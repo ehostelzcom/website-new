@@ -1,0 +1,87 @@
+React + Tailwind + ShadCN + Vite
+
+I NEED WEBSITE in above technologies
+
+HOME PAGE Some product screen shots images show like in slider
+---
+
+# 📘 Documentation for EHostelz Website
+
+## 🌐 Website Structure (Public Website for Marketing)
+
+### 1. **Home Page**
+
+* Clear product tagline: *“Smart Hostel Management Made Simple.”*
+* Quick overview of what EHostelz does.
+* Call-to-action (CTA): *“Start Free Trial” / “Request Demo.”*
+* Highlight benefits: time-saving, easy management, centralized control.
+
+Province dropdown city dropdown location dropdown search button
+### 2. **Features**
+
+Showcase the main features with icons & short descriptions:
+
+* **Hostel Setup Management** (Floors, Rooms, Seats, Dynamic Rents).
+* **Multi-Hostel Dashboard** – One login to manage multiple hostels.
+* **Student/Staff Management** – Register students, staff, teachers, wardens.
+* **Room/Seat Allotment** – Quick assignment of available seats.
+* **Fees & Payments** – One-click monthly fee generation, partial/full payments, refunds, PDF invoices.
+* **Fines & Rules** – Auto log fines for violations.
+* **Expenses & Salaries** – Daily expenses tracking, staff salary management.
+* **Reporting & Analytics** – Fees, expenses, salaries, rents with graphs.
+* **Student Portal** – Students can view history, payments, room details.
+* **Smart Enrollment** – Single registration valid across all hostels on EHostelz (using National ID).
+
+### 3. **Pricing Plans**
+
+* **Basic Plan** – For small hostels.
+* **Professional Plan** – For medium hostels with multiple branches.
+* **Enterprise Plan** – For hostel groups with unlimited hostels.
+* CTA: *“Compare Plans”* + *“Get Started.”*
+
+### 4. **Why Choose Us**
+
+* Centralized hostel management in one system.
+* Scalable: Manage multiple hostels under one login.
+* Saves time with automation (fees, allotments, reporting).
+* Transparent reporting & analytics.
+* Student-friendly: seamless hostel transfers.
+* Affordable and easy-to-use UI.
+
+### 5. **About Us** *(Suggested Addition)*
+
+* Brief story about EHostelz.
+* Mission: *“Digitizing hostel management with simplicity and efficiency.”*
+* Vision: *“To become the No.1 hostel management software worldwide.”*
+
+### 6. **Testimonials / Case Studies** *(Suggested Addition)*
+
+* Showcase 2–3 hostel owners using EHostelz with quotes.
+* Example: *“We manage 5 hostels with EHostelz, everything is automated!”*
+
+### 7. **FAQ** *(Suggested Addition)*
+
+* Do students need to register every time they move hostels? *(No, single registration with National ID.)*
+* Can I manage multiple hostels under one account? *(Yes, multi-hostel dashboard.)*
+* Do you provide reports? *(Yes, monthly reports with fees, expenses, salaries, etc.)*
+
+### 8. **Contact Page**
+
+* Contact form (Name, Email, Message).
+* Support email & phone number.
+* Office address (if applicable).
+
+---
+
+## 🏢 Product Overview (For Marketing Content)
+
+**EHostelz** is a cloud-based **Hostel Management Software** that helps hostel owners and administrators easily manage hostels, rooms, students, fees, and reports.
+
+### 🎯 Key Highlights
+
+* **Easy Hostel Setup:** Define floors, rooms, and seats with dynamic rent structures.
+* **One Login for All Hostels:** Owners can manage multiple hostels with separate dashboards.
+* **Student-Friendly Registration:** Students register once, and can join any hostel in the network with their National ID.
+* **Smart Finance Management:** Fees, payments, fines, expenses, and salaries – all managed from one platform.
+* **Insightful Reports:** Monthly fee collection, expenses, salary reports, and occupancy dashboards with graphs.
+* **Student Portal:** Each student can view their hostel history, payments, and seat details.
