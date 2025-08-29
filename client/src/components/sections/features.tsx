@@ -106,20 +106,31 @@ export default function Features() {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
-              <div key={index} className="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg hover:border-primary/30 transition-all duration-300" data-testid={`feature-card-${index}`}>
-                <div className={`w-14 h-14 ${feature.color.replace('text-', 'bg-')}/10 rounded-lg flex items-center justify-center mb-4`}>
-                  <IconComponent className={`${feature.color}`} size={24} />
+              <div key={index} className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 border-l-4 border-l-primary shadow-sm hover:shadow-md transition-shadow duration-200" data-testid={`feature-card-${index}`}>
+                <div className="p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-white dark:bg-gray-600 rounded-full shadow-sm border-2 border-gray-100 dark:border-gray-500 flex items-center justify-center">
+                        <IconComponent className={`${feature.color}`} size={20} />
+                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2 leading-tight" data-testid={`feature-title-${index}`}>
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed" data-testid={`feature-description-${index}`}>
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white" data-testid={`feature-title-${index}`}>
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed" data-testid={`feature-description-${index}`}>
-                  {feature.description}
-                </p>
+                <div className="absolute top-0 right-0 w-16 h-16 opacity-5">
+                  <IconComponent className="w-full h-full text-gray-900 dark:text-white" />
+                </div>
               </div>
             );
           })}
