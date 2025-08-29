@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import RequestDemoModal from "@/components/ui/request-demo-modal";
 
 export default function Hero() {
   return (
@@ -21,9 +22,11 @@ export default function Hero() {
             <Button size="lg" className="text-lg px-8 py-4" data-testid="button-start-trial">
               Start Free Trial
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-4" data-testid="button-request-demo">
-              Request Demo
-            </Button>
+            <RequestDemoModal>
+              <Button variant="outline" size="lg" className="text-lg px-8 py-4" data-testid="button-request-demo">
+                Request Demo
+              </Button>
+            </RequestDemoModal>
           </div>
         </div>
       </div>
