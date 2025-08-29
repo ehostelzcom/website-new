@@ -68,7 +68,7 @@ export default function Contact() {
             Get in Touch
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto" data-testid="contact-subtitle">
-            Ready to transform your hostel management? Contact us today for a personalized demo.
+            Ready to transform your hostel management? <br />Contact us today for a personalized demo.
           </p>
         </div>
 
