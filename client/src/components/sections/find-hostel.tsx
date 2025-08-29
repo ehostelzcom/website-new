@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search, MapPin, Building2 } from "lucide-react";
-import searchIcon from "@assets/logo/Asset 8.svg";
+import searchIcon from "@assets/logo/Asset 9.svg";
 
 export default function FindHostel() {
   const [province, setProvince] = useState("");
