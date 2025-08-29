@@ -41,10 +41,10 @@ export default function About() {
         {/* Header Section */}
         <div className="text-center mb-16 px-4">
           <h2 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent" data-testid="about-title">
-            Why Choose eHostelz.com?
+            Why Choose ehostelz.com?
           </h2>
           <p className="text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed" data-testid="about-subtitle">
-            Transform your property management with cutting-edge technology and unmatched efficiency
+            Transform your hostel management with cutting-edge technology and unmatched efficiency
           </p>
         </div>
 
