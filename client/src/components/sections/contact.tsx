@@ -73,12 +73,11 @@ export default function Contact() {
         </div>
 
         {/* Main Content - 12 Column Grid */}
-        <div className="grid grid-cols-12 gap-8 max-w-6xl mx-auto items-start">
+        <div className="grid grid-cols-12 gap-8 max-w-6xl mx-auto">
           {/* Contact Form - 7 columns */}
           <div className="col-span-12 lg:col-span-7">
+            <h3 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Send us a Message</h3>
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 h-full">
-              <h3 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Send us a Message</h3>
-              
               <form className="space-y-6" onSubmit={handleSubmit} data-testid="contact-form">
                 {/* Name and Email Row */}
                 <div className="grid grid-cols-12 gap-4">
