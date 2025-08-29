@@ -110,7 +110,7 @@ export default function Features() {
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
-              <div key={index} className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 border-l-4 border-l-primary shadow-sm hover:shadow-md transition-shadow duration-200" data-testid={`feature-card-${index}`}>
+              <div key={index} className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg shadow-sm hover:shadow-md hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-200" data-testid={`feature-card-${index}`}>
                 <div className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
