@@ -69,7 +69,7 @@ export default function About() {
         </div>
 
         {/* Mission Statement - Full Width */}
-        <div className="bg-gradient-to-r from-primary to-accent py-16 px-4">
+        <div className="bg-primary py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="text-3xl lg:text-4xl font-bold text-white mb-6" data-testid="mission-title">
               Our Mission
