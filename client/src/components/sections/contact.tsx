@@ -158,7 +158,7 @@ export default function Contact() {
           {/* Contact Information - 5 columns */}
           <div className="col-span-12 lg:col-span-5">
             {/* Contact Details */}
-            <div>
+            <div className="mt-14">
               <h3 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white" data-testid="contact-info-title">
                 Contact Information
               </h3>
