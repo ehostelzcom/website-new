@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import VideoModal from "@/components/ui/video-modal";
 
 const slides = [
   {
@@ -44,6 +45,13 @@ export default function TopSlider() {
     setCurrentSlide(index);
   };
 
+  const scrollToFeatures = () => {
+    const featuresSection = document.getElementById('features-section');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(nextSlide, 6000);
     return () => clearInterval(interval);
@@ -76,12 +84,19 @@ export default function TopSlider() {
                     {slide.subtitle}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button size="lg" className="text-lg px-8 py-4 bg-white text-black hover:bg-gray-100" data-testid={`slide-cta-${index}`}>
+                    <Button 
+                      size="lg" 
+                      className="text-lg px-8 py-4 bg-white text-black hover:bg-gray-100" 
+                      onClick={scrollToFeatures}
+                      data-testid={`slide-cta-${index}`}
+                    >
                       Explore Features
                     </Button>
-                    <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-black" data-testid={`slide-demo-${index}`}>
-                      Watch Demo
-                    </Button>
+                    <VideoModal videoUrl="https://www.youtube.com/embed/dQw4w9WgXcQ" title="EHostelz Platform Demo">
+                      <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-black" data-testid={`slide-demo-${index}`}>
+                        Watch Demo
+                      </Button>
+                    </VideoModal>
                   </div>
                 </div>
               </div>
