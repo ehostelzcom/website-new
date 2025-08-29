@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Building2 } from "lucide-react";
+import RequestDemoModal from "@/components/ui/request-demo-modal";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -81,9 +82,11 @@ export default function Header() {
             <Button variant="ghost" className="hidden md:inline-flex" data-testid="button-signin">
               Sign In
             </Button>
-            <Button data-testid="button-trial">
-              Start Free Trial
-            </Button>
+            <RequestDemoModal>
+              <Button data-testid="button-request-demo-header">
+                Request Demo
+              </Button>
+            </RequestDemoModal>
             
             {/* Mobile menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -139,9 +142,11 @@ export default function Header() {
                   <Button variant="ghost" data-testid="nav-mobile-signin">
                     Sign In
                   </Button>
-                  <Button data-testid="nav-mobile-trial">
-                    Start Free Trial
-                  </Button>
+                  <RequestDemoModal>
+                    <Button data-testid="nav-mobile-request-demo">
+                      Request Demo
+                    </Button>
+                  </RequestDemoModal>
                 </div>
               </SheetContent>
             </Sheet>

@@ -1,5 +1,6 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import TopSlider from "@/components/sections/top-slider";
 import Hero from "@/components/sections/hero";
 import FindHostel from "@/components/sections/find-hostel";
 import Features from "@/components/sections/features";
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <TopSlider />
       <main>
         <Hero />
         <FindHostel />
