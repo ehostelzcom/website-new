@@ -10,26 +10,49 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-muted/50 border-t border-border py-12">
+    <footer className="bg-gray-900 text-white py-16">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <img src={logoUrl} alt="EHostelz Logo" className="w-8 h-8" />
-              <span className="text-xl font-bold">EHostelz</span>
+            <div className="mb-6">
+              <img src={logoUrl} alt="EHostelz Logo" className="w-16 h-16" />
             </div>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-gray-300 text-sm leading-relaxed">
               Smart hostel management software that simplifies operations and enhances student experiences.
             </p>
+            {/* Social Media Icons */}
+            <div className="hidden md:flex space-x-4 mt-6">
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-gray-800"
+                data-testid="social-facebook"
+              >
+                <SiFacebook className="w-5 h-5" />
+              </a>
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-gray-800"
+                data-testid="social-instagram"
+              >
+                <SiInstagram className="w-5 h-5" />
+              </a>
+              <a 
+                href="#" 
+                className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-gray-800"
+                data-testid="social-linkedin"
+              >
+                <SiLinkedin className="w-5 h-5" />
+              </a>
+            </div>
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">Product</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <h3 className="font-semibold mb-4 text-white">Product</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <button 
                   onClick={() => scrollToSection('features')}
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-white transition-colors"
                   data-testid="footer-features"
                 >
                   Features
@@ -38,7 +61,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => scrollToSection('pricing')}
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-white transition-colors"
                   data-testid="footer-pricing"
                 >
                   Pricing
@@ -58,12 +81,12 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">Company</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <h3 className="font-semibold mb-4 text-white">Company</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <button 
                   onClick={() => scrollToSection('about')}
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-white transition-colors"
                   data-testid="footer-about"
                 >
                   About
@@ -82,7 +105,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => scrollToSection('contact')}
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-white transition-colors"
                   data-testid="footer-contact"
                 >
                   Contact
@@ -92,8 +115,8 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">Support</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <h3 className="font-semibold mb-4 text-white">Support</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <a href="#" className="hover:text-foreground transition-colors" data-testid="footer-help">
                   Help Center
@@ -118,33 +141,10 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-muted-foreground text-sm" data-testid="copyright">
+        <div className="border-t border-gray-700 pt-8 text-center">
+          <p className="text-gray-400 text-sm" data-testid="copyright">
             &copy; 2024 EHostelz. All rights reserved.
           </p>
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <a 
-              href="#" 
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              data-testid="social-facebook"
-            >
-              <SiFacebook className="w-5 h-5" />
-            </a>
-            <a 
-              href="#" 
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              data-testid="social-instagram"
-            >
-              <SiInstagram className="w-5 h-5" />
-            </a>
-            <a 
-              href="#" 
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              data-testid="social-linkedin"
-            >
-              <SiLinkedin className="w-5 h-5" />
-            </a>
-          </div>
         </div>
       </div>
     </footer>
