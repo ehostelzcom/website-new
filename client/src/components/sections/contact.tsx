@@ -121,7 +121,7 @@ export default function Contact() {
                     type="tel"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    placeholder="+92 300 1234567"
+                    placeholder="03129409211"
                     className="mt-1 h-11"
                     data-testid="input-phone"
                   />
@@ -176,36 +176,15 @@ export default function Contact() {
                     <Phone className="text-primary mt-1 mr-3 h-5 w-5" />
                     <div>
                       <div className="font-medium text-gray-900 dark:text-white">Phone</div>
-                      <div className="text-gray-600 dark:text-gray-400">+92 300 1234567</div>
+                      <div className="text-gray-600 dark:text-gray-400">03129409211</div>
                     </div>
                   </div>
                   <div className="flex items-start" data-testid="contact-address">
                     <MapPin className="text-primary mt-1 mr-3 h-5 w-5" />
                     <div>
                       <div className="font-medium text-gray-900 dark:text-white">Office</div>
-                      <div className="text-gray-600 dark:text-gray-400">Lahore, Pakistan</div>
+                      <div className="text-gray-600 dark:text-gray-400">Islamabad, Pakistan</div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Business Hours */}
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white" data-testid="business-hours-title">
-                  Business Hours
-                </h3>
-                <div className="space-y-2 text-gray-600 dark:text-gray-400">
-                  <div className="flex justify-between" data-testid="hours-weekdays">
-                    <span>Monday - Friday</span>
-                    <span>9:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between" data-testid="hours-saturday">
-                    <span>Saturday</span>
-                    <span>10:00 AM - 4:00 PM</span>
-                  </div>
-                  <div className="flex justify-between" data-testid="hours-sunday">
-                    <span>Sunday</span>
-                    <span className="text-red-500">Closed</span>
                   </div>
                 </div>
               </div>
@@ -225,7 +204,7 @@ export default function Contact() {
                   variant="outline" 
                   size="sm" 
                   className="w-full" 
-                  onClick={() => window.open('https://wa.me/923001234567', '_blank')}
+                  onClick={() => window.open('https://wa.me/923129409211', '_blank')}
                   data-testid="button-live-chat"
                 >
                   <SiWhatsapp className="mr-2 h-4 w-4" />
