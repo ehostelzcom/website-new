@@ -43,13 +43,13 @@ export default function Hero() {
             </RequestDemoModal>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-full mx-4 lg:mx-8">
             <div className="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-primary/30 transition-all duration-300 min-h-[220px] flex flex-col">
               <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:bg-primary/20 transition-colors duration-300">
                 <div className="text-3xl">🏢</div>
               </div>
               <h3 className="font-semibold text-xl mb-3 text-center text-primary">Multi-Hostel Management</h3>
-              <p className="text-base text-gray-600 dark:text-gray-400 text-center leading-relaxed flex-1">Manage unlimited hostels from a single dashboard</p>
+              <p className="text-base text-gray-600 dark:text-gray-400 text-center leading-relaxed flex-1">Manage unlimited properties from a single dashboard</p>
             </div>
             <div className="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-accent/30 transition-all duration-300 min-h-[220px] flex flex-col">
               <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:bg-accent/20 transition-colors duration-300">
