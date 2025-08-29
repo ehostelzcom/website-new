@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="mb-6">
-              <img src={logoUrl} alt="EHostelz Logo" className="w-16 h-16" />
+              <img src={logoUrl} alt="EHostelz Logo" className="w-24 h-24" />
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Smart hostel management software that simplifies operations and enhances student experiences.
