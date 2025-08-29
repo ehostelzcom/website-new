@@ -16,8 +16,8 @@ export default function Hero() {
       <div className="absolute bottom-32 left-20 w-3 h-3 bg-primary rounded-full animate-pulse delay-700"></div>
       <div className="absolute bottom-48 right-32 w-5 h-5 bg-accent/60 rounded-full animate-pulse delay-300"></div>
       
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto text-center">
+      <div className="relative z-10 w-full">
+        <div className="max-w-5xl mx-auto text-center mb-20">
           <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-10 text-gray-900 dark:text-white drop-shadow-2xl" data-testid="hero-title">
             <span className="bg-gradient-to-r from-primary via-primary/80 to-accent bg-clip-text text-transparent animate-gradient-x bg-300% filter drop-shadow-lg">
               Seamless Hostel Management Solutions
@@ -29,7 +29,7 @@ export default function Hero() {
             </span>
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-20">
+          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
             <RequestDemoModal>
               <Button size="lg" className="group relative inline-flex items-center justify-center px-12 py-4 text-lg font-semibold text-white bg-primary hover:bg-primary/90 border-2 border-primary hover:border-accent shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg overflow-hidden" data-testid="button-request-demo">
                 <span className="absolute inset-0 w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
@@ -42,8 +42,10 @@ export default function Hero() {
               </Button>
             </RequestDemoModal>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 w-full px-4 lg:px-8">
+        </div>
+        
+        <div className="w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 px-2">
             <div className="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-primary/30 transition-all duration-300 min-h-[160px] flex flex-col">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-5 mx-auto group-hover:bg-primary/20 transition-colors duration-300">
                 <div className="text-2xl">🏢</div>
