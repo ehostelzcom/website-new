@@ -8,7 +8,7 @@ interface WhatsAppChatProps {
 }
 
 export default function WhatsAppChat({ 
-  phoneNumber = "923001234567", // Default phone number - user can change this
+  phoneNumber = "923129409211", // Your WhatsApp number
   message = "Hi! I'm interested in EHostelz. Can you tell me more about your hostel management solution?",
   className = ""
 }: WhatsAppChatProps) {
