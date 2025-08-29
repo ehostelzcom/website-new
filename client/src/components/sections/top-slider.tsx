@@ -58,7 +58,7 @@ export default function TopSlider() {
   }, []);
 
   return (
-    <section className="relative w-full h-[400px] lg:h-[500px] overflow-hidden bg-gray-100 dark:bg-gray-900">
+    <section className="relative w-full h-[400px] lg:h-[500px] overflow-hidden bg-gray-100 dark:bg-gray-900 mt-4">
       <div 
         className="flex transition-transform duration-700 ease-in-out h-full"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
