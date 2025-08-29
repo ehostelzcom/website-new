@@ -4,7 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
@@ -212,7 +213,7 @@ export default function Contact() {
               {/* Need Help */}
               <div className="bg-primary/10 rounded-lg p-6">
                 <div className="flex items-center mb-3">
-                  <MessageCircle className="text-primary h-6 w-6 mr-2" />
+                  <SiWhatsapp className="text-primary h-6 w-6 mr-2" />
                   <h4 className="font-semibold text-gray-900 dark:text-white" data-testid="help-title">
                     Need immediate help?
                   </h4>
@@ -220,9 +221,15 @@ export default function Contact() {
                 <p className="text-gray-600 dark:text-gray-400 text-sm mb-4" data-testid="help-description">
                   For urgent technical support or sales inquiries, reach out to us directly.
                 </p>
-                <Button variant="outline" size="sm" className="w-full" data-testid="button-live-chat">
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  Live Chat
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full" 
+                  onClick={() => window.open('https://wa.me/923001234567', '_blank')}
+                  data-testid="button-live-chat"
+                >
+                  <SiWhatsapp className="mr-2 h-4 w-4" />
+                  WhatsApp Chat
                 </Button>
               </div>
             </div>
