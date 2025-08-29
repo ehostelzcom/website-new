@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search, MapPin, Building2 } from "lucide-react";
+import searchIcon from "@assets/logo/Asset 8.svg";
 
 export default function FindHostel() {
   const [province, setProvince] = useState("");
@@ -66,8 +67,8 @@ export default function FindHostel() {
             {/* Form Header */}
             <div className="bg-gradient-to-r from-primary/10 to-accent/10 dark:from-gray-700 dark:to-gray-600 p-6 border-b border-gray-200 dark:border-gray-600">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                  <Building2 className="text-white" size={24} />
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <img src={searchIcon} alt="Search Hostels" className="w-12 h-12 rounded-lg" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Search Hostels by Location</h3>
@@ -194,8 +195,8 @@ export default function FindHostel() {
               {province && city && (
                 <div className="mt-8 p-6 bg-gradient-to-r from-accent/10 to-primary/10 rounded-xl border-2 border-accent/20 animate-in slide-in-from-bottom-4">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Building2 className="h-6 w-6 text-white" />
+                    <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
+                      <img src={searchIcon} alt="Search Results" className="w-12 h-12 rounded-lg" />
                     </div>
                     <div>
                       <h4 className="font-bold text-xl text-accent mb-2">Search Results</h4>
