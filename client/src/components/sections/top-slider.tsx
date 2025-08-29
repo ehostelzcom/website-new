@@ -77,7 +77,7 @@ export default function TopSlider() {
             
             {/* Content Overlay */}
             <div className="relative z-10 h-full flex items-center">
-              <div className="container mx-auto px-4 lg:px-8">
+              <div className="container mx-auto px-16 lg:px-24">
                 <div className="max-w-3xl text-white">
                   <h1 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight" data-testid={`slide-title-${index}`}>
                     {slide.title}
@@ -120,7 +120,7 @@ export default function TopSlider() {
             <Button
               variant="outline"
               size="icon"
-              className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 border-white/30 text-white backdrop-blur-sm"
+              className="absolute left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 border-white/30 text-white backdrop-blur-sm"
               onClick={previousSlide}
               data-testid="button-previous-top"
             >
@@ -137,7 +137,7 @@ export default function TopSlider() {
             <Button
               variant="outline"
               size="icon"
-              className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 border-white/30 text-white backdrop-blur-sm"
+              className="absolute right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 border-white/30 text-white backdrop-blur-sm"
               onClick={nextSlide}
               data-testid="button-next-top"
             >
