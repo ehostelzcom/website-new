@@ -43,34 +43,34 @@ export default function Hero() {
             </RequestDemoModal>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div className="group bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-primary/30 transition-all duration-300">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-primary/20 transition-colors duration-300">
-                <div className="text-2xl">🏢</div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <div className="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-primary/30 transition-all duration-300 min-h-[220px] flex flex-col">
+              <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:bg-primary/20 transition-colors duration-300">
+                <div className="text-3xl">🏢</div>
               </div>
-              <h3 className="font-semibold text-lg mb-2 text-center text-primary">Multi-Hostel Management</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-center leading-relaxed">Manage unlimited hostels from a single dashboard</p>
+              <h3 className="font-semibold text-xl mb-3 text-center text-primary">Multi-Hostel Management</h3>
+              <p className="text-base text-gray-600 dark:text-gray-400 text-center leading-relaxed flex-1">Manage unlimited hostels from a single dashboard</p>
             </div>
-            <div className="group bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-accent/30 transition-all duration-300">
-              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-accent/20 transition-colors duration-300">
-                <div className="text-2xl">💰</div>
+            <div className="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-accent/30 transition-all duration-300 min-h-[220px] flex flex-col">
+              <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:bg-accent/20 transition-colors duration-300">
+                <div className="text-3xl">💰</div>
               </div>
-              <h3 className="font-semibold text-lg mb-2 text-center text-accent">Automated Fee Collection</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-center leading-relaxed">Automatic payments and instant receipt generation</p>
+              <h3 className="font-semibold text-xl mb-3 text-center text-accent">Automated Fee Collection</h3>
+              <p className="text-base text-gray-600 dark:text-gray-400 text-center leading-relaxed flex-1">Automatic payments and instant receipt generation</p>
             </div>
-            <div className="group bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-primary/30 transition-all duration-300">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-primary/20 transition-colors duration-300">
-                <div className="text-2xl">🛏️</div>
+            <div className="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-primary/30 transition-all duration-300 min-h-[220px] flex flex-col">
+              <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:bg-primary/20 transition-colors duration-300">
+                <div className="text-3xl">🛏️</div>
               </div>
-              <h3 className="font-semibold text-lg mb-2 text-center text-primary">Room Availability Tracker</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-center leading-relaxed">Instantly find vacant and occupied seats across all rooms</p>
+              <h3 className="font-semibold text-xl mb-3 text-center text-primary">Room Availability Tracker</h3>
+              <p className="text-base text-gray-600 dark:text-gray-400 text-center leading-relaxed flex-1">Instantly find vacant and occupied seats across all rooms</p>
             </div>
-            <div className="group bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-accent/30 transition-all duration-300">
-              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-accent/20 transition-colors duration-300">
-                <div className="text-2xl">📊</div>
+            <div className="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-accent/30 transition-all duration-300 min-h-[220px] flex flex-col">
+              <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:bg-accent/20 transition-colors duration-300">
+                <div className="text-3xl">📊</div>
               </div>
-              <h3 className="font-semibold text-lg mb-2 text-center text-accent">Smart Analytics & Reports</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-center leading-relaxed">Detailed insights with beautiful charts and reports</p>
+              <h3 className="font-semibold text-xl mb-3 text-center text-accent">Smart Analytics & Reports</h3>
+              <p className="text-base text-gray-600 dark:text-gray-400 text-center leading-relaxed flex-1">Detailed insights with beautiful charts and reports</p>
             </div>
           </div>
         </div>
