@@ -14,7 +14,8 @@ import {
   Star,
   CheckCircle,
   BarChart3,
-  TrendingUp
+  TrendingUp,
+  Monitor
 } from "lucide-react";
 
 const features = [
@@ -122,6 +123,13 @@ const features = [
     description: "Streamlined checkout process with automatic fee dues verification, outstanding balance checks, and clearance confirmation.",
     color: "text-green-600",
     bgColor: "bg-green-600"
+  },
+  {
+    icon: Monitor,
+    title: "Student Portal",
+    description: "Personal dashboard for students to access their entire hostel history across multiple properties. One login provides lifetime access to all hostels using ehostelz.com with complete records of allotments, fees, payments, and fines from 2025 to 2035 and beyond.",
+    color: "text-blue-500",
+    bgColor: "bg-blue-500"
   }
 ];
 
