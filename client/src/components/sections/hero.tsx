@@ -1,6 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import LocationSearch from "@/components/ui/location-search";
 
 export default function Hero() {
   return (
@@ -18,12 +16,6 @@ export default function Hero() {
             Manage multiple hostels, students, fees, and reports from one powerful platform. 
             Save time with automation and boost your hostel operations.
           </p>
-          
-          <Card className="mb-8 max-w-3xl mx-auto shadow-lg">
-            <CardContent className="p-6">
-              <LocationSearch />
-            </CardContent>
-          </Card>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="text-lg px-8 py-4" data-testid="button-start-trial">

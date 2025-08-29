@@ -29,6 +29,13 @@ export default function Header() {
           
           <nav className="hidden md:flex items-center space-x-6">
             <button 
+              onClick={() => scrollToSection('find-hostel')}
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              data-testid="nav-find-hostel"
+            >
+              Find Hostel
+            </button>
+            <button 
               onClick={() => scrollToSection('features')}
               className="text-muted-foreground hover:text-foreground transition-colors"
               data-testid="nav-features"
@@ -75,6 +82,13 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent>
                 <div className="flex flex-col space-y-4 mt-6">
+                  <button 
+                    onClick={() => scrollToSection('find-hostel')}
+                    className="text-left text-muted-foreground hover:text-foreground transition-colors"
+                    data-testid="nav-mobile-find-hostel"
+                  >
+                    Find Hostel
+                  </button>
                   <button 
                     onClick={() => scrollToSection('features')}
                     className="text-left text-muted-foreground hover:text-foreground transition-colors"
