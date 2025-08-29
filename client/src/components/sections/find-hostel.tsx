@@ -60,97 +60,139 @@ export default function FindHostel() {
         </div>
       </div>
       
-      {/* Compact Search Form */}
+      {/* Enhanced Search Form */}
       <div className="w-full">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-6">
-              {/* Compact Form */}
-              <div className="grid md:grid-cols-4 gap-4 mb-4">
-                <div>
-                  <Select value={province} onValueChange={setProvince}>
-                    <SelectTrigger className="h-10" data-testid="select-province">
-                      <SelectValue placeholder="Select Province" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {provinces.map((prov) => (
-                        <SelectItem key={prov} value={prov}>
-                          {prov}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div>
-                  <Select 
-                    value={city} 
-                    onValueChange={setCity}
-                    disabled={!province}
-                  >
-                    <SelectTrigger className="h-10" data-testid="select-city">
-                      <SelectValue placeholder={!province ? "Select Province first" : "Select City"} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {availableCities.map((cty) => (
-                        <SelectItem key={cty} value={cty}>
-                          {cty}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div>
-                  <Select 
-                    value={location} 
-                    onValueChange={setLocation}
-                    disabled={!city}
-                  >
-                    <SelectTrigger className="h-10" data-testid="select-location">
-                      <SelectValue placeholder={!city ? "Select City first" : "Select Location"} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {availableLocations.map((loc) => (
-                        <SelectItem key={loc} value={loc}>
-                          {loc}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div className="flex gap-2">
-                  <Button 
-                    onClick={handleSearch} 
-                    className="flex-1 h-10 bg-primary hover:bg-primary/90"
-                    disabled={!province || !city}
-                    data-testid="button-search-hostels"
-                  >
-                    <Search className="mr-2 h-4 w-4" />
-                    Search
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={resetFilters}
-                    className="h-10"
-                    data-testid="button-reset"
-                  >
-                    Reset
-                  </Button>
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+              {/* Form Header */}
+              <div className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 border-b border-gray-100 dark:border-gray-700 p-4">
+                <div className="flex items-center justify-center gap-3">
+                  <img src={searchIcon} alt="Search" className="w-8 h-8" />
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Search Hostels by Location</h3>
                 </div>
               </div>
               
-              {/* Simple Status */}
-              {(province || city || location) && (
-                <div className="text-center text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 rounded p-3">
-                  <MapPin className="h-4 w-4 inline mr-2" />
-                  {!province && !city && !location && "Select your location"}
-                  {province && !city && `Selected: ${province}`}
-                  {province && city && !location && `Selected: ${city}, ${province}`}
-                  {province && city && location && `Selected: ${location}, ${city}, ${province}`}
+              {/* Enhanced Form */}
+              <div className="p-6">
+                <div className="grid md:grid-cols-4 gap-4 mb-6">
+                  {/* Province */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                      Province *
+                    </label>
+                    <Select value={province} onValueChange={setProvince}>
+                      <SelectTrigger className="h-12 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:border-primary focus:border-primary transition-all duration-200 bg-gray-50 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600" data-testid="select-province">
+                        <SelectValue placeholder="Choose Province" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {provinces.map((prov) => (
+                          <SelectItem key={prov} value={prov}>
+                            {prov}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  {/* City */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-accent rounded-full"></div>
+                      City *
+                    </label>
+                    <Select 
+                      value={city} 
+                      onValueChange={setCity}
+                      disabled={!province}
+                    >
+                      <SelectTrigger className="h-12 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:border-accent focus:border-accent transition-all duration-200 bg-gray-50 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed" data-testid="select-city">
+                        <SelectValue placeholder={!province ? "Select Province first" : "Choose City"} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {availableCities.map((cty) => (
+                          <SelectItem key={cty} value={cty}>
+                            {cty}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  {/* Area/Location */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                      Area (Optional)
+                    </label>
+                    <Select 
+                      value={location} 
+                      onValueChange={setLocation}
+                      disabled={!city}
+                    >
+                      <SelectTrigger className="h-12 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:border-primary focus:border-primary transition-all duration-200 bg-gray-50 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed" data-testid="select-location">
+                        <SelectValue placeholder={!city ? "Select City first" : "Choose Area"} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {availableLocations.map((loc) => (
+                          <SelectItem key={loc} value={loc}>
+                            {loc}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  {/* Action Buttons */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide opacity-0">
+                      Actions
+                    </label>
+                    <div className="flex gap-3 h-12">
+                      <Button 
+                        onClick={handleSearch} 
+                        className="flex-1 h-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                        disabled={!province || !city}
+                        data-testid="button-search-hostels"
+                      >
+                        <Search className="mr-2 h-4 w-4" />
+                        Search
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        onClick={resetFilters}
+                        className="px-4 h-full border-2 border-gray-300 hover:border-accent hover:bg-accent hover:text-white rounded-lg transition-all duration-200"
+                        data-testid="button-reset"
+                      >
+                        Reset
+                      </Button>
+                    </div>
+                  </div>
                 </div>
-              )}
+                
+                {/* Enhanced Status Display */}
+                {(province || city || location) && (
+                  <div className="bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10 border border-primary/20 rounded-xl p-4">
+                    <div className="flex items-center justify-center gap-3 text-gray-700 dark:text-gray-300">
+                      <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                        <MapPin className="h-4 w-4 text-primary" />
+                      </div>
+                      <div className="text-center">
+                        <p className="font-semibold text-sm">
+                          {!province && !city && !location && "Select your location"}
+                          {province && !city && `Selected: ${province}`}
+                          {province && city && !location && `Selected: ${city}, ${province}`}
+                          {province && city && location && `Selected: ${location}, ${city}, ${province}`}
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                          Click Search to find available hostels
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
