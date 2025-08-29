@@ -9,9 +9,8 @@ export default function Hero() {
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-10 text-gray-900 dark:text-white" data-testid="hero-title">
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Complete Hostel Management
+              Seamless Hostel Management Solutions
             </span>
-            <span className="block mt-4">Made Simple & Smart</span>
           </h1>
           <p className="text-2xl lg:text-3xl xl:text-4xl text-gray-600 dark:text-gray-300 mb-16 max-w-4xl mx-auto leading-relaxed" data-testid="hero-subtitle">
             Transform how you manage hostels with our powerful platform. Handle student admissions, room allocations, fee collections, expense tracking, staff management, and detailed reporting - all from one comprehensive dashboard that saves you time and money.
