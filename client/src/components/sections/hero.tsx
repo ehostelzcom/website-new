@@ -43,7 +43,7 @@ export default function Hero() {
             </RequestDemoModal>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
             <div className="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-primary/30 transition-all duration-300 min-h-[220px] flex flex-col">
               <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:bg-primary/20 transition-colors duration-300">
                 <div className="text-3xl">🏢</div>
@@ -71,6 +71,13 @@ export default function Hero() {
               </div>
               <h3 className="font-semibold text-xl mb-3 text-center text-accent">Smart Analytics & Reports</h3>
               <p className="text-base text-gray-600 dark:text-gray-400 text-center leading-relaxed flex-1">Detailed insights with beautiful charts and reports</p>
+            </div>
+            <div className="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-primary/30 transition-all duration-300 min-h-[220px] flex flex-col">
+              <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6 mx-auto group-hover:bg-primary/20 transition-colors duration-300">
+                <div className="text-3xl">👨‍🎓</div>
+              </div>
+              <h3 className="font-semibold text-xl mb-3 text-center text-primary">Student Portal</h3>
+              <p className="text-base text-gray-600 dark:text-gray-400 text-center leading-relaxed flex-1">Personal dashboard for students to access their complete hostel history across multiple properties</p>
             </div>
           </div>
         </div>

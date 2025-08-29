@@ -104,13 +104,6 @@ const features = [
     bgColor: "bg-pink-600"
   },
   {
-    icon: Monitor,
-    title: "Student Portal",
-    description: "Personal dashboard for students to access their entire hostel history across multiple properties. One login provides lifetime access to all hostels using ehostelz.com with complete records of allotments, fees, payments, and fines.",
-    color: "text-blue-500",
-    bgColor: "bg-blue-500"
-  },
-  {
     icon: MapPin,
     title: "Room & Seat Tracker",
     description: "Real-time occupancy monitoring with visual floor plans, vacancy alerts, and availability dashboard.",
