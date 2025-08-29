@@ -93,7 +93,7 @@ export default function TopSlider() {
                       Explore Features
                     </Button>
                     <VideoModal videoUrl="https://www.youtube.com/embed/dQw4w9WgXcQ" title="EHostelz Platform Demo">
-                      <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-black" data-testid={`slide-demo-${index}`}>
+                      <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-white text-white bg-white/10 hover:bg-white hover:text-black backdrop-blur-sm" data-testid={`slide-demo-${index}`}>
                         Watch Demo
                       </Button>
                     </VideoModal>

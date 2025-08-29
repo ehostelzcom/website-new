@@ -79,9 +79,6 @@ export default function Header() {
           </nav>
           
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" className="hidden md:inline-flex" data-testid="button-signin">
-              Sign In
-            </Button>
             <RequestDemoModal>
               <Button data-testid="button-request-demo-header">
                 Request Demo
@@ -139,9 +136,6 @@ export default function Header() {
                   >
                     Contact
                   </button>
-                  <Button variant="ghost" data-testid="nav-mobile-signin">
-                    Sign In
-                  </Button>
                   <RequestDemoModal>
                     <Button data-testid="nav-mobile-request-demo">
                       Request Demo
