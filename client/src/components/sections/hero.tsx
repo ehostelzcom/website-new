@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import RequestDemoModal from "@/components/ui/request-demo-modal";
+import ProductSlider from "@/components/sections/product-slider";
 
 export default function Hero() {
   return (
@@ -28,6 +29,21 @@ export default function Hero() {
               </Button>
             </RequestDemoModal>
           </div>
+        </div>
+      </div>
+      
+      {/* Product Slider Section */}
+      <div className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4" data-testid="slider-title">
+              See EHostelz in Action
+            </h2>
+            <p className="text-muted-foreground text-lg" data-testid="slider-subtitle">
+              Explore our powerful features through real screenshots
+            </p>
+          </div>
+          <ProductSlider />
         </div>
       </div>
     </section>
