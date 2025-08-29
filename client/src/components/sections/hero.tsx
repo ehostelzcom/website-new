@@ -11,10 +11,10 @@ export default function Hero() {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl"></div>
       
       {/* Floating Geometric Shapes */}
-      <div className="absolute top-24 right-20 w-4 h-4 bg-primary rotate-45 animate-bounce delay-500"></div>
+      <div className="absolute top-24 right-20 w-4 h-4 bg-primary rounded-full animate-bounce delay-500"></div>
       <div className="absolute top-40 left-32 w-6 h-6 bg-accent rounded-full animate-bounce delay-1000"></div>
       <div className="absolute bottom-32 left-20 w-3 h-3 bg-primary rounded-full animate-pulse delay-700"></div>
-      <div className="absolute bottom-48 right-32 w-5 h-5 bg-accent/60 rotate-45 animate-pulse delay-300"></div>
+      <div className="absolute bottom-48 right-32 w-5 h-5 bg-accent/60 rounded-full animate-pulse delay-300"></div>
       
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
@@ -34,7 +34,7 @@ export default function Hero() {
               <Button size="lg" className="text-2xl px-16 py-8 bg-gradient-to-r from-primary via-primary/90 to-primary/80 hover:from-primary/95 hover:via-primary/85 hover:to-primary/75 shadow-2xl transform hover:scale-110 transition-all duration-500 rounded-full border-4 border-white/20 backdrop-blur-sm relative overflow-hidden group" data-testid="button-request-demo">
                 <span className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
                 <span className="relative z-10 flex items-center gap-3">
-                  ✨ Start Free Demo
+                  Request Demo
                 </span>
               </Button>
             </RequestDemoModal>
