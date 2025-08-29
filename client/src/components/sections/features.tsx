@@ -13,7 +13,8 @@ import {
   MapPin,
   Star,
   CheckCircle,
-  BarChart3
+  BarChart3,
+  TrendingUp
 } from "lucide-react";
 
 const features = [
@@ -72,6 +73,13 @@ const features = [
     description: "Efficient refund processing and fine management with automatic calculations and penalty tracking.",
     color: "text-red-600",
     bgColor: "bg-red-600"
+  },
+  {
+    icon: TrendingUp,
+    title: "Profit Take Out",
+    description: "Track monthly profit distributions to owners with detailed payment method records including cash, bank transfers, and digital payments.",
+    color: "text-purple-600",
+    bgColor: "bg-purple-600"
   },
   {
     icon: Calculator,
