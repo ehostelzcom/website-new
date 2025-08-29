@@ -40,29 +40,37 @@ export default function Hero() {
             </RequestDemoModal>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
-            <div className="group bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border-2 border-gradient-to-r from-primary/20 to-primary/10 hover:shadow-[0_20px_50px_rgba(0,78,137,0.3)] transition-all duration-500 hover:-translate-y-3 hover:rotate-1 relative overflow-hidden">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            <div className="group bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl border-2 border-gradient-to-r from-primary/20 to-primary/10 hover:shadow-[0_15px_35px_rgba(0,78,137,0.2)] transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative z-10">
-                <div className="text-7xl mb-8 text-center transform group-hover:scale-110 transition-transform duration-300">🏢</div>
-                <h3 className="font-bold text-3xl mb-6 text-center bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Multi-Hostel Management</h3>
-                <p className="text-xl text-muted-foreground text-center leading-relaxed">Efficiently manage unlimited hostels, rooms, and properties from a single powerful dashboard. Scale your business without complexity.</p>
+                <div className="text-4xl mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">🏢</div>
+                <h3 className="font-bold text-lg mb-3 text-center bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Multi-Hostel Management</h3>
+                <p className="text-sm text-muted-foreground text-center leading-relaxed">Manage unlimited hostels from a single dashboard</p>
               </div>
             </div>
-            <div className="group bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border-2 border-gradient-to-r from-accent/20 to-accent/10 hover:shadow-[0_20px_50px_rgba(255,107,53,0.3)] transition-all duration-500 hover:-translate-y-3 hover:rotate-1 relative overflow-hidden">
+            <div className="group bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl border-2 border-gradient-to-r from-accent/20 to-accent/10 hover:shadow-[0_15px_35px_rgba(255,107,53,0.2)] transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative z-10">
-                <div className="text-7xl mb-8 text-center transform group-hover:scale-110 transition-transform duration-300">💰</div>
-                <h3 className="font-bold text-3xl mb-6 text-center bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent">Automated Fee Collection</h3>
-                <p className="text-xl text-muted-foreground text-center leading-relaxed">Streamline payment processes with automatic fee calculations, online payments, and instant receipt generation. Never miss a payment again.</p>
+                <div className="text-4xl mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">💰</div>
+                <h3 className="font-bold text-lg mb-3 text-center bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent">Automated Fee Collection</h3>
+                <p className="text-sm text-muted-foreground text-center leading-relaxed">Automatic payments and instant receipt generation</p>
               </div>
             </div>
-            <div className="group bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border-2 border-gradient-to-r from-primary/20 to-primary/10 hover:shadow-[0_20px_50px_rgba(0,78,137,0.3)] transition-all duration-500 hover:-translate-y-3 hover:rotate-1 relative overflow-hidden">
+            <div className="group bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl border-2 border-gradient-to-r from-primary/20 to-primary/10 hover:shadow-[0_15px_35px_rgba(0,78,137,0.2)] transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative z-10">
-                <div className="text-7xl mb-8 text-center transform group-hover:scale-110 transition-transform duration-300">📊</div>
-                <h3 className="font-bold text-3xl mb-6 text-center bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Smart Analytics & Reports</h3>
-                <p className="text-xl text-muted-foreground text-center leading-relaxed">Get detailed insights on occupancy, revenue, expenses, and performance with beautiful charts and comprehensive reporting tools.</p>
+                <div className="text-4xl mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">🛏️</div>
+                <h3 className="font-bold text-lg mb-3 text-center bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Room Availability Tracker</h3>
+                <p className="text-sm text-muted-foreground text-center leading-relaxed">Instantly find vacant and occupied seats across all rooms</p>
+              </div>
+            </div>
+            <div className="group bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl border-2 border-gradient-to-r from-accent/20 to-accent/10 hover:shadow-[0_15px_35px_rgba(255,107,53,0.2)] transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
+                <div className="text-4xl mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">📊</div>
+                <h3 className="font-bold text-lg mb-3 text-center bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent">Smart Analytics & Reports</h3>
+                <p className="text-sm text-muted-foreground text-center leading-relaxed">Detailed insights with beautiful charts and reports</p>
               </div>
             </div>
           </div>
