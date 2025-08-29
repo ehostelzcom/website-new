@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Building2 } from "lucide-react";
+import { Menu } from "lucide-react";
 import RequestDemoModal from "@/components/ui/request-demo-modal";
+import logoSvg from "@assets/logo/Asset 3.svg";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,10 +27,11 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2" data-testid="logo">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Building2 className="text-primary-foreground text-sm" />
-              </div>
-              <span className="text-xl font-bold text-foreground">EHostelz</span>
+              <img 
+                src={logoSvg} 
+                alt="EHostelz" 
+                className="h-8 w-auto"
+              />
             </div>
           </div>
           
