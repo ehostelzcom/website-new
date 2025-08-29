@@ -1,70 +1,95 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { 
-  Building2, 
   LayoutDashboard, 
+  Building2, 
   Users, 
+  UserPlus, 
   Bed, 
   CreditCard, 
-  BarChart3, 
-  Smartphone, 
-  IdCard, 
-  Calculator 
+  Receipt, 
+  Calculator, 
+  UserCog, 
+  FileBarChart, 
+  MapPin
 } from "lucide-react";
 
 const features = [
   {
+    icon: LayoutDashboard,
+    title: "Multi-Hostel Dashboard",
+    description: "Unified control center to manage multiple hostels from one login with separate dashboards for each property.",
+    color: "text-primary",
+    bgColor: "bg-primary"
+  },
+  {
     icon: Building2,
     title: "Hostel Setup Management",
     description: "Define floors, rooms, and seats with dynamic rent structures. Complete hostel configuration in minutes.",
-    color: "text-primary"
-  },
-  {
-    icon: LayoutDashboard,
-    title: "Multi-Hostel Dashboard",
-    description: "Manage multiple hostels from one login with separate dashboards for each property.",
-    color: "text-accent"
+    color: "text-accent",
+    bgColor: "bg-accent"
   },
   {
     icon: Users,
     title: "Student Management",
-    description: "Register students, staff, teachers, and wardens with comprehensive profile management.",
-    color: "text-emerald-500"
+    description: "Comprehensive student database with profile management, document storage, and history tracking.",
+    color: "text-emerald-600",
+    bgColor: "bg-emerald-600"
+  },
+  {
+    icon: UserPlus,
+    title: "Smart Enrollment",
+    description: "Streamlined admission process with National ID integration valid across all EHostelz network hostels.",
+    color: "text-purple-600",
+    bgColor: "bg-purple-600"
   },
   {
     icon: Bed,
     title: "Room & Seat Allotment",
-    description: "Quick assignment of available seats with real-time occupancy tracking.",
-    color: "text-orange-500"
+    description: "Intelligent seat assignment with real-time availability tracking and automated vacancy management.",
+    color: "text-orange-600",
+    bgColor: "bg-orange-600"
   },
   {
     icon: CreditCard,
     title: "Fees & Payments",
-    description: "One-click monthly fee generation, partial/full payments, refunds, and PDF invoices.",
-    color: "text-green-500"
+    description: "Automated monthly fee generation, partial/full payments processing, and instant PDF receipt generation.",
+    color: "text-green-600",
+    bgColor: "bg-green-600"
   },
   {
-    icon: BarChart3,
-    title: "Reports & Analytics",
-    description: "Comprehensive reporting for fees, expenses, salaries, and occupancy with visual graphs.",
-    color: "text-red-500"
-  },
-  {
-    icon: Smartphone,
-    title: "Student Portal",
-    description: "Students can view their history, payments, room details, and hostel information.",
-    color: "text-blue-500"
-  },
-  {
-    icon: IdCard,
-    title: "Smart Enrollment",
-    description: "Single registration with National ID valid across all hostels on EHostelz network.",
-    color: "text-purple-500"
+    icon: Receipt,
+    title: "Refund & Student Fines",
+    description: "Efficient refund processing and fine management with automatic calculations and penalty tracking.",
+    color: "text-red-600",
+    bgColor: "bg-red-600"
   },
   {
     icon: Calculator,
-    title: "Expenses & Salaries",
-    description: "Track daily expenses and manage staff salary payments with automated calculations.",
-    color: "text-indigo-500"
+    title: "Utility Expenses & Daily Expenses",
+    description: "Track electricity, water, maintenance costs and daily operational expenses with detailed categorization.",
+    color: "text-blue-600",
+    bgColor: "bg-blue-600"
+  },
+  {
+    icon: UserCog,
+    title: "Employee Enrollment & Salaries",
+    description: "Staff management system with automated salary calculations, attendance tracking, and payroll processing.",
+    color: "text-indigo-600",
+    bgColor: "bg-indigo-600"
+  },
+  {
+    icon: FileBarChart,
+    title: "Reports & Analytics generate PDF",
+    description: "Comprehensive reporting suite with visual analytics, financial summaries, and professional PDF generation.",
+    color: "text-pink-600",
+    bgColor: "bg-pink-600"
+  },
+  {
+    icon: MapPin,
+    title: "Room | Seat Tracker",
+    description: "Real-time occupancy monitoring with visual floor plans, vacancy alerts, and availability dashboard.",
+    color: "text-teal-600",
+    bgColor: "bg-teal-600"
   }
 ];
 
@@ -85,17 +110,21 @@ export default function Features() {
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
-              <Card key={index} className="hover:shadow-lg transition-shadow" data-testid={`feature-card-${index}`}>
-                <CardContent className="p-6">
-                  <div className={`w-12 h-12 ${feature.color.replace('text-', 'bg-')}/10 rounded-lg flex items-center justify-center mb-4`}>
-                    <IconComponent className={`${feature.color} text-xl`} size={24} />
+              <Card key={index} className="group hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 hover:border-primary/20 bg-gradient-to-br from-white to-gray-50/50 dark:from-gray-800 dark:to-gray-800/50" data-testid={`feature-card-${index}`}>
+                <CardContent className="p-8">
+                  <div className="relative mb-6">
+                    <div className={`w-16 h-16 ${feature.bgColor}/10 rounded-2xl flex items-center justify-center mb-4 group-hover:${feature.bgColor}/20 transition-all duration-300`}>
+                      <IconComponent className={`${feature.color} group-hover:scale-110 transition-transform duration-300`} size={28} />
+                    </div>
+                    <div className={`absolute -top-1 -right-1 w-4 h-4 ${feature.bgColor}/20 rounded-full animate-ping group-hover:animate-none`}></div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-3" data-testid={`feature-title-${index}`}>
+                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300" data-testid={`feature-title-${index}`}>
                     {feature.title}
                   </h3>
-                  <p className="text-muted-foreground" data-testid={`feature-description-${index}`}>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed group-hover:text-gray-800 dark:group-hover:text-gray-100 transition-colors duration-300" data-testid={`feature-description-${index}`}>
                     {feature.description}
                   </p>
+                  <div className={`mt-6 h-1 w-0 ${feature.bgColor} rounded-full group-hover:w-full transition-all duration-500 ease-out`}></div>
                 </CardContent>
               </Card>
             );
