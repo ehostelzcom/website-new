@@ -79,14 +79,14 @@ const features = [
   },
   {
     icon: FileBarChart,
-    title: "Reports & Analytics generate PDF",
+    title: "Reports & Analytics Generate PDF",
     description: "Comprehensive reporting suite with visual analytics, financial summaries, and professional PDF generation.",
     color: "text-pink-600",
     bgColor: "bg-pink-600"
   },
   {
     icon: MapPin,
-    title: "Room | Seat Tracker",
+    title: "Room & Seat Tracker",
     description: "Real-time occupancy monitoring with visual floor plans, vacancy alerts, and availability dashboard.",
     color: "text-teal-600",
     bgColor: "bg-teal-600"
@@ -106,27 +106,21 @@ export default function Features() {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
-              <Card key={index} className="group hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 hover:border-primary/20 bg-gradient-to-br from-white to-gray-50/50 dark:from-gray-800 dark:to-gray-800/50" data-testid={`feature-card-${index}`}>
-                <CardContent className="p-8">
-                  <div className="relative mb-6">
-                    <div className={`w-16 h-16 ${feature.bgColor}/10 rounded-2xl flex items-center justify-center mb-4 group-hover:${feature.bgColor}/20 transition-all duration-300`}>
-                      <IconComponent className={`${feature.color} group-hover:scale-110 transition-transform duration-300`} size={28} />
-                    </div>
-                    <div className={`absolute -top-1 -right-1 w-4 h-4 ${feature.bgColor}/20 rounded-full animate-ping group-hover:animate-none`}></div>
-                  </div>
-                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300" data-testid={`feature-title-${index}`}>
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed group-hover:text-gray-800 dark:group-hover:text-gray-100 transition-colors duration-300" data-testid={`feature-description-${index}`}>
-                    {feature.description}
-                  </p>
-                  <div className={`mt-6 h-1 w-0 ${feature.bgColor} rounded-full group-hover:w-full transition-all duration-500 ease-out`}></div>
-                </CardContent>
-              </Card>
+              <div key={index} className="group bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg hover:border-primary/30 transition-all duration-300" data-testid={`feature-card-${index}`}>
+                <div className={`w-14 h-14 ${feature.color.replace('text-', 'bg-')}/10 rounded-lg flex items-center justify-center mb-4`}>
+                  <IconComponent className={`${feature.color}`} size={24} />
+                </div>
+                <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white" data-testid={`feature-title-${index}`}>
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed" data-testid={`feature-description-${index}`}>
+                  {feature.description}
+                </p>
+              </div>
             );
           })}
         </div>
