@@ -49,7 +49,7 @@ export default function FindHostel() {
   return (
     <section id="find-hostel" className="py-16 bg-gradient-to-br from-primary/5 via-white to-accent/5 dark:from-gray-900 dark:to-gray-800">
       {/* Full Width Header */}
-      <div className="w-full bg-gradient-to-r from-primary to-accent py-12 mb-8">
+      <div className="w-full bg-gradient-to-r from-primary to-white py-12 mb-8">
         <div className="container mx-auto px-4 lg:px-8 text-center">
           <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-white" data-testid="find-hostel-title">
             Find Your Perfect Hostel
