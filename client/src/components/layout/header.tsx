@@ -44,7 +44,7 @@ export default function Header() {
               Home
             </button>
             <button 
-              onClick={() => scrollToSection('features')}
+              onClick={() => scrollToSection('features-section')}
               className="text-muted-foreground hover:text-foreground transition-colors"
               data-testid="nav-features"
             >
@@ -104,7 +104,7 @@ export default function Header() {
                     Home
                   </button>
                   <button 
-                    onClick={() => scrollToSection('features')}
+                    onClick={() => scrollToSection('features-section')}
                     className="text-left text-muted-foreground hover:text-foreground transition-colors"
                     data-testid="nav-mobile-features"
                   >
