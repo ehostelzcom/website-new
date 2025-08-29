@@ -18,7 +18,7 @@ export default function Footer() {
               <img src={logoUrl} alt="EHostelz Logo" className="w-60 h-auto" />
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Smart hostel management software that simplifies operations and enhances student experiences.
+              ehostelz.com - hostel management software that simplifies operations and enhances student experiences.
             </p>
             {/* Social Media Icons */}
             <div className="hidden md:flex space-x-4 mt-6">
