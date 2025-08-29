@@ -60,33 +60,16 @@ export default function FindHostel() {
         </div>
       </div>
       
-      {/* Full Width Search Form */}
+      {/* Compact Search Form */}
       <div className="w-full">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-            {/* Form Header */}
-            <div className="bg-gradient-to-r from-primary/10 to-accent/10 dark:from-gray-700 dark:to-gray-600 p-6 border-b border-gray-200 dark:border-gray-600">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 flex items-center justify-center">
-                  <img src={searchIcon} alt="Search Hostels" className="w-12 h-12 rounded-lg" />
-                </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-6">
+              {/* Compact Form */}
+              <div className="grid md:grid-cols-4 gap-4 mb-4">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Search Hostels by Location</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Enter your preferred location details below</p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Form Content */}
-            <div className="p-8">
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div className="space-y-3">
-                  <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-primary rounded-full"></div>
-                    Province *
-                  </label>
                   <Select value={province} onValueChange={setProvince}>
-                    <SelectTrigger className="h-12 border-2 hover:border-primary focus:border-primary transition-colors" data-testid="select-province">
+                    <SelectTrigger className="h-10" data-testid="select-province">
                       <SelectValue placeholder="Select Province" />
                     </SelectTrigger>
                     <SelectContent>
@@ -99,17 +82,13 @@ export default function FindHostel() {
                   </Select>
                 </div>
                 
-                <div className="space-y-3">
-                  <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-accent rounded-full"></div>
-                    City *
-                  </label>
+                <div>
                   <Select 
                     value={city} 
                     onValueChange={setCity}
                     disabled={!province}
                   >
-                    <SelectTrigger className="h-12 border-2 hover:border-accent focus:border-accent transition-colors disabled:opacity-50" data-testid="select-city">
+                    <SelectTrigger className="h-10" data-testid="select-city">
                       <SelectValue placeholder={!province ? "Select Province first" : "Select City"} />
                     </SelectTrigger>
                     <SelectContent>
@@ -122,17 +101,13 @@ export default function FindHostel() {
                   </Select>
                 </div>
                 
-                <div className="space-y-3">
-                  <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-primary rounded-full"></div>
-                    Area/Location
-                  </label>
+                <div>
                   <Select 
                     value={location} 
                     onValueChange={setLocation}
                     disabled={!city}
                   >
-                    <SelectTrigger className="h-12 border-2 hover:border-primary focus:border-primary transition-colors disabled:opacity-50" data-testid="select-location">
+                    <SelectTrigger className="h-10" data-testid="select-location">
                       <SelectValue placeholder={!city ? "Select City first" : "Select Location"} />
                     </SelectTrigger>
                     <SelectContent>
@@ -145,67 +120,35 @@ export default function FindHostel() {
                   </Select>
                 </div>
                 
-                <div className="space-y-3">
-                  <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 opacity-0">
-                    Actions
-                  </label>
-                  <div className="flex gap-3 h-12">
-                    <Button 
-                      onClick={handleSearch} 
-                      className="flex-1 h-full bg-primary hover:bg-primary/90 text-white font-semibold transition-all duration-300 hover:scale-105"
-                      disabled={!province || !city}
-                      data-testid="button-search-hostels"
-                    >
-                      <Search className="mr-2 h-5 w-5" />
-                      Search Hostels
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      onClick={resetFilters}
-                      className="px-6 h-full border-2 border-gray-300 hover:border-accent hover:text-accent transition-colors"
-                      data-testid="button-reset"
-                    >
-                      Reset
-                    </Button>
-                  </div>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={handleSearch} 
+                    className="flex-1 h-10 bg-primary hover:bg-primary/90"
+                    disabled={!province || !city}
+                    data-testid="button-search-hostels"
+                  >
+                    <Search className="mr-2 h-4 w-4" />
+                    Search
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={resetFilters}
+                    className="h-10"
+                    data-testid="button-reset"
+                  >
+                    Reset
+                  </Button>
                 </div>
               </div>
               
-              {/* Status Display */}
-              <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl p-6 border border-primary/20">
-                <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <MapPin className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">
-                      {!province && !city && !location && "Select your preferred location to find nearby hostels"}
-                      {province && !city && `Selected: ${province}`}
-                      {province && city && !location && `Selected: ${city}, ${province}`}
-                      {province && city && location && `Selected: ${location}, ${city}, ${province}`}
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Use the filters above to narrow down your hostel search
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Search Results */}
-              {province && city && (
-                <div className="mt-8 p-6 bg-gradient-to-r from-accent/10 to-primary/10 rounded-xl border-2 border-accent/20 animate-in slide-in-from-bottom-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
-                      <img src={searchIcon} alt="Search Results" className="w-12 h-12 rounded-lg" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-xl text-accent mb-2">Search Results</h4>
-                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                        Found hostels in <span className="font-semibold text-primary">{location ? `${location}, ` : ""}{city}, {province}</span>. 
-                        This feature will display available hostels once connected to the database.
-                      </p>
-                    </div>
-                  </div>
+              {/* Simple Status */}
+              {(province || city || location) && (
+                <div className="text-center text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 rounded p-3">
+                  <MapPin className="h-4 w-4 inline mr-2" />
+                  {!province && !city && !location && "Select your location"}
+                  {province && !city && `Selected: ${province}`}
+                  {province && city && !location && `Selected: ${city}, ${province}`}
+                  {province && city && location && `Selected: ${location}, ${city}, ${province}`}
                 </div>
               )}
             </div>
