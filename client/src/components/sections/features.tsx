@@ -12,7 +12,8 @@ import {
   FileBarChart, 
   MapPin,
   Star,
-  CheckCircle
+  CheckCircle,
+  BarChart3
 } from "lucide-react";
 
 const features = [
@@ -22,6 +23,13 @@ const features = [
     description: "Unified control center to manage multiple hostels from one login with separate dashboards for each property.",
     color: "text-primary",
     bgColor: "bg-primary"
+  },
+  {
+    icon: BarChart3,
+    title: "Dashboard",
+    description: "Individual hostel dashboard with real-time statistics, student data, seat availability, financial overview, and monthly analytics charts.",
+    color: "text-blue-600",
+    bgColor: "bg-blue-600"
   },
   {
     icon: Building2,
