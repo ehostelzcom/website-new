@@ -10,7 +10,9 @@ import {
   Calculator, 
   UserCog, 
   FileBarChart, 
-  MapPin
+  MapPin,
+  Star,
+  CheckCircle
 } from "lucide-react";
 
 const features = [
@@ -90,6 +92,20 @@ const features = [
     description: "Real-time occupancy monitoring with visual floor plans, vacancy alerts, and availability dashboard.",
     color: "text-teal-600",
     bgColor: "bg-teal-600"
+  },
+  {
+    icon: Star,
+    title: "User Ratings",
+    description: "Rating system allowing hostels to collect and display user feedback with 1-5 star ratings for reputation management.",
+    color: "text-yellow-600",
+    bgColor: "bg-yellow-600"
+  },
+  {
+    icon: CheckCircle,
+    title: "Students Check Out",
+    description: "Streamlined checkout process with automatic fee dues verification, outstanding balance checks, and clearance confirmation.",
+    color: "text-green-600",
+    bgColor: "bg-green-600"
   }
 ];
 
