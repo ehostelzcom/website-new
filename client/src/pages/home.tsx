@@ -6,8 +6,8 @@ import FindHostel from "@/components/sections/find-hostel";
 import Features from "@/components/sections/features";
 import Pricing from "@/components/sections/pricing";
 import About from "@/components/sections/about";
-import FAQ from "@/components/sections/faq";
 import Contact from "@/components/sections/contact";
+import WhatsAppChat from "@/components/ui/whatsapp-chat";
 
 export default function Home() {
   return (
@@ -20,10 +20,10 @@ export default function Home() {
         <Features />
         <Pricing />
         <About />
-        <FAQ />
         <Contact />
       </main>
       <Footer />
+      <WhatsAppChat />
     </div>
   );
 }
