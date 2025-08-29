@@ -158,12 +158,11 @@ export default function Contact() {
           
           {/* Contact Information - 5 columns */}
           <div className="col-span-12 lg:col-span-5">
-            <div className="space-y-8">
-              {/* Contact Details */}
-              <div>
-                <h3 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white" data-testid="contact-info-title">
-                  Contact Information
-                </h3>
+            {/* Contact Details */}
+            <div>
+              <h3 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white" data-testid="contact-info-title">
+                Contact Information
+              </h3>
                 <div className="space-y-4">
                   <div className="flex items-start" data-testid="contact-email">
                     <Mail className="text-primary mt-1 mr-3 h-5 w-5" />
@@ -190,7 +189,7 @@ export default function Contact() {
               </div>
               
               {/* Need Help */}
-              <div className="bg-primary/10 rounded-lg p-6">
+              <div className="bg-primary/10 rounded-lg p-6 mt-8">
                 <div className="flex items-center mb-3">
                   <SiWhatsapp className="text-primary h-6 w-6 mr-2" />
                   <h4 className="font-semibold text-gray-900 dark:text-white" data-testid="help-title">
@@ -211,7 +210,6 @@ export default function Contact() {
                   WhatsApp Chat
                 </Button>
               </div>
-            </div>
           </div>
         </div>
       </div>
