@@ -73,7 +73,7 @@ export default function Contact() {
         </div>
 
         {/* Main Content - 12 Column Grid */}
-        <div className="grid grid-cols-12 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-12 gap-12 max-w-6xl mx-auto">
           {/* Contact Form - 7 columns */}
           <div className="col-span-12 lg:col-span-7">
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 h-full">
