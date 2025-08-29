@@ -30,7 +30,7 @@ export default function Header() {
               <img 
                 src={logoSvg} 
                 alt="EHostelz" 
-                className="h-8 w-auto"
+                className="h-12 w-auto"
               />
             </div>
           </div>
