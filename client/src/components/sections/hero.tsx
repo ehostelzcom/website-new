@@ -31,9 +31,12 @@ export default function Hero() {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
             <RequestDemoModal>
-              <Button size="lg" className="text-2xl px-16 py-8 bg-gradient-to-r from-primary via-primary/90 to-primary/80 hover:from-primary/95 hover:via-primary/85 hover:to-primary/75 shadow-2xl transform hover:scale-110 transition-all duration-500 rounded-full border-4 border-white/20 backdrop-blur-sm relative overflow-hidden group" data-testid="button-request-demo">
-                <span className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-                <span className="relative z-10 flex items-center gap-3">
+              <Button size="lg" className="group relative inline-flex items-center justify-center px-12 py-4 text-lg font-semibold text-white bg-primary hover:bg-primary/90 border-2 border-primary hover:border-accent shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg overflow-hidden" data-testid="button-request-demo">
+                <span className="absolute inset-0 w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                <span className="relative z-10 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1a3 3 0 015.83 1M15 10h1a3 3 0 01-3.83-1M12 3v3m0 12v3m9-9h-3M3 12h3" />
+                  </svg>
                   Request Demo
                 </span>
               </Button>
