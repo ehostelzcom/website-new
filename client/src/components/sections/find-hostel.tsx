@@ -146,8 +146,9 @@ export default function FindHostel() {
                   
                   {/* Action Buttons */}
                   <div className="space-y-2">
-                    <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide opacity-0">
-                      Actions
+                    <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide flex items-center gap-2 h-4">
+                      <div className="w-1.5 h-1.5 bg-transparent rounded-full"></div>
+                      <span className="opacity-0">Actions</span>
                     </label>
                     <div className="flex gap-3 h-12">
                       <Button 
