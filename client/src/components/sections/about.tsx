@@ -1,82 +1,98 @@
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Target, Users, Clock, Shield } from "lucide-react";
 
 export default function About() {
   const benefits = [
     {
+      icon: Target,
       title: "Centralized Management",
-      description: "Manage all your hostels from one powerful platform"
+      description: "Manage all your properties from one powerful platform",
+      color: "bg-primary/10 text-primary"
     },
     {
+      icon: Clock,
       title: "Time-Saving Automation",
-      description: "Automate fees, allotments, and reporting processes"
+      description: "Automate fees, allotments, and reporting processes",
+      color: "bg-accent/10 text-accent"
     },
     {
+      icon: Users,
       title: "Student-Friendly",
-      description: "Seamless hostel transfers with single registration"
+      description: "Seamless property transfers with single registration",
+      color: "bg-green-500/10 text-green-600"
+    },
+    {
+      icon: Shield,
+      title: "Secure & Reliable",
+      description: "Enterprise-grade security with 99.9% uptime guarantee",
+      color: "bg-blue-500/10 text-blue-600"
     }
   ];
 
   const stats = [
-    { value: "500+", label: "Hostels Managed" },
-    { value: "10k+", label: "Students Served" },
-    { value: "99.9%", label: "Uptime" }
+    { value: "500+", label: "Properties Managed", icon: "🏢" },
+    { value: "10k+", label: "Students Served", icon: "👨‍🎓" },
+    { value: "99.9%", label: "Uptime", icon: "⚡" },
+    { value: "24/7", label: "Support", icon: "🛟" }
   ];
 
   return (
-    <section id="about" className="py-20">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4" data-testid="about-title">
-              Why Choose EHostelz?
-            </h2>
-            <p className="text-xl text-muted-foreground" data-testid="about-subtitle">
-              Digitizing hostel management with simplicity and efficiency
+    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 via-white to-primary/5 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="w-full">
+        {/* Header Section */}
+        <div className="text-center mb-16 px-4">
+          <h2 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent" data-testid="about-title">
+            Why Choose EHostelz?
+          </h2>
+          <p className="text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed" data-testid="about-subtitle">
+            Transform your property management with cutting-edge technology and unmatched efficiency
+          </p>
+        </div>
+
+        {/* Benefits Cards - Full Width Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-4 mb-20">
+          {benefits.map((benefit, index) => {
+            const IconComponent = benefit.icon;
+            return (
+              <div key={index} className="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:scale-105 transition-all duration-300" data-testid={`benefit-${index}`}>
+                <div className={`w-16 h-16 rounded-2xl ${benefit.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <IconComponent className="w-8 h-8" />
+                </div>
+                <h4 className="font-bold text-xl mb-3 text-gray-900 dark:text-white" data-testid={`benefit-title-${index}`}>
+                  {benefit.title}
+                </h4>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed" data-testid={`benefit-description-${index}`}>
+                  {benefit.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Mission Statement - Full Width */}
+        <div className="bg-gradient-to-r from-primary to-accent py-16 px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl lg:text-4xl font-bold text-white mb-6" data-testid="mission-title">
+              Our Mission
+            </h3>
+            <p className="text-xl text-white/90 leading-relaxed" data-testid="mission-description">
+              To become the world's leading property management platform by providing innovative, 
+              user-friendly solutions that transform how properties operate and serve their communities.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
-            <div>
-              <h3 className="text-2xl font-bold mb-6" data-testid="mission-title">
-                Our Mission
-              </h3>
-              <p className="text-muted-foreground text-lg mb-6" data-testid="mission-description">
-                To become the No.1 hostel management software worldwide by providing innovative, 
-                user-friendly solutions that transform how hostels operate and serve their communities.
-              </p>
-              <div className="space-y-4">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-start" data-testid={`benefit-${index}`}>
-                    <CheckCircle className="text-green-500 mt-1 mr-3 h-5 w-5" />
-                    <div>
-                      <h4 className="font-semibold" data-testid={`benefit-title-${index}`}>
-                        {benefit.title}
-                      </h4>
-                      <p className="text-muted-foreground" data-testid={`benefit-description-${index}`}>
-                        {benefit.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <img 
-                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" 
-                alt="Professional team working on software solutions" 
-                className="rounded-xl shadow-lg w-full"
-                data-testid="about-image"
-              />
-            </div>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
+        </div>
+
+        {/* Stats Section - Full Width */}
+        <div className="py-16 px-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center" data-testid={`stat-${index}`}>
-                <div className="text-3xl font-bold text-primary mb-2" data-testid={`stat-value-${index}`}>
+              <div key={index} className="text-center group" data-testid={`stat-${index}`}>
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {stat.icon}
+                </div>
+                <div className="text-4xl lg:text-5xl font-bold text-primary mb-2 group-hover:text-accent transition-colors duration-300" data-testid={`stat-value-${index}`}>
                   {stat.value}
                 </div>
-                <div className="text-muted-foreground" data-testid={`stat-label-${index}`}>
+                <div className="text-gray-600 dark:text-gray-400 font-medium" data-testid={`stat-label-${index}`}>
                   {stat.label}
                 </div>
               </div>
