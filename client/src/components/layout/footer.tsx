@@ -12,8 +12,8 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-200 py-16">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8 mb-12">
-          <div>
+        <div className="grid md:grid-cols-6 gap-8 mb-12">
+          <div className="col-span-6 md:col-span-2">
             <div className="mb-6">
               <img src={logoUrl} alt="EHostelz Logo" className="w-60 h-auto" />
             </div>
@@ -46,7 +46,10 @@ export default function Footer() {
             </div>
           </div>
           
-          <div>
+          {/* Empty space for gap */}
+          <div className="hidden md:block"></div>
+          
+          <div className="col-span-6 md:col-span-1">
             <h3 className="font-semibold mb-4 text-gray-900">Product</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
@@ -80,7 +83,7 @@ export default function Footer() {
             </ul>
           </div>
           
-          <div>
+          <div className="col-span-6 md:col-span-1">
             <h3 className="font-semibold mb-4 text-gray-900">Company</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
@@ -114,7 +117,7 @@ export default function Footer() {
             </ul>
           </div>
           
-          <div>
+          <div className="col-span-6 md:col-span-1">
             <h3 className="font-semibold mb-4 text-gray-900">Support</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
