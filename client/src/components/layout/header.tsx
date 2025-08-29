@@ -7,6 +7,11 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
+    if (sectionId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setIsOpen(false);
+      return;
+    }
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -29,11 +34,11 @@ export default function Header() {
           
           <nav className="hidden md:flex items-center space-x-6">
             <button 
-              onClick={() => scrollToSection('find-hostel')}
+              onClick={() => scrollToSection('home')}
               className="text-muted-foreground hover:text-foreground transition-colors"
-              data-testid="nav-find-hostel"
+              data-testid="nav-home"
             >
-              Find Hostel
+              Home
             </button>
             <button 
               onClick={() => scrollToSection('features')}
@@ -48,6 +53,13 @@ export default function Header() {
               data-testid="nav-pricing"
             >
               Pricing
+            </button>
+            <button 
+              onClick={() => scrollToSection('find-hostel')}
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              data-testid="nav-find-hostel"
+            >
+              Find Hostel
             </button>
             <button 
               onClick={() => scrollToSection('about')}
@@ -83,11 +95,11 @@ export default function Header() {
               <SheetContent>
                 <div className="flex flex-col space-y-4 mt-6">
                   <button 
-                    onClick={() => scrollToSection('find-hostel')}
+                    onClick={() => scrollToSection('home')}
                     className="text-left text-muted-foreground hover:text-foreground transition-colors"
-                    data-testid="nav-mobile-find-hostel"
+                    data-testid="nav-mobile-home"
                   >
-                    Find Hostel
+                    Home
                   </button>
                   <button 
                     onClick={() => scrollToSection('features')}
@@ -102,6 +114,13 @@ export default function Header() {
                     data-testid="nav-mobile-pricing"
                   >
                     Pricing
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection('find-hostel')}
+                    className="text-left text-muted-foreground hover:text-foreground transition-colors"
+                    data-testid="nav-mobile-find-hostel"
+                  >
+                    Find Hostel
                   </button>
                   <button 
                     onClick={() => scrollToSection('about')}
