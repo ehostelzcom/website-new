@@ -172,7 +172,7 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
                   <FormLabel>Hostel Name</FormLabel>
                   <FormControl>
                     <Input 
-                      placeholder="e.g., Al-Noor Boys Hostel"
+                      placeholder="e.g., Smart Hostel"
                       data-testid="input-hostel-name"
                       {...field} 
                     />
