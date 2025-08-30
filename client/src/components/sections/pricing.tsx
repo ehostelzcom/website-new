@@ -172,16 +172,20 @@ export default function Pricing() {
           </p>
 
           {/* Billing Toggle */}
-          <div className="flex justify-center mb-8">
-            <div className="flex flex-col space-y-3">
+          <div className="flex justify-center mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl">
               {[
-                { key: 'monthly', label: 'Monthly', badge: null },
-                { key: '6months', label: '6 Months', badge: '10% OFF' },
-                { key: 'yearly', label: '1 Year', badge: '20% OFF' }
+                { key: 'monthly', label: 'Monthly', description: 'Pay monthly', badge: null },
+                { key: '6months', label: '6 Months', description: 'Save 10%', badge: '10% OFF' },
+                { key: 'yearly', label: '1 Year', description: 'Best value', badge: '20% OFF' }
               ].map((option) => (
                 <label
                   key={option.key}
-                  className="flex items-center space-x-3 cursor-pointer group"
+                  className={`relative cursor-pointer group transition-all duration-300 ${
+                    billingPeriod === option.key
+                      ? 'transform scale-105'
+                      : 'hover:scale-102'
+                  }`}
                 >
                   <input
                     type="radio"
@@ -189,16 +193,47 @@ export default function Pricing() {
                     value={option.key}
                     checked={billingPeriod === option.key}
                     onChange={(e) => setBillingPeriod(e.target.value)}
-                    className="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary dark:focus:ring-primary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="sr-only"
                   />
-                  <span className="text-gray-900 dark:text-gray-100 font-medium group-hover:text-primary transition-colors">
-                    {option.label}
+                  <div className={`relative p-6 rounded-xl border-2 text-center transition-all duration-300 ${
+                    billingPeriod === option.key
+                      ? 'border-primary bg-primary/5 shadow-lg ring-4 ring-primary/20'
+                      : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/50 hover:shadow-md'
+                  }`}>
                     {option.badge && (
-                      <span className="ml-2 bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full dark:bg-green-900 dark:text-green-200">
-                        {option.badge}
-                      </span>
+                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                          {option.badge}
+                        </span>
+                      </div>
                     )}
-                  </span>
+                    
+                    <div className={`w-6 h-6 mx-auto mb-3 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                      billingPeriod === option.key
+                        ? 'border-primary bg-primary'
+                        : 'border-gray-300 dark:border-gray-600 group-hover:border-primary'
+                    }`}>
+                      {billingPeriod === option.key && (
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      )}
+                    </div>
+                    
+                    <h3 className={`text-lg font-bold mb-1 transition-colors ${
+                      billingPeriod === option.key
+                        ? 'text-primary'
+                        : 'text-gray-900 dark:text-gray-100 group-hover:text-primary'
+                    }`}>
+                      {option.label}
+                    </h3>
+                    
+                    <p className={`text-sm transition-colors ${
+                      billingPeriod === option.key
+                        ? 'text-primary/80'
+                        : 'text-gray-600 dark:text-gray-400'
+                    }`}>
+                      {option.description}
+                    </p>
+                  </div>
                 </label>
               ))}
             </div>
