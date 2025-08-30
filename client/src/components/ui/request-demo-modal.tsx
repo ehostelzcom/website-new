@@ -31,7 +31,7 @@ const requestDemoSchema = z.object({
   province: z.string().min(1, "Please select a province"),
   city: z.string().min(1, "Please select a city"),
   location: z.string().min(1, "Please enter location"),
-  address: z.string().min(10, "Please provide complete address")
+  address: z.string().min(10, "Please provide address")
 });
 
 type RequestDemoForm = z.infer<typeof requestDemoSchema>;
@@ -312,10 +312,10 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Complete Address</FormLabel>
+                  <FormLabel>Address</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Please provide the complete address of your hostel..."
+                      placeholder="Please provide the address of your hostel..."
                       className="min-h-[80px]"
                       data-testid="input-address"
                       {...field}
