@@ -6,6 +6,7 @@ import { useState } from "react";
 const plans = [
   {
     name: "Starter",
+    category: "Single Hostel",
     description: "Perfect for small single hostels just starting",
     monthlyPrice: 2000,
     seats: 50,
@@ -19,6 +20,7 @@ const plans = [
   },
   {
     name: "Growth",
+    category: "Single Hostel",
     description: "For growing hostels with more students",
     monthlyPrice: 3500,
     seats: 100,
@@ -32,6 +34,7 @@ const plans = [
   },
   {
     name: "Scale",
+    category: "Single Hostel",
     description: "For large hostels with high turnover",
     monthlyPrice: 8000,
     seats: 500,
@@ -45,6 +48,7 @@ const plans = [
   },
   {
     name: "Business",
+    category: "Group of Hostels",
     description: "Designed for small hostel groups",
     monthlyPrice: 12000,
     seats: 300,
@@ -58,6 +62,7 @@ const plans = [
   },
   {
     name: "Enterprise",
+    category: "Group of Hostels",
     description: "For bigger hostel chains with multiple branches",
     monthlyPrice: 20000,
     seats: 1000,
@@ -71,6 +76,7 @@ const plans = [
   },
   {
     name: "Custom",
+    category: "Group of Hostels",
     description: "Unlimited hostels for large organizations",
     monthlyPrice: null,
     seats: "Unlimited",
@@ -196,12 +202,23 @@ export default function Pricing() {
                 <CardContent className="p-6">
                   {/* Plan Header */}
                   <div className="text-center mb-6">
-                    <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" data-testid={`plan-name-${index}`}>
+                    <div className="mb-2">
+                      <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                        plan.category === 'Single Hostel' 
+                          ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                          : 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200'
+                      }`}>
+                        {plan.category}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-testid={`plan-name-${index}`}>
                       {plan.name}
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4" data-testid={`plan-description-${index}`}>
-                      {plan.description}
-                    </p>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg mb-4">
+                      <p className="text-sm font-medium text-gray-700 dark:text-gray-300" data-testid={`plan-description-${index}`}>
+                        {plan.description}
+                      </p>
+                    </div>
                     
                     {/* Price */}
                     {plan.isCustom ? (
