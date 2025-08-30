@@ -69,36 +69,41 @@ export default function TopSlider() {
   }, []);
 
   return (
-    <section className="relative w-full h-[460px] lg:h-[560px] overflow-hidden bg-gray-100 dark:bg-gray-900 mt-4">
+    <section className="relative w-full h-[460px] lg:h-[560px] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 mt-4">
       <div 
-        className="flex transition-transform duration-700 ease-in-out h-full"
+        className="flex transition-all duration-1000 ease-out h-full"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         data-testid="top-slider-container"
       >
         {slides.map((slide, index) => (
-          <div key={index} className="w-full flex-shrink-0 relative h-full">
-            {/* Background Image with Simple Overlay */}
+          <div key={index} className="w-full flex-shrink-0 relative h-full group">
+            {/* Background Image with Modern Gradient Overlay */}
             <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 group-hover:scale-105"
               style={{ backgroundImage: `url(${slide.image})` }}
             >
-              <div className="absolute inset-0 bg-black/60"></div>
+              {/* Multi-layered Modern Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#004e89]/80 via-black/60 to-[#ff6b35]/40"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
             </div>
             
-            {/* Content Overlay */}
+            {/* Content Overlay with Enhanced Typography */}
             <div className="relative z-10 h-full flex items-center">
-              <div className="container mx-auto px-16 lg:px-24">
-                <div className="max-w-3xl text-white">
-                  <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight" data-testid={`slide-title-${index}`}>
+              <div className="container mx-auto px-8 lg:px-24">
+                <div className="max-w-4xl text-white">
+                  {/* Enhanced Title with Modern Typography */}
+                  <h1 className="text-4xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-[0.9] tracking-tight bg-gradient-to-r from-white via-white to-white/90 bg-clip-text text-transparent drop-shadow-lg" data-testid={`slide-title-${index}`}>
                     {slide.title}
-                  </h2>
-                  <p className="text-lg lg:text-xl text-gray-200 mb-8 leading-relaxed" data-testid={`slide-subtitle-${index}`}>
+                  </h1>
+                  {/* Enhanced Subtitle with Better Spacing */}
+                  <p className="text-xl lg:text-2xl text-gray-100/90 mb-10 leading-relaxed font-light max-w-3xl backdrop-blur-sm" data-testid={`slide-subtitle-${index}`}>
                     {slide.subtitle}
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  {/* Modern Button Design */}
+                  <div className="flex flex-col sm:flex-row gap-6">
                     <Button 
                       size="lg" 
-                      className="text-lg px-8 py-4 bg-primary text-white hover:bg-primary/90"
+                      className="text-lg px-10 py-5 bg-gradient-to-r from-[#004e89] to-[#0066b3] text-white hover:from-[#003a6b] hover:to-[#004e89] shadow-2xl shadow-[#004e89]/30 border border-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-3xl"
                       onClick={scrollToFeatures}
                       data-testid={`slide-cta-${index}`}
                     >
@@ -108,10 +113,10 @@ export default function TopSlider() {
                       <Button 
                         variant="outline" 
                         size="lg" 
-                        className="text-lg px-8 py-4 border-white text-white bg-white/10 hover:bg-white hover:text-black" 
+                        className="text-lg px-10 py-5 border-2 border-white/30 text-white bg-white/10 hover:bg-white/20 backdrop-blur-md shadow-xl transition-all duration-300 hover:scale-105 hover:border-white/50" 
                         data-testid={`slide-demo-${index}`}
                       >
-                        <Play className="w-5 h-5 mr-2" />
+                        <Play className="w-6 h-6 mr-3" />
                         Watch Demo
                       </Button>
                     </VideoModal>
@@ -123,22 +128,22 @@ export default function TopSlider() {
         ))}
       </div>
       
-      {/* Navigation Arrows with Tooltips */}
+      {/* Modern Glassmorphism Navigation Arrows */}
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
               variant="outline"
               size="icon"
-              className="absolute left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 border-white/30 text-white backdrop-blur-sm"
+              className="absolute left-4 lg:left-8 top-1/2 transform -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 border border-white/20 text-white backdrop-blur-xl shadow-2xl shadow-black/20 transition-all duration-300 hover:scale-110 hover:border-white/40 rounded-full"
               onClick={previousSlide}
               data-testid="button-previous-top"
             >
-              <ChevronLeft className="h-6 w-6" />
+              <ChevronLeft className="h-7 w-7" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent>
-            <p>Previous</p>
+          <TooltipContent side="right" className="bg-black/80 backdrop-blur-sm border-white/20">
+            <p className="text-white">Previous</p>
           </TooltipContent>
         </Tooltip>
         
@@ -147,30 +152,30 @@ export default function TopSlider() {
             <Button
               variant="outline"
               size="icon"
-              className="absolute right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 border-white/30 text-white backdrop-blur-sm"
+              className="absolute right-4 lg:right-8 top-1/2 transform -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 border border-white/20 text-white backdrop-blur-xl shadow-2xl shadow-black/20 transition-all duration-300 hover:scale-110 hover:border-white/40 rounded-full"
               onClick={nextSlide}
               data-testid="button-next-top"
             >
-              <ChevronRight className="h-6 w-6" />
+              <ChevronRight className="h-7 w-7" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent>
-            <p>Next</p>
+          <TooltipContent side="left" className="bg-black/80 backdrop-blur-sm border-white/20">
+            <p className="text-white">Next</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
       
-      {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
+      {/* Modern Glassmorphism Slide Indicators */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-4 bg-black/20 backdrop-blur-xl px-6 py-3 rounded-full border border-white/20 shadow-2xl">
         {slides.map((_, index) => (
           <Button
             key={index}
             variant="ghost"
             size="sm"
-            className={`w-4 h-4 rounded-full p-0 transition-all duration-300 ${
+            className={`transition-all duration-500 ease-out rounded-full p-0 border ${
               currentSlide === index 
-                ? 'bg-white scale-110' 
-                : 'bg-white/40 hover:bg-white/60'
+                ? 'w-12 h-3 bg-gradient-to-r from-[#004e89] to-[#ff6b35] scale-110 shadow-lg border-white/30' 
+                : 'w-3 h-3 bg-white/30 hover:bg-white/50 hover:scale-125 border-white/20'
             }`}
             onClick={() => goToSlide(index)}
             data-testid={`top-indicator-${index}`}
