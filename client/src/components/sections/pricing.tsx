@@ -7,7 +7,7 @@ const plans = [
   {
     name: "Starter",
     description: "Perfect for small single hostels just starting",
-    monthlyPrice: 3000,
+    monthlyPrice: 2000,
     seats: 50,
     hostels: 1,
     features: [
@@ -20,7 +20,7 @@ const plans = [
   {
     name: "Growth",
     description: "For growing hostels with more students",
-    monthlyPrice: 5000,
+    monthlyPrice: 3500,
     seats: 100,
     hostels: 1,
     features: [
@@ -33,7 +33,7 @@ const plans = [
   {
     name: "Scale",
     description: "For large hostels with high turnover",
-    monthlyPrice: 12000,
+    monthlyPrice: 8000,
     seats: 500,
     hostels: 1,
     features: [
@@ -46,7 +46,7 @@ const plans = [
   {
     name: "Business",
     description: "Designed for small hostel groups",
-    monthlyPrice: 15000,
+    monthlyPrice: 12000,
     seats: 300,
     hostels: 3,
     features: [
@@ -59,7 +59,7 @@ const plans = [
   {
     name: "Enterprise",
     description: "For bigger hostel chains with multiple branches",
-    monthlyPrice: 25000,
+    monthlyPrice: 20000,
     seats: 1000,
     hostels: 5,
     features: [
