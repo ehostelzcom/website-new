@@ -154,7 +154,7 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[800px] max-h-[95vh]">
         <DialogHeader>
           <DialogTitle className="text-2xl">Request Demo</DialogTitle>
           <DialogDescription>
@@ -163,46 +163,49 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
         </DialogHeader>
         
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="homeName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Hostel Name</FormLabel>
-                  <FormControl>
-                    <Input 
-                      placeholder="e.g., Smart Hostel"
-                      data-testid="input-hostel-name"
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Type</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            {/* Row 1: Hostel Name and Type */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="homeName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Hostel Name</FormLabel>
                     <FormControl>
-                      <SelectTrigger data-testid="select-type">
-                        <SelectValue placeholder="Select type" />
-                      </SelectTrigger>
+                      <Input 
+                        placeholder="e.g., Smart Hostel"
+                        data-testid="input-hostel-name"
+                        {...field} 
+                      />
                     </FormControl>
-                    <SelectContent>
-                      <SelectItem value="Boys">Boys</SelectItem>
-                      <SelectItem value="Girls">Girls</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="type"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Type</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger data-testid="select-type">
+                          <SelectValue placeholder="Select type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Boys">Boys</SelectItem>
+                        <SelectItem value="Girls">Girls</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={form.control}
@@ -222,65 +225,68 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="province"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Province</FormLabel>
-                  <Select 
-                    onValueChange={(value) => {
-                      field.onChange(value);
-                      form.setValue("city", ""); // Reset city when province changes
-                    }} 
-                    value={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger data-testid="select-demo-province">
-                        <SelectValue placeholder="Select province" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {provinces.map((province) => (
-                        <SelectItem key={province} value={province}>
-                          {province}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>City</FormLabel>
-                  <Select 
-                    onValueChange={field.onChange} 
-                    value={field.value}
-                    disabled={!selectedProvince}
-                  >
-                    <FormControl>
-                      <SelectTrigger data-testid="select-demo-city">
-                        <SelectValue placeholder={!selectedProvince ? "Select province first" : "Select city"} />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {availableCities.map((city) => (
-                        <SelectItem key={city} value={city}>
-                          {city}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {/* Row 3: Province and City */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="province"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Province</FormLabel>
+                    <Select 
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        form.setValue("city", ""); // Reset city when province changes
+                      }} 
+                      value={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger data-testid="select-demo-province">
+                          <SelectValue placeholder="Select province" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {provinces.map((province) => (
+                          <SelectItem key={province} value={province}>
+                            {province}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>City</FormLabel>
+                    <Select 
+                      onValueChange={field.onChange} 
+                      value={field.value}
+                      disabled={!selectedProvince}
+                    >
+                      <FormControl>
+                        <SelectTrigger data-testid="select-demo-city">
+                          <SelectValue placeholder={!selectedProvince ? "Select province first" : "Select city"} />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {availableCities.map((city) => (
+                          <SelectItem key={city} value={city}>
+                            {city}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={form.control}
@@ -316,7 +322,7 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
                   <FormControl>
                     <Textarea
                       placeholder="Please provide the address of your hostel..."
-                      className="min-h-[80px]"
+                      className="min-h-[60px]"
                       data-testid="input-address"
                       {...field}
                     />
@@ -326,7 +332,7 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
               )}
             />
 
-            <div className="flex justify-end space-x-3 pt-4">
+            <div className="flex justify-end space-x-3 pt-2">
               <Button 
                 type="button" 
                 variant="outline" 
