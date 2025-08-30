@@ -1,6 +1,7 @@
 import { SiFacebook, SiInstagram, SiLinkedin } from "react-icons/si";
 import logoUrl from "@assets/logo/Asset 3.svg";
 import RequestDemoModal from "@/components/ui/request-demo-modal";
+import YouTubeModal from "@/components/ui/youtube-modal";
 import { Button } from "@/components/ui/button";
 
 export default function Footer() {
@@ -80,9 +81,11 @@ export default function Footer() {
                 </RequestDemoModal>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors" data-testid="footer-watch-demo">
-                  Watch Demo
-                </a>
+                <YouTubeModal>
+                  <button className="hover:text-foreground transition-colors text-left" data-testid="footer-watch-demo">
+                    Watch Demo
+                  </button>
+                </YouTubeModal>
               </li>
             </ul>
           </div>
