@@ -212,7 +212,7 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
                   <FormLabel>Mobile Number</FormLabel>
                   <FormControl>
                     <Input 
-                      placeholder="+92 300 1234567"
+                      placeholder="03001234567"
                       data-testid="input-mobile"
                       {...field} 
                     />
