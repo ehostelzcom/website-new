@@ -173,31 +173,34 @@ export default function Pricing() {
 
           {/* Billing Toggle */}
           <div className="flex justify-center mb-8">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-1 shadow-md border border-gray-200 dark:border-gray-700">
-              <div className="flex space-x-1">
-                {[
-                  { key: 'monthly', label: 'Monthly' },
-                  { key: '6months', label: '6 Months', badge: '10% OFF' },
-                  { key: 'yearly', label: '1 Year', badge: '20% OFF' }
-                ].map((option) => (
-                  <button
-                    key={option.key}
-                    onClick={() => setBillingPeriod(option.key)}
-                    className={`relative px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                      billingPeriod === option.key
-                        ? 'bg-primary text-white'
-                        : 'text-gray-600 dark:text-gray-400 hover:text-primary'
-                    }`}
-                  >
+            <div className="flex flex-col space-y-3">
+              {[
+                { key: 'monthly', label: 'Monthly', badge: null },
+                { key: '6months', label: '6 Months', badge: '10% OFF' },
+                { key: 'yearly', label: '1 Year', badge: '20% OFF' }
+              ].map((option) => (
+                <label
+                  key={option.key}
+                  className="flex items-center space-x-3 cursor-pointer group"
+                >
+                  <input
+                    type="radio"
+                    name="billingPeriod"
+                    value={option.key}
+                    checked={billingPeriod === option.key}
+                    onChange={(e) => setBillingPeriod(e.target.value)}
+                    className="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary dark:focus:ring-primary dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <span className="text-gray-900 dark:text-gray-100 font-medium group-hover:text-primary transition-colors">
                     {option.label}
                     {option.badge && (
-                      <span className="absolute -top-1 -right-1 bg-accent text-white text-xs px-1 py-0.5 rounded-full">
+                      <span className="ml-2 bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full dark:bg-green-900 dark:text-green-200">
                         {option.badge}
                       </span>
                     )}
-                  </button>
-                ))}
-              </div>
+                  </span>
+                </label>
+              ))}
             </div>
           </div>
         </div>
