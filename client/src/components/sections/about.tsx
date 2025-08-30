@@ -56,7 +56,7 @@ export default function About() {
             Why Choose ehostelz.com?
           </h2>
           <p className="text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed" data-testid="about-subtitle">
-            Transform your hostel management with cutting-edge technology and unmatched efficiency
+            ehostelz.com empowers hostel owners with automation, centralized management, and clear monthly tracking—making operations smoother, faster, and more transparent than ever.
           </p>
         </div>
 
