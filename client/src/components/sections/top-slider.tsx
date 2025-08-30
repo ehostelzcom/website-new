@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import VideoModal from "@/components/ui/video-modal";
-import dashboardImage from "@assets/generated_images/Hostel_management_dashboard_interface_300de500.png";
-import studentImage from "@assets/generated_images/Student_management_software_interface_e1523600.png";
-import roomImage from "@assets/generated_images/Room_management_system_interface_8d15d0a1.png";
-import financialImage from "@assets/generated_images/Financial_analytics_dashboard_interface_33f4ce90.png";
+import dashboardImage from "@assets/generated_images/Secure_dashboard_interface_redesign_b32b56ab.png";
+import studentImage from "@assets/generated_images/Secure_student_data_interface_adca6447.png";
+import roomImage from "@assets/generated_images/Secure_room_management_interface_b828af5a.png";
+import allotmentImage from "@assets/generated_images/Secure_allotments_feedback_interface_8820174e.png";
 
 const slides = [
   {
@@ -28,10 +28,10 @@ const slides = [
     subtitle: "Automated room and seat management with real-time availability"
   },
   {
-    image: financialImage,
-    alt: "Financial Reports and Analytics",
-    title: "Advanced Reports & Analytics",
-    subtitle: "Comprehensive insights into fees, expenses, and hostel performance"
+    image: allotmentImage,
+    alt: "Student Allotments and Feedback",
+    title: "Student Performance & Feedback",
+    subtitle: "Track student ratings, behavior, and fee payment compliance"
   }
 ];
 

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import dashboardImage from "@assets/generated_images/Hostel_management_dashboard_interface_300de500.png";
-import studentImage from "@assets/generated_images/Student_management_software_interface_e1523600.png";
-import roomImage from "@assets/generated_images/Room_management_system_interface_8d15d0a1.png";
-import financialImage from "@assets/generated_images/Financial_analytics_dashboard_interface_33f4ce90.png";
+import dashboardImage from "@assets/generated_images/Secure_dashboard_interface_redesign_b32b56ab.png";
+import studentImage from "@assets/generated_images/Secure_student_data_interface_adca6447.png";
+import roomImage from "@assets/generated_images/Secure_room_management_interface_b828af5a.png";
+import allotmentImage from "@assets/generated_images/Secure_allotments_feedback_interface_8820174e.png";
 
 const slides = [
   {
@@ -20,8 +20,8 @@ const slides = [
     alt: "Room Management System"
   },
   {
-    image: financialImage,
-    alt: "Financial Reports and Analytics"
+    image: allotmentImage,
+    alt: "Student Allotments and Feedback"
   }
 ];
 
