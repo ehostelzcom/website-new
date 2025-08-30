@@ -89,9 +89,9 @@ export default function TopSlider() {
             <div className="relative z-10 h-full flex items-center">
               <div className="container mx-auto px-16 lg:px-24">
                 <div className="max-w-3xl text-white">
-                  <h1 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight" data-testid={`slide-title-${index}`}>
+                  <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight" data-testid={`slide-title-${index}`}>
                     {slide.title}
-                  </h1>
+                  </h2>
                   <p className="text-lg lg:text-xl text-gray-200 mb-8 leading-relaxed" data-testid={`slide-subtitle-${index}`}>
                     {slide.subtitle}
                   </p>

@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ehostelz.com/sitemap.xml
+
+# Optimize crawling
+Crawl-delay: 1
+
+# Allow important pages
+Allow: /#features
+Allow: /#pricing
+Allow: /#about
+Allow: /#contact
+Allow: /#find-hostel
+
+# Block unnecessary paths
+Disallow: /src/
+Disallow: /*.tsx
+Disallow: /*.ts
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /.git/
