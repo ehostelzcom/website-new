@@ -57,7 +57,8 @@ const plans = [
     features: [
       "Up to 3 Hostels",
       "100 Active Seats per hostel",
-      "Unlimited Registered Users"
+      "Unlimited Registered Users",
+      "Student Portal"
     ],
     popular: false
   },
