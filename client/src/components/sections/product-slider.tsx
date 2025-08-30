@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import dashboardImage from "@assets/generated_images/Secure_e1_dashboard_with_top_menu_eff6b32f.png";
 import loginImage from "@assets/slider images/login.jpg";
-import roomImage from "@assets/generated_images/Room_management_with_top_navigation_3e162275.png";
+import enrollmentImage from "@assets/slider images/e5.jpg";
 import financialImage from "@assets/generated_images/Financial_management_dashboard_interface_73139990.png";
 
 const slides = [
@@ -16,7 +16,7 @@ const slides = [
     alt: "Multiple Hostels Management in One Login"
   },
   {
-    image: roomImage,
+    image: enrollmentImage,
     alt: "Smart Enrollment - One Time Registration System"
   },
   {

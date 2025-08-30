@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import VideoModal from "@/components/ui/video-modal";
 import dashboardImage from "@assets/generated_images/Secure_e1_dashboard_with_top_menu_eff6b32f.png";
 import loginImage from "@assets/slider images/login.jpg";
-import roomImage from "@assets/generated_images/Room_management_with_top_navigation_3e162275.png";
+import enrollmentImage from "@assets/slider images/e5.jpg";
 import financialImage from "@assets/generated_images/Financial_management_dashboard_interface_73139990.png";
 
 const slides = [
@@ -22,7 +22,7 @@ const slides = [
     subtitle: "Control all your hostel branches from a single dashboard - no more juggling multiple systems or accounts"
   },
   {
-    image: roomImage,
+    image: enrollmentImage,
     alt: "Smart Enrollment System",
     title: "Smart Enrollment - One Time Registration", 
     subtitle: "Register students once in ehostelz.com and seamlessly manage them across all your hostel locations"
