@@ -77,7 +77,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Contact Form - 2 columns */}
             <div className="lg:col-span-2">
-              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-primary/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl transition-all duration-500">
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-gray-50 to-primary/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl transition-all duration-500">
                 {/* Background Decoration */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl opacity-50"></div>
                 <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-accent/10 to-primary/10 rounded-full blur-xl opacity-30"></div>
@@ -172,7 +172,7 @@ export default function Contact() {
             {/* Contact Information - 1 column */}
             <div className="flex flex-col h-full">
               {/* Contact Details Cards */}
-              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-5 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500 mb-6 flex-shrink-0">
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-5 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500 mb-6 flex-shrink-0">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-xl opacity-50"></div>
                 
                 <div className="relative z-10">
@@ -212,7 +212,7 @@ export default function Contact() {
               </div>
               
               {/* WhatsApp Card - Positioned at bottom */}
-              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-50 via-white to-green-100 dark:from-gray-800 dark:via-gray-750 dark:to-green-900/20 p-6 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500 mt-auto">
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-50 via-white to-green-100 dark:from-gray-800 dark:via-gray-750 dark:to-green-900/20 p-6 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500 mt-auto">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-400/20 to-green-600/20 rounded-full blur-xl opacity-50"></div>
                 
                 <div className="relative z-10">

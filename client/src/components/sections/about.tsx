@@ -65,14 +65,14 @@ export default function About() {
           {benefits.map((benefit, index) => {
             const IconComponent = benefit.icon;
             return (
-              <div key={index} className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid={`benefit-${index}`}>
+              <div key={index} className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid={`benefit-${index}`}>
                 {/* Background Decoration */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
                 <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-accent/10 to-primary/10 rounded-full blur-xl opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
                 
                 {/* Icon */}
                 <div className="relative z-10 mb-6">
-                  <div className={`w-20 h-20 rounded-3xl ${benefit.color} flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg`}>
+                  <div className={`w-20 h-20 rounded-2xl ${benefit.color} flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg`}>
                     <IconComponent className="w-10 h-10" />
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export default function About() {
                 </div>
                 
                 {/* Hover Effect Border */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
               </div>
             );
           })}
@@ -140,13 +140,13 @@ export default function About() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Hostel Owners App */}
-              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-primary/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid="future-owners-app">
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-gray-50 to-primary/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid="future-owners-app">
                 {/* Background Decoration */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
                 
                 {/* Icon */}
                 <div className="relative z-10 mb-6">
-                  <div className="w-20 h-20 rounded-3xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
+                  <div className="w-20 h-20 rounded-2xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
                     <Monitor className="w-10 h-10" />
                   </div>
                 </div>
@@ -162,17 +162,17 @@ export default function About() {
                 </div>
                 
                 {/* Hover Effect Border */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
               </div>
 
               {/* Mobile App */}
-              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid="future-mobile-app">
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid="future-mobile-app">
                 {/* Background Decoration */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
                 
                 {/* Icon */}
                 <div className="relative z-10 mb-6">
-                  <div className="w-20 h-20 rounded-3xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
+                  <div className="w-20 h-20 rounded-2xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
                     <Smartphone className="w-10 h-10" />
                   </div>
                 </div>
@@ -188,7 +188,7 @@ export default function About() {
                 </div>
                 
                 {/* Hover Effect Border */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-accent via-primary to-accent opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-accent via-primary to-accent opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
               </div>
             </div>
           </div>
