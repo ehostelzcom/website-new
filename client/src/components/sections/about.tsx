@@ -1,4 +1,4 @@
-import { CheckCircle, Target, Users, Clock, Shield, Calendar, TrendingUp, BarChart3, DollarSign } from "lucide-react";
+import { CheckCircle, Target, Users, Clock, Shield, Calendar, TrendingUp, BarChart3, DollarSign, Smartphone, Monitor } from "lucide-react";
 
 export default function About() {
   const benefits = [
@@ -123,6 +123,74 @@ export default function About() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Future Plans Section */}
+        <div className="bg-gradient-to-br from-accent/10 via-primary/5 to-accent/10 py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h3 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent" data-testid="future-plans-title">
+                Future Plans
+              </h3>
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed" data-testid="future-plans-subtitle">
+                We're continuously innovating to bring you the most advanced hostel management solutions
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Hostel Owners App */}
+              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-primary/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid="future-owners-app">
+                {/* Background Decoration */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
+                
+                {/* Icon */}
+                <div className="relative z-10 mb-6">
+                  <div className="w-20 h-20 rounded-3xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
+                    <Monitor className="w-10 h-10" />
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <h4 className="font-bold text-2xl mb-4 text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300" data-testid="owners-app-title">
+                    Hostel Owners App
+                  </h4>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg" data-testid="owners-app-description">
+                    We are developing a dedicated app for hostel owners where you can monitor all your hostel activities, track real-time occupancy, manage finances, and oversee operations from anywhere.
+                  </p>
+                </div>
+                
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
+              </div>
+
+              {/* Mobile App */}
+              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid="future-mobile-app">
+                {/* Background Decoration */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
+                
+                {/* Icon */}
+                <div className="relative z-10 mb-6">
+                  <div className="w-20 h-20 rounded-3xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
+                    <Smartphone className="w-10 h-10" />
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <h4 className="font-bold text-2xl mb-4 text-gray-900 dark:text-white group-hover:text-accent transition-colors duration-300" data-testid="mobile-app-title">
+                    ehostelz.com Mobile App
+                  </h4>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg" data-testid="mobile-app-description">
+                    A comprehensive mobile application is coming soon with enhanced features, offline capabilities, student portal access, and streamlined hostel management tools for ultimate convenience.
+                  </p>
+                </div>
+                
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-accent via-primary to-accent opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
