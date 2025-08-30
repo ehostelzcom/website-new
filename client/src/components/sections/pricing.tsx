@@ -172,8 +172,8 @@ export default function Pricing() {
           </p>
 
           {/* Billing Toggle */}
-          <div className="flex justify-center mb-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl">
+          <div className="flex justify-center mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full max-w-xl">
               {[
                 { key: 'monthly', label: 'Monthly', description: 'Pay monthly', badge: null },
                 { key: '6months', label: '6 Months', description: 'Save 10%', badge: '10% OFF' },
@@ -195,30 +195,30 @@ export default function Pricing() {
                     onChange={(e) => setBillingPeriod(e.target.value)}
                     className="sr-only"
                   />
-                  <div className={`relative p-6 rounded-xl border-2 text-center transition-all duration-300 ${
+                  <div className={`relative p-4 rounded-lg border-2 text-center transition-all duration-300 ${
                     billingPeriod === option.key
                       ? 'border-primary bg-primary/5 shadow-lg ring-4 ring-primary/20'
                       : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/50 hover:shadow-md'
                   }`}>
                     {option.badge && (
-                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                        <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2">
+                        <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-lg">
                           {option.badge}
                         </span>
                       </div>
                     )}
                     
-                    <div className={`w-6 h-6 mx-auto mb-3 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                    <div className={`w-5 h-5 mx-auto mb-2 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
                       billingPeriod === option.key
                         ? 'border-primary bg-primary'
                         : 'border-gray-300 dark:border-gray-600 group-hover:border-primary'
                     }`}>
                       {billingPeriod === option.key && (
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
                       )}
                     </div>
                     
-                    <h3 className={`text-lg font-bold mb-1 transition-colors ${
+                    <h3 className={`text-base font-bold mb-1 transition-colors ${
                       billingPeriod === option.key
                         ? 'text-primary'
                         : 'text-gray-900 dark:text-gray-100 group-hover:text-primary'
@@ -226,7 +226,7 @@ export default function Pricing() {
                       {option.label}
                     </h3>
                     
-                    <p className={`text-sm transition-colors ${
+                    <p className={`text-xs transition-colors ${
                       billingPeriod === option.key
                         ? 'text-primary/80'
                         : 'text-gray-600 dark:text-gray-400'
