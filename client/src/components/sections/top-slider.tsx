@@ -11,27 +11,33 @@ import allotmentImage from "@assets/generated_images/Allotments_interface_with_t
 const slides = [
   {
     image: dashboardImage,
-    alt: "ehostelz.com Dashboard Overview",
-    title: "Complete Hostel Management Dashboard",
-    subtitle: "Manage multiple hostels, students, and operations from one powerful platform"
+    alt: "About ehostelz.com",
+    title: "Welcome to ehostelz.com",
+    subtitle: "We are dedicated to revolutionizing hostel management with real, professional software solutions that simplify operations and enhance efficiency for hostel owners across Pakistan"
   },
   {
     image: studentImage,
-    alt: "Student Management Interface", 
-    title: "Smart Student Management",
-    subtitle: "Register students once, manage across all hostels with ease"
+    alt: "Multiple Hostels Management", 
+    title: "Manage Multiple Hostels in One Login",
+    subtitle: "Control all your hostel branches from a single dashboard - no more juggling multiple systems or accounts"
   },
   {
     image: roomImage,
-    alt: "Room Management System",
-    title: "Intelligent Room Allocation", 
-    subtitle: "Automated room and seat management with real-time availability"
+    alt: "Smart Enrollment System",
+    title: "Smart Enrollment - One Time Registration", 
+    subtitle: "Register students once in ehostelz.com and seamlessly manage them across all your hostel locations"
   },
   {
     image: allotmentImage,
-    alt: "Student Allotments and Feedback",
-    title: "Student Performance & Feedback",
-    subtitle: "Track student ratings, behavior, and fee payment compliance"
+    alt: "Automated Financial Management",
+    title: "Automated Financial Management",
+    subtitle: "Monthly transaction cycles with automated fee generation, expense tracking, and salary management - complete financial transparency"
+  },
+  {
+    image: dashboardImage,
+    alt: "Future Plans",
+    title: "Future Plans & Innovation",
+    subtitle: "Coming soon: Mobile apps for owners and students, advanced analytics, and AI-powered insights to take your hostel management to the next level"
   }
 ];
 

@@ -9,19 +9,23 @@ import allotmentImage from "@assets/generated_images/Allotments_interface_with_t
 const slides = [
   {
     image: dashboardImage,
-    alt: "ehostelz.com Dashboard Overview"
+    alt: "About ehostelz.com - Real Hostel Management Software"
   },
   {
     image: studentImage,
-    alt: "Student Management Interface"
+    alt: "Multiple Hostels Management in One Login"
   },
   {
     image: roomImage,
-    alt: "Room Management System"
+    alt: "Smart Enrollment - One Time Registration System"
   },
   {
     image: allotmentImage,
-    alt: "Student Allotments and Feedback"
+    alt: "Automated Financial Management System"
+  },
+  {
+    image: dashboardImage,
+    alt: "Future Plans - Mobile Apps and Advanced Features"
   }
 ];
 
