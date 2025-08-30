@@ -13,17 +13,17 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-white border-t border-gray-200 py-16">
+    <footer className="bg-white border-t border-gray-200 py-10">
       <div className="w-full px-4">
         <div className="max-w-7xl mx-auto">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {/* Brand Section */}
             <div className="lg:col-span-2">
               <div className="mb-6">
                 <img src={logoUrl} alt="ehostelz.com Logo" className="w-48 h-auto" />
               </div>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6 max-w-md">
+              <p className="text-gray-600 text-lg leading-relaxed mb-4 max-w-md">
                 Transform your hostel management with our innovative software solution. Streamline operations, enhance student experiences, and grow your business efficiently.
               </p>
               
@@ -55,7 +55,7 @@ export default function Footer() {
             
             {/* Product Section */}
             <div>
-              <h3 className="font-bold text-xl mb-6 text-gray-900 relative">
+              <h3 className="font-bold text-xl mb-4 text-gray-900 relative">
                 Product
                 <div className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-primary to-accent rounded-full"></div>
               </h3>
@@ -101,7 +101,7 @@ export default function Footer() {
             
             {/* Company & Support Combined */}
             <div>
-              <h3 className="font-bold text-xl mb-6 text-gray-900 relative">
+              <h3 className="font-bold text-xl mb-4 text-gray-900 relative">
                 Company & Support
                 <div className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-accent to-primary rounded-full"></div>
               </h3>
@@ -149,7 +149,7 @@ export default function Footer() {
           </div>
           
           {/* Bottom Section */}
-          <div className="border-t border-gray-200 pt-8">
+          <div className="border-t border-gray-200 pt-6">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <p className="text-gray-500 text-sm font-medium" data-testid="copyright">
                 &copy; {new Date().getFullYear()} ehostelz.com. All rights reserved.
