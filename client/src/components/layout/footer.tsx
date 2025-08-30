@@ -79,6 +79,11 @@ export default function Footer() {
                   </button>
                 </RequestDemoModal>
               </li>
+              <li>
+                <a href="#" className="hover:text-foreground transition-colors" data-testid="footer-watch-demo">
+                  Watch Demo
+                </a>
+              </li>
             </ul>
           </div>
           
