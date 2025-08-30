@@ -25,7 +25,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
 const requestDemoSchema = z.object({
-  homeName: z.string().min(2, "Home name must be at least 2 characters"),
+  homeName: z.string().min(2, "Hostel name must be at least 2 characters"),
   type: z.enum(["Boys", "Girls"], { required_error: "Please select hostel type" }),
   mobile: z.string().min(11, "Please enter a valid mobile number"),
   province: z.string().min(1, "Please select a province"),
@@ -119,11 +119,11 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
               name="homeName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Home Name</FormLabel>
+                  <FormLabel>Hostel Name</FormLabel>
                   <FormControl>
                     <Input 
                       placeholder="e.g., Al-Noor Boys Hostel"
-                      data-testid="input-home-name"
+                      data-testid="input-hostel-name"
                       {...field} 
                     />
                   </FormControl>
