@@ -159,9 +159,7 @@ export default function Footer() {
               <p className="text-gray-200 text-sm font-medium" data-testid="copyright">
                 &copy; {new Date().getFullYear()} ehostelz.com. All rights reserved.
               </p>
-              <div className="flex items-center space-x-6 text-sm text-gray-200 font-medium">
-                <span>Made with ❤️ in Pakistan</span>
-                <div className="w-1 h-1 bg-gray-200 rounded-full"></div>
+              <div className="flex items-center text-sm text-gray-200 font-medium">
                 <span>Trusted by 10+ Hostels</span>
               </div>
             </div>
