@@ -76,7 +76,7 @@ const plans = [
   },
   {
     name: "Custom",
-    category: "Group of Hostels",
+    category: "Both Single Hostel & Group of Hostels",
     description: "Unlimited hostels for large organizations",
     monthlyPrice: null,
     seats: "Unlimited",
@@ -202,18 +202,20 @@ export default function Pricing() {
                 <CardContent className="p-6">
                   {/* Plan Header */}
                   <div className="text-center mb-6">
+                    <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-testid={`plan-name-${index}`}>
+                      {plan.name}
+                    </h3>
                     <div className="mb-2">
                       <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
                         plan.category === 'Single Hostel' 
                           ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                          : plan.category.includes('Both')
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
                           : 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200'
                       }`}>
                         {plan.category}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-testid={`plan-name-${index}`}>
-                      {plan.name}
-                    </h3>
                     <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg mb-4">
                       <p className="text-sm font-medium text-gray-700 dark:text-gray-300" data-testid={`plan-description-${index}`}>
                         {plan.description}
