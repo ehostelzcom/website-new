@@ -1,5 +1,7 @@
 import { SiFacebook, SiInstagram, SiLinkedin } from "react-icons/si";
 import logoUrl from "@assets/logo/Asset 3.svg";
+import RequestDemoModal from "@/components/ui/request-demo-modal";
+import { Button } from "@/components/ui/button";
 
 export default function Footer() {
   const scrollToSection = (sectionId: string) => {
@@ -71,14 +73,11 @@ export default function Footer() {
                 </button>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors" data-testid="footer-demo">
-                  Demo
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-foreground transition-colors" data-testid="footer-api">
-                  API
-                </a>
+                <RequestDemoModal>
+                  <button className="hover:text-foreground transition-colors text-left" data-testid="footer-demo">
+                    Request Demo
+                  </button>
+                </RequestDemoModal>
               </li>
             </ul>
           </div>
