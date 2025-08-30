@@ -21,8 +21,8 @@ export default function Footer() {
             {/* Brand Section */}
             <div className="lg:col-span-2">
               <div className="mb-6">
-                <div className="inline-block p-4 bg-white/10 rounded-2xl backdrop-blur-sm">
-                  <img src={logoUrl} alt="ehostelz.com Logo" className="w-40 h-auto brightness-0 invert" />
+                <div className="inline-block p-4 bg-white/90 rounded-2xl backdrop-blur-sm">
+                  <img src={logoUrl} alt="ehostelz.com Logo" className="w-40 h-auto" />
                 </div>
               </div>
               <p className="text-gray-300 text-lg leading-relaxed mb-6 max-w-md">
