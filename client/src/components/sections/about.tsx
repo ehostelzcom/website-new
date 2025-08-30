@@ -1,36 +1,42 @@
-import { CheckCircle, Target, Users, Clock, Shield, Calendar } from "lucide-react";
+import { CheckCircle, Target, Users, Clock, Shield, Calendar, TrendingUp, BarChart3, DollarSign } from "lucide-react";
 
 export default function About() {
   const benefits = [
     {
       icon: Target,
       title: "Centralized Management",
-      description: "Manage all your properties from one powerful platform",
+      description: "Manage all your hostels, branches from one powerful platform. No need to juggle multiple systems – everything you need is available under a single login.",
       color: "bg-primary/10 text-primary"
     },
     {
-      icon: Clock,
-      title: "Time-Saving Automation",
-      description: "Automate fees, allotments, and reporting processes",
-      color: "bg-accent/10 text-accent"
-    },
-    {
-      icon: Users,
-      title: "Student-Friendly",
-      description: "Seamless property transfers with single registration",
+      icon: TrendingUp,
+      title: "Scalable & Flexible",
+      description: "Whether you run one small hostel or multiple large branches, EHostelz adapts to your needs and grows with you.",
       color: "bg-green-500/10 text-green-600"
-    },
-    {
-      icon: Shield,
-      title: "Secure & Reliable",
-      description: "Enterprise-grade security with 99.9% uptime guarantee",
-      color: "bg-blue-500/10 text-blue-600"
     },
     {
       icon: Calendar,
       title: "Monthly Transaction Cycle",
-      description: "All hostel activities (fees, payments, expenses, and salaries) are managed and tracked on a monthly basis, ensuring transparency and easy financial planning",
+      description: "Every financial activity, including fees, payments, expenses, and staff salaries, is automatically managed and tracked on a monthly basis. This makes it easy to monitor cash flow, plan budgets, and maintain complete transparency.",
       color: "bg-purple-500/10 text-purple-600"
+    },
+    {
+      icon: Clock,
+      title: "Save Time with Automation",
+      description: "Routine tasks like fee generation, seat allotments, and report preparation are automated, freeing up your time to focus on growing your business.",
+      color: "bg-accent/10 text-accent"
+    },
+    {
+      icon: BarChart3,
+      title: "Transparent Reporting & Analytics",
+      description: "Get accurate insights through detailed reports and visual dashboards covering fees, expenses, salaries, and occupancy.",
+      color: "bg-blue-500/10 text-blue-600"
+    },
+    {
+      icon: DollarSign,
+      title: "Affordable & User-Friendly",
+      description: "A simple, intuitive interface that anyone can use, backed by pricing that makes professional hostel management accessible to all.",
+      color: "bg-emerald-500/10 text-emerald-600"
     }
   ];
 
@@ -55,7 +61,7 @@ export default function About() {
         </div>
 
         {/* Benefits Cards - Full Width Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 px-4 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 mb-20">
           {benefits.map((benefit, index) => {
             const IconComponent = benefit.icon;
             return (
