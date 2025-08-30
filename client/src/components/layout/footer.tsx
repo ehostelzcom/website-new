@@ -121,7 +121,13 @@ export default function Footer() {
             <h3 className="font-semibold mb-4 text-gray-900">Support</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>
-                <a href="#" className="hover:text-foreground transition-colors" data-testid="footer-help">
+                <a 
+                  href="https://wa.me/923129409211?text=Hi%2C%20I%20need%20help%20with%20ehostelz.com.%20Can%20you%20assist%20me%3F" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-foreground transition-colors" 
+                  data-testid="footer-help"
+                >
                   Help Center
                 </a>
               </li>
