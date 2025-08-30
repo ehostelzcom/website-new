@@ -18,14 +18,14 @@ export default function YouTubeModal({ children, videoId = "dQw4w9WgXcQ" }: YouT
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[900px] p-0">
-        <div className="relative w-full h-0 pb-[56.25%]"> {/* 16:9 aspect ratio */}
+      <DialogContent className="sm:max-w-[900px] p-0 border-0 bg-transparent shadow-none">
+        <div className="relative w-full h-0 pb-[56.25%] bg-black rounded-lg overflow-hidden"> {/* 16:9 aspect ratio */}
           <iframe
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
             title="Demo Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="absolute top-0 left-0 w-full h-full rounded-lg"
+            className="absolute top-0 left-0 w-full h-full"
           />
         </div>
       </DialogContent>
