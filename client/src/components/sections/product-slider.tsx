@@ -1,22 +1,26 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import dashboardImage from "@assets/generated_images/Hostel_management_dashboard_interface_300de500.png";
+import studentImage from "@assets/generated_images/Student_management_software_interface_e1523600.png";
+import roomImage from "@assets/generated_images/Room_management_system_interface_8d15d0a1.png";
+import financialImage from "@assets/generated_images/Financial_analytics_dashboard_interface_33f4ce90.png";
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=700",
+    image: dashboardImage,
     alt: "ehostelz.com Dashboard Overview"
   },
   {
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=700",
+    image: studentImage,
     alt: "Student Management Interface"
   },
   {
-    image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=700",
+    image: roomImage,
     alt: "Room Management System"
   },
   {
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=700",
+    image: financialImage,
     alt: "Financial Reports and Analytics"
   }
 ];
