@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import dashboardImage from "@assets/generated_images/Secure_e1_dashboard_with_top_menu_eff6b32f.png";
 import loginImage from "@assets/slider images/login.jpg";
 import roomImage from "@assets/generated_images/Room_management_with_top_navigation_3e162275.png";
-import allotmentImage from "@assets/generated_images/Allotments_interface_with_top_navigation_04805373.png";
+import financialImage from "@assets/generated_images/Financial_management_dashboard_interface_73139990.png";
 
 const slides = [
   {
@@ -20,7 +20,7 @@ const slides = [
     alt: "Smart Enrollment - One Time Registration System"
   },
   {
-    image: allotmentImage,
+    image: financialImage,
     alt: "Automated Financial Management System"
   },
   {
