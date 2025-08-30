@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -37,7 +37,7 @@ const requestDemoSchema = z.object({
 type RequestDemoForm = z.infer<typeof requestDemoSchema>;
 
 interface RequestDemoModalProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export default function RequestDemoModal({ children }: RequestDemoModalProps) {
@@ -59,6 +59,37 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
     "Azad Jammu and Kashmir": ["Muzaffarabad", "Mirpur", "Kotli", "Rawalakot"]
   };
 
+  const locations = {
+    "Lahore": ["DHA Phase 1", "DHA Phase 2", "DHA Phase 3", "Gulberg", "Model Town", "Johar Town", "Cantt", "Garden Town", "Muslim Town", "Faisal Town"],
+    "Karachi": ["DHA Phase 1", "DHA Phase 2", "Clifton", "Gulshan-e-Iqbal", "North Nazimabad", "Korangi", "Malir", "PECHS", "Saddar", "University Road"],
+    "Faisalabad": ["Civil Lines", "Peoples Colony", "Gulberg", "Samanabad", "Susan Road", "Kotwali Road", "Millat Town", "Madina Town"],
+    "Rawalpindi": ["Cantt", "Saddar", "Committee Chowk", "Murree Road", "PWD Housing", "Satellite Town", "Bahria Town"],
+    "Multan": ["Cantt", "Gulgasht Colony", "New Multan", "Bosan Road", "MDA", "Shah Rukn-e-Alam Colony"],
+    "Gujranwala": ["Civil Lines", "Satellite Town", "Model Town", "Peoples Colony", "Wapda Town"],
+    "Hyderabad": ["Latifabad", "Qasimabad", "Cantonment", "City", "SITE Area"],
+    "Sukkur": ["Civil Lines", "New Sukkur", "Airport Road", "Minhas Road"],
+    "Larkana": ["Station Road", "Jinnah Bagh", "Medical College Road", "VIP Road"],
+    "Nawabshah": ["Station Road", "Court Road", "Hospital Road", "Sakrand Road"],
+    "Peshawar": ["University Town", "Hayatabad", "Board Bazar", "Saddar", "Cantt", "Warsak Road"],
+    "Mardan": ["Katlang Road", "Swabi Road", "Nowshera Road", "City Center"],
+    "Abbottabad": ["Supply", "Mandian", "Jinnahabad", "Cantt", "PMA Road"],
+    "Kohat": ["Cantt", "Hangu Road", "Bannu Road", "KDA"],
+    "Bannu": ["Cantt", "Miranshah Road", "Lakki Road", "City Area"],
+    "Quetta": ["Cantt", "Satellite Town", "Jinnah Town", "Brewery Road", "Zarghoon Road"],
+    "Gwadar": ["New Town", "Old Town", "Port Area", "Marine Drive"],
+    "Turbat": ["Airport Road", "Hoshab Road", "City Center"],
+    "Khuzdar": ["Hub Road", "Karachi Road", "Quetta Road"],
+    "Sibi": ["Railway Road", "Quetta Road", "Jacobabad Road"],
+    "Gilgit": ["City Center", "Jutial", "Danyore", "Kashrote"],
+    "Skardu": ["City Center", "Airport Road", "Satpara Road"],
+    "Hunza": ["Karimabad", "Altit", "Gulmit"],
+    "Ghanche": ["Khaplu", "Shigar", "Roundu"],
+    "Muzaffarabad": ["City Center", "Chattar", "Keil", "Plate"],
+    "Mirpur": ["City Center", "Sector F", "Allama Iqbal Road", "AJK University Road"],
+    "Kotli": ["City Center", "Sehnsa", "Fatehpur", "Gulpur"],
+    "Rawalakot": ["City Center", "Banjosa", "Toli Pir", "Poonch Road"]
+  };
+
   const form = useForm<RequestDemoForm>({
     resolver: zodResolver(requestDemoSchema),
     defaultValues: {
@@ -73,7 +104,26 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
   });
 
   const selectedProvince = form.watch("province");
+  const selectedCity = form.watch("city");
   const availableCities = selectedProvince ? cities[selectedProvince as keyof typeof cities] || [] : [];
+  const availableLocations = selectedCity ? locations[selectedCity as keyof typeof locations] || [] : [];
+
+  // Reset dependent fields when parent changes
+  const provinceValue = form.watch("province");
+  const cityValue = form.watch("city");
+  
+  useEffect(() => {
+    if (provinceValue) {
+      form.setValue("city", "");
+      form.setValue("location", "");
+    }
+  }, [provinceValue, form]);
+  
+  useEffect(() => {
+    if (cityValue) {
+      form.setValue("location", "");
+    }
+  }, [cityValue, form]);
 
   const onSubmit = async (data: RequestDemoForm) => {
     setIsSubmitting(true);
@@ -238,13 +288,20 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Location</FormLabel>
-                  <FormControl>
-                    <Input 
-                      placeholder="e.g., DHA Phase 2, Near University"
-                      data-testid="input-location"
-                      {...field} 
-                    />
-                  </FormControl>
+                  <Select onValueChange={field.onChange} value={field.value} disabled={!selectedCity}>
+                    <FormControl>
+                      <SelectTrigger data-testid="select-location">
+                        <SelectValue placeholder={selectedCity ? "Select location" : "Please select city first"} />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {availableLocations.map((location) => (
+                        <SelectItem key={location} value={location}>
+                          {location}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
