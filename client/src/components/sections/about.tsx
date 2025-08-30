@@ -1,4 +1,4 @@
-import { CheckCircle, Target, Users, Clock, Shield } from "lucide-react";
+import { CheckCircle, Target, Users, Clock, Shield, Calendar } from "lucide-react";
 
 export default function About() {
   const benefits = [
@@ -25,6 +25,12 @@ export default function About() {
       title: "Secure & Reliable",
       description: "Enterprise-grade security with 99.9% uptime guarantee",
       color: "bg-blue-500/10 text-blue-600"
+    },
+    {
+      icon: Calendar,
+      title: "Monthly Transaction Cycle",
+      description: "All hostel activities (fees, payments, expenses, and salaries) are managed and tracked on a monthly basis, ensuring transparency and easy financial planning",
+      color: "bg-purple-500/10 text-purple-600"
     }
   ];
 
@@ -49,7 +55,7 @@ export default function About() {
         </div>
 
         {/* Benefits Cards - Full Width Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-4 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 px-4 mb-20">
           {benefits.map((benefit, index) => {
             const IconComponent = benefit.icon;
             return (
