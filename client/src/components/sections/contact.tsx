@@ -157,7 +157,7 @@ export default function Contact() {
                     <Button 
                       type="submit" 
                       size="lg"
-                      className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl" 
+                      className="w-full h-14 text-lg font-semibold bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl" 
                       disabled={isSubmitting}
                       data-testid="button-send"
                     >
@@ -170,9 +170,9 @@ export default function Contact() {
             </div>
             
             {/* Contact Information - 1 column */}
-            <div className="space-y-6">
+            <div className="flex flex-col justify-start h-full">
               {/* Contact Details Cards */}
-              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-6 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500">
+              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-6 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500 mb-6">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-xl opacity-50"></div>
                 
                 <div className="relative z-10">
