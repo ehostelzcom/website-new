@@ -172,11 +172,11 @@ export default function Contact() {
             {/* Contact Information - 1 column */}
             <div className="flex flex-col h-full">
               {/* Contact Details Cards */}
-              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-6 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500 mb-6 flex-shrink-0">
+              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-5 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500 mb-6 flex-shrink-0">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-xl opacity-50"></div>
                 
                 <div className="relative z-10">
-                  <div className="flex items-center mb-6">
+                  <div className="flex items-center mb-4">
                     <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mr-3">
                       <MessageCircle className="w-6 h-6" />
                     </div>
@@ -185,22 +185,22 @@ export default function Contact() {
                     </h3>
                   </div>
                   
-                  <div className="space-y-4">
-                    <div className="flex items-start p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-testid="contact-email">
+                  <div className="space-y-2">
+                    <div className="flex items-start p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-testid="contact-email">
                       <Mail className="text-primary mt-1 mr-3 h-5 w-5 flex-shrink-0" />
                       <div>
                         <div className="font-semibold text-gray-900 dark:text-white">Email</div>
                         <div className="text-gray-600 dark:text-gray-400">support@ehostelz.com</div>
                       </div>
                     </div>
-                    <div className="flex items-start p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-testid="contact-phone">
+                    <div className="flex items-start p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-testid="contact-phone">
                       <Phone className="text-primary mt-1 mr-3 h-5 w-5 flex-shrink-0" />
                       <div>
                         <div className="font-semibold text-gray-900 dark:text-white">Phone</div>
                         <div className="text-gray-600 dark:text-gray-400">03129409211</div>
                       </div>
                     </div>
-                    <div className="flex items-start p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-testid="contact-address">
+                    <div className="flex items-start p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-testid="contact-address">
                       <MapPin className="text-primary mt-1 mr-3 h-5 w-5 flex-shrink-0" />
                       <div>
                         <div className="font-semibold text-gray-900 dark:text-white">Office</div>
