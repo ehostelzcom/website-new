@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { useState } from "react";
 
 const plans = [
@@ -134,7 +135,7 @@ export default function Pricing() {
   };
 
   const handleGetStarted = (planName: string, price: number | null, period: string) => {
-    let message = `Hi! I'm interested in the ${planName} plan for EHostelz. `;
+    let message = `Hi! I'm interested in the ${planName} plan for ehostelz.com. `;
     
     if (price) {
       message += `The pricing is Rs ${price.toLocaleString()}${getPeriodLabel(period)}. `;
@@ -147,7 +148,7 @@ export default function Pricing() {
   };
 
   const handleContactSales = () => {
-    const message = `Hi! I'm interested in the Custom plan for EHostelz. I need unlimited hostels and would like to discuss pricing and custom features. Can you help me with a tailored solution?`;
+    const message = `Hi! I'm interested in the Custom plan for ehostelz.com. I need unlimited hostels and would like to discuss pricing and custom features. Can you help me with a tailored solution?`;
     const whatsappUrl = `https://wa.me/923129409211?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -283,11 +284,12 @@ export default function Pricing() {
 
                   {/* CTA Button */}
                   <Button 
-                    className="w-full"
+                    className="w-full flex items-center justify-center gap-2"
                     variant={plan.popular ? 'default' : 'outline'}
                     onClick={() => plan.isCustom ? handleContactSales() : handleGetStarted(plan.name, price, billingPeriod)}
                     data-testid={`plan-button-${index}`}
                   >
+                    <FaWhatsapp className="h-4 w-4" />
                     {plan.isCustom ? 'Contact Sales' : 'Get Started'}
                   </Button>
                 </CardContent>
