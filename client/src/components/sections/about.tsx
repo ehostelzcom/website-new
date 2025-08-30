@@ -61,20 +61,34 @@ export default function About() {
         </div>
 
         {/* Benefits Cards - Full Width Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 mb-20">
           {benefits.map((benefit, index) => {
             const IconComponent = benefit.icon;
             return (
-              <div key={index} className="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:scale-105 transition-all duration-300" data-testid={`benefit-${index}`}>
-                <div className={`w-16 h-16 rounded-2xl ${benefit.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <IconComponent className="w-8 h-8" />
+              <div key={index} className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid={`benefit-${index}`}>
+                {/* Background Decoration */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-accent/10 to-primary/10 rounded-full blur-xl opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
+                
+                {/* Icon */}
+                <div className="relative z-10 mb-6">
+                  <div className={`w-20 h-20 rounded-3xl ${benefit.color} flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg`}>
+                    <IconComponent className="w-10 h-10" />
+                  </div>
                 </div>
-                <h4 className="font-bold text-xl mb-3 text-gray-900 dark:text-white" data-testid={`benefit-title-${index}`}>
-                  {benefit.title}
-                </h4>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed" data-testid={`benefit-description-${index}`}>
-                  {benefit.description}
-                </p>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <h4 className="font-bold text-2xl mb-4 text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300" data-testid={`benefit-title-${index}`}>
+                    {benefit.title}
+                  </h4>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg" data-testid={`benefit-description-${index}`}>
+                    {benefit.description}
+                  </p>
+                </div>
+                
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
               </div>
             );
           })}
