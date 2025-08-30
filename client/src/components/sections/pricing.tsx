@@ -165,7 +165,7 @@ export default function Pricing() {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white" data-testid="pricing-title">
-            ehostelz.com Pricing Plans
+            Pricing Plans
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8" data-testid="pricing-subtitle">
             Choose the perfect plan for your hostel management needs
