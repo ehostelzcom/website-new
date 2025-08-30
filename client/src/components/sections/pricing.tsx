@@ -15,7 +15,8 @@ const plans = [
     features: [
       "1 Hostel",
       "50 Active Seats / month",
-      "Unlimited Registered Users"
+      "Unlimited Registered Users",
+      "Student Portal"
     ],
     popular: false
   },
@@ -29,7 +30,8 @@ const plans = [
     features: [
       "1 Hostel",
       "100 Active Seats / month",
-      "Unlimited Registered Users"
+      "Unlimited Registered Users",
+      "Student Portal"
     ],
     popular: true
   },
@@ -43,7 +45,8 @@ const plans = [
     features: [
       "1 Hostel",
       "500 Active Seats / month",
-      "Unlimited Registered Users"
+      "Unlimited Registered Users",
+      "Student Portal"
     ],
     popular: false
   },
@@ -72,7 +75,8 @@ const plans = [
     features: [
       "Up to 5 Hostels",
       "200 Active Seats per hostel",
-      "Unlimited Registered Users"
+      "Unlimited Registered Users",
+      "Student Portal"
     ],
     popular: false
   },
@@ -86,7 +90,8 @@ const plans = [
     features: [
       "Unlimited Hostels",
       "Unlimited Seats / month",
-      "Unlimited Registered Users"
+      "Unlimited Registered Users",
+      "Student Portal"
     ],
     popular: false,
     isCustom: true
