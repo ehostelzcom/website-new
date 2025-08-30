@@ -21,7 +21,7 @@ export default function Footer() {
             {/* Brand Section */}
             <div className="lg:col-span-2">
               <div className="mb-6">
-                <img src={logoUrl} alt="ehostelz.com Logo" className="w-48 h-auto filter brightness-0 invert" />
+                <img src={logoUrl} alt="ehostelz.com Logo" className="w-48 h-auto brightness-0 invert contrast-200" />
               </div>
               <p className="text-gray-300 text-lg leading-relaxed mb-6 max-w-md">
                 Transform your hostel management with our innovative software solution. Streamline operations, enhance student experiences, and grow your business efficiently.
@@ -154,12 +154,12 @@ export default function Footer() {
           {/* Bottom Section */}
           <div className="border-t border-white/20 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <p className="text-gray-400 text-sm" data-testid="copyright">
+              <p className="text-gray-200 text-sm font-medium" data-testid="copyright">
                 &copy; {new Date().getFullYear()} ehostelz.com. All rights reserved.
               </p>
-              <div className="flex items-center space-x-6 text-sm text-gray-400">
+              <div className="flex items-center space-x-6 text-sm text-gray-200 font-medium">
                 <span>Made with ❤️ in Pakistan</span>
-                <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-200 rounded-full"></div>
                 <span>Trusted by 10+ Hostels</span>
               </div>
             </div>
