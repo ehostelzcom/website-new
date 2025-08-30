@@ -170,9 +170,9 @@ export default function Contact() {
             </div>
             
             {/* Contact Information - 1 column */}
-            <div className="flex flex-col justify-start h-full">
+            <div className="flex flex-col h-full">
               {/* Contact Details Cards */}
-              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-6 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500 mb-6">
+              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-6 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500 mb-6 flex-shrink-0">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-xl opacity-50"></div>
                 
                 <div className="relative z-10">
@@ -211,8 +211,8 @@ export default function Contact() {
                 </div>
               </div>
               
-              {/* WhatsApp Card */}
-              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-50 via-white to-green-100 dark:from-gray-800 dark:via-gray-750 dark:to-green-900/20 p-6 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500">
+              {/* WhatsApp Card - Positioned at bottom */}
+              <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-50 via-white to-green-100 dark:from-gray-800 dark:via-gray-750 dark:to-green-900/20 p-6 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-1 transition-all duration-500 mt-auto">
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-400/20 to-green-600/20 rounded-full blur-xl opacity-50"></div>
                 
                 <div className="relative z-10">
