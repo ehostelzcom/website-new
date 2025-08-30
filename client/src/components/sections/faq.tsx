@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     question: "Do students need to register every time they move hostels?",
-    answer: "No, students register once with their National ID and can join any hostel in the EHostelz network without re-registration."
+    answer: "No, students register once with their National ID and can join any hostel in the ehostelz.com network without re-registration."
   },
   {
     question: "Can I manage multiple hostels under one account?",
@@ -45,7 +45,7 @@ export default function FAQ() {
               Frequently Asked Questions
             </h2>
             <p className="text-xl text-muted-foreground" data-testid="faq-subtitle">
-              Everything you need to know about EHostelz
+              Everything you need to know about ehostelz.com
             </p>
           </div>
           

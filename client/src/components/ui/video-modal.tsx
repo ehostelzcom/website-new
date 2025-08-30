@@ -12,7 +12,7 @@ interface VideoModalProps {
 export default function VideoModal({ 
   children, 
   videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ", // Example YouTube video - user will replace
-  title = "EHostelz Demo Video" 
+  title = "ehostelz.com Demo Video" 
 }: VideoModalProps) {
   const [isOpen, setIsOpen] = useState(false);
 

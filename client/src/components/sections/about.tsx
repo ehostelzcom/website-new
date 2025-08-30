@@ -11,7 +11,7 @@ export default function About() {
     {
       icon: TrendingUp,
       title: "Scalable & Flexible",
-      description: "Whether you run one small hostel or multiple large branches, EHostelz adapts to your needs and grows with you.",
+      description: "Whether you run one small hostel or multiple large branches, ehostelz.com adapts to your needs and grows with you.",
       color: "bg-green-500/10 text-green-600"
     },
     {

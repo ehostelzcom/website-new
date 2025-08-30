@@ -9,7 +9,7 @@ interface WhatsAppChatProps {
 
 export default function WhatsAppChat({ 
   phoneNumber = "923129409211", // Your WhatsApp number
-  message = "Hi! I'm interested in EHostelz. Can you tell me more about your hostel management solution?",
+  message = "Hi! I'm interested in ehostelz.com. Can you tell me more about your hostel management solution?",
   className = ""
 }: WhatsAppChatProps) {
   const handleWhatsAppClick = () => {

@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const slides = [
   {
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=700",
-    alt: "EHostelz Dashboard Overview"
+    alt: "ehostelz.com Dashboard Overview"
   },
   {
     image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=700",
@@ -46,7 +46,7 @@ export default function ProductSlider() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4" data-testid="slider-title">
-            See EHostelz in Action
+            See ehostelz.com in Action
           </h2>
           <p className="text-muted-foreground text-lg" data-testid="slider-subtitle">
             Explore our powerful features through real screenshots

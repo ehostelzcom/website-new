@@ -7,7 +7,7 @@ import VideoModal from "@/components/ui/video-modal";
 const slides = [
   {
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800",
-    alt: "EHostelz Dashboard Overview",
+    alt: "ehostelz.com Dashboard Overview",
     title: "Complete Hostel Management Dashboard",
     subtitle: "Manage multiple hostels, students, and operations from one powerful platform"
   },
@@ -94,7 +94,7 @@ export default function TopSlider() {
                     >
                       Explore Features
                     </Button>
-                    <VideoModal videoUrl="https://www.youtube.com/embed/dQw4w9WgXcQ" title="EHostelz Platform Demo">
+                    <VideoModal videoUrl="https://www.youtube.com/embed/dQw4w9WgXcQ" title="ehostelz.com Platform Demo">
                       <Button 
                         variant="outline" 
                         size="lg" 

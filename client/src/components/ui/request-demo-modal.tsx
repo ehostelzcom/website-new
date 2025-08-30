@@ -108,7 +108,7 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
         <DialogHeader>
           <DialogTitle className="text-2xl">Request Demo</DialogTitle>
           <DialogDescription>
-            Tell us about your hostel and we'll schedule a personalized demo showing how EHostelz can transform your operations.
+            Tell us about your hostel and we'll schedule a personalized demo showing how ehostelz.com can transform your operations.
           </DialogDescription>
         </DialogHeader>
         

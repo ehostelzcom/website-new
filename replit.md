@@ -1,8 +1,8 @@
-# EHostelz - Smart Hostel Management Platform
+# ehostelz.com - Smart Hostel Management Platform
 
 ## Overview
 
-EHostelz is a comprehensive hostel management platform designed to simplify operations for single hostels and multi-hostel organizations. The application provides a complete solution for managing hostel infrastructure, student enrollment, financial operations, and reporting through a modern web interface.
+ehostelz.com is a comprehensive hostel management platform designed to simplify operations for single hostels and multi-hostel organizations. The application provides a complete solution for managing hostel infrastructure, student enrollment, financial operations, and reporting through a modern web interface.
 
 The platform features a React-based frontend with shadcn/ui components, an Express.js backend, and PostgreSQL database integration through Drizzle ORM. The system supports multi-hostel management from a single dashboard, automated fee processing, room allocation, and comprehensive reporting capabilities.
 

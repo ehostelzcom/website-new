@@ -50,7 +50,7 @@ const features = [
   {
     icon: UserPlus,
     title: "Smart Enrollment",
-    description: "Streamlined admission process with National ID integration valid across all EHostelz network hostels.",
+    description: "Streamlined admission process with National ID integration valid across all ehostelz.com network hostels.",
     color: "text-purple-600",
     bgColor: "bg-purple-600"
   },
