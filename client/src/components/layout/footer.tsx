@@ -24,21 +24,21 @@ export default function Footer() {
             <div className="hidden md:flex space-x-4 mt-6">
               <a 
                 href="#" 
-                className="text-gray-500 hover:text-primary transition-colors p-2 rounded-full hover:bg-gray-100"
+                className="text-[#1877F2] hover:text-[#1877F2]/80 transition-colors p-2 rounded-full hover:bg-blue-50"
                 data-testid="social-facebook"
               >
                 <SiFacebook className="w-5 h-5" />
               </a>
               <a 
                 href="#" 
-                className="text-gray-500 hover:text-primary transition-colors p-2 rounded-full hover:bg-gray-100"
+                className="text-[#E4405F] hover:text-[#E4405F]/80 transition-colors p-2 rounded-full hover:bg-pink-50"
                 data-testid="social-instagram"
               >
                 <SiInstagram className="w-5 h-5" />
               </a>
               <a 
                 href="#" 
-                className="text-gray-500 hover:text-primary transition-colors p-2 rounded-full hover:bg-gray-100"
+                className="text-[#0A66C2] hover:text-[#0A66C2]/80 transition-colors p-2 rounded-full hover:bg-blue-50"
                 data-testid="social-linkedin"
               >
                 <SiLinkedin className="w-5 h-5" />
