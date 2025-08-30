@@ -69,7 +69,7 @@ export default function TopSlider() {
   }, []);
 
   return (
-    <section className="relative w-full h-[460px] lg:h-[560px] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 mt-4">
+    <section className="relative w-full h-[490px] lg:h-[590px] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 mt-4">
       <div 
         className="flex transition-all duration-1000 ease-out h-full"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
