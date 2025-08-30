@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import dashboardImage from "@assets/generated_images/Secure_e1_dashboard_with_top_menu_eff6b32f.png";
-import studentImage from "@assets/generated_images/Student_interface_with_top_navigation_d7a7a611.png";
+import loginImage from "@assets/slider images/login.jpg";
 import roomImage from "@assets/generated_images/Room_management_with_top_navigation_3e162275.png";
 import allotmentImage from "@assets/generated_images/Allotments_interface_with_top_navigation_04805373.png";
 
@@ -12,7 +12,7 @@ const slides = [
     alt: "About ehostelz.com - Real Hostel Management Software"
   },
   {
-    image: studentImage,
+    image: loginImage,
     alt: "Multiple Hostels Management in One Login"
   },
   {
@@ -45,7 +45,7 @@ export default function ProductSlider() {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
+    const interval = setInterval(nextSlide, 8000);
     return () => clearInterval(interval);
   }, []);
 

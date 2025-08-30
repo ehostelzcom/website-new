@@ -4,7 +4,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import VideoModal from "@/components/ui/video-modal";
 import dashboardImage from "@assets/generated_images/Secure_e1_dashboard_with_top_menu_eff6b32f.png";
-import studentImage from "@assets/generated_images/Student_interface_with_top_navigation_d7a7a611.png";
+import loginImage from "@assets/slider images/login.jpg";
 import roomImage from "@assets/generated_images/Room_management_with_top_navigation_3e162275.png";
 import allotmentImage from "@assets/generated_images/Allotments_interface_with_top_navigation_04805373.png";
 
@@ -16,7 +16,7 @@ const slides = [
     subtitle: "We are dedicated to revolutionizing hostel management with real, professional software solutions that simplify operations and enhance efficiency for hostel owners across Pakistan"
   },
   {
-    image: studentImage,
+    image: loginImage,
     alt: "Multiple Hostels Management", 
     title: "Manage Multiple Hostels in One Login",
     subtitle: "Control all your hostel branches from a single dashboard - no more juggling multiple systems or accounts"
@@ -64,7 +64,7 @@ export default function TopSlider() {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 6000);
+    const interval = setInterval(nextSlide, 8000);
     return () => clearInterval(interval);
   }, []);
 
