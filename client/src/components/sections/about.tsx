@@ -41,8 +41,8 @@ export default function About() {
   ];
 
   const stats = [
-    { value: "500+", label: "Properties Managed", icon: "🏢" },
-    { value: "10k+", label: "Students Served", icon: "👨‍🎓" },
+    { value: "10+", label: "Hostels Managed", icon: "🏢" },
+    { value: "1000+", label: "Students Served", icon: "👨‍🎓" },
     { value: "99.9%", label: "Uptime", icon: "⚡" },
     { value: "24/7", label: "Support", icon: "🛟" }
   ];
