@@ -133,6 +133,25 @@ export default function Pricing() {
     }
   };
 
+  const handleGetStarted = (planName: string, price: number | null, period: string) => {
+    let message = `Hi! I'm interested in the ${planName} plan for EHostelz. `;
+    
+    if (price) {
+      message += `The pricing is Rs ${price.toLocaleString()}${getPeriodLabel(period)}. `;
+    }
+    
+    message += `Can you help me get started and provide more details about the features?`;
+    
+    const whatsappUrl = `https://wa.me/923129409211?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleContactSales = () => {
+    const message = `Hi! I'm interested in the Custom plan for EHostelz. I need unlimited hostels and would like to discuss pricing and custom features. Can you help me with a tailored solution?`;
+    const whatsappUrl = `https://wa.me/923129409211?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <section id="pricing" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
@@ -266,6 +285,7 @@ export default function Pricing() {
                   <Button 
                     className="w-full"
                     variant={plan.popular ? 'default' : 'outline'}
+                    onClick={() => plan.isCustom ? handleContactSales() : handleGetStarted(plan.name, price, billingPeriod)}
                     data-testid={`plan-button-${index}`}
                   >
                     {plan.isCustom ? 'Contact Sales' : 'Get Started'}
