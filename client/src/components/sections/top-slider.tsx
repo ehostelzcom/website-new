@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import VideoModal from "@/components/ui/video-modal";
-import dashboardImage from "@assets/generated_images/Secure_dashboard_interface_redesign_b32b56ab.png";
-import studentImage from "@assets/generated_images/Secure_student_data_interface_adca6447.png";
-import roomImage from "@assets/generated_images/Secure_room_management_interface_b828af5a.png";
-import allotmentImage from "@assets/generated_images/Secure_allotments_feedback_interface_8820174e.png";
+import dashboardImage from "@assets/generated_images/Secure_e1_dashboard_with_top_menu_eff6b32f.png";
+import studentImage from "@assets/generated_images/Student_interface_with_top_navigation_d7a7a611.png";
+import roomImage from "@assets/generated_images/Room_management_with_top_navigation_3e162275.png";
+import allotmentImage from "@assets/generated_images/Allotments_interface_with_top_navigation_04805373.png";
 
 const slides = [
   {
