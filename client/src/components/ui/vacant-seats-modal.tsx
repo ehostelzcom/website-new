@@ -259,9 +259,9 @@ Please let me know about availability and booking process. Thank you!`;
                 {Object.entries(groupedSeats).map(([roomTitle, seats]) => (
                   <Card key={roomTitle} className="border-2 border-primary/20 bg-gradient-to-r from-white to-primary/5 dark:from-gray-800 dark:to-primary/10">
                     <CardHeader className="pb-4">
-                      <CardTitle className="text-lg flex items-center gap-3">
+                      <CardTitle className="text-lg flex items-center gap-2">
                         <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                          <img src={asset9} alt="Room icon" className="w-7 h-7" />
+                          <img src={asset9} alt="Room icon" className="w-8 h-8" />
                         </div>
                         <div>
                           <h4 className="font-bold text-gray-900 dark:text-white">Room: {roomTitle}</h4>
