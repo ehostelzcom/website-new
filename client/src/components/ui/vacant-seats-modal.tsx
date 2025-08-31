@@ -230,9 +230,9 @@ Please let me know about availability and booking process. Thank you!`;
         <DialogHeader className="space-y-3">
           {/* Enhanced Header with Hostel Info */}
           <div className="bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 rounded-lg p-4 border border-primary/20">
-            <DialogTitle className="text-2xl flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                <img src={asset8} alt="Hostel icon" className="w-6 h-6" />
+            <DialogTitle className="text-2xl flex items-center gap-4 mb-2">
+              <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center">
+                <img src={asset8} alt="Hostel icon" className="w-10 h-10" />
               </div>
               <div>
                 <span className="text-gray-900 dark:text-white">{hostel?.name}</span>
