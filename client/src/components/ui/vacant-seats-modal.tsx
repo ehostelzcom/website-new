@@ -250,7 +250,7 @@ Please let me know about availability and booking process. Thank you!`;
                   Available Seats ({vacantSeats.length} total)
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Click "Book Now" to contact hostel via WhatsApp
+                  Click "Request Booking" to contact hostel via WhatsApp
                 </p>
               </div>
 
@@ -290,7 +290,7 @@ Please let me know about availability and booking process. Thank you!`;
                                 data-testid={`button-book-${seat.seat_title}`}
                               >
                                 <MessageCircle className="w-3 h-3" />
-                                Book Now
+                                Request Booking
                               </Button>
                             </div>
                           </div>
