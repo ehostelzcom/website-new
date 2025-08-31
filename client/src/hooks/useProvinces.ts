@@ -1,19 +1,31 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { Province, ProvincesResponse } from "@shared/schema";
 
 const PROVINCES_API_URL = "http://ehostelz.com:8890/ords/jee_management_system/web/api/provinces";
 
 export function useProvinces() {
   return useQuery<Province[], Error>({
-    queryKey: [PROVINCES_API_URL],
+    queryKey: ['provinces'],
     queryFn: async () => {
-      const response = await fetch(PROVINCES_API_URL);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch provinces: ${response.statusText}`);
+      try {
+        const response = await axios.get<ProvincesResponse>(PROVINCES_API_URL, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          timeout: 10000, // 10 second timeout
+        });
+        return response.data.items.sort((a, b) => a.title.localeCompare(b.title));
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          throw new Error(`API Error: ${error.message}`);
+        }
+        throw new Error('Failed to fetch provinces');
       }
-      const data: ProvincesResponse = await response.json();
-      return data.items.sort((a, b) => a.title.localeCompare(b.title));
     },
     staleTime: 1000 * 60 * 60, // Cache for 1 hour since provinces don't change often
+    retry: 3,
+    retryDelay: 1000,
   });
 }
