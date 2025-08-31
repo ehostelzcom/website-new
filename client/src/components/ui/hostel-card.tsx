@@ -96,7 +96,7 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
               className="w-full group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-200"
               data-testid={`button-view-seats-${hostel.id}`}
             >
-              <Bed className="w-4 h-4 mr-2" />
+              <img src={asset8} alt="Check seats" className="w-4 h-4 mr-2" />
               Check Vacant Seats
               <Eye className="w-4 h-4 ml-2" />
             </Button>

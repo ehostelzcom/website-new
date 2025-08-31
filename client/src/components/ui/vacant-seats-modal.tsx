@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Bed, User, MapPin, Loader2, AlertCircle, MessageCircle, Phone, Star } from "lucide-react";
 import type { Hostel } from "@/pages/SearchResults";
+import asset8 from "@assets/logo/Asset 8.svg";
 import asset9 from "@assets/logo/Asset 9.svg";
 
 interface Province {
@@ -231,7 +232,7 @@ Please let me know about availability and booking process. Thank you!`;
           <div className="bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 rounded-lg p-4 border border-primary/20">
             <DialogTitle className="text-2xl flex items-center gap-3 mb-2">
               <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                <Bed className="w-6 h-6 text-primary" />
+                <img src={asset8} alt="Hostel icon" className="w-6 h-6" />
               </div>
               <div>
                 <span className="text-gray-900 dark:text-white">{hostel?.name}</span>
