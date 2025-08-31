@@ -3,30 +3,29 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Users, Star, Bed, Eye } from "lucide-react";
 import type { Hostel } from "@/pages/SearchResults";
+import asset7 from "@assets/logo/Asset 7.svg";
+import asset8 from "@assets/logo/Asset 8.svg";
 
 interface HostelCardProps {
   hostel: Hostel;
+  index: number;
   onClick: () => void;
 }
 
-export default function HostelCard({ hostel, onClick }: HostelCardProps) {
+export default function HostelCard({ hostel, index, onClick }: HostelCardProps) {
+  // Alternate between Asset 7 and Asset 8 based on index
+  const logo = index % 2 === 0 ? asset7 : asset8;
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer border-2 hover:border-primary/20 bg-white dark:bg-gray-800" onClick={onClick}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
-              {hostel.logo ? (
-                <img 
-                  src={hostel.logo} 
-                  alt={`${hostel.name} logo`}
-                  className="w-12 h-12 rounded-lg object-cover border-2 border-gray-200 dark:border-gray-600"
-                />
-              ) : (
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Users className="w-6 h-6 text-primary" />
-                </div>
-              )}
+              <img 
+                src={logo} 
+                alt={`${hostel.name} logo`}
+                className="w-12 h-12 rounded-lg object-cover border-2 border-gray-200 dark:border-gray-600"
+              />
               <div>
                 <h3 className="font-bold text-lg text-gray-900 dark:text-white group-hover:text-primary transition-colors">
                   {hostel.name}

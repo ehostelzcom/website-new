@@ -22,7 +22,6 @@ export interface Hostel {
   country_id: number;
   mobile: string;
   phone?: string;
-  logo?: string;
   type: "Boys" | "Girls";
   province_id: number;
   location_id?: number;
@@ -88,7 +87,6 @@ export default function SearchResults() {
           country_id: 1,
           mobile: "03001234567",
           phone: "042-123456",
-          logo: "https://via.placeholder.com/100x100?text=Logo",
           type: "Boys",
           province_id: parseInt(params.province),
           location_id: params.location ? parseInt(params.location) : undefined
@@ -100,6 +98,29 @@ export default function SearchResults() {
           city_id: parseInt(params.city),
           country_id: 1,
           mobile: "03009876543",
+          type: "Girls",
+          province_id: parseInt(params.province),
+          location_id: params.location ? parseInt(params.location) : undefined
+        },
+        {
+          id: 3,
+          name: "Elite Boys Hostel",
+          address: "789 University Road, Block C",
+          city_id: parseInt(params.city),
+          country_id: 1,
+          mobile: "03005555555",
+          phone: "042-789012",
+          type: "Boys",
+          province_id: parseInt(params.province),
+          location_id: params.location ? parseInt(params.location) : undefined
+        },
+        {
+          id: 4,
+          name: "Rose Girls Hostel",
+          address: "321 Campus Avenue, Block D",
+          city_id: parseInt(params.city),
+          country_id: 1,
+          mobile: "03007777777",
           type: "Girls",
           province_id: parseInt(params.province),
           location_id: params.location ? parseInt(params.location) : undefined
@@ -248,10 +269,11 @@ export default function SearchResults() {
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {hostels.map((hostel) => (
+                  {hostels.map((hostel, index) => (
                     <HostelCard
                       key={hostel.id}
                       hostel={hostel}
+                      index={index}
                       onClick={() => handleHostelClick(hostel)}
                     />
                   ))}
