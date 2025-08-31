@@ -311,6 +311,8 @@ export default function SearchResults() {
         hostel={selectedHostel}
         open={vacantSeatsModalOpen}
         onOpenChange={setVacantSeatsModalOpen}
+        provinces={provinces}
+        cities={cities}
       />
     </div>
   );
