@@ -2,6 +2,8 @@ import { useState, useEffect, ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useProvinces } from "@/hooks/useProvinces";
+import { Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -44,11 +46,9 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-
-  const provinces = [
-    "Punjab", "Sindh", "Khyber Pakhtunkhwa", "Balochistan", 
-    "Gilgit-Baltistan", "Azad Jammu and Kashmir"
-  ];
+  
+  // Fetch provinces from live API
+  const { data: provinces, isLoading: provincesLoading, error: provincesError } = useProvinces();
   
   const cities = {
     "Punjab": ["Lahore", "Karachi", "Faisalabad", "Rawalpindi", "Multan", "Gujranwala"],
@@ -239,6 +239,7 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
                         form.setValue("city", ""); // Reset city when province changes
                       }} 
                       value={field.value}
+                      disabled={provincesLoading}
                     >
                       <FormControl>
                         <SelectTrigger data-testid="select-demo-province">
@@ -246,11 +247,24 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {provinces.map((province) => (
-                          <SelectItem key={province} value={province}>
-                            {province}
+                        {provincesLoading ? (
+                          <SelectItem value="loading" disabled>
+                            <div className="flex items-center gap-2">
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                              Loading provinces...
+                            </div>
                           </SelectItem>
-                        ))}
+                        ) : provincesError ? (
+                          <SelectItem value="error" disabled>
+                            Error loading provinces
+                          </SelectItem>
+                        ) : (
+                          provinces?.map((province) => (
+                            <SelectItem key={province.id} value={province.title}>
+                              {province.title}
+                            </SelectItem>
+                          ))
+                        )}
                       </SelectContent>
                     </Select>
                     <FormMessage />

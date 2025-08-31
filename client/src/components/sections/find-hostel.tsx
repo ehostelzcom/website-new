@@ -2,18 +2,17 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search, MapPin, Building2 } from "lucide-react";
+import { Search, MapPin, Building2, Loader2 } from "lucide-react";
+import { useProvinces } from "@/hooks/useProvinces";
 import searchIcon from "@assets/logo/Asset 9.svg";
 
 export default function FindHostel() {
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
   const [location, setLocation] = useState("");
-
-  const provinces = [
-    "Punjab", "Sindh", "Khyber Pakhtunkhwa", "Balochistan", 
-    "Gilgit-Baltistan", "Azad Jammu and Kashmir"
-  ];
+  
+  // Fetch provinces from live API
+  const { data: provinces, isLoading: provincesLoading, error: provincesError } = useProvinces();
   
   const cities = {
     "Punjab": ["Lahore", "Karachi", "Faisalabad", "Rawalpindi", "Multan", "Gujranwala"],
@@ -82,16 +81,29 @@ export default function FindHostel() {
                       <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
                       Province *
                     </label>
-                    <Select value={province} onValueChange={setProvince}>
+                    <Select value={province} onValueChange={setProvince} disabled={provincesLoading}>
                       <SelectTrigger className="h-12 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:border-primary focus:border-primary transition-all duration-200 bg-gray-50 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600" data-testid="select-province">
                         <SelectValue placeholder="Choose Province" />
                       </SelectTrigger>
                       <SelectContent>
-                        {provinces.map((prov) => (
-                          <SelectItem key={prov} value={prov}>
-                            {prov}
+                        {provincesLoading ? (
+                          <SelectItem value="loading" disabled>
+                            <div className="flex items-center gap-2">
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                              Loading provinces...
+                            </div>
                           </SelectItem>
-                        ))}
+                        ) : provincesError ? (
+                          <SelectItem value="error" disabled>
+                            Error loading provinces
+                          </SelectItem>
+                        ) : (
+                          provinces?.map((prov) => (
+                            <SelectItem key={prov.id} value={prov.title}>
+                              {prov.title}
+                            </SelectItem>
+                          ))
+                        )}
                       </SelectContent>
                     </Select>
                   </div>
