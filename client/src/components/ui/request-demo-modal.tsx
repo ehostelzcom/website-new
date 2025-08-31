@@ -194,8 +194,8 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
               )}
             />
 
-            {/* Row 3: Province and City */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Row 3: Province, City, and Location */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <FormField
                 control={form.control}
                 name="province"
