@@ -52,11 +52,28 @@ export default function Contact() {
       const apiData = response.data.data;
       const isSuccess = apiData?.status === true;
       const apiMessage = apiData?.message || "Contact form submitted successfully";
+      const apiCode = apiData?.code;
+      
+      // Determine toast variant based on status and code
+      let toastVariant = "default";
+      let toastTitle = "Response";
+      
+      if (isSuccess) {
+        toastVariant = "default";
+        toastTitle = "Message Sent!";
+      } else if (apiCode === 500) {
+        toastVariant = "destructive";
+        toastTitle = "Error";
+      } else {
+        toastVariant = "destructive";
+        toastTitle = "Already Submitted";
+      }
       
       toast({
-        title: isSuccess ? "Message Sent!" : "Already Submitted",
+        title: toastTitle,
         description: apiMessage,
-        variant: isSuccess ? "default" : "destructive"
+        variant: toastVariant as "default" | "destructive",
+        className: isSuccess ? "border-green-500 bg-green-50 text-green-900 dark:bg-green-950 dark:text-green-100" : undefined
       });
       
       // Only reset form on successful submission

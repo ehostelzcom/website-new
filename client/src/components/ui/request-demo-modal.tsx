@@ -137,11 +137,28 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
       const apiData = response.data.data;
       const isSuccess = apiData?.status === true;
       const apiMessage = apiData?.message || "Demo request submitted successfully";
+      const apiCode = apiData?.code;
+      
+      // Determine toast variant based on status and code
+      let toastVariant = "default";
+      let toastTitle = "Response";
+      
+      if (isSuccess) {
+        toastVariant = "default";
+        toastTitle = "Demo Request Submitted!";
+      } else if (apiCode === 500) {
+        toastVariant = "destructive";
+        toastTitle = "Error";
+      } else {
+        toastVariant = "destructive";
+        toastTitle = "Already Submitted";
+      }
       
       toast({
-        title: isSuccess ? "Demo Request Submitted!" : "Already Submitted", 
+        title: toastTitle,
         description: apiMessage,
-        variant: isSuccess ? "default" : "destructive"
+        variant: toastVariant as "default" | "destructive",
+        className: isSuccess ? "border-green-500 bg-green-50 text-green-900 dark:bg-green-950 dark:text-green-100" : undefined
       });
       
       // Only reset form and close modal on successful submission
