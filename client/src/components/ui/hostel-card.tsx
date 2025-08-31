@@ -36,24 +36,24 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
     <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 hover:border-primary/30 bg-white dark:bg-gray-800 rounded-xl overflow-hidden" onClick={onClick}>
       <CardHeader className="p-5">
         <div className="flex items-center gap-4">
-          <div className="relative">
-            <img 
-              src={logo} 
-              alt={`${hostel.name} logo`}
-              className="w-14 h-14 rounded-lg object-cover border-2 border-gray-200 dark:border-gray-600 group-hover:scale-105 transition-transform duration-200"
-            />
-            <Badge 
-              variant={hostel.type === "Boys" ? "default" : "secondary"}
-              className="absolute -top-2 -right-2 text-xs"
-            >
-              {hostel.type}
-            </Badge>
-          </div>
+          <img 
+            src={logo} 
+            alt={`${hostel.name} logo`}
+            className="w-14 h-14 rounded-lg object-cover border-2 border-gray-200 dark:border-gray-600 group-hover:scale-105 transition-transform duration-200"
+          />
           
           <div className="flex-1">
-            <h3 className="font-bold text-lg text-gray-900 dark:text-white group-hover:text-primary transition-colors mb-2">
-              {hostel.name}
-            </h3>
+            <div className="flex items-center gap-2 mb-2">
+              <h3 className="font-bold text-lg text-gray-900 dark:text-white group-hover:text-primary transition-colors">
+                {hostel.name}
+              </h3>
+              <Badge 
+                variant={hostel.type === "Boys" ? "default" : "secondary"}
+                className="text-xs"
+              >
+                {hostel.type}
+              </Badge>
+            </div>
             <div className="flex items-center gap-2 mb-2">
               <div className="flex items-center gap-1">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
