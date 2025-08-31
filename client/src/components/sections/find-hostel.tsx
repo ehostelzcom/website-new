@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SearchableSelect } from "@/components/ui/searchable-select";
@@ -10,6 +11,7 @@ import { useLocations } from "@/hooks/useLocations";
 import searchIcon from "@assets/logo/Asset 9.svg";
 
 export default function FindHostel() {
+  const [, setLocationPath] = useLocation();
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
   const [location, setLocation] = useState("");
@@ -18,27 +20,33 @@ export default function FindHostel() {
   const { data: provinces, isLoading: provincesLoading, error: provincesError } = useProvinces();
   
   // Get selected province ID for cities API
-  const selectedProvinceId = provinces?.find(p => p.title === province)?.id;
+  const selectedProvinceId = province ? parseInt(province) : undefined;
   
   // Fetch cities based on selected province
   const { data: cities, isLoading: citiesLoading, error: citiesError } = useCities(selectedProvinceId);
   
   // Get selected city ID for locations API
-  const selectedCityId = cities?.find(c => c.title === city)?.id;
+  const selectedCityId = city ? parseInt(city) : undefined;
   
   // Fetch locations based on selected city (optional)
   const { data: locations, isLoading: locationsLoading, error: locationsError } = useLocations(selectedCityId);
 
   const handleSearch = () => {
-    console.log({ 
-      province, 
-      city, 
-      location: location || "(optional)", 
-      provinceId: selectedProvinceId,
-      cityId: selectedCityId
+    if (!province || !city) return;
+    
+    // Build search URL with query parameters
+    const params = new URLSearchParams({
+      province: province,
+      city: city,
     });
-    // TODO: Implement search functionality
-    // Note: Location is optional - search can work with just province/city
+    
+    // Add location if selected
+    if (location) {
+      params.append("location", location);
+    }
+    
+    // Navigate to search results page
+    setLocationPath(`/search-hostels?${params.toString()}`);
   };
 
   const resetFilters = () => {
@@ -109,7 +117,7 @@ export default function FindHostel() {
                           </SelectItem>
                         ) : (
                           provinces?.map((prov) => (
-                            <SelectItem key={prov.id} value={prov.title}>
+                            <SelectItem key={prov.id} value={prov.id.toString()}>
                               {prov.title}
                             </SelectItem>
                           ))
@@ -201,9 +209,9 @@ export default function FindHostel() {
                       <div className="text-center">
                         <p className="font-semibold text-sm">
                           {!province && !city && !location && "Select your location"}
-                          {province && !city && `Selected: ${province}`}
-                          {province && city && !location && `Selected: ${city}, ${province}`}
-                          {province && city && location && `Selected: ${location}, ${city}, ${province}`}
+                          {province && !city && `Selected: ${provinces?.find(p => p.id.toString() === province)?.title}`}
+                          {province && city && !location && `Selected: ${cities?.find(c => c.id.toString() === city)?.title}, ${provinces?.find(p => p.id.toString() === province)?.title}`}
+                          {province && city && location && `Selected: ${locations?.find(l => l.id.toString() === location)?.title}, ${cities?.find(c => c.id.toString() === city)?.title}, ${provinces?.find(p => p.id.toString() === province)?.title}`}
                         </p>
                         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                           Click Search to find available hostels
