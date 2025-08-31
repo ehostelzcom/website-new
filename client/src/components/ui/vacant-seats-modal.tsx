@@ -261,7 +261,7 @@ Please let me know about availability and booking process. Thank you!`;
                     <CardHeader className="pb-4">
                       <CardTitle className="text-lg flex items-center gap-3">
                         <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                          <img src={asset9} alt="Room icon" className="w-5 h-5" />
+                          <img src={asset9} alt="Room icon" className="w-7 h-7" />
                         </div>
                         <div>
                           <h4 className="font-bold text-gray-900 dark:text-white">Room: {roomTitle}</h4>
