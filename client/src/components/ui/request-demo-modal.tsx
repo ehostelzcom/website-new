@@ -132,14 +132,23 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
         location: data.location || null, // This is now the location ID (optional)
         address: data.address,
       });
+
+      // Use the actual message from Oracle APEX API response
+      const apiData = response.data.data;
+      const isSuccess = apiData?.status === true;
+      const apiMessage = apiData?.message || "Demo request submitted successfully";
       
       toast({
-        title: "Demo Request Submitted!",
-        description: "Thank you for your interest. Our team will contact you within 24 hours to schedule your personalized demo.",
+        title: isSuccess ? "Demo Request Submitted!" : "Already Submitted", 
+        description: apiMessage,
+        variant: isSuccess ? "default" : "destructive"
       });
       
-      form.reset();
-      setIsOpen(false);
+      // Only reset form and close modal on successful submission
+      if (isSuccess) {
+        form.reset();
+        setIsOpen(false);
+      }
     } catch (error) {
       toast({
         title: "Error",

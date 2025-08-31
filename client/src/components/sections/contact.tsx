@@ -47,13 +47,22 @@ export default function Contact() {
         phone: formData.phone,
         message: formData.message,
       });
+
+      // Use the actual message from Oracle APEX API response
+      const apiData = response.data.data;
+      const isSuccess = apiData?.status === true;
+      const apiMessage = apiData?.message || "Contact form submitted successfully";
       
       toast({
-        title: "Message Sent!",
-        description: "Thank you for your message. We will get back to you soon.",
+        title: isSuccess ? "Message Sent!" : "Already Submitted",
+        description: apiMessage,
+        variant: isSuccess ? "default" : "destructive"
       });
       
-      setFormData({ name: "", email: "", phone: "", message: "" });
+      // Only reset form on successful submission
+      if (isSuccess) {
+        setFormData({ name: "", email: "", phone: "", message: "" });
+      }
     } catch (error) {
       toast({
         title: "Error",
