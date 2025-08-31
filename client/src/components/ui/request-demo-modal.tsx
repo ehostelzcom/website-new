@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useProvinces } from "@/hooks/useProvinces";
 import { useCities } from "@/hooks/useCities";
+import { useLocations } from "@/hooks/useLocations";
 import { Loader2 } from "lucide-react";
 import {
   Dialog,
@@ -23,6 +24,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SearchableSelect } from "@/components/ui/searchable-select";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -33,7 +35,7 @@ const requestDemoSchema = z.object({
   mobile: z.string().min(11, "Please enter a valid mobile number"),
   province: z.string().min(1, "Please select a province"),
   city: z.string().min(1, "Please select a city"),
-  location: z.string().min(1, "Please enter location"),
+  location: z.string().optional(), // Make location optional
   address: z.string().min(10, "Please provide address")
 });
 
@@ -70,44 +72,15 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
   
   // Fetch cities based on selected province
   const { data: cities, isLoading: citiesLoading, error: citiesError } = useCities(selectedProvinceId);
-
-  const locations = {
-    "Lahore": ["DHA Phase 1", "DHA Phase 2", "DHA Phase 3", "Gulberg", "Model Town", "Johar Town", "Cantt", "Garden Town", "Muslim Town", "Faisal Town"],
-    "Karachi": ["DHA Phase 1", "DHA Phase 2", "Clifton", "Gulshan-e-Iqbal", "North Nazimabad", "Korangi", "Malir", "PECHS", "Saddar", "University Road"],
-    "Faisalabad": ["Civil Lines", "Peoples Colony", "Gulberg", "Samanabad", "Susan Road", "Kotwali Road", "Millat Town", "Madina Town"],
-    "Rawalpindi": ["Cantt", "Saddar", "Committee Chowk", "Murree Road", "PWD Housing", "Satellite Town", "Bahria Town"],
-    "Multan": ["Cantt", "Gulgasht Colony", "New Multan", "Bosan Road", "MDA", "Shah Rukn-e-Alam Colony"],
-    "Gujranwala": ["Civil Lines", "Satellite Town", "Model Town", "Peoples Colony", "Wapda Town"],
-    "Hyderabad": ["Latifabad", "Qasimabad", "Cantonment", "City", "SITE Area"],
-    "Sukkur": ["Civil Lines", "New Sukkur", "Airport Road", "Minhas Road"],
-    "Larkana": ["Station Road", "Jinnah Bagh", "Medical College Road", "VIP Road"],
-    "Nawabshah": ["Station Road", "Court Road", "Hospital Road", "Sakrand Road"],
-    "Peshawar": ["University Town", "Hayatabad", "Board Bazar", "Saddar", "Cantt", "Warsak Road"],
-    "Mardan": ["Katlang Road", "Swabi Road", "Nowshera Road", "City Center"],
-    "Abbottabad": ["Supply", "Mandian", "Jinnahabad", "Cantt", "PMA Road"],
-    "Kohat": ["Cantt", "Hangu Road", "Bannu Road", "KDA"],
-    "Bannu": ["Cantt", "Miranshah Road", "Lakki Road", "City Area"],
-    "Quetta": ["Cantt", "Satellite Town", "Jinnah Town", "Brewery Road", "Zarghoon Road"],
-    "Gwadar": ["New Town", "Old Town", "Port Area", "Marine Drive"],
-    "Turbat": ["Airport Road", "Hoshab Road", "City Center"],
-    "Khuzdar": ["Hub Road", "Karachi Road", "Quetta Road"],
-    "Sibi": ["Railway Road", "Quetta Road", "Jacobabad Road"],
-    "Gilgit": ["City Center", "Jutial", "Danyore", "Kashrote"],
-    "Skardu": ["City Center", "Airport Road", "Satpara Road"],
-    "Hunza": ["Karimabad", "Altit", "Gulmit"],
-    "Ghanche": ["Khaplu", "Shigar", "Roundu"],
-    "Muzaffarabad": ["City Center", "Chattar", "Keil", "Plate"],
-    "Mirpur": ["City Center", "Sector F", "Allama Iqbal Road", "AJK University Road"],
-    "Kotli": ["City Center", "Sehnsa", "Fatehpur", "Gulpur"],
-    "Rawalakot": ["City Center", "Banjosa", "Toli Pir", "Poonch Road"]
-  };
-
-  const selectedCity = form.watch("city");
-  const availableLocations = selectedCity ? locations[selectedCity as keyof typeof locations] || [] : [];
-
-  // Reset dependent fields when parent changes  
-  const cityValue = form.watch("city");
   
+  // Get selected city ID for locations API
+  const selectedCity = form.watch("city");
+  const selectedCityId = cities?.find(c => c.title === selectedCity)?.id;
+  
+  // Fetch locations based on selected city (optional)
+  const { data: locations, isLoading: locationsLoading, error: locationsError } = useLocations(selectedCityId);
+
+  // Reset dependent fields when parent changes
   useEffect(() => {
     if (selectedProvince) {
       form.setValue("city", "");
@@ -116,10 +89,10 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
   }, [selectedProvince, form]);
   
   useEffect(() => {
-    if (cityValue) {
+    if (selectedCity) {
       form.setValue("location", "");
     }
-  }, [cityValue, form]);
+  }, [selectedCity, form]);
 
   const onSubmit = async (data: RequestDemoForm) => {
     setIsSubmitting(true);
@@ -274,44 +247,22 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>City</FormLabel>
-                    <Select 
-                      onValueChange={(value) => {
-                        field.onChange(value);
-                        form.setValue("location", ""); // Reset location when city changes
-                      }} 
-                      value={field.value}
-                      disabled={!selectedProvince || citiesLoading}
-                    >
-                      <FormControl>
-                        <SelectTrigger data-testid="select-demo-city">
-                          <SelectValue placeholder={!selectedProvince ? "Select province first" : "Select city"} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {citiesLoading ? (
-                          <SelectItem value="loading" disabled>
-                            <div className="flex items-center gap-2">
-                              <Loader2 className="h-4 w-4 animate-spin" />
-                              Loading cities...
-                            </div>
-                          </SelectItem>
-                        ) : citiesError ? (
-                          <SelectItem value="error" disabled>
-                            Error loading cities
-                          </SelectItem>
-                        ) : cities && cities.length > 0 ? (
-                          cities.map((cityObj) => (
-                            <SelectItem key={cityObj.id} value={cityObj.title}>
-                              {cityObj.title}
-                            </SelectItem>
-                          ))
-                        ) : selectedProvince ? (
-                          <SelectItem value="no-cities" disabled>
-                            No cities found for this province
-                          </SelectItem>
-                        ) : null}
-                      </SelectContent>
-                    </Select>
+                    <FormControl>
+                      <SearchableSelect
+                        options={cities || []}
+                        value={field.value}
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          form.setValue("location", ""); // Reset location when city changes
+                        }}
+                        placeholder={!selectedProvince ? "Select province first" : "Select city"}
+                        disabled={!selectedProvince || citiesLoading}
+                        isLoading={citiesLoading}
+                        searchPlaceholder="Search cities..."
+                        emptyText={selectedProvince ? "No cities found for this province" : "Select province first"}
+                        testId="select-demo-city"
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -323,21 +274,20 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
               name="location"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Location</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value} disabled={!selectedCity}>
-                    <FormControl>
-                      <SelectTrigger data-testid="select-location">
-                        <SelectValue placeholder={selectedCity ? "Select location" : "Please select city first"} />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {availableLocations.map((location) => (
-                        <SelectItem key={location} value={location}>
-                          {location}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <FormLabel>Location (Optional)</FormLabel>
+                  <FormControl>
+                    <SearchableSelect
+                      options={locations || []}
+                      value={field.value || ""}
+                      onValueChange={field.onChange}
+                      placeholder={!selectedCity ? "Select city first" : "Select location (Optional)"}
+                      disabled={!selectedCity}
+                      isLoading={locationsLoading}
+                      searchPlaceholder="Search locations..."
+                      emptyText={selectedCity ? "No locations found - you can proceed without location" : "Select city first"}
+                      testId="select-demo-location"
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

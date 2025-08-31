@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SearchableSelect } from "@/components/ui/searchable-select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search, MapPin, Building2, Loader2 } from "lucide-react";
 import { useProvinces } from "@/hooks/useProvinces";
 import { useCities } from "@/hooks/useCities";
+import { useLocations } from "@/hooks/useLocations";
 import searchIcon from "@assets/logo/Asset 9.svg";
 
 export default function FindHostel() {
@@ -21,17 +23,22 @@ export default function FindHostel() {
   // Fetch cities based on selected province
   const { data: cities, isLoading: citiesLoading, error: citiesError } = useCities(selectedProvinceId);
   
-  const locations = {
-    "Lahore": ["DHA", "Gulberg", "Model Town", "Johar Town", "Cantt", "Anarkali"],
-    "Karachi": ["Clifton", "Defence", "Gulshan", "Nazimabad", "North Nazimabad"],
-    "Islamabad": ["Blue Area", "F-6", "F-7", "F-8", "G-6", "G-7"],
-    "Peshawar": ["University Town", "Hayatabad", "Board Bazaar", "Saddar"],
-    "Faisalabad": ["Samanabad", "People's Colony", "Madina Town", "Civil Lines"]
-  };
+  // Get selected city ID for locations API
+  const selectedCityId = cities?.find(c => c.title === city)?.id;
+  
+  // Fetch locations based on selected city (optional)
+  const { data: locations, isLoading: locationsLoading, error: locationsError } = useLocations(selectedCityId);
 
   const handleSearch = () => {
-    console.log({ province, city, location, provinceId: selectedProvinceId });
+    console.log({ 
+      province, 
+      city, 
+      location: location || "(optional)", 
+      provinceId: selectedProvinceId,
+      cityId: selectedCityId
+    });
     // TODO: Implement search functionality
+    // Note: Location is optional - search can work with just province/city
   };
 
   const resetFilters = () => {
@@ -39,9 +46,6 @@ export default function FindHostel() {
     setCity("");
     setLocation("");
   };
-
-
-  const availableLocations = city ? locations[city as keyof typeof locations] || [] : [];
 
   return (
     <section id="find-hostel" className="py-16 bg-gradient-to-br from-primary/5 via-white to-accent/5 dark:from-gray-900 dark:to-gray-800">
@@ -120,42 +124,22 @@ export default function FindHostel() {
                       <div className="w-1.5 h-1.5 bg-accent rounded-full"></div>
                       City *
                     </label>
-                    <Select 
-                      value={city} 
-                      onValueChange={(value) => {
-                        setCity(value);
-                        setLocation(""); // Reset location when city changes
-                      }} 
-                      disabled={!province || citiesLoading}
-                    >
-                      <SelectTrigger className="h-12 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:border-accent focus:border-accent transition-all duration-200 bg-gray-50 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed" data-testid="select-city">
-                        <SelectValue placeholder={!province ? "Select Province first" : "Choose City"} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {citiesLoading ? (
-                          <SelectItem value="loading" disabled>
-                            <div className="flex items-center gap-2">
-                              <Loader2 className="h-4 w-4 animate-spin" />
-                              Loading cities...
-                            </div>
-                          </SelectItem>
-                        ) : citiesError ? (
-                          <SelectItem value="error" disabled>
-                            Error loading cities
-                          </SelectItem>
-                        ) : cities && cities.length > 0 ? (
-                          cities.map((cityObj) => (
-                            <SelectItem key={cityObj.id} value={cityObj.title}>
-                              {cityObj.title}
-                            </SelectItem>
-                          ))
-                        ) : province ? (
-                          <SelectItem value="no-cities" disabled>
-                            No cities found for this province
-                          </SelectItem>
-                        ) : null}
-                      </SelectContent>
-                    </Select>
+                    <div className="h-12">
+                      <SearchableSelect
+                        options={cities || []}
+                        value={city}
+                        onValueChange={(value) => {
+                          setCity(value);
+                          setLocation(""); // Reset location when city changes
+                        }}
+                        placeholder={!province ? "Select Province first" : "Choose City"}
+                        disabled={!province || citiesLoading}
+                        isLoading={citiesLoading}
+                        searchPlaceholder="Search cities..."
+                        emptyText={province ? "No cities found for this province" : "Select province first"}
+                        testId="select-city"
+                      />
+                    </div>
                   </div>
                   
                   {/* Area/Location */}
@@ -164,22 +148,19 @@ export default function FindHostel() {
                       <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
                       Area (Optional)
                     </label>
-                    <Select 
-                      value={location} 
-                      onValueChange={setLocation}
-                      disabled={!city}
-                    >
-                      <SelectTrigger className="h-12 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:border-primary focus:border-primary transition-all duration-200 bg-gray-50 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed" data-testid="select-location">
-                        <SelectValue placeholder={!city ? "Select City first" : "Choose Area"} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {availableLocations.map((loc) => (
-                          <SelectItem key={loc} value={loc}>
-                            {loc}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <div className="h-12">
+                      <SearchableSelect
+                        options={locations || []}
+                        value={location}
+                        onValueChange={setLocation}
+                        placeholder={!city ? "Select City first" : "Choose Area (Optional)"}
+                        disabled={!city}
+                        isLoading={locationsLoading}
+                        searchPlaceholder="Search areas..."
+                        emptyText={city ? "No areas found - search works without area" : "Select city first"}
+                        testId="select-location"
+                      />
+                    </div>
                   </div>
                   
                   {/* Action Buttons */}
