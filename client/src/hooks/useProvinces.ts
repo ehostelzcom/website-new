@@ -1,22 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Province, ProvincesResponse } from "@shared/schema";
-
-const PROVINCES_API_URL = "http://ehostelz.com:8890/ords/jee_management_system/web/api/provinces";
+import { Province } from "@shared/schema";
 
 export function useProvinces() {
   return useQuery<Province[], Error>({
     queryKey: ['provinces'],
     queryFn: async () => {
       try {
-        const response = await axios.get<ProvincesResponse>(PROVINCES_API_URL, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
+        const response = await axios.get<Province[]>("/api/provinces", {
           timeout: 10000, // 10 second timeout
         });
-        return response.data.items.sort((a, b) => a.title.localeCompare(b.title));
+        return response.data;
       } catch (error) {
         if (axios.isAxiosError(error)) {
           throw new Error(`API Error: ${error.message}`);
