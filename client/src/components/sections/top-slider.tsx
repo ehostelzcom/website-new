@@ -52,7 +52,7 @@ const slides = [
     image: securityImage,
     alt: "Enterprise Security",
     title: "🔒 Advanced Data Protection",
-    subtitle: "Military-grade encryption protects your sensitive student and financial data 24/7 with automated backups and compliance standards"
+    subtitle: "Enterprise-grade encryption protects your sensitive student and financial data 24/7 with automated backups and compliance standards"
   },
   {
     image: mobileImage,
