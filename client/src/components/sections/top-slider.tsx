@@ -19,24 +19,6 @@ const slides = [
     subtitle: "We are dedicated to revolutionizing hostel management with real, professional software solutions that simplify operations and enhance efficiency for hostel owners across Pakistan"
   },
   {
-    image: cloudImage,
-    alt: "100% Cloud-Based Platform",
-    title: "100% Cloud-Based Access",
-    subtitle: "Access anywhere, anytime with secure cloud infrastructure. No server maintenance required - focus on what matters most!"
-  },
-  {
-    image: securityImage,
-    alt: "Enterprise Security",
-    title: "🔒 Enterprise-Grade Security",
-    subtitle: "Bank-level encryption protects your sensitive student and financial data 24/7 with automated backups and compliance standards"
-  },
-  {
-    image: mobileImage,
-    alt: "Mobile Optimized Experience",
-    title: "📱 Mobile-First Design",
-    subtitle: "Perfect experience on phones, tablets, and desktops. Manage hostels on-the-go with our responsive mobile interface!"
-  },
-  {
     image: loginImage,
     alt: "Multiple Hostels Management", 
     title: "Manage Multiple Hostels in One Login",
@@ -59,6 +41,24 @@ const slides = [
     alt: "Future Plans",
     title: "Future Plans & Innovation",
     subtitle: "Coming soon: Mobile apps for owners and students, advanced analytics, and AI-powered insights to take your hostel management to the next level"
+  },
+  {
+    image: cloudImage,
+    alt: "100% Cloud-Based Platform",
+    title: "100% Cloud-Based Access",
+    subtitle: "Access anywhere, anytime with secure cloud infrastructure. No server maintenance required - focus on what matters most!"
+  },
+  {
+    image: securityImage,
+    alt: "Enterprise Security",
+    title: "🔒 Advanced Data Protection",
+    subtitle: "Military-grade encryption protects your sensitive student and financial data 24/7 with automated backups and compliance standards"
+  },
+  {
+    image: mobileImage,
+    alt: "Mobile Optimized Experience",
+    title: "📱 Mobile-First Design",
+    subtitle: "Perfect experience on phones, tablets, and desktops. Manage hostels on-the-go with our responsive mobile interface!"
   }
 ];
 
@@ -85,7 +85,7 @@ export default function TopSlider() {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 8000);
+    const interval = setInterval(nextSlide, 12000);
     return () => clearInterval(interval);
   }, []);
 
