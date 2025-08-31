@@ -267,31 +267,31 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
                   </FormItem>
                 )}
               />
+              
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Location (Optional)</FormLabel>
+                    <FormControl>
+                      <SearchableSelect
+                        options={locations || []}
+                        value={field.value || ""}
+                        onValueChange={field.onChange}
+                        placeholder={!selectedCity ? "Select city first" : "Select location (Optional)"}
+                        disabled={!selectedCity}
+                        isLoading={locationsLoading}
+                        searchPlaceholder="Search locations..."
+                        emptyText={selectedCity ? "No locations found - you can proceed without location" : "Select city first"}
+                        testId="select-demo-location"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-
-            <FormField
-              control={form.control}
-              name="location"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Location (Optional)</FormLabel>
-                  <FormControl>
-                    <SearchableSelect
-                      options={locations || []}
-                      value={field.value || ""}
-                      onValueChange={field.onChange}
-                      placeholder={!selectedCity ? "Select city first" : "Select location (Optional)"}
-                      disabled={!selectedCity}
-                      isLoading={locationsLoading}
-                      searchPlaceholder="Search locations..."
-                      emptyText={selectedCity ? "No locations found - you can proceed without location" : "Select city first"}
-                      testId="select-demo-location"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
             <FormField
               control={form.control}
