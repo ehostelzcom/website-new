@@ -226,7 +226,7 @@ Please let me know about availability and booking process. Thank you!`;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[900px] max-h-[95vh]">
+      <DialogContent className="sm:max-w-[1200px] max-h-[95vh]">
         <DialogHeader className="space-y-3">
           {/* Enhanced Header with Hostel Info */}
           <div className="bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 rounded-lg p-4 border border-primary/20">
