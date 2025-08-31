@@ -9,7 +9,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Bed, User, MapPin, Loader2, AlertCircle, MessageCircle, Phone, Star } from "lucide-react";
+import { Bed, User, MapPin, Loader2, AlertCircle, MessageCircle, Phone, Star, Check } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import type { Hostel } from "@/pages/SearchResults";
 import asset8 from "@assets/logo/Asset 8.svg";
 import asset9 from "@assets/logo/Asset 9.svg";
@@ -47,6 +48,8 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
   const city = cities?.find(c => c.id === hostel?.city_id);
   const [vacantSeats, setVacantSeats] = useState<VacantSeat[]>([]);
   const [loading, setLoading] = useState(false);
+  const [requestedSeats, setRequestedSeats] = useState<Set<string>>(new Set());
+  const { toast } = useToast();
   const [error, setError] = useState<string | null>(null);
 
   // Group seats by room for better display
@@ -204,6 +207,11 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
   const handleWhatsAppBooking = (seat: VacantSeat) => {
     if (!hostel) return;
     
+    const seatKey = `${seat.room_title}-${seat.bed_title}-${seat.seat_title}`;
+    
+    // Add to requested seats immediately for visual feedback
+    setRequestedSeats(prev => new Set(prev).add(seatKey));
+    
     const message = `Hello! I'm interested in booking a seat at ${hostel.name}.
 
 📍 Hostel: ${hostel.name}
@@ -222,6 +230,22 @@ Please let me know about availability and booking process. Thank you!`;
     
     // Open WhatsApp in new tab
     window.open(whatsappUrl, '_blank');
+    
+    // Show success toast
+    toast({
+      title: "Booking Request Sent!",
+      description: `Your request for ${seat.room_title} - ${seat.seat_title} has been sent via WhatsApp.`,
+      duration: 3000,
+    });
+    
+    // Reset button state after 3 seconds
+    setTimeout(() => {
+      setRequestedSeats(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(seatKey);
+        return newSet;
+      });
+    }, 3000);
   };
 
   return (
@@ -335,15 +359,36 @@ Please let me know about availability and booking process. Thank you!`;
                                 <p className="font-bold text-sm text-gray-900 dark:text-white">{seat.bed_title}</p>
                                 <p className="text-xs text-primary font-medium mb-2">{seat.seat_title}</p>
                               </div>
-                              <Button
-                                size="sm"
-                                onClick={() => handleWhatsAppBooking(seat)}
-                                className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white text-xs py-2.5 gap-1 shadow-md hover:shadow-lg transition-all duration-200"
-                                data-testid={`button-book-${seat.seat_title}`}
-                              >
-                                <MessageCircle className="w-3 h-3" />
-                                Request Booking
-                              </Button>
+                              {(() => {
+                                const seatKey = `${seat.room_title}-${seat.bed_title}-${seat.seat_title}`;
+                                const isRequested = requestedSeats.has(seatKey);
+                                
+                                return (
+                                  <Button
+                                    size="sm"
+                                    onClick={() => handleWhatsAppBooking(seat)}
+                                    disabled={isRequested}
+                                    className={`w-full text-xs py-2.5 gap-1 shadow-md hover:shadow-lg transition-all duration-200 ${
+                                      isRequested 
+                                        ? "bg-gradient-to-r from-emerald-600 to-emerald-700 text-white cursor-default" 
+                                        : "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white"
+                                    }`}
+                                    data-testid={`button-book-${seat.seat_title}`}
+                                  >
+                                    {isRequested ? (
+                                      <>
+                                        <Check className="w-3 h-3" />
+                                        Request Sent!
+                                      </>
+                                    ) : (
+                                      <>
+                                        <MessageCircle className="w-3 h-3" />
+                                        Request Booking
+                                      </>
+                                    )}
+                                  </Button>
+                                );
+                              })()}
                             </div>
                           </div>
                         ))}
