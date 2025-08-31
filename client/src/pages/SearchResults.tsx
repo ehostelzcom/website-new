@@ -268,7 +268,7 @@ export default function SearchResults() {
                     Click on any hostel to check vacant seats
                   </p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
                   {hostels.map((hostel, index) => (
                     <HostelCard
                       key={hostel.id}
