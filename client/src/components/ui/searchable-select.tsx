@@ -41,7 +41,7 @@ export function SearchableSelect({
 }: SearchableSelectProps) {
   const [open, setOpen] = useState(false);
 
-  const selectedOption = options.find((option) => option.title === value);
+  const selectedOption = options.find((option) => option.id.toString() === value);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -77,15 +77,16 @@ export function SearchableSelect({
                 <CommandItem
                   key={option.id}
                   value={option.title}
-                  onSelect={(currentValue) => {
-                    onValueChange(currentValue === value ? "" : currentValue);
+                  onSelect={() => {
+                    const newValue = option.id.toString();
+                    onValueChange(newValue === value ? "" : newValue);
                     setOpen(false);
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === option.title ? "opacity-100" : "opacity-0"
+                      value === option.id.toString() ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {option.title}

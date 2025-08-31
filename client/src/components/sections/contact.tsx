@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Send, MessageCircle } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -39,8 +40,13 @@ export default function Contact() {
     }
 
     try {
-      // TODO: Implement actual form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Call the contact-us API using axios
+      const response = await axios.post("/api/contact-us", {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+      });
       
       toast({
         title: "Message Sent!",

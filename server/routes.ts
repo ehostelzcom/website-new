@@ -111,6 +111,122 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // POST API for Contact Us form
+  app.post("/api/contact-us", async (req, res) => {
+    console.log("Contact Us form submission received:", req.body);
+    try {
+      const { name, email, phone, message } = req.body;
+      
+      // Validate required fields
+      if (!name || !email || !phone || !message) {
+        return res.status(400).json({ 
+          error: "Missing required fields",
+          message: "All fields (name, email, phone, message) are required"
+        });
+      }
+
+      // Call Oracle APEX API
+      const response = await axios.post(
+        "http://ehostelz.com:8890/ords/jee_management_system/web/api/contact-us",
+        {
+          name,
+          email,
+          phone,
+          message
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          timeout: 10000,
+        }
+      );
+      
+      console.log("Oracle APEX contact-us response:", response.data);
+      
+      // Return success response
+      res.setHeader('Content-Type', 'application/json');
+      res.json({ 
+        success: true, 
+        message: "Contact form submitted successfully",
+        data: response.data
+      });
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      res.status(500).json({ 
+        error: "Failed to submit contact form",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // POST API for Request Demo form
+  app.post("/api/request-demo", async (req, res) => {
+    console.log("Request Demo form submission received:", req.body);
+    try {
+      const { 
+        homeName, 
+        type, 
+        mobile, 
+        whatsapp, 
+        province, 
+        city, 
+        location, 
+        address 
+      } = req.body;
+      
+      // Validate required fields
+      if (!homeName || !type || !mobile || !whatsapp || !province || !city || !address) {
+        return res.status(400).json({ 
+          error: "Missing required fields",
+          message: "All fields except location are required"
+        });
+      }
+
+      // Map frontend field names to Oracle APEX expected field names
+      const requestData = {
+        hostel_name: homeName,
+        type: type.toUpperCase(), // Ensure uppercase for API
+        mobile_no: mobile,
+        whatsapp_no: whatsapp,
+        province_id: parseInt(province), // Convert to number if needed
+        city_id: parseInt(city), // Convert to number if needed
+        location_id: location ? parseInt(location) : null, // Optional field
+        address: address
+      };
+
+      // Call Oracle APEX API
+      const response = await axios.post(
+        "http://ehostelz.com:8890/ords/jee_management_system/web/api/request-demo",
+        requestData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          timeout: 10000,
+        }
+      );
+      
+      console.log("Oracle APEX request-demo response:", response.data);
+      
+      // Return success response
+      res.setHeader('Content-Type', 'application/json');
+      res.json({ 
+        success: true, 
+        message: "Demo request submitted successfully",
+        data: response.data
+      });
+    } catch (error) {
+      console.error("Error submitting demo request:", error);
+      res.status(500).json({ 
+        error: "Failed to submit demo request",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 

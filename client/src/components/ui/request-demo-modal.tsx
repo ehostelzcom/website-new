@@ -29,6 +29,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
 
 const requestDemoSchema = z.object({
   homeName: z.string().min(2, "Hostel name must be at least 2 characters"),
@@ -73,14 +74,14 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
   
   // Get selected province details for cities API
   const selectedProvince = form.watch("province");
-  const selectedProvinceId = provinces?.find(p => p.title === selectedProvince)?.id;
+  const selectedProvinceId = selectedProvince ? parseInt(selectedProvince) : undefined;
   
   // Fetch cities based on selected province
   const { data: cities, isLoading: citiesLoading, error: citiesError } = useCities(selectedProvinceId);
   
   // Get selected city ID for locations API
   const selectedCity = form.watch("city");
-  const selectedCityId = cities?.find(c => c.title === selectedCity)?.id;
+  const selectedCityId = selectedCity ? parseInt(selectedCity) : undefined;
   
   // Fetch locations based on selected city (optional)
   const { data: locations, isLoading: locationsLoading, error: locationsError } = useLocations(selectedCityId);
@@ -120,8 +121,17 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
   const onSubmit = async (data: RequestDemoForm) => {
     setIsSubmitting(true);
     try {
-      // TODO: Implement actual demo request submission
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Call the request-demo API using axios
+      const response = await axios.post("/api/request-demo", {
+        homeName: data.homeName,
+        type: data.type,
+        mobile: data.mobile,
+        whatsapp: data.whatsapp,
+        province: data.province, // This is now the province ID
+        city: data.city, // This is now the city ID
+        location: data.location || null, // This is now the location ID (optional)
+        address: data.address,
+      });
       
       toast({
         title: "Demo Request Submitted!",
@@ -296,7 +306,7 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
                           </SelectItem>
                         ) : (
                           provinces?.map((province) => (
-                            <SelectItem key={province.id} value={province.title}>
+                            <SelectItem key={province.id} value={province.id.toString()}>
                               {province.title}
                             </SelectItem>
                           ))
