@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useProvinces } from "@/hooks/useProvinces";
+import { useCities } from "@/hooks/useCities";
 import { Loader2 } from "lucide-react";
 import {
   Dialog,
@@ -49,15 +50,26 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
   
   // Fetch provinces from live API
   const { data: provinces, isLoading: provincesLoading, error: provincesError } = useProvinces();
+
+  const form = useForm<RequestDemoForm>({
+    resolver: zodResolver(requestDemoSchema),
+    defaultValues: {
+      homeName: "",
+      type: undefined,
+      mobile: "",
+      province: "",
+      city: "",
+      location: "",
+      address: ""
+    }
+  });
   
-  const cities = {
-    "Punjab": ["Lahore", "Karachi", "Faisalabad", "Rawalpindi", "Multan", "Gujranwala"],
-    "Sindh": ["Karachi", "Hyderabad", "Sukkur", "Larkana", "Nawabshah"],
-    "Khyber Pakhtunkhwa": ["Peshawar", "Mardan", "Abbottabad", "Kohat", "Bannu"],
-    "Balochistan": ["Quetta", "Gwadar", "Turbat", "Khuzdar", "Sibi"],
-    "Gilgit-Baltistan": ["Gilgit", "Skardu", "Hunza", "Ghanche"],
-    "Azad Jammu and Kashmir": ["Muzaffarabad", "Mirpur", "Kotli", "Rawalakot"]
-  };
+  // Get selected province details for cities API
+  const selectedProvince = form.watch("province");
+  const selectedProvinceId = provinces?.find(p => p.title === selectedProvince)?.id;
+  
+  // Fetch cities based on selected province
+  const { data: cities, isLoading: citiesLoading, error: citiesError } = useCities(selectedProvinceId);
 
   const locations = {
     "Lahore": ["DHA Phase 1", "DHA Phase 2", "DHA Phase 3", "Gulberg", "Model Town", "Johar Town", "Cantt", "Garden Town", "Muslim Town", "Faisal Town"],
@@ -90,34 +102,18 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
     "Rawalakot": ["City Center", "Banjosa", "Toli Pir", "Poonch Road"]
   };
 
-  const form = useForm<RequestDemoForm>({
-    resolver: zodResolver(requestDemoSchema),
-    defaultValues: {
-      homeName: "",
-      type: undefined,
-      mobile: "",
-      province: "",
-      city: "",
-      location: "",
-      address: ""
-    }
-  });
-
-  const selectedProvince = form.watch("province");
   const selectedCity = form.watch("city");
-  const availableCities = selectedProvince ? cities[selectedProvince as keyof typeof cities] || [] : [];
   const availableLocations = selectedCity ? locations[selectedCity as keyof typeof locations] || [] : [];
 
-  // Reset dependent fields when parent changes
-  const provinceValue = form.watch("province");
+  // Reset dependent fields when parent changes  
   const cityValue = form.watch("city");
   
   useEffect(() => {
-    if (provinceValue) {
+    if (selectedProvince) {
       form.setValue("city", "");
       form.setValue("location", "");
     }
-  }, [provinceValue, form]);
+  }, [selectedProvince, form]);
   
   useEffect(() => {
     if (cityValue) {
@@ -279,9 +275,12 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
                   <FormItem>
                     <FormLabel>City</FormLabel>
                     <Select 
-                      onValueChange={field.onChange} 
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        form.setValue("location", ""); // Reset location when city changes
+                      }} 
                       value={field.value}
-                      disabled={!selectedProvince}
+                      disabled={!selectedProvince || citiesLoading}
                     >
                       <FormControl>
                         <SelectTrigger data-testid="select-demo-city">
@@ -289,11 +288,28 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {availableCities.map((city) => (
-                          <SelectItem key={city} value={city}>
-                            {city}
+                        {citiesLoading ? (
+                          <SelectItem value="loading" disabled>
+                            <div className="flex items-center gap-2">
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                              Loading cities...
+                            </div>
                           </SelectItem>
-                        ))}
+                        ) : citiesError ? (
+                          <SelectItem value="error" disabled>
+                            Error loading cities
+                          </SelectItem>
+                        ) : cities && cities.length > 0 ? (
+                          cities.map((cityObj) => (
+                            <SelectItem key={cityObj.id} value={cityObj.title}>
+                              {cityObj.title}
+                            </SelectItem>
+                          ))
+                        ) : selectedProvince ? (
+                          <SelectItem value="no-cities" disabled>
+                            No cities found for this province
+                          </SelectItem>
+                        ) : null}
                       </SelectContent>
                     </Select>
                     <FormMessage />

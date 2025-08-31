@@ -4,6 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search, MapPin, Building2, Loader2 } from "lucide-react";
 import { useProvinces } from "@/hooks/useProvinces";
+import { useCities } from "@/hooks/useCities";
 import searchIcon from "@assets/logo/Asset 9.svg";
 
 export default function FindHostel() {
@@ -14,14 +15,11 @@ export default function FindHostel() {
   // Fetch provinces from live API
   const { data: provinces, isLoading: provincesLoading, error: provincesError } = useProvinces();
   
-  const cities = {
-    "Punjab": ["Lahore", "Karachi", "Faisalabad", "Rawalpindi", "Multan", "Gujranwala"],
-    "Sindh": ["Karachi", "Hyderabad", "Sukkur", "Larkana", "Nawabshah"],
-    "Khyber Pakhtunkhwa": ["Peshawar", "Mardan", "Abbottabad", "Kohat", "Bannu"],
-    "Balochistan": ["Quetta", "Gwadar", "Turbat", "Khuzdar", "Sibi"],
-    "Gilgit-Baltistan": ["Gilgit", "Skardu", "Hunza", "Ghanche"],
-    "Azad Jammu and Kashmir": ["Muzaffarabad", "Mirpur", "Kotli", "Rawalakot"]
-  };
+  // Get selected province ID for cities API
+  const selectedProvinceId = provinces?.find(p => p.title === province)?.id;
+  
+  // Fetch cities based on selected province
+  const { data: cities, isLoading: citiesLoading, error: citiesError } = useCities(selectedProvinceId);
   
   const locations = {
     "Lahore": ["DHA", "Gulberg", "Model Town", "Johar Town", "Cantt", "Anarkali"],
@@ -32,7 +30,7 @@ export default function FindHostel() {
   };
 
   const handleSearch = () => {
-    console.log({ province, city, location });
+    console.log({ province, city, location, provinceId: selectedProvinceId });
     // TODO: Implement search functionality
   };
 
@@ -42,7 +40,7 @@ export default function FindHostel() {
     setLocation("");
   };
 
-  const availableCities = province ? cities[province as keyof typeof cities] || [] : [];
+
   const availableLocations = city ? locations[city as keyof typeof locations] || [] : [];
 
   return (
@@ -81,7 +79,15 @@ export default function FindHostel() {
                       <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
                       Province *
                     </label>
-                    <Select value={province} onValueChange={setProvince} disabled={provincesLoading}>
+                    <Select 
+                      value={province} 
+                      onValueChange={(value) => {
+                        setProvince(value);
+                        setCity(""); // Reset city when province changes
+                        setLocation(""); // Reset location when province changes
+                      }} 
+                      disabled={provincesLoading}
+                    >
                       <SelectTrigger className="h-12 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:border-primary focus:border-primary transition-all duration-200 bg-gray-50 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600" data-testid="select-province">
                         <SelectValue placeholder="Choose Province" />
                       </SelectTrigger>
@@ -116,18 +122,38 @@ export default function FindHostel() {
                     </label>
                     <Select 
                       value={city} 
-                      onValueChange={setCity}
-                      disabled={!province}
+                      onValueChange={(value) => {
+                        setCity(value);
+                        setLocation(""); // Reset location when city changes
+                      }} 
+                      disabled={!province || citiesLoading}
                     >
                       <SelectTrigger className="h-12 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:border-accent focus:border-accent transition-all duration-200 bg-gray-50 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed" data-testid="select-city">
                         <SelectValue placeholder={!province ? "Select Province first" : "Choose City"} />
                       </SelectTrigger>
                       <SelectContent>
-                        {availableCities.map((cty) => (
-                          <SelectItem key={cty} value={cty}>
-                            {cty}
+                        {citiesLoading ? (
+                          <SelectItem value="loading" disabled>
+                            <div className="flex items-center gap-2">
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                              Loading cities...
+                            </div>
                           </SelectItem>
-                        ))}
+                        ) : citiesError ? (
+                          <SelectItem value="error" disabled>
+                            Error loading cities
+                          </SelectItem>
+                        ) : cities && cities.length > 0 ? (
+                          cities.map((cityObj) => (
+                            <SelectItem key={cityObj.id} value={cityObj.title}>
+                              {cityObj.title}
+                            </SelectItem>
+                          ))
+                        ) : province ? (
+                          <SelectItem value="no-cities" disabled>
+                            No cities found for this province
+                          </SelectItem>
+                        ) : null}
                       </SelectContent>
                     </Select>
                   </div>

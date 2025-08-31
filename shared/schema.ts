@@ -35,5 +35,28 @@ export const provincesResponseSchema = z.object({
   })),
 });
 
+// City API types
+export const citySchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  province_id: z.number(),
+});
+
+export const citiesResponseSchema = z.object({
+  items: z.array(citySchema),
+  hasMore: z.boolean().optional(),
+  limit: z.number().optional(),
+  offset: z.number().optional(),
+  count: z.number().optional(),
+  first: z.object({
+    $ref: z.string(),
+  }).optional(),
+  next: z.object({
+    $ref: z.string(),
+  }).optional(),
+});
+
 export type Province = z.infer<typeof provinceSchema>;
 export type ProvincesResponse = z.infer<typeof provincesResponseSchema>;
+export type City = z.infer<typeof citySchema>;
+export type CitiesResponse = z.infer<typeof citiesResponseSchema>;

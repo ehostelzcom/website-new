@@ -1,0 +1,135 @@
+{
+    "items": [
+        {
+            "id": 81,
+            "title": "Lakki Marwat",
+            "province_id": 3
+        },
+        {
+            "id": 82,
+            "title": "Shangla",
+            "province_id": 3
+        },
+        {
+            "id": 84,
+            "title": "Upper Chitral",
+            "province_id": 3
+        },
+        {
+            "id": 88,
+            "title": "Orakzai",
+            "province_id": 3
+        },
+        {
+            "id": 93,
+            "title": "North Waziristan",
+            "province_id": 3
+        },
+        {
+            "id": 97,
+            "title": "Sahiwal",
+            "province_id": 1
+        },
+        {
+            "id": 98,
+            "title": "Wah Cantonment",
+            "province_id": 1
+        },
+        {
+            "id": 100,
+            "title": "Chiniot",
+            "province_id": 1
+        },
+        {
+            "id": 102,
+            "title": "Hafizabad",
+            "province_id": 1
+        },
+        {
+            "id": 103,
+            "title": "Khanewal",
+            "province_id": 1
+        },
+        {
+            "id": 105,
+            "title": "Mandi Bahauddin",
+            "province_id": 1
+        },
+        {
+            "id": 106,
+            "title": "Pakpattan",
+            "province_id": 1
+        },
+        {
+            "id": 109,
+            "title": "Jhelum",
+            "province_id": 1
+        },
+        {
+            "id": 110,
+            "title": "Bahawalnagar",
+            "province_id": 1
+        },
+        {
+            "id": 112,
+            "title": "Attock",
+            "province_id": 1
+        },
+        {
+            "id": 114,
+            "title": "Bhakkar",
+            "province_id": 1
+        },
+        {
+            "id": 117,
+            "title": "Kharian",
+            "province_id": 1
+        },
+        {
+            "id": 118,
+            "title": "Murree",
+            "province_id": 1
+        },
+        {
+            "id": 119,
+            "title": "Shakargarh",
+            "province_id": 1
+        },
+        {
+            "id": 120,
+            "title": "Jaranwala",
+            "province_id": 1
+        },
+        {
+            "id": 123,
+            "title": "Shorkot",
+            "province_id": 1
+        },
+        {
+            "id": 124,
+            "title": "Mianwali",
+            "province_id": 1
+        },
+        {
+            "id": 195,
+            "title": "Bolhari",
+            "province_id": 2
+        },
+        {
+            "id": 196,
+            "title": "Umerkot",
+            "province_id": 2
+        },
+        {
+            "id": 197,
+            "title": "Pano Akil",
+            "province_id": 2
+        }
+    ],
+    "first": {
+        "$ref": "http://ehostelz.com:8890/ords/jee_management_system/web/api/cities"
+    },
+    "next": {
+        "$ref": "http://ehostelz.com:8890/ords/jee_management_system/web/api/cities?page=1"
+    }
+}
