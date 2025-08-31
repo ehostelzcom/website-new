@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Bed, User, MapPin, Loader2, AlertCircle } from "lucide-react";
+import { Bed, User, MapPin, Loader2, AlertCircle, MessageCircle, Phone } from "lucide-react";
 import type { Hostel } from "@/pages/SearchResults";
 
 // Vacant seat data structure
@@ -60,6 +60,7 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange }: VacantS
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       const mockSeats: VacantSeat[] = [
+        // Ground Floor Room 1 - 6 seats
         {
           room_title: "GF-R01",
           bed_title: "B01",
@@ -73,11 +74,61 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange }: VacantS
           hostel_id: hostelId
         },
         {
+          room_title: "GF-R01",
+          bed_title: "B03",
+          seat_title: "GF-R01-B03",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "GF-R01",
+          bed_title: "B04",
+          seat_title: "GF-R01-B04",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "GF-R01",
+          bed_title: "B05",
+          seat_title: "GF-R01-B05",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "GF-R01",
+          bed_title: "B06",
+          seat_title: "GF-R01-B06",
+          hostel_id: hostelId
+        },
+        // Ground Floor Room 2 - 5 seats
+        {
           room_title: "GF-R02",
           bed_title: "B01",
           seat_title: "GF-R02-B01",
           hostel_id: hostelId
         },
+        {
+          room_title: "GF-R02",
+          bed_title: "B02",
+          seat_title: "GF-R02-B02",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "GF-R02",
+          bed_title: "B03",
+          seat_title: "GF-R02-B03",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "GF-R02",
+          bed_title: "B04",
+          seat_title: "GF-R02-B04",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "GF-R02",
+          bed_title: "B05",
+          seat_title: "GF-R02-B05",
+          hostel_id: hostelId
+        },
+        // First Floor Room 3 - 7 seats
         {
           room_title: "FF-R03",
           bed_title: "B01",
@@ -86,8 +137,38 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange }: VacantS
         },
         {
           room_title: "FF-R03",
+          bed_title: "B02",
+          seat_title: "FF-R03-B02",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "FF-R03",
           bed_title: "B03",
           seat_title: "FF-R03-B03",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "FF-R03",
+          bed_title: "B04",
+          seat_title: "FF-R03-B04",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "FF-R03",
+          bed_title: "B05",
+          seat_title: "FF-R03-B05",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "FF-R03",
+          bed_title: "B06",
+          seat_title: "FF-R03-B06",
+          hostel_id: hostelId
+        },
+        {
+          room_title: "FF-R03",
+          bed_title: "B07",
+          seat_title: "FF-R03-B07",
           hostel_id: hostelId
         }
       ];
@@ -101,10 +182,28 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange }: VacantS
     }
   };
 
-  const handleSeatSelect = (seat: VacantSeat) => {
-    // TODO: Handle seat selection/booking
-    console.log("Selected seat:", seat);
-    // You can add booking functionality here in the future
+  // WhatsApp booking function
+  const handleWhatsAppBooking = (seat: VacantSeat) => {
+    if (!hostel) return;
+    
+    const message = `Hello! I'm interested in booking a seat at ${hostel.name}.
+
+📍 Hostel: ${hostel.name}
+🏠 Address: ${hostel.address}
+🛏️ Room: ${seat.room_title}
+🛏️ Bed: ${seat.bed_title}
+🎯 Seat: ${seat.seat_title}
+
+Please let me know about availability and booking process. Thank you!`;
+    
+    // Format mobile number for WhatsApp (remove any formatting)
+    const mobileNumber = hostel.mobile.replace(/[^0-9]/g, '');
+    
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${mobileNumber}?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -151,37 +250,50 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange }: VacantS
                   Available Seats ({vacantSeats.length} total)
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Click on any seat to select it
+                  Click "Book Now" to contact hostel via WhatsApp
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-6">
                 {Object.entries(groupedSeats).map(([roomTitle, seats]) => (
-                  <Card key={roomTitle} className="border-2 hover:border-primary/20 transition-colors">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-base flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-primary" />
-                        Room: {roomTitle}
-                        <Badge variant="outline" className="ml-auto">
+                  <Card key={roomTitle} className="border-2 border-primary/20 bg-gradient-to-r from-white to-primary/5 dark:from-gray-800 dark:to-primary/10">
+                    <CardHeader className="pb-4">
+                      <CardTitle className="text-lg flex items-center gap-3">
+                        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                          <MapPin className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-gray-900 dark:text-white">Room: {roomTitle}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">Available beds for booking</p>
+                        </div>
+                        <Badge variant="default" className="ml-auto bg-primary">
                           {seats.length} seat{seats.length !== 1 ? 's' : ''}
                         </Badge>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                         {seats.map((seat) => (
-                          <Button
-                            key={seat.seat_title}
-                            variant="outline"
-                            size="sm"
-                            className="h-auto p-3 flex flex-col items-center gap-1 hover:bg-primary hover:text-white transition-colors"
-                            onClick={() => handleSeatSelect(seat)}
-                            data-testid={`button-seat-${seat.seat_title}`}
-                          >
-                            <Bed className="w-4 h-4" />
-                            <span className="text-xs font-medium">{seat.bed_title}</span>
-                            <span className="text-xs text-gray-500">{seat.seat_title}</span>
-                          </Button>
+                          <div key={seat.seat_title} className="bg-white dark:bg-gray-700 rounded-lg border-2 border-gray-200 dark:border-gray-600 p-3 hover:border-primary/50 transition-all duration-200 hover:shadow-md">
+                            <div className="flex flex-col items-center gap-2">
+                              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                                <Bed className="w-5 h-5 text-primary" />
+                              </div>
+                              <div className="text-center">
+                                <p className="font-semibold text-sm text-gray-900 dark:text-white">{seat.bed_title}</p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">{seat.seat_title}</p>
+                              </div>
+                              <Button
+                                size="sm"
+                                onClick={() => handleWhatsAppBooking(seat)}
+                                className="w-full bg-green-600 hover:bg-green-700 text-white text-xs py-2 gap-1"
+                                data-testid={`button-book-${seat.seat_title}`}
+                              >
+                                <MessageCircle className="w-3 h-3" />
+                                Book Now
+                              </Button>
+                            </div>
+                          </div>
                         ))}
                       </div>
                     </CardContent>
@@ -202,7 +314,11 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange }: VacantS
           )}
         </div>
 
-        <div className="flex justify-end pt-4 border-t">
+        <div className="flex justify-between items-center pt-4 border-t">
+          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+            <Phone className="w-4 h-4" />
+            <span>Contact: {hostel?.mobile}</span>
+          </div>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Close
           </Button>
