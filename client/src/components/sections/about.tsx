@@ -1,7 +1,25 @@
-import { CheckCircle, Target, Users, Clock, Shield, Calendar, TrendingUp, BarChart3, DollarSign, Smartphone, Monitor } from "lucide-react";
+import { CheckCircle, Target, Users, Clock, Shield, Calendar, TrendingUp, BarChart3, DollarSign, Smartphone, Monitor, Cloud } from "lucide-react";
 
 export default function About() {
   const benefits = [
+    {
+      icon: Cloud,
+      title: "100% Cloud-Based",
+      description: "Access anywhere, anytime with secure cloud infrastructure. No server maintenance required!",
+      color: "bg-blue-500/10 text-blue-600"
+    },
+    {
+      icon: Shield,
+      title: "🔒 Security",
+      description: "Enterprise-grade encryption protects your sensitive student and financial data 24/7",
+      color: "bg-green-500/10 text-green-600"
+    },
+    {
+      icon: Smartphone,
+      title: "📱 Mobile Optimized",
+      description: "Perfect experience on phones, tablets, and desktops. Manage hostels on-the-go!",
+      color: "bg-purple-500/10 text-purple-600"
+    },
     {
       icon: Target,
       title: "Centralized Management",
