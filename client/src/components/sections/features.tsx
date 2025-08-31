@@ -15,10 +15,34 @@ import {
   CheckCircle,
   BarChart3,
   TrendingUp,
-  Monitor
+  Monitor,
+  Cloud,
+  Shield,
+  Smartphone
 } from "lucide-react";
 
 const features = [
+  {
+    icon: Cloud,
+    title: "100% Cloud-Based Platform",
+    description: "Access your hostel management system anywhere, anytime with our secure cloud infrastructure. No servers to maintain, automatic updates, and 99.9% uptime guaranteed.",
+    color: "text-blue-600",
+    bgColor: "bg-blue-600"
+  },
+  {
+    icon: Shield,
+    title: "Bank-Level Data Security",
+    description: "Your sensitive student and financial data is protected with enterprise-grade encryption, secure backups, and compliance with international data protection standards.",
+    color: "text-green-600",
+    bgColor: "bg-green-600"
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile Responsive Design",
+    description: "Perfect experience across all devices - smartphones, tablets, and desktops. Manage your hostels on-the-go with our mobile-optimized interface.",
+    color: "text-purple-600",
+    bgColor: "bg-purple-600"
+  },
   {
     icon: LayoutDashboard,
     title: "Multi-Hostel Dashboard",

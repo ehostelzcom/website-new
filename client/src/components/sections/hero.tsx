@@ -45,7 +45,34 @@ export default function Hero() {
         </div>
         
         <div className="w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 px-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-3 px-2">
+            {/* Cloud Base */}
+            <div className="group bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-8 shadow-md border-2 border-blue-200 dark:border-blue-600 hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-300 min-h-[160px] flex flex-col">
+              <div className="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center mb-5 mx-auto group-hover:bg-blue-500/30 transition-colors duration-300">
+                <div className="text-2xl">☁️</div>
+              </div>
+              <h3 className="font-semibold text-xl mb-3 text-center text-blue-600 dark:text-blue-400">100% Cloud-Based</h3>
+              <p className="text-base text-gray-700 dark:text-gray-300 text-center leading-relaxed flex-1">Access anywhere, anytime with secure cloud infrastructure. No server maintenance required!</p>
+            </div>
+
+            {/* Data Security */}
+            <div className="group bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-8 shadow-md border-2 border-green-200 dark:border-green-600 hover:shadow-xl hover:border-green-300 dark:hover:border-green-500 transition-all duration-300 min-h-[160px] flex flex-col">
+              <div className="w-14 h-14 bg-green-500/20 rounded-xl flex items-center justify-center mb-5 mx-auto group-hover:bg-green-500/30 transition-colors duration-300">
+                <div className="text-2xl">🔒</div>
+              </div>
+              <h3 className="font-semibold text-xl mb-3 text-center text-green-600 dark:text-green-400">Bank-Level Security</h3>
+              <p className="text-base text-gray-700 dark:text-gray-300 text-center leading-relaxed flex-1">Enterprise-grade encryption protects your sensitive student and financial data 24/7</p>
+            </div>
+
+            {/* Mobile Responsive */}
+            <div className="group bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl p-8 shadow-md border-2 border-purple-200 dark:border-purple-600 hover:shadow-xl hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-300 min-h-[160px] flex flex-col">
+              <div className="w-14 h-14 bg-purple-500/20 rounded-xl flex items-center justify-center mb-5 mx-auto group-hover:bg-purple-500/30 transition-colors duration-300">
+                <div className="text-2xl">📱</div>
+              </div>
+              <h3 className="font-semibold text-xl mb-3 text-center text-purple-600 dark:text-purple-400">Mobile Optimized</h3>
+              <p className="text-base text-gray-700 dark:text-gray-300 text-center leading-relaxed flex-1">Perfect experience on phones, tablets, and desktops. Manage hostels on-the-go!</p>
+            </div>
+
             <div className="group bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-primary/30 transition-all duration-300 min-h-[160px] flex flex-col">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-5 mx-auto group-hover:bg-primary/20 transition-colors duration-300">
                 <div className="text-2xl">🏢</div>
