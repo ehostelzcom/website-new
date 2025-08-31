@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Bed, User, MapPin, Loader2, AlertCircle, MessageCircle, Phone } from "lucide-react";
 import type { Hostel } from "@/pages/SearchResults";
+import asset9 from "@assets/logo/Asset 9.svg";
 
 // Vacant seat data structure
 export interface VacantSeat {
@@ -260,7 +261,7 @@ Please let me know about availability and booking process. Thank you!`;
                     <CardHeader className="pb-4">
                       <CardTitle className="text-lg flex items-center gap-3">
                         <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                          <MapPin className="w-5 h-5 text-primary" />
+                          <img src={asset9} alt="Room icon" className="w-5 h-5" />
                         </div>
                         <div>
                           <h4 className="font-bold text-gray-900 dark:text-white">Room: {roomTitle}</h4>
