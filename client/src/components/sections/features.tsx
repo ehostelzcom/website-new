@@ -14,35 +14,10 @@ import {
   Star,
   CheckCircle,
   BarChart3,
-  TrendingUp,
-  Monitor,
-  Cloud,
-  Shield,
-  Smartphone
+  TrendingUp
 } from "lucide-react";
 
 const features = [
-  {
-    icon: Cloud,
-    title: "100% Cloud-Based Platform",
-    description: "Access your hostel management system anywhere, anytime with our secure cloud infrastructure. No servers to maintain, automatic updates, and 99.9% uptime guaranteed.",
-    color: "text-blue-600",
-    bgColor: "bg-blue-600"
-  },
-  {
-    icon: Shield,
-    title: "Bank-Level Data Security",
-    description: "Your sensitive student and financial data is protected with enterprise-grade encryption, secure backups, and compliance with international data protection standards.",
-    color: "text-green-600",
-    bgColor: "bg-green-600"
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile Responsive Design",
-    description: "Perfect experience across all devices - smartphones, tablets, and desktops. Manage your hostels on-the-go with our mobile-optimized interface.",
-    color: "text-purple-600",
-    bgColor: "bg-purple-600"
-  },
   {
     icon: LayoutDashboard,
     title: "Multi-Hostel Dashboard",
@@ -163,31 +138,30 @@ export default function Features() {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
-              <div key={index} className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg shadow-sm hover:shadow-md hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-200" data-testid={`feature-card-${index}`}>
-                <div className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-white dark:bg-gray-600 rounded-full shadow-sm border-2 border-gray-100 dark:border-gray-500 flex items-center justify-center">
-                        <IconComponent className={`${feature.color}`} size={20} />
+              <div key={index} className="group relative overflow-hidden bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg hover:shadow-2xl hover:border-primary/20 dark:hover:border-primary/30 transition-all duration-300 hover:-translate-y-2" data-testid={`feature-card-${index}`}>
+                <div className="p-8">
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div className="relative">
+                      <div className={`w-16 h-16 ${feature.bgColor} rounded-2xl shadow-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300`}>
+                        <IconComponent className="text-white" size={28} />
                       </div>
+                      <div className={`absolute -inset-2 ${feature.bgColor} rounded-2xl opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-300`}></div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2 leading-tight" data-testid={`feature-title-${index}`}>
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300" data-testid={`feature-title-${index}`}>
                         {feature.title}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed" data-testid={`feature-description-${index}`}>
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed" data-testid={`feature-description-${index}`}>
                         {feature.description}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className="absolute top-0 right-0 w-16 h-16 opacity-5">
-                  <IconComponent className="w-full h-full text-gray-900 dark:text-white" />
-                </div>
+                <div className={`absolute bottom-0 left-0 right-0 h-1 ${feature.bgColor} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>
               </div>
             );
           })}
