@@ -34,11 +34,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Proxy route for cities API with optional province filtering
-  app.get("/api/cities", async (req, res) => {
-    console.log("API call received for cities");
+  // Proxy route for cities API with province_id as path parameter
+  app.get("/api/cities/:province_id", async (req, res) => {
+    console.log("API call received for cities with province_id:", req.params.province_id);
     try {
-      const response = await axios.get("http://ehostelz.com:8890/ords/jee_management_system/web/api/cities", {
+      const provinceId = req.params.province_id;
+      
+      // Call Oracle APEX API with province_id in URL path
+      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/cities/${provinceId}`, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -48,13 +51,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log("Oracle APEX cities response count:", response.data.items?.length);
       
-      let cities = response.data.items || [];
-      
-      // Filter by province_id if provided
-      const provinceId = req.query.province_id;
-      if (provinceId) {
-        cities = cities.filter((city: any) => city.province_id === parseInt(provinceId as string));
-      }
+      const cities = response.data.items || [];
       
       // Sort cities alphabetically
       const sortedCities = cities.sort((a: any, b: any) => a.title.localeCompare(b.title));

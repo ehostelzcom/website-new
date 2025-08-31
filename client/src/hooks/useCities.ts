@@ -6,10 +6,12 @@ export function useCities(provinceId?: number) {
   return useQuery<City[], Error>({
     queryKey: ['cities', provinceId],
     queryFn: async () => {
+      if (!provinceId) {
+        return []; // Return empty array if no province selected
+      }
+      
       try {
-        const params = provinceId ? { province_id: provinceId } : {};
-        const response = await axios.get<City[]>("/api/cities", {
-          params,
+        const response = await axios.get<City[]>(`/api/cities/${provinceId}`, {
           timeout: 10000,
         });
         return response.data;
@@ -20,7 +22,7 @@ export function useCities(provinceId?: number) {
         throw new Error('Failed to fetch cities');
       }
     },
-    enabled: true, // Always enable, filter on backend
+    enabled: !!provinceId, // Only enable when provinceId is provided
     staleTime: 1000 * 60 * 30, // Cache for 30 minutes
     retry: 3,
     retryDelay: 1000,
