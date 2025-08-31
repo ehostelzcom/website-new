@@ -2,7 +2,6 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import TopSlider from "@/components/sections/top-slider";
 import Hero from "@/components/sections/hero";
-import KeyAdvantages from "@/components/sections/key-advantages";
 import FindHostel from "@/components/sections/find-hostel";
 import Features from "@/components/sections/features";
 import Pricing from "@/components/sections/pricing";
@@ -17,7 +16,6 @@ export default function Home() {
       <TopSlider />
       <main>
         <Hero />
-        <KeyAdvantages />
         <FindHostel />
         <Features />
         <Pricing />
