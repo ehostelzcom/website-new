@@ -274,6 +274,8 @@ export default function SearchResults() {
                       key={hostel.id}
                       hostel={hostel}
                       index={index}
+                      provinces={provinces || []}
+                      cities={cities || []}
                       onClick={() => handleHostelClick(hostel)}
                     />
                   ))}

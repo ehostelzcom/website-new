@@ -6,15 +6,32 @@ import type { Hostel } from "@/pages/SearchResults";
 import asset7 from "@assets/logo/Asset 7.svg";
 import asset8 from "@assets/logo/Asset 8.svg";
 
+interface Province {
+  id: number;
+  title: string;
+}
+
+interface City {
+  id: number;
+  title: string;
+  province_id: number;
+}
+
 interface HostelCardProps {
   hostel: Hostel;
   index: number;
+  provinces: Province[];
+  cities: City[];
   onClick: () => void;
 }
 
-export default function HostelCard({ hostel, index, onClick }: HostelCardProps) {
+export default function HostelCard({ hostel, index, provinces, cities, onClick }: HostelCardProps) {
   // Alternate between Asset 7 and Asset 8 based on index
   const logo = index % 2 === 0 ? asset7 : asset8;
+  
+  // Get province and city names
+  const province = provinces.find(p => p.id === hostel.province_id);
+  const city = cities.find(c => c.id === hostel.city_id);
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 hover:border-primary/30 bg-white dark:bg-gray-800 rounded-xl overflow-hidden" onClick={onClick}>
       <CardHeader className="p-5">
@@ -37,12 +54,17 @@ export default function HostelCard({ hostel, index, onClick }: HostelCardProps) 
             <h3 className="font-bold text-lg text-gray-900 dark:text-white group-hover:text-primary transition-colors mb-2">
               {hostel.name}
             </h3>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 mb-2">
               <div className="flex items-center gap-1">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                 <span className="text-sm font-medium text-yellow-600 dark:text-yellow-400">4.5</span>
               </div>
               <span className="text-xs text-gray-500 dark:text-gray-400">(24 reviews)</span>
+            </div>
+            {/* Province and City */}
+            <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+              <MapPin className="w-3 h-3" />
+              <span>{city?.title || 'Unknown City'}, {province?.title || 'Unknown Province'}</span>
             </div>
           </div>
         </div>
