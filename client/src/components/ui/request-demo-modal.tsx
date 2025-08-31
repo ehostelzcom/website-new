@@ -26,6 +26,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SearchableSelect } from "@/components/ui/searchable-select";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
@@ -33,6 +34,8 @@ const requestDemoSchema = z.object({
   homeName: z.string().min(2, "Hostel name must be at least 2 characters"),
   type: z.enum(["Boys", "Girls"], { required_error: "Please select hostel type" }),
   mobile: z.string().min(11, "Please enter a valid mobile number"),
+  whatsapp: z.string().min(11, "Please enter a valid WhatsApp number"),
+  sameAsMobile: z.boolean().optional(),
   province: z.string().min(1, "Please select a province"),
   city: z.string().min(1, "Please select a city"),
   location: z.string().optional(), // Make location optional
@@ -59,6 +62,8 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
       homeName: "",
       type: undefined,
       mobile: "",
+      whatsapp: "",
+      sameAsMobile: true, // Default to true for convenience
       province: "",
       city: "",
       location: "",
@@ -93,6 +98,24 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
       form.setValue("location", "");
     }
   }, [selectedCity, form]);
+
+  // Sync mobile and WhatsApp numbers
+  const mobileValue = form.watch("mobile");
+  const sameAsMobile = form.watch("sameAsMobile");
+
+  useEffect(() => {
+    if (sameAsMobile && mobileValue) {
+      form.setValue("whatsapp", mobileValue);
+    } else if (sameAsMobile && !mobileValue) {
+      form.setValue("whatsapp", "");
+    }
+  }, [mobileValue, sameAsMobile, form]);
+
+  useEffect(() => {
+    if (sameAsMobile) {
+      form.setValue("whatsapp", mobileValue || "");
+    }
+  }, [sameAsMobile, mobileValue, form]);
 
   const onSubmit = async (data: RequestDemoForm) => {
     setIsSubmitting(true);
@@ -176,20 +199,64 @@ export default function RequestDemoModal({ children }: RequestDemoModalProps) {
               />
             </div>
 
+            {/* Row 2: Mobile and WhatsApp */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="mobile"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mobile Number</FormLabel>
+                    <FormControl>
+                      <Input 
+                        placeholder="03001234567"
+                        data-testid="input-mobile"
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="whatsapp"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>WhatsApp Number</FormLabel>
+                    <FormControl>
+                      <Input 
+                        placeholder="03001234567"
+                        data-testid="input-whatsapp"
+                        disabled={sameAsMobile}
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {/* Same as Mobile Checkbox */}
             <FormField
               control={form.control}
-              name="mobile"
+              name="sameAsMobile"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Mobile Number</FormLabel>
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                   <FormControl>
-                    <Input 
-                      placeholder="03001234567"
-                      data-testid="input-mobile"
-                      {...field} 
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      data-testid="checkbox-same-mobile"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <div className="space-y-1 leading-none">
+                    <FormLabel className="text-sm font-normal cursor-pointer">
+                      WhatsApp number is same as mobile number
+                    </FormLabel>
+                  </div>
                 </FormItem>
               )}
             />
