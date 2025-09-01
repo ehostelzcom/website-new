@@ -16,9 +16,9 @@ export default function Home() {
       <TopSlider />
       <main>
         <Hero />
-        <FindHostel />
         <Features />
         <Pricing />
+        <FindHostel />
         <About />
         <Contact />
       </main>
