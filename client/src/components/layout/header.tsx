@@ -87,14 +87,16 @@ export default function Header() {
           </nav>
           
           <div className="flex items-center space-x-6">
-            <RequestDemoModal>
-              <Button 
-                className="bg-gradient-to-r from-[#004e89] to-[#0066b3] hover:from-[#003a6b] hover:to-[#004e89] text-white font-semibold px-6 py-2.5 shadow-lg shadow-[#004e89]/25 hover:shadow-xl hover:shadow-[#004e89]/30 transition-all duration-300 hover:scale-105 border border-white/10 backdrop-blur-sm"
-                data-testid="button-request-demo-header"
-              >
-                Request Demo
-              </Button>
-            </RequestDemoModal>
+            <div className="hidden md:block">
+              <RequestDemoModal>
+                <Button 
+                  className="bg-gradient-to-r from-[#004e89] to-[#0066b3] hover:from-[#003a6b] hover:to-[#004e89] text-white font-semibold px-6 py-2.5 shadow-lg shadow-[#004e89]/25 hover:shadow-xl hover:shadow-[#004e89]/30 transition-all duration-300 hover:scale-105 border border-white/10 backdrop-blur-sm"
+                  data-testid="button-request-demo-header"
+                >
+                  Request Demo
+                </Button>
+              </RequestDemoModal>
+            </div>
             
             {/* Modern Mobile menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
