@@ -125,6 +125,102 @@ export default function About() {
           </div>
         </div>
 
+        {/* Client Support Services Section */}
+        <div className="bg-gradient-to-br from-accent/5 via-white to-primary/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-800 py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h3 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent" data-testid="client-support-title">
+                Complete Client Support
+              </h3>
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed" data-testid="client-support-subtitle">
+                We don't just provide software – we ensure your success with comprehensive demo and training services
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Software Demo */}
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-gray-50 to-primary/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid="software-demo">
+                {/* Background Decoration */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
+                
+                {/* Icon */}
+                <div className="relative z-10 mb-6">
+                  <div className="w-20 h-20 rounded-2xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
+                    <Monitor className="w-10 h-10" />
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <h4 className="font-bold text-2xl mb-4 text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300" data-testid="demo-title">
+                    🎯 Free Software Demo
+                  </h4>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg mb-4" data-testid="demo-description">
+                    Experience ehostelz.com in action with a personalized live demo tailored to your hostel's specific needs and requirements.
+                  </p>
+                  <ul className="text-gray-600 dark:text-gray-400 space-y-2">
+                    <li className="flex items-center">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                      Live walkthrough of all features
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                      Customized to your hostel setup
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                      Q&A session with our experts
+                    </li>
+                  </ul>
+                </div>
+                
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
+              </div>
+
+              {/* Training Services */}
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-gray-50 to-accent/5 dark:from-gray-800 dark:via-gray-750 dark:to-gray-700 p-8 shadow-2xl border-0 hover:shadow-3xl hover:-translate-y-2 transition-all duration-500" data-testid="training-services">
+                {/* Background Decoration */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
+                
+                {/* Icon */}
+                <div className="relative z-10 mb-6">
+                  <div className="w-20 h-20 rounded-2xl bg-accent/10 text-accent flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
+                    <Users className="w-10 h-10" />
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <h4 className="font-bold text-2xl mb-4 text-gray-900 dark:text-white group-hover:text-accent transition-colors duration-300" data-testid="training-title">
+                    📚 Complete Training Program
+                  </h4>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg mb-4" data-testid="training-description">
+                    Comprehensive hands-on training to ensure your team masters every aspect of the ehostelz.com platform.
+                  </p>
+                  <ul className="text-gray-600 dark:text-gray-400 space-y-2">
+                    <li className="flex items-center">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                      Step-by-step system walkthrough
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                      Best practices & workflows
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                      Ongoing support & assistance
+                    </li>
+                  </ul>
+                </div>
+                
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-accent via-primary to-accent opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Stats Section - Full Width */}
         <div className="py-16 px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
