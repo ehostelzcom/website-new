@@ -14,7 +14,7 @@ const plans = [
     hostels: 1,
     features: [
       "✅ 100% Cloud-Based Access",
-      "🔒 Bank-Level Data Security",
+      "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "1 Hostel",
       "50 Active Seats / month",
@@ -32,7 +32,7 @@ const plans = [
     hostels: 1,
     features: [
       "✅ 100% Cloud-Based Access",
-      "🔒 Bank-Level Data Security",
+      "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "1 Hostel",
       "100 Active Seats / month",
@@ -50,7 +50,7 @@ const plans = [
     hostels: 1,
     features: [
       "✅ 100% Cloud-Based Access",
-      "🔒 Bank-Level Data Security",
+      "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "1 Hostel",
       "500 Active Seats / month",
@@ -68,7 +68,7 @@ const plans = [
     hostels: 3,
     features: [
       "✅ 100% Cloud-Based Access",
-      "🔒 Bank-Level Data Security",
+      "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "Up to 3 Hostels",
       "100 Active Seats per hostel",
@@ -86,7 +86,7 @@ const plans = [
     hostels: 5,
     features: [
       "✅ 100% Cloud-Based Access",
-      "🔒 Bank-Level Data Security",
+      "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "Up to 5 Hostels",
       "200 Active Seats per hostel",
@@ -104,7 +104,7 @@ const plans = [
     hostels: "Unlimited",
     features: [
       "✅ 100% Cloud-Based Access",
-      "🔒 Bank-Level Data Security",
+      "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "Unlimited Hostels",
       "Unlimited Seats / month",
