@@ -222,7 +222,7 @@ export default function Contact() {
                       <Mail className="text-primary mt-1 mr-3 h-5 w-5 flex-shrink-0" />
                       <div>
                         <div className="font-semibold text-gray-900 dark:text-white">Email</div>
-                        <div className="text-gray-600 dark:text-gray-400">support@ehostelz.com</div>
+                        <div className="text-gray-600 dark:text-gray-400">ehostelz.com@gmail.com</div>
                       </div>
                     </div>
                     <div className="flex items-start p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-testid="contact-phone">
