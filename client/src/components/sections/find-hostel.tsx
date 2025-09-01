@@ -72,7 +72,7 @@ export default function FindHostel() {
       {/* Enhanced Search Form */}
       <div className="w-full">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
               {/* Form Header */}
               <div className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 border-b border-gray-100 dark:border-gray-700 p-4">
@@ -83,8 +83,8 @@ export default function FindHostel() {
               </div>
               
               {/* Enhanced Form */}
-              <div className="p-6">
-                <div className="grid md:grid-cols-4 gap-4 mb-6">
+              <div className="p-8">
+                <div className="grid md:grid-cols-4 gap-6 mb-6">
                   {/* Province */}
                   <div className="space-y-2">
                     <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide flex items-center gap-2">
