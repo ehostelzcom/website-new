@@ -29,9 +29,9 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
   // Alternate between Asset 7 and Asset 8 based on index
   const logo = index % 2 === 0 ? asset7 : asset8;
   
-  // Get province and city names
-  const province = provinces.find(p => p.id === hostel.province_id);
-  const city = cities.find(c => c.id === hostel.city_id);
+  // Province and city names are already strings in the API response
+  const provinceName = hostel.province;
+  const cityName = hostel.city_name;
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 hover:border-primary/30 bg-white dark:bg-gray-800 rounded-xl overflow-hidden hover:-translate-y-1" onClick={onClick}>
       <div className="p-6">
@@ -41,15 +41,15 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
             <div className="relative">
               <img 
                 src={logo} 
-                alt={`${hostel.name} logo`}
+                alt={`${hostel.hostel_name} logo`}
                 className="w-20 h-20 rounded-xl object-cover border-2 border-gray-200 dark:border-gray-600 group-hover:scale-105 transition-transform duration-200 shadow-md"
               />
               <div className="absolute -top-2 -right-2">
                 <Badge 
-                  variant={hostel.type === "Boys" ? "default" : "secondary"}
+                  variant={hostel.hostel_type.toUpperCase() === "BOYS" ? "default" : "secondary"}
                   className="text-xs font-semibold shadow-sm"
                 >
-                  {hostel.type}
+                  {hostel.hostel_type}
                 </Badge>
               </div>
             </div>
@@ -57,19 +57,19 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
             <div className="flex-1">
               <div className="mb-3">
                 <h3 className="font-bold text-2xl text-gray-900 dark:text-white group-hover:text-primary transition-colors mb-2">
-                  {hostel.name}
+                  {hostel.hostel_name}
                 </h3>
                 <div className="flex items-center gap-4 mb-2">
                   <div className="flex items-center gap-1">
                     <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <span className="text-base font-semibold text-yellow-600 dark:text-yellow-400">4.5</span>
+                    <span className="text-base font-semibold text-yellow-600 dark:text-yellow-400">{hostel.rating}</span>
                     <span className="text-sm text-gray-500 dark:text-gray-400">(24 reviews)</span>
                   </div>
                 </div>
                 {/* Location */}
                 <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                   <MapPin className="w-4 h-4 text-primary" />
-                  <span className="font-medium">{city?.title || 'Unknown City'}, {province?.title || 'Unknown Province'}</span>
+                  <span className="font-medium">{hostel.location}, {cityName}, {provinceName}</span>
                 </div>
               </div>
               
@@ -93,11 +93,11 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                   {hostel.mobile}
                 </span>
               </div>
-              {hostel.phone && (
+              {hostel.whatsapp && hostel.whatsapp !== hostel.mobile && (
                 <div className="flex items-center gap-2 justify-end">
                   <Phone className="w-4 h-4 text-gray-500" />
                   <span className="text-sm text-gray-600 dark:text-gray-400">
-                    {hostel.phone}
+                    {hostel.whatsapp} (WhatsApp)
                   </span>
                 </div>
               )}
@@ -107,7 +107,7 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
             <Button 
               size="lg"
               className="group-hover:bg-primary group-hover:text-white bg-primary/10 text-primary hover:bg-primary hover:text-white border-primary/20 hover:border-primary transition-all duration-200 px-8 py-3 text-base font-semibold shadow-md hover:shadow-lg"
-              data-testid={`button-view-seats-${hostel.id}`}
+              data-testid={`button-view-seats-${hostel.hostel_id || 0}`}
             >
               <Bed className="w-5 h-5 mr-2" />
               Check Vacant Seats

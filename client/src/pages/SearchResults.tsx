@@ -13,18 +13,19 @@ import { useLocations } from "@/hooks/useLocations";
 import HostelCard from "../components/ui/hostel-card";
 import VacantSeatsModal from "../components/ui/vacant-seats-modal";
 
-// Hostel type definition
+// Hostel type definition based on API response
 export interface Hostel {
-  id: number;
-  name: string;
-  address: string;
-  city_id: number;
-  country_id: number;
+  hostel_id?: number;
+  group_name: string;
+  hostel_name: string;
+  hostel_type: string;
   mobile: string;
-  phone?: string;
-  type: "Boys" | "Girls";
-  province_id: number;
-  location_id?: number;
+  whatsapp: string;
+  province: string;
+  city_name: string;
+  location: string;
+  address: string;
+  rating: number; // Static for now, will be dynamic later
 }
 
 interface SearchParams {
@@ -72,62 +73,21 @@ export default function SearchResults() {
     
     setLoading(true);
     try {
-      // TODO: Replace with actual API call
-      // const response = await axios.get(`/api/search-hostels?province_id=${params.province}&city_id=${params.city}&location_id=${params.location || ''}`);
+      // Call the real API for finding hostels
+      let apiUrl = `/api/find-hostels/${params.province}/${params.city}`;
+      if (params.location) {
+        apiUrl += `?location_id=${params.location}`;
+      }
       
-      // Mock data for now - will be replaced with actual API
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       
-      const mockHostels: Hostel[] = [
-        {
-          id: 1,
-          name: "Smart Boys Hostel",
-          address: "123 Main Street, Block A",
-          city_id: parseInt(params.city),
-          country_id: 1,
-          mobile: "03001234567",
-          phone: "042-123456",
-          type: "Boys",
-          province_id: parseInt(params.province),
-          location_id: params.location ? parseInt(params.location) : undefined
-        },
-        {
-          id: 2,
-          name: "Pearl Girls Hostel",
-          address: "456 Garden Road, Block B",
-          city_id: parseInt(params.city),
-          country_id: 1,
-          mobile: "03009876543",
-          type: "Girls",
-          province_id: parseInt(params.province),
-          location_id: params.location ? parseInt(params.location) : undefined
-        },
-        {
-          id: 3,
-          name: "Elite Boys Hostel",
-          address: "789 University Road, Block C",
-          city_id: parseInt(params.city),
-          country_id: 1,
-          mobile: "03005555555",
-          phone: "042-789012",
-          type: "Boys",
-          province_id: parseInt(params.province),
-          location_id: params.location ? parseInt(params.location) : undefined
-        },
-        {
-          id: 4,
-          name: "Rose Girls Hostel",
-          address: "321 Campus Avenue, Block D",
-          city_id: parseInt(params.city),
-          country_id: 1,
-          mobile: "03007777777",
-          type: "Girls",
-          province_id: parseInt(params.province),
-          location_id: params.location ? parseInt(params.location) : undefined
-        }
-      ];
+      const data = await response.json();
+      console.log('Search results received:', data);
       
-      setHostels(mockHostels);
+      setHostels(data.hostels || []);
     } catch (error) {
       console.error("Error searching hostels:", error);
       setHostels([]);
@@ -271,7 +231,7 @@ export default function SearchResults() {
                 <div className="space-y-4">
                   {hostels.map((hostel, index) => (
                     <HostelCard
-                      key={hostel.id}
+                      key={hostel.hostel_id || index}
                       hostel={hostel}
                       index={index}
                       provinces={provinces || []}

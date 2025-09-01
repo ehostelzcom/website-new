@@ -227,6 +227,65 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // GET API for finding hostels by search (province_id, city_id, optional location_id)
+  app.get("/api/find-hostels/:province_id/:city_id", async (req, res) => {
+    console.log("Find hostels API call received with params:", req.params, "query:", req.query);
+    try {
+      const { province_id, city_id } = req.params;
+      const { location_id } = req.query;
+      
+      // Validate required parameters
+      if (!province_id || !city_id) {
+        return res.status(400).json({ 
+          error: "Missing required parameters",
+          message: "province_id and city_id are required"
+        });
+      }
+
+      // Build API URL with optional location_id
+      let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/find-hostels/${province_id}/${city_id}`;
+      if (location_id) {
+        apiUrl += `?location_id=${location_id}`;
+      }
+
+      // Call Oracle APEX API
+      const response = await axios.get(apiUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log("Oracle APEX find-hostels response:", response.data);
+      
+      // Transform response and add static rating for now
+      const hostels = (response.data.items || []).map((item: any) => ({
+        ...item,
+        rating: 4.2, // Static rating as requested
+        hostel_id: item.hostel_id || Math.random() * 1000 // Add unique ID if not provided
+      }));
+      
+      // Set proper JSON headers and return the hostels
+      res.setHeader('Content-Type', 'application/json');
+      res.json({
+        hostels,
+        count: hostels.length,
+        searchParams: {
+          province_id,
+          city_id,
+          location_id: location_id || null
+        }
+      });
+    } catch (error) {
+      console.error("Error finding hostels:", error);
+      res.status(500).json({ 
+        error: "Failed to find hostels",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 
