@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SearchableSelect } from "@/components/ui/searchable-select";
 import { ArrowLeft, Search, MapPin, Phone, Users, Star, Bed } from "lucide-react";
+import asset9 from "@assets/logo/Asset 9.svg";
 import { useProvinces } from "@/hooks/useProvinces";
 import { useCities } from "@/hooks/useCities";
 import { useLocations } from "@/hooks/useLocations";
@@ -243,7 +244,7 @@ export default function SearchResults() {
               </>
             ) : searchParams.province && searchParams.city ? (
               <div className="text-center py-12">
-                <MapPin className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <img src={asset9} alt="No hostels found" className="w-16 h-16 mx-auto mb-4 opacity-60" />
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                   No Hostels Found
                 </h3>
