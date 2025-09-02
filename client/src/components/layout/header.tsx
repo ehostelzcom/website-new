@@ -73,7 +73,7 @@ export default function Header() {
               className="relative text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-[15px] group"
               data-testid="nav-about"
             >
-              About
+              Why ehostelz
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] to-[#ff6b35] transition-all duration-300 group-hover:w-full"></span>
             </button>
             <button 
@@ -145,7 +145,7 @@ export default function Header() {
                     className="text-left text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-lg py-3 border-b border-gray-200/30 dark:border-gray-700/30 hover:border-[#004e89]/30"
                     data-testid="nav-mobile-about"
                   >
-                    About
+                    Why ehostelz
                   </button>
                   <button 
                     onClick={() => scrollToSection('contact')}
