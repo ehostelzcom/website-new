@@ -285,7 +285,7 @@ Please let me know about availability and booking process. Thank you!`;
             </>
           ) : (
             <div className="text-center py-8">
-              <User className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <Bed className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                 No Vacant Seats
               </h3>

@@ -263,7 +263,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const hostels = (response.data.items || []).map((item: any) => ({
         ...item,
         rating: 4.2, // Static rating as requested
-        hostel_id: item.hostel_id || Math.random() * 1000 // Add unique ID if not provided
+        hostel_id: item.hostel_id // Use real hostel_id from API
       }));
       
       // Set proper JSON headers and return the hostels
