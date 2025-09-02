@@ -1,0 +1,412 @@
+[
+    {
+        "room_title": "GF-R03",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "GF-R03-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "GF-R03-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "GF-R04",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "GF-R04-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "GF-R04-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R04",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R04-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R04-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R07",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R07-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R07-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R11",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R11-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R11-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "SF-R03",
+        "counts": 3,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "SF-R03-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "SF-R03-B02"
+            },
+            {
+                "bed_title": "B03",
+                "seat_title": "SF-R03-B03"
+            }
+        ]
+    },
+    {
+        "room_title": "SF-R06",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "SF-R06-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "SF-R06-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "GF-R01",
+        "counts": 4,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "GF-R01-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "GF-R01-B02"
+            },
+            {
+                "bed_title": "B03",
+                "seat_title": "GF-R01-B03"
+            },
+            {
+                "bed_title": "B04",
+                "seat_title": "GF-R01-B04"
+            }
+        ]
+    },
+    {
+        "room_title": "GF-R02",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "GF-R02-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "GF-R02-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R06",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R06-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R06-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R09",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R09-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R09-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "SF-R02",
+        "counts": 4,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "SF-R02-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "SF-R02-B02"
+            },
+            {
+                "bed_title": "B03",
+                "seat_title": "SF-R02-B03"
+            },
+            {
+                "bed_title": "B04",
+                "seat_title": "SF-R02-B04"
+            }
+        ]
+    },
+    {
+        "room_title": "GF-R07",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "GF-R07-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "GF-R07-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "GF-R09",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "GF-R09-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "GF-R09-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R02",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R02-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R02-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R05",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R05-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R05-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "GF-R08",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "GF-R08-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "GF-R08-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R03",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R03-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R03-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R08",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R08-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R08-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R10",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R10-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R10-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "SF-R01",
+        "counts": 3,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "SF-R01-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "SF-R01-B02"
+            },
+            {
+                "bed_title": "B03",
+                "seat_title": "SF-R01-B03"
+            }
+        ]
+    },
+    {
+        "room_title": "GF-R05",
+        "counts": 3,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "GF-R05-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "GF-R05-B02"
+            },
+            {
+                "bed_title": "B03",
+                "seat_title": "GF-R05-B03"
+            }
+        ]
+    },
+    {
+        "room_title": "GF-R10",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "GF-R10-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "GF-R10-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "SF-R05",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "SF-R05-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "SF-R05-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "GF-R06",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "GF-R06-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "GF-R06-B02"
+            }
+        ]
+    },
+    {
+        "room_title": "FF-R01",
+        "counts": 3,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "FF-R01-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "FF-R01-B02"
+            },
+            {
+                "bed_title": "B03",
+                "seat_title": "FF-R01-B03"
+            }
+        ]
+    },
+    {
+        "room_title": "SF-R04",
+        "counts": 2,
+        "beds": [
+            {
+                "bed_title": "B01",
+                "seat_title": "SF-R04-B01"
+            },
+            {
+                "bed_title": "B02",
+                "seat_title": "SF-R04-B02"
+            }
+        ]
+    }
+]

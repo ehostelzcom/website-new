@@ -286,6 +286,67 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // GET API for finding vacant seats by hostel_id
+  app.get("/api/vacant-seats/:hostel_id", async (req, res) => {
+    console.log("Vacant seats API call received for hostel_id:", req.params.hostel_id);
+    try {
+      const { hostel_id } = req.params;
+      
+      // Validate required parameter
+      if (!hostel_id) {
+        return res.status(400).json({ 
+          error: "Missing required parameter",
+          message: "hostel_id is required"
+        });
+      }
+
+      // Call Oracle APEX API for vacant seats
+      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/find-vacant-seats/${hostel_id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log("Oracle APEX vacant-seats response:", response.data);
+      
+      // Transform the API response to flatten the structure for frontend use
+      const vacantSeats: any[] = [];
+      
+      if (response.data.rooms && Array.isArray(response.data.rooms)) {
+        response.data.rooms.forEach((room: any) => {
+          if (room.beds && Array.isArray(room.beds)) {
+            room.beds.forEach((bed: any) => {
+              vacantSeats.push({
+                room_title: room.room_title,
+                bed_title: bed.bed_title,
+                seat_title: bed.seat_title,
+                hostel_id: parseInt(hostel_id)
+              });
+            });
+          }
+        });
+      }
+      
+      // Set proper JSON headers and return the transformed data
+      res.setHeader('Content-Type', 'application/json');
+      res.json({
+        status: response.data.status,
+        code: response.data.code,
+        hostel: response.data.hostel,
+        vacantSeats, // Flattened structure for frontend
+        totalSeats: vacantSeats.length
+      });
+    } catch (error) {
+      console.error("Error fetching vacant seats:", error);
+      res.status(500).json({ 
+        error: "Failed to fetch vacant seats",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 

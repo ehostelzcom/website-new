@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Dialog,
   DialogContent,
@@ -43,9 +44,9 @@ interface VacantSeatsModalProps {
 }
 
 export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces, cities }: VacantSeatsModalProps) {
-  // Get province and city names
-  const province = provinces?.find(p => p.id === hostel?.province_id);
-  const city = cities?.find(c => c.id === hostel?.city_id);
+  // Province and city names are already strings in the API response
+  const provinceName = hostel?.province;
+  const cityName = hostel?.city_name;
   const [vacantSeats, setVacantSeats] = useState<VacantSeat[]>([]);
   const [loading, setLoading] = useState(false);
   const [requestedSeats, setRequestedSeats] = useState<Set<string>>(new Set());
@@ -64,7 +65,7 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
   // Fetch vacant seats when modal opens and hostel is selected
   useEffect(() => {
     if (open && hostel) {
-      fetchVacantSeats(hostel.id);
+      fetchVacantSeats(hostel.hostel_id || 0);
     }
   }, [open, hostel]);
 
@@ -73,128 +74,12 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
     setError(null);
     
     try {
-      // TODO: Replace with actual API call
-      // const response = await axios.get(`/api/vacant-seats/${hostelId}`);
-      // setVacantSeats(response.data);
+      // Call the real API
+      const response = await axios.get(`/api/vacant-seats/${hostelId}`);
+      console.log("Vacant seats API response:", response.data);
       
-      // Mock data for now - will be replaced with actual API
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const mockSeats: VacantSeat[] = [
-        // Ground Floor Room 1 - 6 seats
-        {
-          room_title: "GF-R01",
-          bed_title: "B01",
-          seat_title: "GF-R01-B01",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "GF-R01",
-          bed_title: "B02",
-          seat_title: "GF-R01-B02",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "GF-R01",
-          bed_title: "B03",
-          seat_title: "GF-R01-B03",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "GF-R01",
-          bed_title: "B04",
-          seat_title: "GF-R01-B04",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "GF-R01",
-          bed_title: "B05",
-          seat_title: "GF-R01-B05",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "GF-R01",
-          bed_title: "B06",
-          seat_title: "GF-R01-B06",
-          hostel_id: hostelId
-        },
-        // Ground Floor Room 2 - 5 seats
-        {
-          room_title: "GF-R02",
-          bed_title: "B01",
-          seat_title: "GF-R02-B01",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "GF-R02",
-          bed_title: "B02",
-          seat_title: "GF-R02-B02",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "GF-R02",
-          bed_title: "B03",
-          seat_title: "GF-R02-B03",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "GF-R02",
-          bed_title: "B04",
-          seat_title: "GF-R02-B04",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "GF-R02",
-          bed_title: "B05",
-          seat_title: "GF-R02-B05",
-          hostel_id: hostelId
-        },
-        // First Floor Room 3 - 7 seats
-        {
-          room_title: "FF-R03",
-          bed_title: "B01",
-          seat_title: "FF-R03-B01",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "FF-R03",
-          bed_title: "B02",
-          seat_title: "FF-R03-B02",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "FF-R03",
-          bed_title: "B03",
-          seat_title: "FF-R03-B03",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "FF-R03",
-          bed_title: "B04",
-          seat_title: "FF-R03-B04",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "FF-R03",
-          bed_title: "B05",
-          seat_title: "FF-R03-B05",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "FF-R03",
-          bed_title: "B06",
-          seat_title: "FF-R03-B06",
-          hostel_id: hostelId
-        },
-        {
-          room_title: "FF-R03",
-          bed_title: "B07",
-          seat_title: "FF-R03-B07",
-          hostel_id: hostelId
-        }
-      ];
-      
-      setVacantSeats(mockSeats);
+      // Set the transformed vacant seats data from API
+      setVacantSeats(response.data.vacantSeats || []);
     } catch (err) {
       setError("Failed to load vacant seats. Please try again.");
       console.error("Error fetching vacant seats:", err);
@@ -212,9 +97,9 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
     // Add to requested seats immediately for visual feedback
     setRequestedSeats(prev => new Set(prev).add(seatKey));
     
-    const message = `Hello! I'm interested in booking a seat at ${hostel.name}.
+    const message = `Hello! I'm interested in booking a seat at ${hostel.hostel_name}.
 
-📍 Hostel: ${hostel.name}
+📍 Hostel: ${hostel.hostel_name}
 🏠 Address: ${hostel.address}
 🛏️ Room: ${seat.room_title}
 🛏️ Bed: ${seat.bed_title}
@@ -259,10 +144,10 @@ Please let me know about availability and booking process. Thank you!`;
                 <img src={asset8} alt="Hostel icon" className="w-10 h-10" />
               </div>
               <div>
-                <span className="text-gray-900 dark:text-white">{hostel?.name}</span>
+                <span className="text-gray-900 dark:text-white">{hostel?.hostel_name}</span>
                 <div className="flex items-center gap-2 mt-1">
                   <Badge variant="outline" className="text-xs">
-                    {hostel?.type} Hostel
+                    {hostel?.hostel_type} Hostel
                   </Badge>
                   <div className="flex items-center gap-1">
                     <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
@@ -277,7 +162,7 @@ Please let me know about availability and booking process. Thank you!`;
               <DialogDescription className="flex items-center gap-2 text-sm">
                 <MapPin className="w-4 h-4 text-primary" />
                 <span className="font-medium text-gray-700 dark:text-gray-300">
-                  {city?.title || 'Unknown City'}, {province?.title || 'Unknown Province'}
+                  {hostel?.location}, {cityName}, {provinceName}
                 </span>
               </DialogDescription>
               <DialogDescription className="flex items-start gap-2 text-sm ml-6">
@@ -311,7 +196,7 @@ Please let me know about availability and booking process. Thank you!`;
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  onClick={() => hostel && fetchVacantSeats(hostel.id)}
+                  onClick={() => hostel && fetchVacantSeats(hostel.hostel_id || 0)}
                   className="mt-2"
                 >
                   Try Again
