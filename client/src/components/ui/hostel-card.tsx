@@ -168,7 +168,7 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                 </Button>
                 
                 {/* Contact Information - Under Pricing Button */}
-                <div className="space-y-1 text-xs mt-2">
+                <div className="space-y-1 mt-2">
                   <div className="flex items-center gap-1">
                     <Phone className="w-3 h-3 text-primary" />
                     <span className="font-semibold text-gray-900 dark:text-white">
