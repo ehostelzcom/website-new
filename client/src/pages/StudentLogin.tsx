@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Eye, EyeOff, User, Lock, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, User, Lock } from "lucide-react";
 import { useLocation } from "wouter";
 import logoSvg from "@assets/logo/Asset 3.svg";
 
@@ -33,16 +33,6 @@ export default function StudentLogin() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Back to Home Button */}
-        <Button
-          variant="ghost"
-          onClick={() => setLocation("/")}
-          className="mb-6 text-gray-600 dark:text-gray-400 hover:text-[#004e89] dark:hover:text-[#004e89] transition-colors"
-          data-testid="button-back-home"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Home
-        </Button>
 
         {/* Login Card */}
         <Card className="border-0 shadow-2xl shadow-black/10 dark:shadow-black/20 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl">

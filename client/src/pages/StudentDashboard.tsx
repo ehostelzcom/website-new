@@ -82,7 +82,7 @@ export default function StudentDashboard() {
 
   const handleLogout = () => {
     // TODO: Implement logout logic
-    setLocation("/");
+    setLocation("/student-login");
   };
 
   return (
