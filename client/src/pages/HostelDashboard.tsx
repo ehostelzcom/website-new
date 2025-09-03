@@ -257,7 +257,7 @@ export default function HostelDashboard() {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
-                    className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white"
                     data-testid="button-user-menu"
                   >
                     <div className="w-8 h-8 bg-[#004e89] rounded-full flex items-center justify-center">
