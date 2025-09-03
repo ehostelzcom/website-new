@@ -33,6 +33,7 @@ export interface VacantSeat {
   bed_title: string;
   seat_title: string;
   hostel_id: number;
+  total_counts?: number;
 }
 
 interface VacantSeatsModalProps {
@@ -53,14 +54,14 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
   const { toast } = useToast();
   const [error, setError] = useState<string | null>(null);
 
-  // Group seats by room for better display
+  // Group seats by room for better display with total counts
   const groupedSeats = vacantSeats.reduce((acc, seat) => {
     if (!acc[seat.room_title]) {
-      acc[seat.room_title] = [];
+      acc[seat.room_title] = { seats: [], total_counts: seat.total_counts || 0 };
     }
-    acc[seat.room_title].push(seat);
+    acc[seat.room_title].seats.push(seat);
     return acc;
-  }, {} as Record<string, VacantSeat[]>);
+  }, {} as Record<string, { seats: VacantSeat[], total_counts: number }>);
 
   // Fetch vacant seats when modal opens and hostel is selected
   useEffect(() => {
@@ -78,8 +79,27 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
       const response = await axios.get(`/api/vacant-seats/${hostelId}`);
       console.log("Vacant seats API response:", response.data);
       
-      // Set the transformed vacant seats data from API
-      setVacantSeats(response.data.vacantSeats || []);
+      // Transform the API response to include total_counts for each seat
+      const transformedSeats: VacantSeat[] = [];
+      
+      if (response.data.rooms && Array.isArray(response.data.rooms)) {
+        response.data.rooms.forEach((room: any) => {
+          if (room.beds && Array.isArray(room.beds)) {
+            room.beds.forEach((bed: any) => {
+              transformedSeats.push({
+                room_title: room.room_title,
+                bed_title: bed.bed_title,
+                seat_title: bed.seat_title,
+                hostel_id: parseInt(hostelId.toString()),
+                total_counts: room.total_counts || 0
+              });
+            });
+          }
+        });
+      }
+      
+      // Set the transformed vacant seats data
+      setVacantSeats(transformedSeats);
     } catch (err) {
       setError("Failed to load vacant seats. Please try again.");
       console.error("Error fetching vacant seats:", err);
@@ -216,7 +236,7 @@ Please let me know about availability and booking process. Thank you!`;
               </div>
 
               <div className="grid grid-cols-1 gap-6">
-                {Object.entries(groupedSeats).map(([roomTitle, seats]) => (
+                {Object.entries(groupedSeats).map(([roomTitle, roomData]) => (
                   <Card key={roomTitle} className="border-2 border-primary/30 bg-gradient-to-br from-white via-primary/5 to-primary/10 dark:from-gray-800 dark:via-primary/10 dark:to-primary/15 shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <CardHeader className="pb-4">
                       <CardTitle className="text-lg flex items-center gap-2">
@@ -227,14 +247,19 @@ Please let me know about availability and booking process. Thank you!`;
                           <h4 className="font-bold text-gray-900 dark:text-white">Room: {roomTitle}</h4>
                           <p className="text-sm text-gray-600 dark:text-gray-400">Available beds for booking</p>
                         </div>
-                        <Badge variant="default" className="ml-auto bg-primary">
-                          {seats.length} seat{seats.length !== 1 ? 's' : ''}
-                        </Badge>
+                        <div className="ml-auto flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs text-gray-600 dark:text-gray-400">
+                            {roomData.seats.length}/{roomData.total_counts} available
+                          </Badge>
+                          <Badge variant="default" className="bg-primary">
+                            {roomData.seats.length} seat{roomData.seats.length !== 1 ? 's' : ''}
+                          </Badge>
+                        </div>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
-                        {seats.map((seat) => (
+                        {roomData.seats.map((seat) => (
                           <div key={seat.seat_title} className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-2 hover:border-primary/50 hover:shadow-md transition-all duration-200 group">
                             <div className="flex flex-col items-center gap-1.5">
                               <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
