@@ -121,50 +121,8 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
             </div>
           </div>
           
-          {/* Right Section - Action Buttons */}
-          <div className="flex flex-col gap-3 min-w-0">
-            {/* Primary Action Button */}
-            <Button 
-              size="lg"
-              className="group-hover:bg-primary group-hover:text-white bg-primary/10 text-primary hover:bg-primary hover:text-white border-primary/20 hover:border-primary transition-all duration-200 px-8 py-3 text-base font-semibold shadow-md hover:shadow-lg"
-              data-testid={`button-view-seats-${hostel.hostel_id || 0}`}
-            >
-              <Bed className="w-5 h-5 mr-2" />
-              Check Vacant Seats
-              <Eye className="w-5 h-5 ml-2" />
-            </Button>
-            
-            {/* Secondary Action Buttons */}
-            <div className="flex gap-2">
-              <Button 
-                size="sm"
-                variant="outline"
-                className="flex-1 border-blue-200 text-blue-600 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 transition-all duration-200 py-2 text-sm font-medium shadow-sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setFacilitiesModalOpen(true);
-                }}
-                data-testid={`button-facilities-${hostel.hostel_id || 0}`}
-              >
-                <Settings className="w-4 h-4 mr-1" />
-                Facilities
-              </Button>
-              
-              <Button 
-                size="sm"
-                variant="outline"
-                className="flex-1 border-green-200 text-green-600 hover:bg-green-50 hover:text-green-700 hover:border-green-300 transition-all duration-200 py-2 text-sm font-medium shadow-sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setRentsModalOpen(true);
-                }}
-                data-testid={`button-rents-${hostel.hostel_id || 0}`}
-              >
-                <Banknote className="w-4 h-4 mr-1" />
-                Pricing
-              </Button>
-            </div>
-            
+          {/* Right Section - Contact and Buttons */}
+          <div className="flex gap-4 items-start">
             {/* Contact Information */}
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
@@ -180,6 +138,51 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                 <span className="font-semibold text-gray-900 dark:text-white">
                   {hostel.whatsapp}
                 </span>
+              </div>
+            </div>
+            
+            {/* Action Buttons */}
+            <div className="flex flex-col gap-3 min-w-0">
+              {/* Primary Action Button */}
+              <Button 
+                size="lg"
+                className="group-hover:bg-primary group-hover:text-white bg-primary/10 text-primary hover:bg-primary hover:text-white border-primary/20 hover:border-primary transition-all duration-200 px-8 py-3 text-base font-semibold shadow-md hover:shadow-lg"
+                data-testid={`button-view-seats-${hostel.hostel_id || 0}`}
+              >
+                <Bed className="w-5 h-5 mr-2" />
+                Check Vacant Seats
+                <Eye className="w-5 h-5 ml-2" />
+              </Button>
+              
+              {/* Secondary Action Buttons */}
+              <div className="flex gap-2">
+                <Button 
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 border-blue-200 text-blue-600 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 transition-all duration-200 py-2 text-sm font-medium shadow-sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFacilitiesModalOpen(true);
+                  }}
+                  data-testid={`button-facilities-${hostel.hostel_id || 0}`}
+                >
+                  <Settings className="w-4 h-4 mr-1" />
+                  Facilities
+                </Button>
+                
+                <Button 
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 border-green-200 text-green-600 hover:bg-green-50 hover:text-green-700 hover:border-green-300 transition-all duration-200 py-2 text-sm font-medium shadow-sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setRentsModalOpen(true);
+                  }}
+                  data-testid={`button-rents-${hostel.hostel_id || 0}`}
+                >
+                  <Banknote className="w-4 h-4 mr-1" />
+                  Pricing
+                </Button>
               </div>
             </div>
           </div>
