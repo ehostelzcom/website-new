@@ -127,9 +127,6 @@ export default function RentsModal({ hostel, open, onOpenChange }: RentsModalPro
                       <TableHead className="font-semibold text-green-900 dark:text-green-100 text-right">
                         Monthly Rate
                       </TableHead>
-                      <TableHead className="font-semibold text-green-900 dark:text-green-100 text-center">
-                        Status
-                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -158,11 +155,6 @@ export default function RentsModal({ hostel, open, onOpenChange }: RentsModalPro
                           <p className="text-xs text-gray-500 dark:text-gray-400">
                             per month
                           </p>
-                        </TableCell>
-                        <TableCell className="text-center">
-                          <Badge variant="default" className="bg-green-600 hover:bg-green-700 text-white font-medium">
-                            Available
-                          </Badge>
                         </TableCell>
                       </TableRow>
                     ))}
