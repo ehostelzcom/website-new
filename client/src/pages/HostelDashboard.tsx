@@ -121,6 +121,16 @@ export default function HostelDashboard() {
     setActiveTab("profile");
   };
 
+  const handleHostelCardClick = (hostel: HostelInfo) => {
+    setLocation(`/hostel-dashboard/${hostel.hostel_id}`);
+    // When clicking on hostel card, go to dashboard page
+    setActiveTab("dashboard");
+  };
+
+  // Check if we should show sidebar and hostel info
+  const showSidebar = activeTab !== "home";
+  const showHostelInfo = activeTab !== "home";
+
   const sidebarItems = [
     { id: "home", label: "Home", icon: Home },
     { id: "dashboard", label: "Dashboard", icon: BarChart3 },
@@ -146,8 +156,9 @@ export default function HostelDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 flex">
-      {/* Left Sidebar */}
-      <aside className="w-64 bg-white dark:bg-gray-900 shadow-xl border-r border-gray-200 dark:border-gray-700 flex flex-col">
+      {/* Left Sidebar - Conditional */}
+      {showSidebar && (
+        <aside className="w-64 bg-white dark:bg-gray-900 shadow-xl border-r border-gray-200 dark:border-gray-700 flex flex-col">
         {/* Logo Section */}
         <div className="p-6 border-b border-gray-200 dark:border-gray-700">
           <img 
@@ -181,7 +192,8 @@ export default function HostelDashboard() {
             })}
           </div>
         </nav>
-      </aside>
+        </aside>
+      )}
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
@@ -189,8 +201,8 @@ export default function HostelDashboard() {
         <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-white/10">
           <div className="px-6 py-4">
             <div className="flex items-center justify-between">
-              {/* Hostel Information */}
-              {hostelInfo && (
+              {/* Hostel Information - Conditional */}
+              {showHostelInfo && hostelInfo && (
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
                     <Building2 className="w-6 h-6 text-[#ff6b35]" />
@@ -225,6 +237,18 @@ export default function HostelDashboard() {
                       </span>
                     </div>
                   </div>
+                </div>
+              )}
+              
+              {/* Show logo on Home page when sidebar is hidden */}
+              {!showSidebar && (
+                <div className="flex items-center">
+                  <img 
+                    src={logoSvg} 
+                    alt="ehostelz.com" 
+                    className="h-10 w-auto"
+                    data-testid="img-header-logo"
+                  />
                 </div>
               )}
               
@@ -293,7 +317,7 @@ export default function HostelDashboard() {
                       ? 'border-[#004e89] bg-blue-50 dark:bg-blue-950/20' 
                       : 'border-gray-200 dark:border-gray-700 hover:border-[#004e89] dark:hover:border-[#004e89]'
                     } bg-white dark:bg-gray-800`}
-                    onClick={() => setLocation(`/hostel-dashboard/${hostel.hostel_id}`)}
+                    onClick={() => handleHostelCardClick(hostel)}
                     data-testid={`card-hostel-${hostel.hostel_id}`}
                   >
                     <CardHeader className="pb-2 pt-3 px-3">
