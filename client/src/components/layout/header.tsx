@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import RequestDemoModal from "@/components/ui/request-demo-modal";
+import { useLocation } from "wouter";
 import logoSvg from "@assets/logo/Asset 3.svg";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   const scrollToSection = (sectionId: string) => {
     if (sectionId === 'home') {
@@ -89,6 +91,7 @@ export default function Header() {
           <div className="flex items-center space-x-3">
             <div className="hidden md:block">
               <Button 
+                onClick={() => setLocation("/student-login")}
                 className="bg-white dark:bg-gray-800 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white font-semibold px-6 py-2.5 shadow-lg shadow-[#ff6b35]/25 hover:shadow-xl hover:shadow-[#ff6b35]/30 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
                 data-testid="button-student-login-header"
               >
@@ -164,6 +167,7 @@ export default function Header() {
                   </button>
                   <div className="pt-4 space-y-3">
                     <Button 
+                      onClick={() => {setLocation("/student-login"); setIsOpen(false);}}
                       className="w-full bg-white dark:bg-gray-800 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white font-semibold py-3 shadow-lg shadow-[#ff6b35]/25 hover:shadow-xl transition-all duration-300"
                       data-testid="nav-mobile-student-login"
                     >
