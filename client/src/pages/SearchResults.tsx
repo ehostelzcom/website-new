@@ -118,30 +118,42 @@ export default function SearchResults() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Header */}
-      <div className="bg-white dark:bg-gray-800 shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+      {/* Professional Header */}
+      <div className="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+            {/* Logo and Title Section */}
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4">
+                <img 
+                  src={asset3} 
+                  alt="ehostelz.com Logo" 
+                  className="w-12 h-12 drop-shadow-md"
+                />
+                <div>
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">ehostelz.com</h1>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">Smart Hostel Management Platform</p>
+                </div>
+              </div>
+              <div className="hidden md:block w-px h-12 bg-gray-300 dark:bg-gray-600"></div>
+              <div className="hidden md:block">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Search Results</h2>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Find your perfect hostel accommodation</p>
+              </div>
+            </div>
+            
+            {/* Navigation */}
+            <div className="flex items-center gap-4">
               <Button
-                variant="ghost"
-                size="sm"
+                variant="outline"
                 onClick={() => setLocation("/")}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 border-primary/20 text-primary hover:bg-primary hover:text-white transition-all duration-200 px-6 py-2 font-medium"
                 data-testid="button-back-home"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
               </Button>
-              <div className="flex items-center gap-3">
-                <img 
-                  src={asset3} 
-                  alt="ehostelz.com Logo" 
-                  className="w-8 h-8"
-                />
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Search Results</h1>
-              </div>
             </div>
           </div>
         </div>
