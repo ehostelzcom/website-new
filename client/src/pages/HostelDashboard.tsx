@@ -21,7 +21,8 @@ import {
   MapPin, 
   Phone,
   ChevronDown,
-  Settings
+  Settings,
+  Star
 } from "lucide-react";
 import logoSvg from "@assets/logo/Asset 3.svg";
 import girlsHostelLogo from "@assets/logo/Asset 7.svg";
@@ -38,6 +39,42 @@ interface HostelInfo {
   status: "Active" | "Inactive";
 }
 
+interface RatingData {
+  [key: string]: number;
+}
+
+// Star Rating Component
+const StarRating = ({ rating, onRatingChange, questionId }: { rating: number; onRatingChange: (questionId: string, rating: number) => void; questionId: string }) => {
+  const [hoverRating, setHoverRating] = useState(0);
+
+  return (
+    <div className="flex items-center space-x-1">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <button
+          key={star}
+          type="button"
+          onClick={() => onRatingChange(questionId, star)}
+          onMouseEnter={() => setHoverRating(star)}
+          onMouseLeave={() => setHoverRating(0)}
+          className="focus:outline-none transition-colors duration-200"
+          data-testid={`star-${questionId}-${star}`}
+        >
+          <Star
+            className={`w-6 h-6 ${
+              star <= (hoverRating || rating)
+                ? "fill-yellow-400 text-yellow-400"
+                : "text-gray-300 dark:text-gray-600"
+            }`}
+          />
+        </button>
+      ))}
+      <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+        {rating > 0 ? `${rating}/5` : "Not rated"}
+      </span>
+    </div>
+  );
+};
+
 export default function HostelDashboard() {
   const [, setLocation] = useLocation();
   const [match, params] = useRoute("/hostel-dashboard/:hostelId");
@@ -45,6 +82,8 @@ export default function HostelDashboard() {
   const [hostels, setHostels] = useState<HostelInfo[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("home");
+  const [ratings, setRatings] = useState<RatingData>({});
+  const [isSubmittingRating, setIsSubmittingRating] = useState(false);
 
   const hostelId = params?.hostelId ? parseInt(params.hostelId) : null;
 
@@ -127,6 +166,34 @@ export default function HostelDashboard() {
     setActiveTab("dashboard");
   };
 
+  const handleRatingChange = (questionId: string, rating: number) => {
+    setRatings(prev => ({
+      ...prev,
+      [questionId]: rating
+    }));
+  };
+
+  const handleRatingSubmit = async () => {
+    setIsSubmittingRating(true);
+    // TODO: Submit ratings to API
+    setTimeout(() => {
+      setIsSubmittingRating(false);
+      // Show success message or handle response
+      console.log("Ratings submitted:", ratings);
+    }, 1000);
+  };
+
+  const ratingQuestions = [
+    { id: "cleanliness", question: "How would you rate the cleanliness of the hostel?" },
+    { id: "staff", question: "How helpful and friendly is the staff?" },
+    { id: "facilities", question: "How would you rate the hostel facilities?" },
+    { id: "security", question: "How secure do you feel at this hostel?" },
+    { id: "food", question: "How would you rate the food quality?" },
+    { id: "wifi", question: "How would you rate the WiFi and internet connectivity?" },
+    { id: "location", question: "How convenient is the hostel location?" },
+    { id: "overall", question: "Overall, how would you rate your experience?" }
+  ];
+
   // Check if we should show sidebar and hostel info
   const showSidebar = activeTab !== "home";
   const showHostelInfo = activeTab !== "home";
@@ -136,6 +203,7 @@ export default function HostelDashboard() {
     { id: "dashboard", label: "Dashboard", icon: BarChart3 },
     { id: "fees", label: "Fees", icon: CreditCard },
     { id: "payments", label: "Payments", icon: Receipt },
+    { id: "rating", label: "Rating", icon: Star },
     { id: "profile", label: "Profile", icon: User },
   ];
 
@@ -492,6 +560,68 @@ export default function HostelDashboard() {
                     <p className="text-gray-600 dark:text-gray-400">
                       Payment history will be populated with real API data
                     </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {/* Rating Content */}
+          {activeTab === "rating" && (
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                  Rate Your Experience
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Help other students by sharing your honest feedback about {hostelInfo?.hostel_name}
+                </p>
+              </div>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Hostel Rating Form</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    {ratingQuestions.map((question, index) => (
+                      <div key={question.id} className="space-y-2">
+                        <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                          {index + 1}. {question.question}
+                        </h3>
+                        <StarRating
+                          rating={ratings[question.id] || 0}
+                          onRatingChange={handleRatingChange}
+                          questionId={question.id}
+                        />
+                      </div>
+                    ))}
+
+                    <div className="pt-6 border-t border-gray-200 dark:border-gray-700">
+                      <div className="flex justify-end space-x-4">
+                        <Button
+                          variant="outline"
+                          onClick={() => setRatings({})}
+                          disabled={isSubmittingRating}
+                        >
+                          Clear All Ratings
+                        </Button>
+                        <Button
+                          onClick={handleRatingSubmit}
+                          disabled={isSubmittingRating || Object.keys(ratings).length === 0}
+                          className="bg-gradient-to-r from-[#004e89] to-[#0066b3] hover:from-[#003a6b] hover:to-[#004e89] text-white"
+                        >
+                          {isSubmittingRating ? (
+                            <div className="flex items-center space-x-2">
+                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                              <span>Submitting...</span>
+                            </div>
+                          ) : (
+                            "Submit Rating"
+                          )}
+                        </Button>
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
