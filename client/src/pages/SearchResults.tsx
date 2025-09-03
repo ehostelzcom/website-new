@@ -28,6 +28,10 @@ export interface Hostel {
   location: string;
   address: string;
   rating: number; // Static for now, will be dynamic later
+  wifi?: number; // 1 = available, 0 = not available
+  security?: number; // 1 = available, 0 = not available
+  food?: number; // 1 = available, 0 = not available
+  solar_system?: number; // 1 = available, 0 = not available
 }
 
 interface SearchParams {

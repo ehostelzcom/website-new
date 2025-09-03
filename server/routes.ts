@@ -259,11 +259,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log("Oracle APEX find-hostels response:", response.data);
       
-      // Transform response and add static rating for now
-      const hostels = (response.data.items || []).map((item: any) => ({
-        ...item,
-        rating: 4.2, // Static rating as requested
-        hostel_id: item.hostel_id // Use real hostel_id from API
+      // Transform response and add static rating + amenity data
+      const hostels = await Promise.all((response.data.items || []).map(async (item: any) => {
+        // Fetch facilities data for this hostel to get amenity flags
+        let amenityData = { wifi: 0, security: 0, food: 0, solar_system: 0 };
+        
+        try {
+          const facilityResponse = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/facilities/${item.hostel_id}`, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            timeout: 5000,
+          });
+          
+          // Extract amenity flags from facilities response
+          if (facilityResponse.data) {
+            amenityData = {
+              wifi: facilityResponse.data.wifi || 0,
+              security: facilityResponse.data.security || 0,
+              food: facilityResponse.data.food || 0,
+              solar_system: facilityResponse.data.solar_system || 0
+            };
+          }
+        } catch (error) {
+          console.log(`Warning: Could not fetch amenities for hostel ${item.hostel_id}`);
+          // Use default values (0) if facilities fetch fails
+        }
+        
+        return {
+          ...item,
+          rating: 4.2, // Static rating as requested
+          hostel_id: item.hostel_id, // Use real hostel_id from API
+          ...amenityData // Include amenity flags
+        };
       }));
       
       // Set proper JSON headers and return the hostels
