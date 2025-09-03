@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Users, Phone, Settings, LogOut } from "lucide-react";
+import { MapPin, Users, Phone, Settings, LogOut, Building2 } from "lucide-react";
 import logoSvg from "@assets/logo/Asset 3.svg";
 import girlsHostelLogo from "@assets/logo/Asset 7.svg";
 import boysHostelLogo from "@assets/logo/Asset 8.svg";
@@ -162,7 +162,7 @@ export default function StudentDashboard() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {hostels.map((hostel) => (
               <Card 
                 key={hostel.hostel_id}
@@ -171,13 +171,18 @@ export default function StudentDashboard() {
                 data-testid={`card-hostel-${hostel.hostel_id}`}
               >
                 <CardHeader className="pb-2 pt-3 px-3">
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="w-8 h-8 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
-                      <img 
-                        src={hostel.hostel_type === "GIRLS" ? girlsHostelLogo : boysHostelLogo}
-                        alt={`${hostel.hostel_type} Hostel`}
-                        className="w-5 h-5"
-                      />
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-12 h-12 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
+                        <img 
+                          src={hostel.hostel_type === "GIRLS" ? girlsHostelLogo : boysHostelLogo}
+                          alt={`${hostel.hostel_type} Hostel`}
+                          className="w-7 h-7"
+                        />
+                      </div>
+                      <CardTitle className="text-base font-bold text-gray-900 dark:text-white leading-tight">
+                        {hostel.hostel_name}
+                      </CardTitle>
                     </div>
                     <Badge 
                       variant={hostel.status === "Active" ? "default" : "secondary"}
@@ -189,9 +194,6 @@ export default function StudentDashboard() {
                       {hostel.status}
                     </Badge>
                   </div>
-                  <CardTitle className="text-sm font-bold text-gray-900 dark:text-white leading-tight">
-                    {hostel.hostel_name}
-                  </CardTitle>
                   <div className="flex items-center space-x-1">
                     <Users className="w-3 h-3 text-gray-500" />
                     <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
