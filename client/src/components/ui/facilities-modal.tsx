@@ -61,7 +61,7 @@ export default function FacilitiesModal({ hostel, open, onOpenChange }: Faciliti
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[800px] max-h-[90vh]">
+      <DialogContent className="sm:max-w-[1000px] max-h-[90vh]">
         <DialogHeader className="space-y-3">
           {/* Enhanced Header with Hostel Info */}
           <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg p-4 border border-blue-200 dark:border-blue-700">

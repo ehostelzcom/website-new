@@ -40,7 +40,12 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
   const [facilitiesModalOpen, setFacilitiesModalOpen] = useState(false);
   const [rentsModalOpen, setRentsModalOpen] = useState(false);
   return (
-    <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 hover:border-primary/30 bg-white dark:bg-gray-800 rounded-xl overflow-hidden hover:-translate-y-1" onClick={onClick}>
+    <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 hover:border-primary/30 bg-white dark:bg-gray-800 rounded-xl overflow-hidden hover:-translate-y-1" onClick={(e) => {
+      // Only trigger onClick if clicking on the card itself, not on modal buttons
+      if (!facilitiesModalOpen && !rentsModalOpen) {
+        onClick();
+      }
+    }}>
       <div className="p-6">
         <div className="flex items-start justify-between gap-6">
           {/* Left Section - Logo and Basic Info */}
@@ -162,13 +167,29 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
       <FacilitiesModal
         hostel={hostel}
         open={facilitiesModalOpen}
-        onOpenChange={setFacilitiesModalOpen}
+        onOpenChange={(open) => {
+          setFacilitiesModalOpen(open);
+          // Ensure we don't trigger card click when modal closes
+          if (!open) {
+            setTimeout(() => {
+              // Small delay to prevent any event bubbling
+            }, 100);
+          }
+        }}
       />
       
       <RentsModal
         hostel={hostel}
         open={rentsModalOpen}
-        onOpenChange={setRentsModalOpen}
+        onOpenChange={(open) => {
+          setRentsModalOpen(open);
+          // Ensure we don't trigger card click when modal closes
+          if (!open) {
+            setTimeout(() => {
+              // Small delay to prevent any event bubbling
+            }, 100);
+          }
+        }}
       />
     </Card>
   );
