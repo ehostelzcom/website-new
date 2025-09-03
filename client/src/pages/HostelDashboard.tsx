@@ -153,7 +153,7 @@ export default function HostelDashboard() {
   }, [hostelId]);
 
   const handleLogout = () => {
-    setLocation("/");
+    setLocation("/student-login");
   };
 
   const handleProfile = () => {
