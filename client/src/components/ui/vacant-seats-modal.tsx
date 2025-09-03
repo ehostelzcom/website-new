@@ -78,14 +78,18 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
       // Call the real API
       const response = await axios.get(`/api/vacant-seats/${hostelId}`);
       console.log("Vacant seats API response:", response.data);
+      console.log("Raw rooms data:", JSON.stringify(response.data.rooms, null, 2));
       
       // Transform the API response to include total_counts for each seat
       const transformedSeats: VacantSeat[] = [];
       
       if (response.data.rooms && Array.isArray(response.data.rooms)) {
         response.data.rooms.forEach((room: any) => {
+          console.log(`Processing room: ${room.room_title}`, room);
           if (room.beds && Array.isArray(room.beds)) {
+            console.log(`Room ${room.room_title} has ${room.beds.length} beds:`, room.beds);
             room.beds.forEach((bed: any) => {
+              console.log(`Processing bed:`, bed);
               transformedSeats.push({
                 room_title: room.room_title,
                 bed_title: bed.bed_title,
@@ -94,9 +98,13 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
                 total_counts: room.total_counts || 0
               });
             });
+          } else {
+            console.log(`Room ${room.room_title} has no beds or beds is not an array:`, room.beds);
           }
         });
       }
+      
+      console.log("Transformed seats:", transformedSeats);
       
       // Set the transformed vacant seats data
       setVacantSeats(transformedSeats);
