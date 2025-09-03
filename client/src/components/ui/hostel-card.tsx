@@ -49,51 +49,57 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
     }}>
       <CardContent className="p-4">
         <div className="flex gap-4">
-          {/* Logo Section */}
-          <div className="flex-shrink-0">
-            <div className="relative">
-              <img 
-                src={logo} 
-                alt={`${hostel.hostel_name} logo`}
-                className="w-16 h-16 rounded-lg object-cover border border-gray-200 dark:border-gray-600 group-hover:scale-105 transition-transform duration-200"
-              />
-              <div className="absolute -top-1 -right-1">
-                <Badge 
-                  variant={hostel.hostel_type.toUpperCase() === "BOYS" ? "default" : "secondary"}
-                  className="text-xs font-medium px-2 py-0.5"
-                >
-                  {hostel.hostel_type}
-                </Badge>
+          {/* Left Section - Logo and Basic Info */}
+          <div className="flex gap-4 flex-1">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <div className="relative">
+                <img 
+                  src={logo} 
+                  alt={`${hostel.hostel_name} logo`}
+                  className="w-16 h-16 rounded-lg object-cover border border-gray-200 dark:border-gray-600 group-hover:scale-105 transition-transform duration-200"
+                />
+                <div className="absolute -top-1 -right-1">
+                  <Badge 
+                    variant={hostel.hostel_type.toUpperCase() === "BOYS" ? "default" : "secondary"}
+                    className="text-xs font-medium px-2 py-0.5"
+                  >
+                    {hostel.hostel_type}
+                  </Badge>
+                </div>
+              </div>
+            </div>
+            
+            {/* Main Info */}
+            <div className="flex-1 min-w-0">
+              {/* Title and Rating */}
+              <div className="mb-2">
+                <h3 className="font-bold text-lg text-gray-900 dark:text-white group-hover:text-primary transition-colors leading-tight">
+                  {hostel.hostel_name}
+                </h3>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <span className="text-sm font-medium text-yellow-600 dark:text-yellow-400">{hostel.rating || "4.5"}</span>
+                  </div>
+                  <Badge variant="outline" className="text-xs bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700">
+                    Available
+                  </Badge>
+                </div>
+              </div>
+              
+              {/* Location */}
+              <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
+                <MapPin className="w-3 h-3 text-primary" />
+                <span className="truncate">{hostel.location}, {cityName}</span>
               </div>
             </div>
           </div>
           
-          {/* Main Content */}
-          <div className="flex-1 min-w-0">
-            {/* Title and Rating */}
-            <div className="mb-2">
-              <h3 className="font-bold text-lg text-gray-900 dark:text-white group-hover:text-primary transition-colors leading-tight">
-                {hostel.hostel_name}
-              </h3>
-              <div className="flex items-center gap-2 mt-1">
-                <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  <span className="text-sm font-medium text-yellow-600 dark:text-yellow-400">{hostel.rating || "4.5"}</span>
-                </div>
-                <Badge variant="outline" className="text-xs bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700">
-                  Available
-                </Badge>
-              </div>
-            </div>
-            
-            {/* Location */}
-            <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 mb-2">
-              <MapPin className="w-3 h-3 text-primary" />
-              <span className="truncate">{hostel.location}, {cityName}</span>
-            </div>
-            
-            {/* Contact */}
-            <div className="grid grid-cols-2 gap-2 mb-3">
+          {/* Right Section - Contact and Actions */}
+          <div className="flex flex-col gap-3 min-w-0 w-48">
+            {/* Contact Info */}
+            <div className="space-y-2">
               <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-2 border border-blue-100 dark:border-blue-800">
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-blue-600 dark:text-blue-400" />
