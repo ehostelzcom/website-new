@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { DollarSign, Loader2, AlertCircle } from "lucide-react";
+import { Banknote, Loader2, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { Hostel } from "@/pages/SearchResults";
 
@@ -58,11 +58,7 @@ export default function RentsModal({ hostel, open, onOpenChange }: RentsModalPro
 
   // Format currency
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-PK', {
-      style: 'currency',
-      currency: 'PKR',
-      minimumFractionDigits: 0,
-    }).format(amount);
+    return `Rs ${amount.toLocaleString()}`;
   };
 
   return (
@@ -73,7 +69,7 @@ export default function RentsModal({ hostel, open, onOpenChange }: RentsModalPro
           <div className="bg-gradient-to-r from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-800/20 rounded-lg p-4 border border-green-200 dark:border-green-700">
             <DialogTitle className="text-2xl flex items-center gap-4 mb-2">
               <div className="w-14 h-14 bg-green-100 dark:bg-green-800 rounded-full flex items-center justify-center">
-                <DollarSign className="w-8 h-8 text-green-600 dark:text-green-400" />
+                <Banknote className="w-8 h-8 text-green-600 dark:text-green-400" />
               </div>
               <div>
                 <span className="text-gray-900 dark:text-white">Pricing & Rates</span>
@@ -110,7 +106,7 @@ export default function RentsModal({ hostel, open, onOpenChange }: RentsModalPro
             <>
               <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
                 <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 flex items-center gap-2">
-                  <DollarSign className="w-5 h-5" />
+                  <Banknote className="w-5 h-5" />
                   Pricing Options ({rents.length} available)
                 </h3>
                 <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
@@ -125,7 +121,7 @@ export default function RentsModal({ hostel, open, onOpenChange }: RentsModalPro
                       <CardTitle className="text-lg flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 bg-green-100 dark:bg-green-800 rounded-full flex items-center justify-center">
-                            <DollarSign className="w-5 h-5 text-green-600 dark:text-green-400" />
+                            <Banknote className="w-5 h-5 text-green-600 dark:text-green-400" />
                           </div>
                           <div>
                             <h4 className="font-bold text-gray-900 dark:text-white text-base">{rent.title}</h4>
@@ -152,7 +148,7 @@ export default function RentsModal({ hostel, open, onOpenChange }: RentsModalPro
             </>
           ) : (
             <div className="text-center py-8">
-              <DollarSign className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <Banknote className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                 No Pricing Information
               </h3>

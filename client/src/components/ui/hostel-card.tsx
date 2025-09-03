@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Users, Star, Bed, Eye, Settings, DollarSign } from "lucide-react";
+import { MapPin, Phone, Users, Star, Bed, Eye, Settings, Banknote } from "lucide-react";
 import type { Hostel } from "@/pages/SearchResults";
 import asset7 from "@assets/logo/Asset 7.svg";
 import asset8 from "@assets/logo/Asset 8.svg";
@@ -149,7 +149,7 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                   }}
                   data-testid={`button-rents-${hostel.hostel_id || 0}`}
                 >
-                  <DollarSign className="w-4 h-4 mr-1" />
+                  <Banknote className="w-4 h-4 mr-1" />
                   Pricing
                 </Button>
               </div>
