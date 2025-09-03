@@ -347,6 +347,80 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // GET API for fetching facilities by hostel_id
+  app.get("/api/facilities/:hostel_id", async (req, res) => {
+    console.log("Facilities API call received for hostel_id:", req.params.hostel_id);
+    try {
+      const { hostel_id } = req.params;
+      
+      // Validate required parameter
+      if (!hostel_id) {
+        return res.status(400).json({ 
+          error: "Missing required parameter",
+          message: "hostel_id is required"
+        });
+      }
+
+      // Call Oracle APEX API for facilities
+      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/facilities/${hostel_id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log("Oracle APEX facilities response:", response.data);
+      
+      // Return the facilities data directly
+      res.setHeader('Content-Type', 'application/json');
+      res.json(response.data);
+    } catch (error) {
+      console.error("Error fetching facilities:", error);
+      res.status(500).json({ 
+        error: "Failed to fetch facilities",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // GET API for fetching rents by hostel_id
+  app.get("/api/rents/:hostel_id", async (req, res) => {
+    console.log("Rents API call received for hostel_id:", req.params.hostel_id);
+    try {
+      const { hostel_id } = req.params;
+      
+      // Validate required parameter
+      if (!hostel_id) {
+        return res.status(400).json({ 
+          error: "Missing required parameter",
+          message: "hostel_id is required"
+        });
+      }
+
+      // Call Oracle APEX API for rents
+      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/rents/${hostel_id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log("Oracle APEX rents response:", response.data);
+      
+      // Return the rents data directly
+      res.setHeader('Content-Type', 'application/json');
+      res.json(response.data);
+    } catch (error) {
+      console.error("Error fetching rents:", error);
+      res.status(500).json({ 
+        error: "Failed to fetch rents",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 

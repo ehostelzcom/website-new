@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Users, Star, Bed, Eye } from "lucide-react";
+import { MapPin, Phone, Users, Star, Bed, Eye, Settings, DollarSign } from "lucide-react";
 import type { Hostel } from "@/pages/SearchResults";
 import asset7 from "@assets/logo/Asset 7.svg";
 import asset8 from "@assets/logo/Asset 8.svg";
+import FacilitiesModal from "./facilities-modal";
+import RentsModal from "./rents-modal";
 
 interface Province {
   id: number;
@@ -32,6 +35,10 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
   // Province and city names are already strings in the API response
   const provinceName = hostel.province;
   const cityName = hostel.city_name;
+  
+  // Modal states
+  const [facilitiesModalOpen, setFacilitiesModalOpen] = useState(false);
+  const [rentsModalOpen, setRentsModalOpen] = useState(false);
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 hover:border-primary/30 bg-white dark:bg-gray-800 rounded-xl overflow-hidden hover:-translate-y-1" onClick={onClick}>
       <div className="p-6">
@@ -103,19 +110,66 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
               </div>
             </div>
             
-            {/* Action Button */}
-            <Button 
-              size="lg"
-              className="group-hover:bg-primary group-hover:text-white bg-primary/10 text-primary hover:bg-primary hover:text-white border-primary/20 hover:border-primary transition-all duration-200 px-8 py-3 text-base font-semibold shadow-md hover:shadow-lg"
-              data-testid={`button-view-seats-${hostel.hostel_id || 0}`}
-            >
-              <Bed className="w-5 h-5 mr-2" />
-              Check Vacant Seats
-              <Eye className="w-5 h-5 ml-2" />
-            </Button>
+            {/* Action Buttons */}
+            <div className="flex flex-col gap-3 w-full">
+              {/* Main Action Button */}
+              <Button 
+                size="lg"
+                className="group-hover:bg-primary group-hover:text-white bg-primary/10 text-primary hover:bg-primary hover:text-white border-primary/20 hover:border-primary transition-all duration-200 px-6 py-3 text-base font-semibold shadow-md hover:shadow-lg w-full"
+                data-testid={`button-view-seats-${hostel.hostel_id || 0}`}
+              >
+                <Bed className="w-5 h-5 mr-2" />
+                Check Vacant Seats
+                <Eye className="w-5 h-5 ml-2" />
+              </Button>
+              
+              {/* Secondary Action Buttons */}
+              <div className="flex gap-2">
+                <Button 
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 border-blue-200 text-blue-600 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 transition-all duration-200 py-2 text-sm font-medium shadow-sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFacilitiesModalOpen(true);
+                  }}
+                  data-testid={`button-facilities-${hostel.hostel_id || 0}`}
+                >
+                  <Settings className="w-4 h-4 mr-1" />
+                  Facilities
+                </Button>
+                
+                <Button 
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 border-green-200 text-green-600 hover:bg-green-50 hover:text-green-700 hover:border-green-300 transition-all duration-200 py-2 text-sm font-medium shadow-sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setRentsModalOpen(true);
+                  }}
+                  data-testid={`button-rents-${hostel.hostel_id || 0}`}
+                >
+                  <DollarSign className="w-4 h-4 mr-1" />
+                  Pricing
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      
+      {/* Modals */}
+      <FacilitiesModal
+        hostel={hostel}
+        open={facilitiesModalOpen}
+        onOpenChange={setFacilitiesModalOpen}
+      />
+      
+      <RentsModal
+        hostel={hostel}
+        open={rentsModalOpen}
+        onOpenChange={setRentsModalOpen}
+      />
     </Card>
   );
 }
