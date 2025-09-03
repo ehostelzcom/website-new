@@ -73,14 +73,14 @@ export default function StudentLogin() {
                   Username
                 </Label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 w-5 h-5 z-10 pointer-events-none" />
                   <Input
                     id="username"
                     type="text"
                     placeholder="Enter your username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="pl-10 h-12 border-gray-200 dark:border-gray-600 focus:border-[#004e89] dark:focus:border-[#004e89] focus:ring-[#004e89] bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm"
+                    className="pl-12 h-12 border-gray-200 dark:border-gray-600 focus:border-[#004e89] dark:focus:border-[#004e89] focus:ring-[#004e89] bg-white dark:bg-gray-800 relative z-0"
                     required
                     data-testid="input-username"
                   />
@@ -93,14 +93,14 @@ export default function StudentLogin() {
                   Password
                 </Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 w-5 h-5 z-10 pointer-events-none" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-12 h-12 border-gray-200 dark:border-gray-600 focus:border-[#004e89] dark:focus:border-[#004e89] focus:ring-[#004e89] bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm"
+                    className="pl-12 pr-12 h-12 border-gray-200 dark:border-gray-600 focus:border-[#004e89] dark:focus:border-[#004e89] focus:ring-[#004e89] bg-white dark:bg-gray-800 relative z-0"
                     required
                     data-testid="input-password"
                   />
@@ -108,14 +108,14 @@ export default function StudentLogin() {
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-transparent"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-700 z-10"
                     onClick={() => setShowPassword(!showPassword)}
                     data-testid="button-toggle-password"
                   >
                     {showPassword ? (
-                      <EyeOff className="w-4 h-4 text-gray-400 hover:text-gray-600" />
+                      <EyeOff className="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" />
                     ) : (
-                      <Eye className="w-4 h-4 text-gray-400 hover:text-gray-600" />
+                      <Eye className="w-5 h-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" />
                     )}
                   </Button>
                 </div>
