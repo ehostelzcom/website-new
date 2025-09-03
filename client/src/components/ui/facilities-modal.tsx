@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Settings, Loader2, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -112,26 +112,47 @@ export default function FacilitiesModal({ hostel, open, onOpenChange }: Faciliti
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {facilities.map((facility) => (
-                  <Card key={facility.facility_id} className="border-2 border-blue-100 dark:border-blue-800 bg-gradient-to-br from-white via-blue-50/30 to-blue-100/30 dark:from-gray-800 dark:via-blue-900/10 dark:to-blue-800/10 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-lg flex items-center gap-3">
-                        <div className="w-10 h-10 bg-blue-100 dark:bg-blue-800 rounded-full flex items-center justify-center">
-                          <Settings className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-gray-900 dark:text-white text-base">{facility.title}</h4>
-                        </div>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                        {facility.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-50 dark:hover:bg-blue-900/20">
+                      <TableHead className="w-16 text-center font-semibold text-blue-900 dark:text-blue-100">
+                        #
+                      </TableHead>
+                      <TableHead className="font-semibold text-blue-900 dark:text-blue-100 min-w-[200px]">
+                        Facility Name
+                      </TableHead>
+                      <TableHead className="font-semibold text-blue-900 dark:text-blue-100">
+                        Description
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {facilities.map((facility, index) => (
+                      <TableRow 
+                        key={facility.facility_id} 
+                        className="hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-colors duration-200 border-b border-gray-100 dark:border-gray-700"
+                      >
+                        <TableCell className="text-center font-medium text-gray-500 dark:text-gray-400">
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 bg-blue-100 dark:bg-blue-800 rounded-full flex items-center justify-center flex-shrink-0">
+                              <Settings className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                            </div>
+                            <span className="text-gray-900 dark:text-white font-medium">
+                              {facility.title}
+                            </span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                          {facility.description}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
             </>
           ) : (
