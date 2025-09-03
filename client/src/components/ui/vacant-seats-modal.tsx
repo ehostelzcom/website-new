@@ -77,37 +77,41 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
     try {
       // Call the real API
       const response = await axios.get(`/api/vacant-seats/${hostelId}`);
-      console.log("Vacant seats API response:", response.data);
-      console.log("Raw rooms data:", JSON.stringify(response.data.rooms, null, 2));
+      
+      // Check if response has the expected structure
+      if (!response.data || !response.data.rooms || !Array.isArray(response.data.rooms)) {
+        console.error("Invalid API response structure:", response.data);
+        setError("Invalid response from server");
+        return;
+      }
       
       // Transform the API response to include total_counts for each seat
       const transformedSeats: VacantSeat[] = [];
       
-      if (response.data.rooms && Array.isArray(response.data.rooms)) {
-        response.data.rooms.forEach((room: any) => {
-          console.log(`Processing room: ${room.room_title}`, room);
-          if (room.beds && Array.isArray(room.beds)) {
-            console.log(`Room ${room.room_title} has ${room.beds.length} beds:`, room.beds);
-            room.beds.forEach((bed: any) => {
-              console.log(`Processing bed:`, bed);
+      response.data.rooms.forEach((room: any) => {
+        if (room.beds && Array.isArray(room.beds) && room.beds.length > 0) {
+          room.beds.forEach((bed: any) => {
+            if (bed.bed_title && bed.seat_title) {
               transformedSeats.push({
                 room_title: room.room_title,
                 bed_title: bed.bed_title,
                 seat_title: bed.seat_title,
-                hostel_id: parseInt(hostelId.toString()),
+                hostel_id: hostelId,
                 total_counts: room.total_counts || 0
               });
-            });
-          } else {
-            console.log(`Room ${room.room_title} has no beds or beds is not an array:`, room.beds);
-          }
-        });
-      }
+            }
+          });
+        }
+      });
       
-      console.log("Transformed seats:", transformedSeats);
+      console.log(`Processed ${transformedSeats.length} vacant seats from ${response.data.rooms.length} rooms`);
       
       // Set the transformed vacant seats data
       setVacantSeats(transformedSeats);
+      
+      if (transformedSeats.length === 0) {
+        console.warn("No vacant seats found in API response");
+      }
     } catch (err) {
       setError("Failed to load vacant seats. Please try again.");
       console.error("Error fetching vacant seats:", err);
