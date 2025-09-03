@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Banknote, Loader2, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -114,36 +114,60 @@ export default function RentsModal({ hostel, open, onOpenChange }: RentsModalPro
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {rents.map((rent, index) => (
-                  <Card key={index} className="border-2 border-green-100 dark:border-green-800 bg-gradient-to-br from-white via-green-50/30 to-green-100/30 dark:from-gray-800 dark:via-green-900/10 dark:to-green-800/10 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-lg flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-green-100 dark:bg-green-800 rounded-full flex items-center justify-center">
-                            <Banknote className="w-5 h-5 text-green-600 dark:text-green-400" />
+              <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-green-50 dark:bg-green-900/20 hover:bg-green-50 dark:hover:bg-green-900/20">
+                      <TableHead className="w-16 text-center font-semibold text-green-900 dark:text-green-100">
+                        #
+                      </TableHead>
+                      <TableHead className="font-semibold text-green-900 dark:text-green-100 min-w-[200px]">
+                        Accommodation Type
+                      </TableHead>
+                      <TableHead className="font-semibold text-green-900 dark:text-green-100 text-right">
+                        Monthly Rate
+                      </TableHead>
+                      <TableHead className="font-semibold text-green-900 dark:text-green-100 text-center">
+                        Status
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {rents.map((rent, index) => (
+                      <TableRow 
+                        key={index} 
+                        className="hover:bg-green-50/50 dark:hover:bg-green-900/10 transition-colors duration-200 border-b border-gray-100 dark:border-gray-700"
+                      >
+                        <TableCell className="text-center font-medium text-gray-500 dark:text-gray-400">
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 bg-green-100 dark:bg-green-800 rounded-full flex items-center justify-center flex-shrink-0">
+                              <Banknote className="w-4 h-4 text-green-600 dark:text-green-400" />
+                            </div>
+                            <span className="text-gray-900 dark:text-white font-medium">
+                              {rent.title}
+                            </span>
                           </div>
-                          <div>
-                            <h4 className="font-bold text-gray-900 dark:text-white text-base">{rent.title}</h4>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <div className="text-lg font-bold text-green-600 dark:text-green-400">
+                            {formatCurrency(rent.amount)}
                           </div>
-                        </div>
-                        <Badge variant="default" className="bg-green-600 hover:bg-green-700 text-white font-bold">
-                          {formatCurrency(rent.amount)}
-                        </Badge>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                          {formatCurrency(rent.amount)}
-                        </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                          Monthly rate
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            per month
+                          </p>
+                        </TableCell>
+                        <TableCell className="text-center">
+                          <Badge variant="default" className="bg-green-600 hover:bg-green-700 text-white font-medium">
+                            Available
+                          </Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
             </>
           ) : (
