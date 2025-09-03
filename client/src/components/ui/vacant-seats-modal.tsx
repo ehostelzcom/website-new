@@ -233,16 +233,16 @@ Please let me know about availability and booking process. Thank you!`;
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
-                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
                         {seats.map((seat) => (
-                          <div key={seat.seat_title} className="bg-gradient-to-b from-white to-gray-50 dark:from-gray-700 dark:to-gray-750 rounded-xl border-2 border-gray-200 dark:border-gray-600 p-4 hover:border-primary/60 hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                            <div className="flex flex-col items-center gap-3">
-                              <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl flex items-center justify-center shadow-md">
-                                <Bed className="w-6 h-6 text-primary" />
+                          <div key={seat.seat_title} className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-2 hover:border-primary/50 hover:shadow-md transition-all duration-200 group">
+                            <div className="flex flex-col items-center gap-1.5">
+                              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                <Bed className="w-4 h-4 text-primary" />
                               </div>
-                              <div className="text-center">
-                                <p className="font-bold text-sm text-gray-900 dark:text-white">{seat.bed_title}</p>
-                                <p className="text-xs text-primary font-medium mb-2">{seat.seat_title}</p>
+                              <div className="text-center min-h-[32px] flex flex-col justify-center">
+                                <p className="font-medium text-xs text-gray-900 dark:text-white leading-tight">{seat.bed_title}</p>
+                                <p className="text-xs text-primary font-medium">{seat.seat_title}</p>
                               </div>
                               {(() => {
                                 const seatKey = `${seat.room_title}-${seat.bed_title}-${seat.seat_title}`;
@@ -253,22 +253,20 @@ Please let me know about availability and booking process. Thank you!`;
                                     size="sm"
                                     onClick={() => handleWhatsAppBooking(seat)}
                                     disabled={isRequested}
-                                    className={`w-full text-xs py-2.5 gap-1 shadow-md hover:shadow-lg transition-all duration-200 ${
+                                    className={`w-full text-xs py-1.5 px-2 h-7 transition-all duration-200 ${
                                       isRequested 
-                                        ? "bg-gradient-to-r from-emerald-600 to-emerald-700 text-white cursor-default" 
-                                        : "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white"
+                                        ? "bg-emerald-600 text-white cursor-default hover:bg-emerald-600" 
+                                        : "bg-green-600 hover:bg-green-700 text-white"
                                     }`}
                                     data-testid={`button-book-${seat.seat_title}`}
                                   >
                                     {isRequested ? (
                                       <>
                                         <Check className="w-3 h-3" />
-                                        Request Sent!
                                       </>
                                     ) : (
                                       <>
                                         <MessageCircle className="w-3 h-3" />
-                                        Request Booking
                                       </>
                                     )}
                                   </Button>
