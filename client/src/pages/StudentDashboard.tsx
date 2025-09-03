@@ -3,8 +3,10 @@ import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Building2, MapPin, Users, Phone, Settings, LogOut } from "lucide-react";
+import { MapPin, Users, Phone, Settings, LogOut } from "lucide-react";
 import logoSvg from "@assets/logo/Asset 3.svg";
+import girlsHostelLogo from "@assets/logo/Asset 7.svg";
+import boysHostelLogo from "@assets/logo/Asset 8.svg";
 
 interface StudentHostel {
   hostel_id: number;
@@ -171,7 +173,11 @@ export default function StudentDashboard() {
                 <CardHeader className="pb-2 pt-3 px-3">
                   <div className="flex items-center justify-between mb-1">
                     <div className="w-8 h-8 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
-                      <Building2 className="w-4 h-4 text-[#ff6b35]" />
+                      <img 
+                        src={hostel.hostel_type === "GIRLS" ? girlsHostelLogo : boysHostelLogo}
+                        alt={`${hostel.hostel_type} Hostel`}
+                        className="w-5 h-5"
+                      />
                     </div>
                     <Badge 
                       variant={hostel.status === "Active" ? "default" : "secondary"}
