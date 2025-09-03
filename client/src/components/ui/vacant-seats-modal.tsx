@@ -83,35 +83,19 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
       const response = await axios.get(`/api/vacant-seats/${hostelId}`);
       
       // Check if response has the expected structure
-      if (!response.data || !response.data.rooms || !Array.isArray(response.data.rooms)) {
+      if (!response.data || !response.data.vacantSeats || !Array.isArray(response.data.vacantSeats)) {
         console.error("Invalid API response structure:", response.data);
         setError("Invalid response from server");
         return;
       }
       
-      // Transform the API response to include total_counts for each seat
-      const transformedSeats: VacantSeat[] = [];
+      // Use the server's already transformed data
+      const transformedSeats: VacantSeat[] = response.data.vacantSeats;
       
-      response.data.rooms.forEach((room: any) => {
-        if (room.beds && Array.isArray(room.beds) && room.beds.length > 0) {
-          room.beds.forEach((bed: any) => {
-            if (bed.bed_title && bed.seat_title) {
-              transformedSeats.push({
-                room_title: room.room_title,
-                bed_title: bed.bed_title,
-                seat_title: bed.seat_title,
-                hostel_id: hostelId,
-                total_counts: room.total_counts || 0
-              });
-            }
-          });
-        }
-      });
+      console.log(`Received ${transformedSeats.length} vacant seats from server`);
+      console.log("Vacant seats array:", transformedSeats);
       
-      console.log(`Processed ${transformedSeats.length} vacant seats from ${response.data.rooms.length} rooms`);
-      console.log("Transformed seats array:", transformedSeats);
-      
-      // Set the transformed vacant seats data
+      // Set the vacant seats data
       setVacantSeats(transformedSeats);
       
       if (transformedSeats.length === 0) {
