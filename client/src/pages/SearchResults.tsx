@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { SearchableSelect } from "@/components/ui/searchable-select";
 import { ArrowLeft, Search, MapPin, Phone, Users, Star, Bed } from "lucide-react";
 import asset9 from "@assets/logo/Asset 9.svg";
+import asset3 from "@assets/logo/Asset 3.svg";
 import { useProvinces } from "@/hooks/useProvinces";
 import { useCities } from "@/hooks/useCities";
 import { useLocations } from "@/hooks/useLocations";
@@ -133,7 +134,14 @@ export default function SearchResults() {
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
               </Button>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Search Results</h1>
+              <div className="flex items-center gap-3">
+                <img 
+                  src={asset3} 
+                  alt="ehostelz.com Logo" 
+                  className="w-8 h-8"
+                />
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Search Results</h1>
+              </div>
             </div>
           </div>
         </div>
