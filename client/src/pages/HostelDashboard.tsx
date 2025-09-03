@@ -322,14 +322,12 @@ export default function HostelDashboard() {
                   >
                     <CardHeader className="pb-2 pt-3 px-3">
                       <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center space-x-2">
-                          <div className="w-12 h-12 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
-                            <img 
-                              src={hostel.hostel_type === "GIRLS" ? girlsHostelLogo : boysHostelLogo}
-                              alt={`${hostel.hostel_type} Hostel`}
-                              className="w-7 h-7"
-                            />
-                          </div>
+                        <div className="flex items-center space-x-3">
+                          <img 
+                            src={hostel.hostel_type === "GIRLS" ? girlsHostelLogo : boysHostelLogo}
+                            alt={`${hostel.hostel_type} Hostel`}
+                            className="w-10 h-10"
+                          />
                           <CardTitle className="text-base font-bold text-gray-900 dark:text-white leading-tight">
                             {hostel.hostel_name}
                           </CardTitle>
