@@ -168,52 +168,52 @@ export default function StudentDashboard() {
                 onClick={() => handleHostelClick(hostel)}
                 data-testid={`card-hostel-${hostel.hostel_id}`}
               >
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="w-12 h-12 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
-                      <Building2 className="w-6 h-6 text-[#ff6b35]" />
+                <CardHeader className="pb-2 pt-3 px-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="w-8 h-8 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
+                      <Building2 className="w-4 h-4 text-[#ff6b35]" />
                     </div>
                     <Badge 
                       variant={hostel.status === "Active" ? "default" : "secondary"}
-                      className={hostel.status === "Active" 
+                      className={`text-xs px-2 py-0.5 ${hostel.status === "Active" 
                         ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" 
                         : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
-                      }
+                      }`}
                     >
                       {hostel.status}
                     </Badge>
                   </div>
-                  <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">
+                  <CardTitle className="text-sm font-bold text-gray-900 dark:text-white leading-tight">
                     {hostel.hostel_name}
                   </CardTitle>
-                  <div className="flex items-center space-x-2">
-                    <Users className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                  <div className="flex items-center space-x-1">
+                    <Users className="w-3 h-3 text-gray-500" />
+                    <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
                       {hostel.hostel_type}
                     </span>
                   </div>
                 </CardHeader>
 
-                <CardContent className="space-y-3">
-                  <div className="flex items-start space-x-2">
-                    <MapPin className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                      <p>{hostel.address}</p>
+                <CardContent className="space-y-2 px-3 pb-3">
+                  <div className="flex items-start space-x-1">
+                    <MapPin className="w-3 h-3 text-gray-500 mt-0.5 flex-shrink-0" />
+                    <div className="text-xs text-gray-600 dark:text-gray-400 leading-tight">
+                      <p className="line-clamp-1">{hostel.address}</p>
                       <p>{hostel.city_name}, {hostel.province}</p>
                     </div>
                   </div>
                   
-                  <div className="flex items-center space-x-2">
-                    <Phone className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center space-x-1">
+                    <Phone className="w-3 h-3 text-gray-500" />
+                    <span className="text-xs text-gray-600 dark:text-gray-400">
                       {hostel.mobile}
                     </span>
                   </div>
 
-                  <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
+                  <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
                     <Button 
                       size="sm" 
-                      className="w-full bg-gradient-to-r from-[#004e89] to-[#0066b3] hover:from-[#003a6b] hover:to-[#004e89] text-white"
+                      className="w-full h-7 text-xs bg-gradient-to-r from-[#004e89] to-[#0066b3] hover:from-[#003a6b] hover:to-[#004e89] text-white"
                     >
                       View Dashboard
                     </Button>
