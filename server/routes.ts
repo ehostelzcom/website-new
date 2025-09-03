@@ -352,7 +352,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 bed_title: bed.bed_title,
                 seat_title: bed.seat_title,
                 hostel_id: parseInt(hostel_id),
-                total_counts: room.total_counts || 0
+                total_counts: room.total_counts || 0,
+                counts: room.counts || 0
               });
             });
           }

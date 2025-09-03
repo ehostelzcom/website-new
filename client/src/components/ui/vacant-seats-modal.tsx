@@ -34,6 +34,7 @@ export interface VacantSeat {
   seat_title: string;
   hostel_id: number;
   total_counts?: number;
+  counts?: number;
 }
 
 interface VacantSeatsModalProps {
@@ -57,15 +58,15 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
   // Group seats by room for better display with total counts
   const groupedSeats = vacantSeats.reduce((acc, seat) => {
     if (!acc[seat.room_title]) {
-      acc[seat.room_title] = { seats: [], total_counts: seat.total_counts || 0 };
+      acc[seat.room_title] = { 
+        seats: [], 
+        total_counts: seat.total_counts || 0,
+        counts: seat.counts || 0
+      };
     }
     acc[seat.room_title].seats.push(seat);
     return acc;
-  }, {} as Record<string, { seats: VacantSeat[], total_counts: number }>);
-
-  console.log("Vacant seats state:", vacantSeats);
-  console.log("Grouped seats:", groupedSeats);
-  console.log("Number of room groups:", Object.keys(groupedSeats).length);
+  }, {} as Record<string, { seats: VacantSeat[], total_counts: number, counts: number }>);
 
   // Fetch vacant seats when modal opens and hostel is selected
   useEffect(() => {
@@ -92,16 +93,8 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
       // Use the server's already transformed data
       const transformedSeats: VacantSeat[] = response.data.vacantSeats;
       
-      console.log(`Received ${transformedSeats.length} vacant seats from server`);
-      console.log("Vacant seats array:", transformedSeats);
-      
       // Set the vacant seats data
       setVacantSeats(transformedSeats);
-      
-      if (transformedSeats.length === 0) {
-        console.warn("No vacant seats found in API response");
-        console.log("Full API response for debugging:", JSON.stringify(response.data, null, 2));
-      }
     } catch (err) {
       setError("Failed to load vacant seats. Please try again.");
       console.error("Error fetching vacant seats:", err);
@@ -246,7 +239,7 @@ Please let me know about availability and booking process. Thank you!`;
                           <img src={asset9} alt="Room icon" className="w-8 h-8" />
                         </div>
                         <div>
-                          <h4 className="font-bold text-gray-900 dark:text-white">Room: {roomTitle}</h4>
+                          <h4 className="font-bold text-gray-900 dark:text-white">{roomTitle} ({roomData.total_counts} Seaters - {roomData.counts} Vacant Seats)</h4>
                           <p className="text-sm text-gray-600 dark:text-gray-400">Available beds for booking</p>
                         </div>
                         <div className="ml-auto flex items-center gap-2">
