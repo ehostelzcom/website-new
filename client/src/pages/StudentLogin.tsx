@@ -23,10 +23,10 @@ export default function StudentLogin() {
     // TODO: Implement actual login logic with real API
     setTimeout(() => {
       setIsLoading(false);
-      // For now, redirect to student dashboard on successful login
+      // For now, redirect to hostel dashboard home page on successful login
       console.log("Login attempted:", { username, password, rememberMe });
-      // Redirect to student dashboard after successful login
-      setLocation("/student-dashboard");
+      // Redirect to hostel dashboard home page (where all hostel cards are displayed)
+      setLocation("/hostel-dashboard/1");
     }, 1000);
   };
 
