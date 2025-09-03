@@ -124,20 +124,13 @@ export default function SearchResults() {
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             {/* Logo and Title Section */}
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-4">
-                <img 
-                  src={asset3} 
-                  alt="ehostelz.com Logo" 
-                  className="w-12 h-12 drop-shadow-md"
-                />
-                <div>
-                  <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">ehostelz.com</h1>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">Smart Hostel Management Platform</p>
-                </div>
-              </div>
-              <div className="hidden md:block w-px h-12 bg-gray-300 dark:bg-gray-600"></div>
-              <div className="hidden md:block">
+            <div className="flex items-center gap-4">
+              <img 
+                src={asset3} 
+                alt="ehostelz.com Logo" 
+                className="h-12 w-auto"
+              />
+              <div>
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Search Results</h2>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Find your perfect hostel accommodation</p>
               </div>
