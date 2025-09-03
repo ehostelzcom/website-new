@@ -63,6 +63,10 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
     return acc;
   }, {} as Record<string, { seats: VacantSeat[], total_counts: number }>);
 
+  console.log("Vacant seats state:", vacantSeats);
+  console.log("Grouped seats:", groupedSeats);
+  console.log("Number of room groups:", Object.keys(groupedSeats).length);
+
   // Fetch vacant seats when modal opens and hostel is selected
   useEffect(() => {
     if (open && hostel) {
@@ -105,12 +109,14 @@ export default function VacantSeatsModal({ hostel, open, onOpenChange, provinces
       });
       
       console.log(`Processed ${transformedSeats.length} vacant seats from ${response.data.rooms.length} rooms`);
+      console.log("Transformed seats array:", transformedSeats);
       
       // Set the transformed vacant seats data
       setVacantSeats(transformedSeats);
       
       if (transformedSeats.length === 0) {
         console.warn("No vacant seats found in API response");
+        console.log("Full API response for debugging:", JSON.stringify(response.data, null, 2));
       }
     } catch (err) {
       setError("Failed to load vacant seats. Please try again.");

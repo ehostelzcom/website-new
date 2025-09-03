@@ -1,0 +1,136 @@
+{
+    "status": true,
+    "code": 200,
+    "hostel": {
+        "group_name": "Ungrouped Hostels",
+        "hostel_name": "SMART HOSTEL",
+        "hostel_type": "BOYS",
+        "mobile": "03335638649",
+        "whatsapp": "03335638649",
+        "province": "Khyber Pakhtunkhwa",
+        "city_name": "Mardan",
+        "location": "Nawan Killi, Mardan",
+        "address": "Near Abdul Wali Khan University, Garden Campus Toru Road Mardan."
+    },
+    "rooms": [
+        {
+            "room_title": "FF-R04",
+            "counts": 1,
+            "total_counts": 2,
+            "beds": [
+                {
+                    "bed_title": "B02",
+                    "seat_title": "FF-R04-B02"
+                }
+            ]
+        },
+        {
+            "room_title": "FF-R07",
+            "counts": 1,
+            "total_counts": 2,
+            "beds": [
+                {
+                    "bed_title": "B02",
+                    "seat_title": "FF-R07-B02"
+                }
+            ]
+        },
+        {
+            "room_title": "GF-R01",
+            "counts": 1,
+            "total_counts": 4,
+            "beds": [
+                {
+                    "bed_title": "B04",
+                    "seat_title": "GF-R01-B04"
+                }
+            ]
+        },
+        {
+            "room_title": "GF-R05",
+            "counts": 3,
+            "total_counts": 3,
+            "beds": [
+                {
+                    "bed_title": "B01",
+                    "seat_title": "GF-R05-B01"
+                },
+                {
+                    "bed_title": "B02",
+                    "seat_title": "GF-R05-B02"
+                },
+                {
+                    "bed_title": "B03",
+                    "seat_title": "GF-R05-B03"
+                }
+            ]
+        },
+        {
+            "room_title": "SF-R02",
+            "counts": 2,
+            "total_counts": 4,
+            "beds": [
+                {
+                    "bed_title": "B03",
+                    "seat_title": "SF-R02-B03"
+                },
+                {
+                    "bed_title": "B04",
+                    "seat_title": "SF-R02-B04"
+                }
+            ]
+        },
+        {
+            "room_title": "SF-R03",
+            "counts": 3,
+            "total_counts": 3,
+            "beds": [
+                {
+                    "bed_title": "B01",
+                    "seat_title": "SF-R03-B01"
+                },
+                {
+                    "bed_title": "B02",
+                    "seat_title": "SF-R03-B02"
+                },
+                {
+                    "bed_title": "B03",
+                    "seat_title": "SF-R03-B03"
+                }
+            ]
+        },
+        {
+            "room_title": "SF-R04",
+            "counts": 1,
+            "total_counts": 3,
+            "beds": [
+                {
+                    "bed_title": "B02",
+                    "seat_title": "SF-R04-B02"
+                }
+            ]
+        },
+        {
+            "room_title": "SF-R05",
+            "counts": 1,
+            "total_counts": 2,
+            "beds": [
+                {
+                    "bed_title": "B02",
+                    "seat_title": "SF-R05-B02"
+                }
+            ]
+        },
+        {
+            "room_title": "SF-R06",
+            "counts": 1,
+            "total_counts": 2,
+            "beds": [
+                {
+                    "bed_title": "B01",
+                    "seat_title": "SF-R06-B01"
+                }
+            ]
+        }
+    ]
+}
