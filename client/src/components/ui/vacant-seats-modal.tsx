@@ -246,9 +246,6 @@ Please let me know about availability and booking process. Thank you!`;
                           <Badge variant="outline" className="text-xs text-gray-600 dark:text-gray-400">
                             {roomData.seats.length}/{roomData.total_counts} available
                           </Badge>
-                          <Badge variant="default" className="bg-primary">
-                            {roomData.seats.length} seat{roomData.seats.length !== 1 ? 's' : ''}
-                          </Badge>
                         </div>
                       </CardTitle>
                     </CardHeader>
