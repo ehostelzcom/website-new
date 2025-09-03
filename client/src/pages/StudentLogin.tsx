@@ -56,7 +56,7 @@ export default function StudentLogin() {
             </div>
             
             <div className="space-y-2">
-              <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+              <CardTitle className="text-2xl font-bold text-gray-700 dark:text-gray-300">
                 Student Login
               </CardTitle>
               <CardDescription className="text-gray-600 dark:text-gray-400">
