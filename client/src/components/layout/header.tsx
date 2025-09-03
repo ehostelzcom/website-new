@@ -86,7 +86,15 @@ export default function Header() {
             </button>
           </nav>
           
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-3">
+            <div className="hidden md:block">
+              <Button 
+                className="bg-white dark:bg-gray-800 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white font-semibold px-6 py-2.5 shadow-lg shadow-[#ff6b35]/25 hover:shadow-xl hover:shadow-[#ff6b35]/30 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+                data-testid="button-student-login-header"
+              >
+                Student Login
+              </Button>
+            </div>
             <div className="hidden md:block">
               <RequestDemoModal>
                 <Button 
@@ -154,7 +162,13 @@ export default function Header() {
                   >
                     Contact
                   </button>
-                  <div className="pt-4">
+                  <div className="pt-4 space-y-3">
+                    <Button 
+                      className="w-full bg-white dark:bg-gray-800 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white font-semibold py-3 shadow-lg shadow-[#ff6b35]/25 hover:shadow-xl transition-all duration-300"
+                      data-testid="nav-mobile-student-login"
+                    >
+                      Student Login
+                    </Button>
                     <RequestDemoModal>
                       <Button 
                         className="w-full bg-gradient-to-r from-[#004e89] to-[#0066b3] hover:from-[#003a6b] hover:to-[#004e89] text-white font-semibold py-3 shadow-lg shadow-[#004e89]/25 hover:shadow-xl transition-all duration-300"
