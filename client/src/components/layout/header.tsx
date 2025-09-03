@@ -92,7 +92,7 @@ export default function Header() {
             <div className="hidden md:block">
               <Button 
                 onClick={() => setLocation("/student-login")}
-                className="bg-white dark:bg-gray-800 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white font-semibold px-6 py-2.5 shadow-lg shadow-[#ff6b35]/25 hover:shadow-xl hover:shadow-[#ff6b35]/30 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+                className="bg-gray-800 dark:bg-gray-700 border-2 border-gray-800 dark:border-gray-600 text-white hover:bg-gray-900 dark:hover:bg-gray-600 hover:border-gray-900 dark:hover:border-gray-500 font-semibold px-6 py-2.5 shadow-lg shadow-gray-800/25 hover:shadow-xl hover:shadow-gray-900/30 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
                 data-testid="button-student-login-header"
               >
                 Student Login
@@ -168,7 +168,7 @@ export default function Header() {
                   <div className="pt-4 space-y-3">
                     <Button 
                       onClick={() => {setLocation("/student-login"); setIsOpen(false);}}
-                      className="w-full bg-white dark:bg-gray-800 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white font-semibold py-3 shadow-lg shadow-[#ff6b35]/25 hover:shadow-xl transition-all duration-300"
+                      className="w-full bg-gray-800 dark:bg-gray-700 border-2 border-gray-800 dark:border-gray-600 text-white hover:bg-gray-900 dark:hover:bg-gray-600 hover:border-gray-900 dark:hover:border-gray-500 font-semibold py-3 shadow-lg shadow-gray-800/25 hover:shadow-xl transition-all duration-300"
                       data-testid="nav-mobile-student-login"
                     >
                       Student Login
