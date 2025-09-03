@@ -20,11 +20,13 @@ export default function StudentLogin() {
     e.preventDefault();
     setIsLoading(true);
     
-    // TODO: Implement actual login logic
+    // TODO: Implement actual login logic with real API
     setTimeout(() => {
       setIsLoading(false);
-      // For now, just show success - implement actual authentication later
+      // For now, redirect to student dashboard on successful login
       console.log("Login attempted:", { username, password, rememberMe });
+      // Redirect to student dashboard after successful login
+      setLocation("/student-dashboard");
     }, 1000);
   };
 
