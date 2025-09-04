@@ -715,8 +715,9 @@ export default function HostelDashboard() {
                                   tickLine={{ stroke: '#d1d5db' }}
                                 />
                                 <Tooltip 
-                                  formatter={(value: number, name: string) => {
-                                    const label = name === 'payable' ? 'Monthly Fees' : 'Amount Paid';
+                                  formatter={(value: number, name: string, props: any) => {
+                                    const monthLabel = props.payload?.label || '';
+                                    const label = name === 'payable' ? `${monthLabel} Payable` : `${monthLabel} Paid`;
                                     return [formatCurrency(value), label];
                                   }}
                                   labelStyle={{ color: '#374151', fontWeight: 'bold' }}
@@ -738,14 +739,14 @@ export default function HostelDashboard() {
                                 <Bar 
                                   dataKey="payable" 
                                   fill="url(#payableGradient)" 
-                                  name="Monthly Fees"
+                                  name="Payable Fees"
                                   radius={[4, 4, 0, 0]}
                                   maxBarSize={40}
                                 />
                                 <Bar 
                                   dataKey="paid" 
                                   fill="url(#paidGradient)" 
-                                  name="Amount Paid"
+                                  name="Paid Fees"
                                   radius={[4, 4, 0, 0]}
                                   maxBarSize={40}
                                 />
