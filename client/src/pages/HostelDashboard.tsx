@@ -46,6 +46,7 @@ interface HostelInfo {
   file_name: string;
   presenter_image_url: string;
   conference_logo_url: string;
+  student_hostel_status?: string;
 }
 
 interface RatingData {
@@ -358,7 +359,7 @@ export default function HostelDashboard() {
               {hostelInfo ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <Card 
-                    className="cursor-pointer transition-all duration-200 hover:shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
+                    className="cursor-pointer transition-all duration-200 hover:shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-xl"
                     onClick={handleHostelCardClick}
                     data-testid={`card-hostel-${hostelInfo.hostel_id}`}
                   >
