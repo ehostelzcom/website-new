@@ -452,6 +452,109 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // POST API for Student Login
+  app.post("/api/student-login", async (req, res) => {
+    console.log("Student login API call received:", req.body);
+    try {
+      const { username, password } = req.body;
+      
+      // Validate required fields
+      if (!username || !password) {
+        return res.status(400).json({ 
+          error: "Missing required fields",
+          message: "Username and password are required"
+        });
+      }
+
+      // Call Oracle APEX student login API
+      const response = await axios.post(
+        "http://ehostelz.com:8890/ords/jee_management_system/web/api/student-login",
+        {
+          username,
+          password
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          timeout: 10000,
+        }
+      );
+      
+      console.log("Oracle APEX student-login response:", response.data);
+      
+      // Return the response directly from Oracle APEX
+      res.setHeader('Content-Type', 'application/json');
+      res.json(response.data);
+    } catch (error) {
+      console.error("Error during student login:", error);
+      
+      // Handle authentication failure
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        return res.status(401).json({ 
+          status: false,
+          code: 401,
+          message: "Invalid username or password"
+        });
+      }
+      
+      res.status(500).json({ 
+        status: false,
+        code: 500,
+        message: "Login failed due to server error"
+      });
+    }
+  });
+
+  // GET API for Student Hostels by user_id
+  app.get("/api/student-hostels/:user_id", async (req, res) => {
+    console.log("Student hostels API call received for user_id:", req.params.user_id);
+    try {
+      const { user_id } = req.params;
+      
+      // Validate required parameter
+      if (!user_id) {
+        return res.status(400).json({ 
+          error: "Missing required parameter",
+          message: "user_id is required"
+        });
+      }
+
+      // Call Oracle APEX student hostels API
+      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/student-hostels/${user_id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log("Oracle APEX student-hostels response:", response.data);
+      
+      // Return the response directly from Oracle APEX
+      res.setHeader('Content-Type', 'application/json');
+      res.json(response.data);
+    } catch (error) {
+      console.error("Error fetching student hostels:", error);
+      
+      // Handle not found case
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return res.status(404).json({ 
+          status: false,
+          code: 404,
+          message: "No hostels found for this student"
+        });
+      }
+      
+      res.status(500).json({ 
+        status: false,
+        code: 500,
+        message: "Failed to fetch student hostels"
+      });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 

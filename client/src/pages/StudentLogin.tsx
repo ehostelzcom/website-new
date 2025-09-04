@@ -15,19 +15,47 @@ export default function StudentLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
     
-    // TODO: Implement actual login logic with real API
-    setTimeout(() => {
+    try {
+      // Call the student login API
+      const response = await fetch("/api/student-login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.status && data.code === 200) {
+        // Login successful - store user_id in localStorage
+        const userId = data.data.user_id;
+        localStorage.setItem("student_user_id", userId.toString());
+        
+        console.log("Login successful:", { userId, username });
+        
+        // Redirect to hostel dashboard home page
+        setLocation("/hostel-dashboard/1");
+      } else {
+        // Login failed
+        setError(data.message || "Invalid username or password");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Network error. Please try again.");
+    } finally {
       setIsLoading(false);
-      // For now, redirect to hostel dashboard home page on successful login
-      console.log("Login attempted:", { username, password, rememberMe });
-      // Redirect to hostel dashboard home page (where all hostel cards are displayed)
-      setLocation("/hostel-dashboard/1");
-    }, 1000);
+    }
   };
 
   return (
@@ -129,6 +157,13 @@ export default function StudentLogin() {
                   Remember me
                 </Label>
               </div>
+
+              {/* Error Message */}
+              {error && (
+                <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                  <p className="text-sm text-red-600 dark:text-red-400 text-center">{error}</p>
+                </div>
+              )}
 
               {/* Login Button */}
               <Button

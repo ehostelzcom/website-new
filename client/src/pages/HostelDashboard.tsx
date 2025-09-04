@@ -32,11 +32,20 @@ interface HostelInfo {
   hostel_id: number;
   hostel_name: string;
   hostel_type: string;
-  address: string;
-  city_name: string;
-  province: string;
-  mobile: string;
-  status: "Active" | "Inactive";
+  hostel_address: string;
+  hostel_city_name: string;
+  hostel_mobile_no: string;
+  presenter_name: string;
+  user_mobile_no: string;
+  user_role: string;
+  user_role_id: number;
+  user_city_name: string;
+  user_cnic: string;
+  user_address: string;
+  mime_type: string;
+  file_name: string;
+  presenter_image_url: string;
+  conference_logo_url: string;
 }
 
 interface RatingData {
@@ -79,78 +88,48 @@ export default function HostelDashboard() {
   const [, setLocation] = useLocation();
   const [match, params] = useRoute("/hostel-dashboard/:hostelId");
   const [hostelInfo, setHostelInfo] = useState<HostelInfo | null>(null);
-  const [hostels, setHostels] = useState<HostelInfo[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("home");
   const [ratings, setRatings] = useState<RatingData>({});
   const [isSubmittingRating, setIsSubmittingRating] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const hostelId = params?.hostelId ? parseInt(params.hostelId) : null;
 
-  // Mock user data - will be replaced with real user from login
-  const mockUser = {
-    name: "John Doe",
-    username: "johndoe",
-    email: "john@example.com"
-  };
-
   useEffect(() => {
-    if (hostelId) {
-      // TODO: Replace with real API call when provided
-      setLoading(true);
-      setTimeout(() => {
-        // Mock data - will be replaced with real API
-        const allHostels = [
-          {
-            hostel_id: 1,
-            hostel_name: "Smart Hostel",
-            hostel_type: "BOYS",
-            address: "Near Abdul Wali Khan University, Garden Campus Toru Road",
-            city_name: "Mardan",
-            province: "Khyber Pakhtunkhwa",
-            mobile: "03335638649",
-            status: "Active"
-          },
-          {
-            hostel_id: 2,
-            hostel_name: "Smart Hostel",
-            hostel_type: "GIRLS",
-            address: "Near Abdul Wali Khan University, Garden Campus Toru Road",
-            city_name: "Mardan",
-            province: "Khyber Pakhtunkhwa",
-            mobile: "03335638649",
-            status: "Active"
-          },
-          {
-            hostel_id: 3,
-            hostel_name: "Swabi Hostel",
-            hostel_type: "BOYS",
-            address: "Main Road, Swabi",
-            city_name: "Swabi",
-            province: "Khyber Pakhtunkhwa",
-            mobile: "03339876543",
-            status: "Inactive"
-          },
-          {
-            hostel_id: 4,
-            hostel_name: "Shalimar Hostel",
-            hostel_type: "GIRLS",
-            address: "University Road, Peshawar",
-            city_name: "Peshawar",
-            province: "Khyber Pakhtunkhwa",
-            mobile: "03331234567",
-            status: "Active"
-          }
-        ] as HostelInfo[];
+    const fetchStudentHostel = async () => {
+      try {
+        setLoading(true);
+        setError("");
         
-        setHostels(allHostels);
-        // Set current hostel info
-        const currentHostel = allHostels.find(h => h.hostel_id === hostelId);
-        setHostelInfo(currentHostel || allHostels[0]);
+        // Get user_id from localStorage (stored during login)
+        const userId = localStorage.getItem("student_user_id");
+        if (!userId) {
+          setError("Please login first");
+          setLocation("/student-login");
+          return;
+        }
+
+        // Call student hostels API
+        const response = await fetch(`/api/student-hostels/${userId}`);
+        const data = await response.json();
+
+        if (data.status && data.code === 200) {
+          // Set hostel info from API response
+          setHostelInfo(data.data);
+        } else {
+          setError(data.message || "Failed to fetch hostel data");
+        }
+      } catch (error) {
+        console.error("Error fetching student hostel:", error);
+        setError("Network error. Please try again.");
+      } finally {
         setLoading(false);
-      }, 500);
-    }
-  }, [hostelId]);
+      }
+    };
+
+    fetchStudentHostel();
+  }, [hostelId, setLocation]);
 
   const handleLogout = () => {
     setLocation("/student-login");
@@ -160,10 +139,12 @@ export default function HostelDashboard() {
     setActiveTab("profile");
   };
 
-  const handleHostelCardClick = (hostel: HostelInfo) => {
-    setLocation(`/hostel-dashboard/${hostel.hostel_id}`);
-    // When clicking on hostel card, go to dashboard page
-    setActiveTab("dashboard");
+  const handleHostelCardClick = () => {
+    if (hostelInfo) {
+      setLocation(`/hostel-dashboard/${hostelInfo.hostel_id}`);
+      // When clicking on hostel card, go to dashboard page
+      setActiveTab("dashboard");
+    }
   };
 
   const handleRatingChange = (questionId: string, rating: number) => {
@@ -281,13 +262,10 @@ export default function HostelDashboard() {
                         {hostelInfo.hostel_name}
                       </h1>
                       <Badge 
-                        variant={hostelInfo.status === "Active" ? "default" : "secondary"}
-                        className={hostelInfo.status === "Active" 
-                          ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" 
-                          : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
-                        }
+                        variant="default"
+                        className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
                       >
-                        {hostelInfo.status}
+                        Active
                       </Badge>
                     </div>
                     <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -297,11 +275,11 @@ export default function HostelDashboard() {
                       </span>
                       <span className="flex items-center">
                         <MapPin className="w-3 h-3 mr-1" />
-                        {hostelInfo.city_name}, {hostelInfo.province}
+                        {hostelInfo.hostel_city_name}
                       </span>
                       <span className="flex items-center">
                         <Phone className="w-3 h-3 mr-1" />
-                        {hostelInfo.mobile}
+                        {hostelInfo.hostel_mobile_no}
                       </span>
                     </div>
                   </div>
@@ -331,7 +309,7 @@ export default function HostelDashboard() {
                     <div className="w-8 h-8 bg-[#004e89] rounded-full flex items-center justify-center">
                       <User className="w-4 h-4 text-white" />
                     </div>
-                    <span className="font-medium">{mockUser.name}</span>
+                    <span className="font-medium">{hostelInfo?.presenter_name || "Student"}</span>
                     <ChevronDown className="w-4 h-4" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -339,10 +317,10 @@ export default function HostelDashboard() {
                   <DropdownMenuGroup>
                     <div className="px-2 py-1.5">
                       <p className="text-sm font-medium text-gray-900 dark:text-white">
-                        {mockUser.name}
+                        {hostelInfo?.presenter_name || "Student"}
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
-                        {mockUser.email}
+                        {hostelInfo?.user_role || "Student"} - {hostelInfo?.hostel_name}
                       </p>
                     </div>
                   </DropdownMenuGroup>
@@ -377,43 +355,36 @@ export default function HostelDashboard() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {hostels.map((hostel) => (
+              {hostelInfo ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <Card 
-                    key={hostel.hostel_id}
-                    className={`cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 border-2 ${hostel.hostel_id === hostelId 
-                      ? 'border-[#004e89] bg-blue-50 dark:bg-blue-950/20' 
-                      : 'border-gray-200 dark:border-gray-700 hover:border-[#004e89] dark:hover:border-[#004e89]'
-                    } bg-white dark:bg-gray-800`}
-                    onClick={() => handleHostelCardClick(hostel)}
-                    data-testid={`card-hostel-${hostel.hostel_id}`}
+                    className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 border-2 border-[#004e89] bg-blue-50 dark:bg-blue-950/20 bg-white dark:bg-gray-800"
+                    onClick={handleHostelCardClick}
+                    data-testid={`card-hostel-${hostelInfo.hostel_id}`}
                   >
                     <CardHeader className="pb-2 pt-3 px-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center space-x-3">
                           <img 
-                            src={hostel.hostel_type === "GIRLS" ? girlsHostelLogo : boysHostelLogo}
-                            alt={`${hostel.hostel_type} Hostel`}
+                            src={hostelInfo.hostel_type === "Girls" ? girlsHostelLogo : boysHostelLogo}
+                            alt={`${hostelInfo.hostel_type} Hostel`}
                             className="w-10 h-10"
                           />
                           <CardTitle className="text-base font-bold text-gray-900 dark:text-white leading-tight">
-                            {hostel.hostel_name}
+                            {hostelInfo.hostel_name}
                           </CardTitle>
                         </div>
                         <Badge 
-                          variant={hostel.status === "Active" ? "default" : "secondary"}
-                          className={`text-xs px-2 py-0.5 ${hostel.status === "Active" 
-                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" 
-                            : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
-                          }`}
+                          variant="default"
+                          className="text-xs px-2 py-0.5 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
                         >
-                          {hostel.status}
+                          Active
                         </Badge>
                       </div>
                       <div className="flex items-center space-x-1">
                         <User className="w-3 h-3 text-gray-500" />
                         <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
-                          {hostel.hostel_type}
+                          {hostelInfo.hostel_type}
                         </span>
                       </div>
                     </CardHeader>
@@ -422,29 +393,35 @@ export default function HostelDashboard() {
                       <div className="flex items-start space-x-1">
                         <MapPin className="w-3 h-3 text-gray-500 mt-0.5 flex-shrink-0" />
                         <div className="text-xs text-gray-600 dark:text-gray-400 leading-tight">
-                          <p className="line-clamp-1">{hostel.address}</p>
-                          <p>{hostel.city_name}, {hostel.province}</p>
+                          <p className="line-clamp-1">{hostelInfo.hostel_address}</p>
+                          <p>{hostelInfo.hostel_city_name}</p>
                         </div>
                       </div>
                       
                       <div className="flex items-center space-x-1">
                         <Phone className="w-3 h-3 text-gray-500" />
                         <span className="text-xs text-gray-600 dark:text-gray-400">
-                          {hostel.mobile}
+                          {hostelInfo.hostel_mobile_no}
                         </span>
                       </div>
 
-                      {hostel.hostel_id === hostelId && (
-                        <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-                          <div className="text-xs text-[#004e89] font-medium flex items-center">
-                            ✓ Currently Selected
-                          </div>
+                      <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                        <div className="text-xs text-[#004e89] font-medium flex items-center">
+                          ✓ Your Hostel
                         </div>
-                      )}
+                      </div>
                     </CardContent>
                   </Card>
-                ))}
-              </div>
+                </div>
+              ) : error ? (
+                <div className="text-center py-8">
+                  <p className="text-red-600 dark:text-red-400">{error}</p>
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-gray-600 dark:text-gray-400">No hostel data found</p>
+                </div>
+              )}
             </div>
           )}
 
