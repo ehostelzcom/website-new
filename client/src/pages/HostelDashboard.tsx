@@ -617,94 +617,39 @@ export default function HostelDashboard() {
               ) : (
                 <>
                   {/* Summary Cards */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center space-x-2">
-                          <CreditCard className="w-5 h-5 text-[#004e89]" />
-                          <span>Total Fees</span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                          {formatCurrency(getSummaryStats().totalFees)}
-                        </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          Current year
-                        </p>
-                      </CardContent>
-                    </Card>
-
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center space-x-2">
-                          <Receipt className="w-5 h-5 text-green-600" />
-                          <span>Paid Amount</span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-2xl font-bold text-green-600">
-                          {formatCurrency(getSummaryStats().totalPaid)}
-                        </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {getSummaryStats().totalFees > 0 
-                            ? `${Math.round((getSummaryStats().totalPaid / getSummaryStats().totalFees) * 100)}% completed`
-                            : "No fees yet"
-                          }
-                        </p>
-                      </CardContent>
-                    </Card>
-
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center space-x-2">
-                          <CreditCard className="w-5 h-5 text-red-600" />
-                          <span>Outstanding</span>
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-2xl font-bold text-red-600">
-                          {formatCurrency(getSummaryStats().outstanding)}
-                        </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {getSummaryStats().outstanding > 0 ? "Due soon" : "All clear"}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </div>
                   
                   {/* Totals Summary Cards */}
                   {chartData && chartData.totals && (
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                       {/* Total Fees */}
-                      <Card className="shadow-md border border-red-100 bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20">
+                      <Card className="shadow-lg border border-red-300 bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900/40 dark:to-red-800/40">
                         <CardContent className="p-4">
                           <div className="flex items-center justify-between">
                             <div>
-                              <p className="text-sm font-medium text-red-700 dark:text-red-300">Total Fees</p>
-                              <p className="text-2xl font-bold text-red-800 dark:text-red-200">
+                              <p className="text-sm font-medium text-red-800 dark:text-red-200">Total Fees</p>
+                              <p className="text-3xl font-bold text-red-900 dark:text-red-100">
                                 {formatCurrency(chartData.totals.total_fees)}
                               </p>
                             </div>
-                            <div className="w-12 h-12 bg-red-200 dark:bg-red-800/50 rounded-full flex items-center justify-center">
-                              <CreditCard className="w-6 h-6 text-red-600 dark:text-red-400" />
+                            <div className="w-12 h-12 bg-red-300 dark:bg-red-700 rounded-full flex items-center justify-center">
+                              <CreditCard className="w-6 h-6 text-red-700 dark:text-red-300" />
                             </div>
                           </div>
                         </CardContent>
                       </Card>
 
                       {/* Total Payments */}
-                      <Card className="shadow-md border border-green-100 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20">
+                      <Card className="shadow-lg border border-green-300 bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/40 dark:to-green-800/40">
                         <CardContent className="p-4">
                           <div className="flex items-center justify-between">
                             <div>
-                              <p className="text-sm font-medium text-green-700 dark:text-green-300">Total Payments</p>
-                              <p className="text-2xl font-bold text-green-800 dark:text-green-200">
+                              <p className="text-sm font-medium text-green-800 dark:text-green-200">Total Payments</p>
+                              <p className="text-3xl font-bold text-green-900 dark:text-green-100">
                                 {formatCurrency(chartData.totals.total_payments)}
                               </p>
                             </div>
-                            <div className="w-12 h-12 bg-green-200 dark:bg-green-800/50 rounded-full flex items-center justify-center">
-                              <Receipt className="w-6 h-6 text-green-600 dark:text-green-400" />
+                            <div className="w-12 h-12 bg-green-300 dark:bg-green-700 rounded-full flex items-center justify-center">
+                              <Receipt className="w-6 h-6 text-green-700 dark:text-green-300" />
                             </div>
                           </div>
                         </CardContent>
