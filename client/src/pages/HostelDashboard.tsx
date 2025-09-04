@@ -358,88 +358,60 @@ export default function HostelDashboard() {
               {hostelInfo ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <Card 
-                    className="group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-0 bg-gradient-to-br from-violet-50 via-sky-50 to-emerald-50 dark:from-gray-800 dark:via-blue-950/50 dark:to-purple-950/50 overflow-hidden relative h-64"
+                    className="cursor-pointer transition-all duration-200 hover:shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
                     onClick={handleHostelCardClick}
                     data-testid={`card-hostel-${hostelInfo.hostel_id}`}
                   >
-                    {/* Colorful Header Gradient */}
-                    <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-violet-500 via-blue-500 via-cyan-500 via-teal-500 to-emerald-500"></div>
-                    
-                    {/* Card Content */}
-                    <div className="relative p-4 h-full flex flex-col">
-                      {/* Header */}
+                    <div className="p-4">
+                      {/* Header Row */}
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center space-x-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                          {/* Icon */}
+                          <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
                             <img 
                               src={hostelInfo.hostel_type === "Girls" ? girlsHostelLogo : boysHostelLogo}
                               alt={`${hostelInfo.hostel_type} Hostel`}
-                              className="w-7 h-7 filter brightness-0 invert"
+                              className="w-6 h-6 filter brightness-0 invert"
                             />
                           </div>
+                          
+                          {/* Hostel Name and Type */}
                           <div>
-                            <h3 className="text-lg font-bold text-gray-800 dark:text-white group-hover:text-violet-600 transition-colors">
+                            <h3 className="text-base font-semibold text-gray-900 dark:text-white">
                               {hostelInfo.hostel_name}
                             </h3>
-                            <Badge 
-                              className="text-xs px-2 py-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-medium"
-                            >
-                              {hostelInfo.hostel_type}
-                            </Badge>
-                          </div>
-                        </div>
-                        <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse shadow-lg"></div>
-                      </div>
-
-                      {/* Quick Info */}
-                      <div className="space-y-2 flex-1">
-                        {/* Location */}
-                        <div className="flex items-center space-x-2 p-2 bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 rounded-lg">
-                          <div className="w-6 h-6 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
-                            <MapPin className="w-3 h-3 text-white" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-xs text-gray-700 dark:text-gray-300 truncate">
-                              {hostelInfo.hostel_address}
-                            </p>
-                            <p className="text-xs font-semibold text-orange-600 dark:text-orange-400">
-                              📍 {hostelInfo.hostel_city_name}
-                            </p>
+                            <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+                              <User className="w-4 h-4" />
+                              <span>{hostelInfo.hostel_type}</span>
+                            </div>
                           </div>
                         </div>
                         
-                        {/* Contact */}
-                        <div className="flex items-center space-x-2 p-2 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 rounded-lg">
-                          <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
-                            <Phone className="w-3 h-3 text-white" />
-                          </div>
-                          <p className="text-xs font-mono text-green-700 dark:text-green-300">
-                            {hostelInfo.hostel_mobile_no}
-                          </p>
-                        </div>
+                        {/* Status Badge */}
+                        <Badge className="bg-blue-600 hover:bg-blue-600 text-white text-xs px-3 py-1">
+                          {hostelInfo.student_hostel_status || "Active"}
+                        </Badge>
+                      </div>
 
-                        {/* Manager */}
-                        <div className="flex items-center space-x-2 p-2 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-lg">
-                          <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                            <User className="w-3 h-3 text-white" />
-                          </div>
-                          <p className="text-xs text-purple-700 dark:text-purple-300 truncate">
-                            {hostelInfo.presenter_name}
+                      {/* Location Info */}
+                      <div className="flex items-start space-x-2">
+                        <MapPin className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                          <p className="font-medium text-gray-900 dark:text-white">
+                            {hostelInfo.hostel_city_name}
+                          </p>
+                          <p className="text-xs leading-relaxed">
+                            {hostelInfo.hostel_address}
                           </p>
                         </div>
                       </div>
-
-                      {/* Footer */}
-                      <div className="mt-3 pt-2 border-t border-gray-200/60 dark:border-gray-600/60">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center">
-                            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1"></div>
-                            Your Hostel
-                          </span>
-                          <div className="text-xs text-gray-500 dark:text-gray-400 group-hover:text-violet-500 transition-colors">
-                            Manage →
-                          </div>
-                        </div>
+                      
+                      {/* Contact Info */}
+                      <div className="flex items-center space-x-2 mt-2">
+                        <Phone className="w-4 h-4 text-gray-500" />
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          {hostelInfo.hostel_mobile_no}
+                        </span>
                       </div>
                     </div>
                   </Card>
