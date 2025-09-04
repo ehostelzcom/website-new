@@ -715,7 +715,10 @@ export default function HostelDashboard() {
                                   tickLine={{ stroke: '#d1d5db' }}
                                 />
                                 <Tooltip 
-                                  formatter={(value: number) => [formatCurrency(value), ""]}
+                                  formatter={(value: number, name: string) => {
+                                    const label = name === 'payable' ? 'Monthly Fees' : 'Amount Paid';
+                                    return [formatCurrency(value), label];
+                                  }}
                                   labelStyle={{ color: '#374151', fontWeight: 'bold' }}
                                   contentStyle={{
                                     backgroundColor: 'white',
