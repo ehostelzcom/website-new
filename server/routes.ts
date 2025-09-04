@@ -659,9 +659,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-dashboard-fees-payments/${user_id}/${hostel_id}`;
       const params = [];
       
-      if (year) {
+      if (year && year !== 'overall') {
         params.push(`year=${year}`);
         console.log("Including year parameter:", year);
+      } else if (year === 'overall') {
+        console.log("Year is 'overall', not including in query params");
       }
       
       if (allotment_id && allotment_id !== 'overall') {

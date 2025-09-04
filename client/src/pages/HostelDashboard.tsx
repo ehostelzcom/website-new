@@ -138,7 +138,7 @@ export default function HostelDashboard() {
   const [chartLoading, setChartLoading] = useState(false);
   const [chartError, setChartError] = useState<string>("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedYear, setSelectedYear] = useState<number | string | null>(null);
   const [years, setYears] = useState<Array<{ key: number | string; value: number | string }>>([]);
   const [yearsLoading, setYearsLoading] = useState(false);
   const [yearChanging, setYearChanging] = useState(false);
