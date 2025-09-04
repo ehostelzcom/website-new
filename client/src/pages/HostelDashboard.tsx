@@ -32,9 +32,7 @@ import {
   CartesianGrid, 
   Tooltip, 
   ResponsiveContainer,
-  Legend,
-  LineChart,
-  Line
+  Legend
 } from "recharts";
 import logoSvg from "@assets/logo/Asset 3.svg";
 import girlsHostelLogo from "@assets/logo/Asset 7.svg";
@@ -74,8 +72,7 @@ interface FeePaymentData {
 interface ChartData {
   status: boolean;
   code: number;
-  fees: FeePaymentData[];
-  payments: FeePaymentData[];
+  months: Array<{ serial: number; label: string; payable: number; paid: number }>;
 }
 
 interface RatingData {
@@ -609,8 +606,8 @@ export default function HostelDashboard() {
                     </Card>
                   </div>
                   
-                  {/* Charts */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Chart */}
+                  <div className="w-full">
                     {/* Fees vs Payments Bar Chart */}
                     <Card>
                       <CardHeader>
@@ -618,7 +615,7 @@ export default function HostelDashboard() {
                       </CardHeader>
                       <CardContent>
                         {chartData ? (
-                          <ResponsiveContainer width="100%" height={300}>
+                          <ResponsiveContainer width="100%" height={400}>
                             <BarChart data={getCombinedChartData()}>
                               <CartesianGrid strokeDasharray="3 3" />
                               <XAxis dataKey="month" />
@@ -642,50 +639,6 @@ export default function HostelDashboard() {
                       </CardContent>
                     </Card>
 
-                    {/* Payment Trend Line Chart */}
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Payment Trend</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        {chartData ? (
-                          <ResponsiveContainer width="100%" height={300}>
-                            <LineChart data={getCombinedChartData()}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="month" />
-                              <YAxis tickFormatter={(value) => `Rs ${value.toLocaleString()}`} />
-                              <Tooltip 
-                                formatter={(value: number) => [formatCurrency(value), ""]}
-                                labelStyle={{ color: '#374151' }}
-                              />
-                              <Legend />
-                              <Line 
-                                type="monotone" 
-                                dataKey="paid" 
-                                stroke="#10b981" 
-                                strokeWidth={3}
-                                name="Payments"
-                                dot={{ fill: '#10b981', r: 6 }}
-                              />
-                              <Line 
-                                type="monotone" 
-                                dataKey="payable" 
-                                stroke="#ef4444" 
-                                strokeWidth={3}
-                                name="Payable"
-                                dot={{ fill: '#ef4444', r: 6 }}
-                              />
-                            </LineChart>
-                          </ResponsiveContainer>
-                        ) : (
-                          <div className="h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-                            <p className="text-gray-500 dark:text-gray-400">
-                              No payment trend data available yet
-                            </p>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
                   </div>
                 </>
               )}
