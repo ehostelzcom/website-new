@@ -205,21 +205,18 @@ export default function HostelDashboard() {
     // Initialize all 12 months with zero values
     const monthsMap = new Map();
     monthOrder.forEach(month => {
-      monthsMap.set(month, { month, fee: 0, paid: 0 });
+      monthsMap.set(month, { month, payable: 0, paid: 0 });
     });
     
-    if (chartData) {
-      // Process fees data
-      chartData.fees.forEach(fee => {
-        if (monthsMap.has(fee.label)) {
-          monthsMap.get(fee.label).fee += fee.amount;
-        }
-      });
-      
-      // Process payments data
-      chartData.payments.forEach(payment => {
-        if (monthsMap.has(payment.label)) {
-          monthsMap.get(payment.label).paid += payment.amount;
+    if (chartData && chartData.months) {
+      // Process months data from new API format
+      chartData.months.forEach(monthData => {
+        if (monthsMap.has(monthData.label)) {
+          monthsMap.set(monthData.label, {
+            month: monthData.label,
+            payable: monthData.payable,
+            paid: monthData.paid
+          });
         }
       });
     }
@@ -230,10 +227,10 @@ export default function HostelDashboard() {
 
   // Calculate summary statistics
   const getSummaryStats = () => {
-    if (!chartData) return { totalFees: 0, totalPaid: 0, outstanding: 0 };
+    if (!chartData || !chartData.months) return { totalFees: 0, totalPaid: 0, outstanding: 0 };
     
-    const totalFees = chartData.fees.reduce((sum, fee) => sum + fee.amount, 0);
-    const totalPaid = chartData.payments.reduce((sum, payment) => sum + payment.amount, 0);
+    const totalFees = chartData.months.reduce((sum, month) => sum + month.payable, 0);
+    const totalPaid = chartData.months.reduce((sum, month) => sum + month.paid, 0);
     const outstanding = totalFees - totalPaid;
     
     return { totalFees, totalPaid, outstanding };
@@ -631,7 +628,7 @@ export default function HostelDashboard() {
                                 labelStyle={{ color: '#374151' }}
                               />
                               <Legend />
-                              <Bar dataKey="fee" fill="#ef4444" name="Fee" />
+                              <Bar dataKey="payable" fill="#ef4444" name="Payable" />
                               <Bar dataKey="paid" fill="#10b981" name="Paid" />
                             </BarChart>
                           </ResponsiveContainer>
@@ -672,10 +669,10 @@ export default function HostelDashboard() {
                               />
                               <Line 
                                 type="monotone" 
-                                dataKey="fee" 
+                                dataKey="payable" 
                                 stroke="#ef4444" 
                                 strokeWidth={3}
-                                name="Fee"
+                                name="Payable"
                                 dot={{ fill: '#ef4444', r: 6 }}
                               />
                             </LineChart>
