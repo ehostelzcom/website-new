@@ -673,9 +673,9 @@ export default function HostelDashboard() {
                     {/* Fees vs Payments Bar Chart */}
                     <Card className="shadow-lg border-0 bg-gradient-to-br from-white to-blue-50 dark:from-gray-900 dark:to-gray-800">
                       <CardHeader className="pb-4">
-                        <CardTitle className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent flex items-center gap-2">
-                          <BarChart3 className="w-6 h-6 text-blue-600" />
-                          Monthly Fees vs Payments
+                        <CardTitle className="text-xl md:text-2xl font-bold flex items-center gap-2" style={{ color: '#004e89' }}>
+                          <BarChart3 className="w-6 h-6" style={{ color: '#004e89' }} />
+                          Monthly Financial Overview
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="p-2 sm:p-4 md:p-6">
@@ -727,19 +727,22 @@ export default function HostelDashboard() {
                                   cursor={{ fill: 'rgba(59, 130, 246, 0.05)' }}
                                 />
                                 <Legend 
-                                  wrapperStyle={{ paddingTop: '20px', fontSize: '14px' }}
+                                  verticalAlign="top"
+                                  height={36}
+                                  wrapperStyle={{ paddingBottom: '20px', fontSize: '14px' }}
+                                  iconType="circle"
                                 />
                                 <Bar 
                                   dataKey="payable" 
                                   fill="url(#payableGradient)" 
-                                  name="💰 Payable"
+                                  name="Monthly Fees"
                                   radius={[4, 4, 0, 0]}
                                   maxBarSize={40}
                                 />
                                 <Bar 
                                   dataKey="paid" 
                                   fill="url(#paidGradient)" 
-                                  name="✅ Paid"
+                                  name="Amount Paid"
                                   radius={[4, 4, 0, 0]}
                                   maxBarSize={40}
                                 />
