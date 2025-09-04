@@ -555,11 +555,47 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // GET API for Years
+  app.get("/api/years", async (req, res) => {
+    console.log("Years API call received");
+    try {
+      // Call Oracle APEX years API
+      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/years`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log("Oracle APEX years response:", response.data);
+      
+      // Return the response directly from Oracle APEX
+      res.setHeader('Content-Type', 'application/json');
+      res.json(response.data);
+    } catch (error) {
+      console.error("Error fetching years:", error);
+
+      if (error.code === 'ECONNABORTED') {
+        return res.status(408).json({ 
+          error: "Request timeout",
+          message: "The request to fetch years took too long"
+        });
+      }
+      
+      return res.status(500).json({ 
+        error: "Failed to fetch years",
+        message: error.message || "Unknown error occurred"
+      });
+    }
+  });
+
   // GET API for Student Dashboard Fees and Payments by user_id and hostel_id
   app.get("/api/student-dashboard-fees-payments/:user_id/:hostel_id", async (req, res) => {
     console.log("Student dashboard fees/payments API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
     try {
       const { user_id, hostel_id } = req.params;
+      const { year } = req.query;
       
       // Validate required parameters
       if (!user_id || !hostel_id) {
@@ -569,8 +605,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
+      // Build URL with optional year parameter
+      let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-dashboard-fees-payments/${user_id}/${hostel_id}`;
+      if (year) {
+        apiUrl += `?year=${year}`;
+        console.log("Including year parameter:", year);
+      }
+
       // Call Oracle APEX student dashboard fees/payments API
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/student-dashboard-fees-payments/${user_id}/${hostel_id}`, {
+      const response = await axios.get(apiUrl, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

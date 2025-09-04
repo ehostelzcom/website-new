@@ -131,6 +131,9 @@ export default function HostelDashboard() {
   const [chartLoading, setChartLoading] = useState(false);
   const [chartError, setChartError] = useState<string>("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [years, setYears] = useState<Array<{ key: number; value: number }>>([]);
+  const [yearsLoading, setYearsLoading] = useState(false);
 
   const hostelId = params?.hostelId ? parseInt(params.hostelId) : null;
 
@@ -169,7 +172,36 @@ export default function HostelDashboard() {
     fetchStudentHostel();
   }, [hostelId, setLocation]);
 
-  // Fetch chart data when hostel info is available
+  // Fetch years on component mount
+  useEffect(() => {
+    const fetchYears = async () => {
+      try {
+        setYearsLoading(true);
+        const response = await fetch('/api/years');
+        const data = await response.json();
+        
+        if (data.status && data.code === 200) {
+          setYears(data.data);
+          // Set current year as default if available
+          const currentYear = new Date().getFullYear();
+          const hasCurrentYear = data.data.find((year: any) => year.value === currentYear);
+          if (hasCurrentYear) {
+            setSelectedYear(currentYear);
+          } else if (data.data.length > 0) {
+            setSelectedYear(data.data[0].value);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching years:", error);
+      } finally {
+        setYearsLoading(false);
+      }
+    };
+
+    fetchYears();
+  }, []);
+
+  // Fetch chart data when hostel info or selected year changes
   useEffect(() => {
     const fetchChartData = async () => {
       if (!hostelInfo?.user_id || !hostelInfo?.hostel_id) return;
@@ -178,8 +210,14 @@ export default function HostelDashboard() {
         setChartLoading(true);
         setChartError("");
         
+        // Build URL with optional year parameter
+        let apiUrl = `/api/student-dashboard-fees-payments/${hostelInfo.user_id}/${hostelInfo.hostel_id}`;
+        if (selectedYear) {
+          apiUrl += `?year=${selectedYear}`;
+        }
+        
         // Call dashboard fees/payments API
-        const response = await fetch(`/api/student-dashboard-fees-payments/${hostelInfo.user_id}/${hostelInfo.hostel_id}`);
+        const response = await fetch(apiUrl);
         const data = await response.json();
 
         if (data.status && data.code === 200) {
@@ -196,7 +234,7 @@ export default function HostelDashboard() {
     };
 
     fetchChartData();
-  }, [hostelInfo]);
+  }, [hostelInfo, selectedYear]);
 
   // Helper function to format Pakistani Rupees
   const formatCurrency = (amount: number): string => {
@@ -602,9 +640,32 @@ export default function HostelDashboard() {
           {/* Dashboard Content */}
           {activeTab === "dashboard" && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Dashboard Overview
-              </h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  Dashboard Overview
+                </h2>
+                
+                {/* Year Dropdown */}
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Year:</span>
+                  <Select
+                    value={selectedYear?.toString() || ""}
+                    onValueChange={(value) => setSelectedYear(parseInt(value))}
+                    disabled={yearsLoading}
+                  >
+                    <SelectTrigger className="w-24 h-8 text-sm">
+                      <SelectValue placeholder="Year" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {years.map((year) => (
+                        <SelectItem key={year.key} value={year.value.toString()}>
+                          {year.value}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
               
               {chartLoading ? (
                 <div className="text-center py-8">
