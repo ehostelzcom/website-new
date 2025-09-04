@@ -556,13 +556,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Student Allotments API endpoint
-  app.get("/api/student-allotments", async (req, res) => {
+  app.get("/api/student-allotments/:user_id/:hostel_id", async (req, res) => {
+    console.log("Student allotments API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
     try {
-      console.log("Student allotments API call received");
+      const { user_id, hostel_id } = req.params;
+      const { year } = req.query;
       
-      // Optional year parameter
-      const year = req.query.year;
-      let apiUrl = "http://ehostelz.com:8890/ords/jee_management_system/web/api/student-allotments";
+      // Validate required parameters
+      if (!user_id || !hostel_id) {
+        return res.status(400).json({ 
+          error: "Missing required parameters",
+          message: "user_id and hostel_id are required"
+        });
+      }
+      
+      // Build URL with required parameters
+      let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-allotments/${user_id}/${hostel_id}`;
       
       if (year) {
         apiUrl += `?year=${year}`;

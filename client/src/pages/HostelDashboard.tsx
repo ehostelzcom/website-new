@@ -218,9 +218,11 @@ export default function HostelDashboard() {
     };
 
     const fetchAllotments = async () => {
+      if (!hostelInfo?.user_id || !hostelInfo?.hostel_id) return;
+      
       try {
         setAllotmentsLoading(true);
-        const response = await fetch('/api/student-allotments');
+        const response = await fetch(`/api/student-allotments/${hostelInfo.user_id}/${hostelInfo.hostel_id}`);
         const data = await response.json();
         
         if (data.status && data.code === 200) {
@@ -242,7 +244,7 @@ export default function HostelDashboard() {
 
     fetchYears();
     fetchAllotments();
-  }, []);
+  }, [hostelInfo]);
 
   // Handle year change with beautiful loading animation
   const handleYearChange = (value: string) => {
