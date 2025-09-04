@@ -717,7 +717,8 @@ export default function HostelDashboard() {
                                 <Tooltip 
                                   formatter={(value: number, name: string, props: any) => {
                                     const monthLabel = props.payload?.label || '';
-                                    const label = name === 'payable' ? `${monthLabel} Payable` : `${monthLabel} Paid`;
+                                    const dataKey = props.dataKey;
+                                    const label = dataKey === 'payable' ? `${monthLabel} Payable` : `${monthLabel} Paid`;
                                     return [formatCurrency(value), label];
                                   }}
                                   labelStyle={{ color: '#374151', fontWeight: 'bold' }}
