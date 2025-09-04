@@ -200,30 +200,32 @@ export default function HostelDashboard() {
 
   // Helper function to combine fees and payments data for charts
   const getCombinedChartData = () => {
-    if (!chartData) return [];
+    const monthOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     
+    // Initialize all 12 months with zero values
     const monthsMap = new Map();
-    
-    // Process fees data
-    chartData.fees.forEach(fee => {
-      if (!monthsMap.has(fee.label)) {
-        monthsMap.set(fee.label, { month: fee.label, payable: 0, paid: 0 });
-      }
-      monthsMap.get(fee.label).payable += fee.amount;
+    monthOrder.forEach(month => {
+      monthsMap.set(month, { month, fee: 0, paid: 0 });
     });
     
-    // Process payments data
-    chartData.payments.forEach(payment => {
-      if (!monthsMap.has(payment.label)) {
-        monthsMap.set(payment.label, { month: payment.label, payable: 0, paid: 0 });
-      }
-      monthsMap.get(payment.label).paid += payment.amount;
-    });
+    if (chartData) {
+      // Process fees data
+      chartData.fees.forEach(fee => {
+        if (monthsMap.has(fee.label)) {
+          monthsMap.get(fee.label).fee += fee.amount;
+        }
+      });
+      
+      // Process payments data
+      chartData.payments.forEach(payment => {
+        if (monthsMap.has(payment.label)) {
+          monthsMap.get(payment.label).paid += payment.amount;
+        }
+      });
+    }
     
-    return Array.from(monthsMap.values()).sort((a, b) => {
-      const monthOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      return monthOrder.indexOf(a.month) - monthOrder.indexOf(b.month);
-    });
+    // Return all 12 months in correct order
+    return monthOrder.map(month => monthsMap.get(month));
   };
 
   // Calculate summary statistics
@@ -618,7 +620,7 @@ export default function HostelDashboard() {
                         <CardTitle>Monthly Fees vs Payments</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        {getCombinedChartData().length > 0 ? (
+                        {chartData ? (
                           <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={getCombinedChartData()}>
                               <CartesianGrid strokeDasharray="3 3" />
@@ -629,7 +631,7 @@ export default function HostelDashboard() {
                                 labelStyle={{ color: '#374151' }}
                               />
                               <Legend />
-                              <Bar dataKey="payable" fill="#ef4444" name="Payable" />
+                              <Bar dataKey="fee" fill="#ef4444" name="Fee" />
                               <Bar dataKey="paid" fill="#10b981" name="Paid" />
                             </BarChart>
                           </ResponsiveContainer>
@@ -649,7 +651,7 @@ export default function HostelDashboard() {
                         <CardTitle>Payment Trend</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        {getCombinedChartData().length > 0 ? (
+                        {chartData ? (
                           <ResponsiveContainer width="100%" height={300}>
                             <LineChart data={getCombinedChartData()}>
                               <CartesianGrid strokeDasharray="3 3" />
@@ -670,10 +672,10 @@ export default function HostelDashboard() {
                               />
                               <Line 
                                 type="monotone" 
-                                dataKey="payable" 
+                                dataKey="fee" 
                                 stroke="#ef4444" 
                                 strokeWidth={3}
-                                name="Due Fees"
+                                name="Fee"
                                 dot={{ fill: '#ef4444', r: 6 }}
                               />
                             </LineChart>
