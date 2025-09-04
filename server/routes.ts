@@ -664,9 +664,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.log("Including year parameter:", year);
       }
       
-      if (allotment_id) {
+      if (allotment_id && allotment_id !== 'overall') {
         params.push(`allotment_id=${allotment_id}`);
         console.log("Including allotment_id parameter:", allotment_id);
+      } else if (allotment_id === 'overall') {
+        console.log("Allotment_id is 'overall', not including in query params");
       }
       
       if (params.length > 0) {
