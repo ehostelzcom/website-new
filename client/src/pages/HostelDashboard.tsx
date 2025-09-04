@@ -365,31 +365,33 @@ export default function HostelDashboard() {
                   >
                     <div className="p-4">
                       {/* Header Row */}
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center space-x-3">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-start space-x-3">
                           {/* Icon */}
-                          <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                          <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
                             <img 
                               src={hostelInfo.hostel_type === "Girls" ? girlsHostelLogo : boysHostelLogo}
                               alt={`${hostelInfo.hostel_type} Hostel`}
-                              className="w-6 h-6 filter brightness-0 invert"
+                              className="w-8 h-8"
                             />
                           </div>
                           
                           {/* Hostel Name and Type */}
-                          <div>
-                            <h3 className="text-base font-semibold text-gray-900 dark:text-white">
-                              {hostelInfo.hostel_name}
-                            </h3>
-                            <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-                              <User className="w-4 h-4" />
-                              <span>{hostelInfo.hostel_type}</span>
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-2 mb-1">
+                              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                {hostelInfo.hostel_name}
+                              </h3>
+                              <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
+                                <User className="w-4 h-4" />
+                                <span>{hostelInfo.hostel_type}</span>
+                              </div>
                             </div>
                           </div>
                         </div>
                         
                         {/* Status Badge */}
-                        <Badge className="bg-blue-600 hover:bg-blue-600 text-white text-xs px-3 py-1">
+                        <Badge className="bg-blue-600 hover:bg-blue-600 text-white text-sm px-3 py-1 flex-shrink-0">
                           {hostelInfo.student_hostel_status || "Active"}
                         </Badge>
                       </div>
