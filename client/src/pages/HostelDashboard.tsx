@@ -139,8 +139,9 @@ export default function HostelDashboard() {
   const [chartError, setChartError] = useState<string>("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
-  const [years, setYears] = useState<Array<{ key: number; value: number }>>([]);
+  const [years, setYears] = useState<Array<{ key: number | string; value: number | string }>>([]);
   const [yearsLoading, setYearsLoading] = useState(false);
+  const [yearChanging, setYearChanging] = useState(false);
 
   const hostelId = params?.hostelId ? parseInt(params.hostelId) : null;
 
@@ -188,7 +189,12 @@ export default function HostelDashboard() {
         const data = await response.json();
         
         if (data.status && data.code === 200) {
-          setYears(data.data);
+          // Add blank option for overall values at the beginning
+          const yearsWithOverall = [
+            { key: "overall", value: "" },
+            ...data.data
+          ];
+          setYears(yearsWithOverall);
           // Set current year as default if available
           const currentYear = new Date().getFullYear();
           const hasCurrentYear = data.data.find((year: any) => year.value === currentYear);
@@ -207,6 +213,21 @@ export default function HostelDashboard() {
 
     fetchYears();
   }, []);
+
+  // Handle year change with beautiful loading animation
+  const handleYearChange = (value: string) => {
+    setYearChanging(true);
+    
+    // Small delay for smooth loading experience
+    setTimeout(() => {
+      if (value === "") {
+        setSelectedYear(null); // No year parameter = overall values
+      } else {
+        setSelectedYear(parseInt(value));
+      }
+      setYearChanging(false);
+    }, 400);
+  };
 
   // Fetch chart data when hostel info or selected year changes
   useEffect(() => {
@@ -657,16 +678,16 @@ export default function HostelDashboard() {
                   <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Year:</span>
                   <Select
                     value={selectedYear?.toString() || ""}
-                    onValueChange={(value: string) => setSelectedYear(parseInt(value))}
-                    disabled={yearsLoading}
+                    onValueChange={handleYearChange}
+                    disabled={yearsLoading || yearChanging}
                   >
-                    <SelectTrigger className="w-24 h-8 text-sm">
-                      <SelectValue placeholder="Year" />
+                    <SelectTrigger className="w-32 h-8 text-sm">
+                      <SelectValue placeholder="Overall" />
                     </SelectTrigger>
                     <SelectContent>
                       {years.map((year) => (
                         <SelectItem key={year.key} value={year.value.toString()}>
-                          {year.value}
+                          {year.value === "" ? "Overall" : year.value}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -674,9 +695,14 @@ export default function HostelDashboard() {
                 </div>
               </div>
               
-              {chartLoading ? (
+              {(chartLoading || yearChanging) ? (
                 <div className="text-center py-8">
-                  <p className="text-gray-600 dark:text-gray-400">Loading dashboard data...</p>
+                  <div className="flex flex-col items-center space-y-3">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      {yearChanging ? "Filtering data..." : "Loading dashboard data..."}
+                    </p>
+                  </div>
                 </div>
               ) : chartError ? (
                 <div className="text-center py-8">
