@@ -201,14 +201,8 @@ export default function HostelDashboard() {
             ...data.data
           ];
           setYears(yearsWithOverall);
-          // Set current year as default if available
-          const currentYear = new Date().getFullYear();
-          const hasCurrentYear = data.data.find((year: any) => year.value === currentYear);
-          if (hasCurrentYear) {
-            setSelectedYear(currentYear);
-          } else if (data.data.length > 0) {
-            setSelectedYear(data.data[0].value);
-          }
+          // Set default year to Overall
+          setSelectedYear('overall');
         }
       } catch (error) {
         console.error("Error fetching years:", error);
@@ -734,7 +728,6 @@ export default function HostelDashboard() {
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                   {/* Allotment Dropdown */}
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Allotment:</span>
                     <Select
                       value={selectedAllotment || "overall"}
                       onValueChange={handleAllotmentChange}
@@ -755,7 +748,6 @@ export default function HostelDashboard() {
 
                   {/* Year Dropdown */}
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Year:</span>
                     <Select
                       value={selectedYear?.toString() || "overall"}
                       onValueChange={handleYearChange}
