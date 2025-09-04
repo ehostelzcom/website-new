@@ -356,114 +356,88 @@ export default function HostelDashboard() {
               </div>
 
               {hostelInfo ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <Card 
-                    className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:shadow-[#004e89]/20 hover:-translate-y-2 border-0 bg-gradient-to-br from-white via-blue-50/50 to-white dark:from-gray-800 dark:via-blue-950/20 dark:to-gray-800 backdrop-blur-sm overflow-hidden relative"
+                    className="group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-0 bg-gradient-to-br from-violet-50 via-sky-50 to-emerald-50 dark:from-gray-800 dark:via-blue-950/50 dark:to-purple-950/50 overflow-hidden relative h-64"
                     onClick={handleHostelCardClick}
                     data-testid={`card-hostel-${hostelInfo.hostel_id}`}
                   >
-                    {/* Gradient Border Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#004e89] via-[#0066b3] to-[#ff6b35] p-[2px] rounded-lg">
-                      <div className="h-full w-full bg-gradient-to-br from-white via-blue-50/50 to-white dark:from-gray-800 dark:via-blue-950/20 dark:to-gray-800 rounded-[6px]">
-                      </div>
-                    </div>
+                    {/* Colorful Header Gradient */}
+                    <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-violet-500 via-blue-500 via-cyan-500 via-teal-500 to-emerald-500"></div>
                     
                     {/* Card Content */}
-                    <div className="relative z-10 p-6">
-                      {/* Header Section */}
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center space-x-4">
-                          <div className="relative">
-                            <div className="w-16 h-16 bg-gradient-to-br from-[#004e89] to-[#0066b3] rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
-                              <img 
-                                src={hostelInfo.hostel_type === "Girls" ? girlsHostelLogo : boysHostelLogo}
-                                alt={`${hostelInfo.hostel_type} Hostel`}
-                                className="w-10 h-10 filter brightness-0 invert"
-                              />
-                            </div>
-                            {/* Status Indicator */}
-                            <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center">
-                              <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                            </div>
+                    <div className="relative p-4 h-full flex flex-col">
+                      {/* Header */}
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                            <img 
+                              src={hostelInfo.hostel_type === "Girls" ? girlsHostelLogo : boysHostelLogo}
+                              alt={`${hostelInfo.hostel_type} Hostel`}
+                              className="w-7 h-7 filter brightness-0 invert"
+                            />
                           </div>
-                          <div className="flex-1">
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-[#004e89] transition-colors duration-300">
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-800 dark:text-white group-hover:text-violet-600 transition-colors">
                               {hostelInfo.hostel_name}
                             </h3>
-                            <div className="flex items-center space-x-2">
-                              <Badge 
-                                variant="secondary"
-                                className="text-xs px-3 py-1 bg-gradient-to-r from-blue-100 to-indigo-100 text-[#004e89] dark:from-blue-900/30 dark:to-indigo-900/30 dark:text-blue-300 font-semibold border-0"
-                              >
-                                {hostelInfo.hostel_type} Hostel
-                              </Badge>
-                            </div>
+                            <Badge 
+                              className="text-xs px-2 py-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-medium"
+                            >
+                              {hostelInfo.hostel_type}
+                            </Badge>
                           </div>
                         </div>
-                        
-                        <Badge 
-                          className="text-xs px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold shadow-lg border-0 animate-pulse"
-                        >
-                          Active
-                        </Badge>
+                        <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse shadow-lg"></div>
                       </div>
 
-                      {/* Details Section */}
-                      <div className="space-y-4">
+                      {/* Quick Info */}
+                      <div className="space-y-2 flex-1">
                         {/* Location */}
-                        <div className="flex items-start space-x-3 p-3 bg-gray-50/70 dark:bg-gray-700/30 rounded-xl group-hover:bg-blue-50/70 dark:group-hover:bg-blue-950/30 transition-all duration-300">
-                          <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center shadow-md">
-                            <MapPin className="w-4 h-4 text-white" />
+                        <div className="flex items-center space-x-2 p-2 bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 rounded-lg">
+                          <div className="w-6 h-6 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+                            <MapPin className="w-3 h-3 text-white" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Location</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <p className="text-xs text-gray-700 dark:text-gray-300 truncate">
                               {hostelInfo.hostel_address}
                             </p>
-                            <p className="text-sm font-medium text-[#004e89] dark:text-blue-400 mt-1">
+                            <p className="text-xs font-semibold text-orange-600 dark:text-orange-400">
                               📍 {hostelInfo.hostel_city_name}
                             </p>
                           </div>
                         </div>
                         
                         {/* Contact */}
-                        <div className="flex items-center space-x-3 p-3 bg-gray-50/70 dark:bg-gray-700/30 rounded-xl group-hover:bg-blue-50/70 dark:group-hover:bg-blue-950/30 transition-all duration-300">
-                          <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-emerald-500 rounded-lg flex items-center justify-center shadow-md">
-                            <Phone className="w-4 h-4 text-white" />
+                        <div className="flex items-center space-x-2 p-2 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 rounded-lg">
+                          <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                            <Phone className="w-3 h-3 text-white" />
                           </div>
-                          <div className="flex-1">
-                            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Contact</h4>
-                            <p className="text-sm font-mono text-gray-600 dark:text-gray-300">
-                              {hostelInfo.hostel_mobile_no}
-                            </p>
-                          </div>
+                          <p className="text-xs font-mono text-green-700 dark:text-green-300">
+                            {hostelInfo.hostel_mobile_no}
+                          </p>
                         </div>
 
                         {/* Manager */}
-                        <div className="flex items-center space-x-3 p-3 bg-gray-50/70 dark:bg-gray-700/30 rounded-xl group-hover:bg-blue-50/70 dark:group-hover:bg-blue-950/30 transition-all duration-300">
-                          <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg flex items-center justify-center shadow-md">
-                            <User className="w-4 h-4 text-white" />
+                        <div className="flex items-center space-x-2 p-2 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-lg">
+                          <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                            <User className="w-3 h-3 text-white" />
                           </div>
-                          <div className="flex-1">
-                            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Manager</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-300">
-                              {hostelInfo.presenter_name}
-                            </p>
-                          </div>
+                          <p className="text-xs text-purple-700 dark:text-purple-300 truncate">
+                            {hostelInfo.presenter_name}
+                          </p>
                         </div>
                       </div>
 
-                      {/* Action Footer */}
-                      <div className="mt-6 pt-4 border-t border-gray-200/50 dark:border-gray-600/50">
+                      {/* Footer */}
+                      <div className="mt-3 pt-2 border-t border-gray-200/60 dark:border-gray-600/60">
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                              Your Current Hostel
-                            </span>
-                          </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-[#004e89] dark:group-hover:text-blue-400 transition-colors duration-300">
-                            Click to manage →
+                          <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center">
+                            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1"></div>
+                            Your Hostel
+                          </span>
+                          <div className="text-xs text-gray-500 dark:text-gray-400 group-hover:text-violet-500 transition-colors">
+                            Manage →
                           </div>
                         </div>
                       </div>
