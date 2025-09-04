@@ -555,6 +555,47 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Student Allotments API endpoint
+  app.get("/api/student-allotments", async (req, res) => {
+    try {
+      console.log("Student allotments API call received");
+      
+      // Optional year parameter
+      const year = req.query.year;
+      let apiUrl = "http://ehostelz.com:8890/ords/jee_management_system/web/api/student-allotments";
+      
+      if (year) {
+        apiUrl += `?year=${year}`;
+        console.log(`Including year parameter: ${year}`);
+      }
+
+      const response = await axios.get(apiUrl, {
+        timeout: 10000,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log("Oracle APEX student-allotments response:", response.data);
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("Error fetching student allotments:", error);
+
+      if (error.code === 'ECONNABORTED') {
+        return res.status(408).json({ 
+          error: "Request timeout",
+          message: "The request to fetch student allotments took too long"
+        });
+      }
+      
+      return res.status(500).json({ 
+        error: "Failed to fetch student allotments",
+        message: error.message || "Unknown error occurred"
+      });
+    }
+  });
+
   // GET API for Years
   app.get("/api/years", async (req, res) => {
     console.log("Years API call received");
@@ -595,7 +636,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     console.log("Student dashboard fees/payments API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
     try {
       const { user_id, hostel_id } = req.params;
-      const { year } = req.query;
+      const { year, allotment_id } = req.query;
       
       // Validate required parameters
       if (!user_id || !hostel_id) {
@@ -605,11 +646,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Build URL with optional year parameter
+      // Build URL with optional parameters
       let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-dashboard-fees-payments/${user_id}/${hostel_id}`;
+      const params = [];
+      
       if (year) {
-        apiUrl += `?year=${year}`;
+        params.push(`year=${year}`);
         console.log("Including year parameter:", year);
+      }
+      
+      if (allotment_id) {
+        params.push(`allotment_id=${allotment_id}`);
+        console.log("Including allotment_id parameter:", allotment_id);
+      }
+      
+      if (params.length > 0) {
+        apiUrl += `?${params.join('&')}`;
       }
 
       // Call Oracle APEX student dashboard fees/payments API

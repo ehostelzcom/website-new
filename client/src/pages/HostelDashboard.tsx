@@ -142,6 +142,12 @@ export default function HostelDashboard() {
   const [years, setYears] = useState<Array<{ key: number | string; value: number | string }>>([]);
   const [yearsLoading, setYearsLoading] = useState(false);
   const [yearChanging, setYearChanging] = useState(false);
+  
+  // Allotments state
+  const [selectedAllotment, setSelectedAllotment] = useState<string | null>(null);
+  const [allotments, setAllotments] = useState<Array<{ allotment_id: string; value: string }>>([]);
+  const [allotmentsLoading, setAllotmentsLoading] = useState(false);
+  const [allotmentChanging, setAllotmentChanging] = useState(false);
 
   const hostelId = params?.hostelId ? parseInt(params.hostelId) : null;
 
@@ -211,7 +217,31 @@ export default function HostelDashboard() {
       }
     };
 
+    const fetchAllotments = async () => {
+      try {
+        setAllotmentsLoading(true);
+        const response = await fetch('/api/student-allotments');
+        const data = await response.json();
+        
+        if (data.status && data.code === 200) {
+          // Add overall option for all allotments at the beginning
+          const allotmentsWithOverall = [
+            { allotment_id: "overall", value: "All Allotments" },
+            ...data.data
+          ];
+          setAllotments(allotmentsWithOverall);
+          // Select "All Allotments" by default
+          setSelectedAllotment("overall");
+        }
+      } catch (error) {
+        console.error("Error fetching allotments:", error);
+      } finally {
+        setAllotmentsLoading(false);
+      }
+    };
+
     fetchYears();
+    fetchAllotments();
   }, []);
 
   // Handle year change with beautiful loading animation
@@ -229,7 +259,22 @@ export default function HostelDashboard() {
     }, 400);
   };
 
-  // Fetch chart data when hostel info or selected year changes
+  // Handle allotment change with beautiful loading animation
+  const handleAllotmentChange = (value: string) => {
+    setAllotmentChanging(true);
+    
+    // Small delay for smooth loading experience
+    setTimeout(() => {
+      if (value === "overall") {
+        setSelectedAllotment(null); // No allotment parameter = all allotments
+      } else {
+        setSelectedAllotment(value);
+      }
+      setAllotmentChanging(false);
+    }, 400);
+  };
+
+  // Fetch chart data when hostel info, selected year, or selected allotment changes
   useEffect(() => {
     const fetchChartData = async () => {
       if (!hostelInfo?.user_id || !hostelInfo?.hostel_id) return;
@@ -238,10 +283,20 @@ export default function HostelDashboard() {
         setChartLoading(true);
         setChartError("");
         
-        // Build URL with optional year parameter
+        // Build URL with optional parameters
         let apiUrl = `/api/student-dashboard-fees-payments/${hostelInfo.user_id}/${hostelInfo.hostel_id}`;
+        const params = [];
+        
         if (selectedYear) {
-          apiUrl += `?year=${selectedYear}`;
+          params.push(`year=${selectedYear}`);
+        }
+        
+        if (selectedAllotment) {
+          params.push(`allotment_id=${selectedAllotment}`);
+        }
+        
+        if (params.length > 0) {
+          apiUrl += `?${params.join('&')}`;
         }
         
         // Call dashboard fees/payments API
@@ -262,7 +317,7 @@ export default function HostelDashboard() {
     };
 
     fetchChartData();
-  }, [hostelInfo, selectedYear]);
+  }, [hostelInfo, selectedYear, selectedAllotment]);
 
   // Helper function to format Pakistani Rupees
   const formatCurrency = (amount: number): string => {
@@ -668,39 +723,63 @@ export default function HostelDashboard() {
           {/* Dashboard Content */}
           {activeTab === "dashboard" && (
             <div className="space-y-6">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   Dashboard Overview
                 </h2>
                 
-                {/* Year Dropdown */}
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Year:</span>
-                  <Select
-                    value={selectedYear?.toString() || "overall"}
-                    onValueChange={handleYearChange}
-                    disabled={yearsLoading || yearChanging}
-                  >
-                    <SelectTrigger className="w-32 h-8 text-sm">
-                      <SelectValue placeholder="Overall" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {years.map((year) => (
-                        <SelectItem key={year.key} value={year.value.toString()}>
-                          {year.value === "overall" ? "Overall" : year.value}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                {/* Filters */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  {/* Allotment Dropdown */}
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Allotment:</span>
+                    <Select
+                      value={selectedAllotment || "overall"}
+                      onValueChange={handleAllotmentChange}
+                      disabled={allotmentsLoading || allotmentChanging}
+                    >
+                      <SelectTrigger className="w-48 h-8 text-sm">
+                        <SelectValue placeholder="All Allotments" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {allotments.map((allotment) => (
+                          <SelectItem key={allotment.allotment_id} value={allotment.allotment_id}>
+                            {allotment.allotment_id === "overall" ? "All Allotments" : allotment.value}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Year Dropdown */}
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Year:</span>
+                    <Select
+                      value={selectedYear?.toString() || "overall"}
+                      onValueChange={handleYearChange}
+                      disabled={yearsLoading || yearChanging}
+                    >
+                      <SelectTrigger className="w-32 h-8 text-sm">
+                        <SelectValue placeholder="Overall" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {years.map((year) => (
+                          <SelectItem key={year.key} value={year.value.toString()}>
+                            {year.value === "overall" ? "Overall" : year.value}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
               </div>
               
-              {(chartLoading || yearChanging) ? (
+              {(chartLoading || yearChanging || allotmentChanging) ? (
                 <div className="text-center py-8">
                   <div className="flex flex-col items-center space-y-3">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
                     <p className="text-gray-600 dark:text-gray-400">
-                      {yearChanging ? "Filtering data..." : "Loading dashboard data..."}
+                      {(yearChanging || allotmentChanging) ? "Filtering data..." : "Loading dashboard data..."}
                     </p>
                   </div>
                 </div>
