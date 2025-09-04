@@ -1,0 +1,173 @@
+{
+    "status": true,
+    "code": 200,
+    "fees": [
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "01",
+            "legend": "Payable",
+            "label": "Jan",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "02",
+            "legend": "Payable",
+            "label": "Feb",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "03",
+            "legend": "Payable",
+            "label": "Mar",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "04",
+            "legend": "Payable",
+            "label": "Apr",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "04",
+            "legend": "Payable",
+            "label": "Apr",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "05",
+            "legend": "Payable",
+            "label": "May",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "05",
+            "legend": "Payable",
+            "label": "May",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "09",
+            "legend": "Payable",
+            "label": "Sep",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "10",
+            "legend": "Payable",
+            "label": "Oct",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "11",
+            "legend": "Payable",
+            "label": "Nov",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "user_id": 101,
+            "serial": "12",
+            "legend": "Payable",
+            "label": "Dec",
+            "amount": 10000
+        }
+    ],
+    "payments": [
+        {
+            "hostel_id": 2,
+            "serial": "01",
+            "legend": "Paid",
+            "label": "Jan",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "serial": "02",
+            "legend": "Paid",
+            "label": "Feb",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "serial": "03",
+            "legend": "Paid",
+            "label": "Mar",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "serial": "04",
+            "legend": "Paid",
+            "label": "Apr",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "serial": "04",
+            "legend": "Paid",
+            "label": "Apr",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "serial": "05",
+            "legend": "Paid",
+            "label": "May",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "serial": "05",
+            "legend": "Paid",
+            "label": "May",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "serial": "09",
+            "legend": "Paid",
+            "label": "Sep",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "serial": "10",
+            "legend": "Paid",
+            "label": "Oct",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "serial": "11",
+            "legend": "Paid",
+            "label": "Nov",
+            "amount": 10000
+        },
+        {
+            "hostel_id": 2,
+            "serial": "12",
+            "legend": "Paid",
+            "label": "Dec",
+            "amount": 10000
+        }
+    ]
+}

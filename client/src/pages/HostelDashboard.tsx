@@ -24,11 +24,24 @@ import {
   Settings,
   Star
 } from "lucide-react";
+import { 
+  BarChart, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer,
+  Legend,
+  LineChart,
+  Line
+} from "recharts";
 import logoSvg from "@assets/logo/Asset 3.svg";
 import girlsHostelLogo from "@assets/logo/Asset 7.svg";
 import boysHostelLogo from "@assets/logo/Asset 8.svg";
 
 interface HostelInfo {
+  user_id?: number;
   hostel_id: number;
   hostel_name: string;
   hostel_type: string;
@@ -47,6 +60,22 @@ interface HostelInfo {
   presenter_image_url: string;
   conference_logo_url: string;
   student_hostel_status?: string;
+}
+
+interface FeePaymentData {
+  hostel_id: number;
+  user_id?: number;
+  serial: string;
+  legend: string;
+  label: string;
+  amount: number;
+}
+
+interface ChartData {
+  status: boolean;
+  code: number;
+  fees: FeePaymentData[];
+  payments: FeePaymentData[];
 }
 
 interface RatingData {
@@ -94,6 +123,9 @@ export default function HostelDashboard() {
   const [ratings, setRatings] = useState<RatingData>({});
   const [isSubmittingRating, setIsSubmittingRating] = useState(false);
   const [error, setError] = useState<string>("");
+  const [chartData, setChartData] = useState<ChartData | null>(null);
+  const [chartLoading, setChartLoading] = useState(false);
+  const [chartError, setChartError] = useState<string>("");
 
   const hostelId = params?.hostelId ? parseInt(params.hostelId) : null;
 
@@ -131,6 +163,79 @@ export default function HostelDashboard() {
 
     fetchStudentHostel();
   }, [hostelId, setLocation]);
+
+  // Fetch chart data when hostel info is available
+  useEffect(() => {
+    const fetchChartData = async () => {
+      if (!hostelInfo?.user_id || !hostelInfo?.hostel_id) return;
+      
+      try {
+        setChartLoading(true);
+        setChartError("");
+        
+        // Call dashboard fees/payments API
+        const response = await fetch(`/api/student-dashboard-fees-payments/${hostelInfo.user_id}/${hostelInfo.hostel_id}`);
+        const data = await response.json();
+
+        if (data.status && data.code === 200) {
+          setChartData(data);
+        } else {
+          setChartError(data.message || "Failed to fetch chart data");
+        }
+      } catch (error) {
+        console.error("Error fetching chart data:", error);
+        setChartError("Network error. Please try again.");
+      } finally {
+        setChartLoading(false);
+      }
+    };
+
+    fetchChartData();
+  }, [hostelInfo]);
+
+  // Helper function to format Pakistani Rupees
+  const formatCurrency = (amount: number): string => {
+    return `Rs ${amount.toLocaleString()}`;
+  };
+
+  // Helper function to combine fees and payments data for charts
+  const getCombinedChartData = () => {
+    if (!chartData) return [];
+    
+    const monthsMap = new Map();
+    
+    // Process fees data
+    chartData.fees.forEach(fee => {
+      if (!monthsMap.has(fee.label)) {
+        monthsMap.set(fee.label, { month: fee.label, payable: 0, paid: 0 });
+      }
+      monthsMap.get(fee.label).payable += fee.amount;
+    });
+    
+    // Process payments data
+    chartData.payments.forEach(payment => {
+      if (!monthsMap.has(payment.label)) {
+        monthsMap.set(payment.label, { month: payment.label, payable: 0, paid: 0 });
+      }
+      monthsMap.get(payment.label).paid += payment.amount;
+    });
+    
+    return Array.from(monthsMap.values()).sort((a, b) => {
+      const monthOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return monthOrder.indexOf(a.month) - monthOrder.indexOf(b.month);
+    });
+  };
+
+  // Calculate summary statistics
+  const getSummaryStats = () => {
+    if (!chartData) return { totalFees: 0, totalPaid: 0, outstanding: 0 };
+    
+    const totalFees = chartData.fees.reduce((sum, fee) => sum + fee.amount, 0);
+    const totalPaid = chartData.payments.reduce((sum, payment) => sum + payment.amount, 0);
+    const outstanding = totalFees - totalPaid;
+    
+    return { totalFees, totalPaid, outstanding };
+  };
 
   const handleLogout = () => {
     setLocation("/student-login");
@@ -437,71 +542,154 @@ export default function HostelDashboard() {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                 Dashboard Overview
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center space-x-2">
-                      <CreditCard className="w-5 h-5 text-[#004e89]" />
-                      <span>Total Fees</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                      Rs 25,000
-                    </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      This semester
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center space-x-2">
-                      <Receipt className="w-5 h-5 text-green-600" />
-                      <span>Paid Amount</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold text-green-600">
-                      Rs 15,000
-                    </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      60% completed
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center space-x-2">
-                      <CreditCard className="w-5 h-5 text-red-600" />
-                      <span>Outstanding</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold text-red-600">
-                      Rs 10,000
-                    </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Due soon
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
               
-              <Card>
-                <CardHeader>
-                  <CardTitle>Payment History Chart</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-                    <p className="text-gray-500 dark:text-gray-400">
-                      Chart will be implemented with real data
-                    </p>
+              {chartLoading ? (
+                <div className="text-center py-8">
+                  <p className="text-gray-600 dark:text-gray-400">Loading dashboard data...</p>
+                </div>
+              ) : chartError ? (
+                <div className="text-center py-8">
+                  <p className="text-red-600 dark:text-red-400">{chartError}</p>
+                </div>
+              ) : (
+                <>
+                  {/* Summary Cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center space-x-2">
+                          <CreditCard className="w-5 h-5 text-[#004e89]" />
+                          <span>Total Fees</span>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                          {formatCurrency(getSummaryStats().totalFees)}
+                        </div>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          Current year
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center space-x-2">
+                          <Receipt className="w-5 h-5 text-green-600" />
+                          <span>Paid Amount</span>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold text-green-600">
+                          {formatCurrency(getSummaryStats().totalPaid)}
+                        </div>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          {getSummaryStats().totalFees > 0 
+                            ? `${Math.round((getSummaryStats().totalPaid / getSummaryStats().totalFees) * 100)}% completed`
+                            : "No fees yet"
+                          }
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center space-x-2">
+                          <CreditCard className="w-5 h-5 text-red-600" />
+                          <span>Outstanding</span>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold text-red-600">
+                          {formatCurrency(getSummaryStats().outstanding)}
+                        </div>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          {getSummaryStats().outstanding > 0 ? "Due soon" : "All clear"}
+                        </p>
+                      </CardContent>
+                    </Card>
                   </div>
-                </CardContent>
-              </Card>
+                  
+                  {/* Charts */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Fees vs Payments Bar Chart */}
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Monthly Fees vs Payments</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        {getCombinedChartData().length > 0 ? (
+                          <ResponsiveContainer width="100%" height={300}>
+                            <BarChart data={getCombinedChartData()}>
+                              <CartesianGrid strokeDasharray="3 3" />
+                              <XAxis dataKey="month" />
+                              <YAxis tickFormatter={(value) => `Rs ${value.toLocaleString()}`} />
+                              <Tooltip 
+                                formatter={(value: number) => [formatCurrency(value), ""]}
+                                labelStyle={{ color: '#374151' }}
+                              />
+                              <Legend />
+                              <Bar dataKey="payable" fill="#ef4444" name="Payable" />
+                              <Bar dataKey="paid" fill="#10b981" name="Paid" />
+                            </BarChart>
+                          </ResponsiveContainer>
+                        ) : (
+                          <div className="h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                            <p className="text-gray-500 dark:text-gray-400">
+                              No fee data available yet
+                            </p>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+
+                    {/* Payment Trend Line Chart */}
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Payment Trend</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        {getCombinedChartData().length > 0 ? (
+                          <ResponsiveContainer width="100%" height={300}>
+                            <LineChart data={getCombinedChartData()}>
+                              <CartesianGrid strokeDasharray="3 3" />
+                              <XAxis dataKey="month" />
+                              <YAxis tickFormatter={(value) => `Rs ${value.toLocaleString()}`} />
+                              <Tooltip 
+                                formatter={(value: number) => [formatCurrency(value), ""]}
+                                labelStyle={{ color: '#374151' }}
+                              />
+                              <Legend />
+                              <Line 
+                                type="monotone" 
+                                dataKey="paid" 
+                                stroke="#10b981" 
+                                strokeWidth={3}
+                                name="Payments"
+                                dot={{ fill: '#10b981', r: 6 }}
+                              />
+                              <Line 
+                                type="monotone" 
+                                dataKey="payable" 
+                                stroke="#ef4444" 
+                                strokeWidth={3}
+                                name="Due Fees"
+                                dot={{ fill: '#ef4444', r: 6 }}
+                              />
+                            </LineChart>
+                          </ResponsiveContainer>
+                        ) : (
+                          <div className="h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                            <p className="text-gray-500 dark:text-gray-400">
+                              No payment trend data available yet
+                            </p>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </div>
+                </>
+              )}
             </div>
           )}
 
