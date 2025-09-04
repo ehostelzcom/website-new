@@ -13,6 +13,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { 
   Home, 
   BarChart3, 
   CreditCard, 
@@ -650,7 +657,7 @@ export default function HostelDashboard() {
                   <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Year:</span>
                   <Select
                     value={selectedYear?.toString() || ""}
-                    onValueChange={(value) => setSelectedYear(parseInt(value))}
+                    onValueChange={(value: string) => setSelectedYear(parseInt(value))}
                     disabled={yearsLoading}
                   >
                     <SelectTrigger className="w-24 h-8 text-sm">

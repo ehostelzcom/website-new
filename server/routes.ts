@@ -573,7 +573,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
       res.json(response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching years:", error);
 
       if (error.code === 'ECONNABORTED') {
@@ -626,7 +626,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
       res.json(response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching student dashboard fees/payments:", error);
       
       // Handle not found case
