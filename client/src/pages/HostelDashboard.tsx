@@ -74,6 +74,11 @@ interface FeePaymentData {
 interface ChartData {
   status: boolean;
   code: number;
+  totals: {
+    total_fees: number;
+    total_payments: number;
+    total_balance: number;
+  };
   months: Array<{ serial: number; label: string; payable: number; paid: number }>;
 }
 
@@ -668,6 +673,93 @@ export default function HostelDashboard() {
                     </Card>
                   </div>
                   
+                  {/* Totals Summary Cards */}
+                  {chartData && chartData.totals && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                      {/* Total Fees */}
+                      <Card className="shadow-md border border-red-100 bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20">
+                        <CardContent className="p-4">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="text-sm font-medium text-red-700 dark:text-red-300">Total Fees</p>
+                              <p className="text-2xl font-bold text-red-800 dark:text-red-200">
+                                {formatCurrency(chartData.totals.total_fees)}
+                              </p>
+                            </div>
+                            <div className="w-12 h-12 bg-red-200 dark:bg-red-800/50 rounded-full flex items-center justify-center">
+                              <CreditCard className="w-6 h-6 text-red-600 dark:text-red-400" />
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      {/* Total Payments */}
+                      <Card className="shadow-md border border-green-100 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20">
+                        <CardContent className="p-4">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="text-sm font-medium text-green-700 dark:text-green-300">Total Payments</p>
+                              <p className="text-2xl font-bold text-green-800 dark:text-green-200">
+                                {formatCurrency(chartData.totals.total_payments)}
+                              </p>
+                            </div>
+                            <div className="w-12 h-12 bg-green-200 dark:bg-green-800/50 rounded-full flex items-center justify-center">
+                              <Receipt className="w-6 h-6 text-green-600 dark:text-green-400" />
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      {/* Balance */}
+                      <Card className={`shadow-md border ${
+                        chartData.totals.total_balance === 0 
+                          ? 'border-gray-100 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/20 dark:to-gray-700/20'
+                          : chartData.totals.total_balance > 0
+                          ? 'border-orange-100 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20'
+                          : 'border-blue-100 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20'
+                      }`}>
+                        <CardContent className="p-4">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className={`text-sm font-medium ${
+                                chartData.totals.total_balance === 0 
+                                  ? 'text-gray-700 dark:text-gray-300'
+                                  : chartData.totals.total_balance > 0
+                                  ? 'text-orange-700 dark:text-orange-300'
+                                  : 'text-blue-700 dark:text-blue-300'
+                              }`}>Balance</p>
+                              <p className={`text-2xl font-bold ${
+                                chartData.totals.total_balance === 0 
+                                  ? 'text-gray-800 dark:text-gray-200'
+                                  : chartData.totals.total_balance > 0
+                                  ? 'text-orange-800 dark:text-orange-200'
+                                  : 'text-blue-800 dark:text-blue-200'
+                              }`}>
+                                {formatCurrency(Math.abs(chartData.totals.total_balance))}
+                                {chartData.totals.total_balance > 0 ? ' Due' : chartData.totals.total_balance < 0 ? ' Credit' : ''}
+                              </p>
+                            </div>
+                            <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                              chartData.totals.total_balance === 0 
+                                ? 'bg-gray-200 dark:bg-gray-800/50'
+                                : chartData.totals.total_balance > 0
+                                ? 'bg-orange-200 dark:bg-orange-800/50'
+                                : 'bg-blue-200 dark:bg-blue-800/50'
+                            }`}>
+                              <Building2 className={`w-6 h-6 ${
+                                chartData.totals.total_balance === 0 
+                                  ? 'text-gray-600 dark:text-gray-400'
+                                  : chartData.totals.total_balance > 0
+                                  ? 'text-orange-600 dark:text-orange-400'
+                                  : 'text-blue-600 dark:text-blue-400'
+                              }`} />
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  )}
+
                   {/* Chart */}
                   <div className="w-full">
                     {/* Fees vs Payments Bar Chart */}
