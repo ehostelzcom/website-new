@@ -189,9 +189,9 @@ export default function HostelDashboard() {
         const data = await response.json();
         
         if (data.status && data.code === 200) {
-          // Add blank option for overall values at the beginning
+          // Add overall option for all-time values at the beginning
           const yearsWithOverall = [
-            { key: "overall", value: "" },
+            { key: "overall", value: "overall" },
             ...data.data
           ];
           setYears(yearsWithOverall);
@@ -220,7 +220,7 @@ export default function HostelDashboard() {
     
     // Small delay for smooth loading experience
     setTimeout(() => {
-      if (value === "") {
+      if (value === "overall") {
         setSelectedYear(null); // No year parameter = overall values
       } else {
         setSelectedYear(parseInt(value));
@@ -677,7 +677,7 @@ export default function HostelDashboard() {
                 <div className="flex items-center space-x-2">
                   <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Year:</span>
                   <Select
-                    value={selectedYear?.toString() || ""}
+                    value={selectedYear?.toString() || "overall"}
                     onValueChange={handleYearChange}
                     disabled={yearsLoading || yearChanging}
                   >
@@ -687,7 +687,7 @@ export default function HostelDashboard() {
                     <SelectContent>
                       {years.map((year) => (
                         <SelectItem key={year.key} value={year.value.toString()}>
-                          {year.value === "" ? "Overall" : year.value}
+                          {year.value === "overall" ? "Overall" : year.value}
                         </SelectItem>
                       ))}
                     </SelectContent>
