@@ -368,7 +368,7 @@ export default function HostelDashboard() {
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-start space-x-3">
                           {/* Icon */}
-                          <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
                             <img 
                               src={hostelInfo.hostel_type === "Boys" ? girlsHostelLogo : boysHostelLogo}
                               alt={`${hostelInfo.hostel_type} Hostel`}
