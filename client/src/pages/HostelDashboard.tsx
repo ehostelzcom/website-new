@@ -11,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { 
   Home, 
   BarChart3, 
@@ -22,7 +23,8 @@ import {
   Phone,
   ChevronDown,
   Settings,
-  Star
+  Star,
+  Menu
 } from "lucide-react";
 import { 
   BarChart, 
@@ -123,6 +125,7 @@ export default function HostelDashboard() {
   const [chartData, setChartData] = useState<ChartData | null>(null);
   const [chartLoading, setChartLoading] = useState(false);
   const [chartError, setChartError] = useState<string>("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const hostelId = params?.hostelId ? parseInt(params.hostelId) : null;
 
@@ -307,9 +310,9 @@ export default function HostelDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 flex">
-      {/* Left Sidebar - Conditional */}
+      {/* Desktop Sidebar - Conditional */}
       {showSidebar && (
-        <aside className="w-64 bg-white dark:bg-gray-900 shadow-xl border-r border-gray-200 dark:border-gray-700 flex flex-col">
+        <aside className="hidden lg:flex w-64 bg-white dark:bg-gray-900 shadow-xl border-r border-gray-200 dark:border-gray-700 flex-col">
         {/* Logo Section */}
         <div className="p-6 border-b border-gray-200 dark:border-gray-700">
           <img 
@@ -346,31 +349,90 @@ export default function HostelDashboard() {
         </aside>
       )}
 
+      {/* Mobile Sidebar - Sheet Component */}
+      {showSidebar && (
+        <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+          <SheetContent side="left" className="w-64 p-0 lg:hidden">
+            {/* Logo Section */}
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+              <img 
+                src={logoSvg} 
+                alt="ehostelz.com" 
+                className="h-12 w-auto"
+                data-testid="img-mobile-logo"
+              />
+            </div>
+
+            {/* Navigation Menu */}
+            <nav className="flex-1 p-4">
+              <div className="space-y-2">
+                {sidebarItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        setActiveTab(item.id);
+                        setSidebarOpen(false);
+                      }}
+                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                        activeTab === item.id
+                          ? "bg-gradient-to-r from-[#004e89] to-[#0066b3] text-white shadow-lg"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      }`}
+                      data-testid={`button-mobile-nav-${item.id}`}
+                    >
+                      <Icon className="w-5 h-5" />
+                      <span className="font-medium">{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </nav>
+          </SheetContent>
+        </Sheet>
+      )}
+
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-white/10">
-          <div className="px-6 py-4">
+          <div className="px-4 lg:px-6 py-4">
             <div className="flex items-center justify-between">
+              {/* Mobile Menu Button */}
+              {showSidebar && (
+                <div className="lg:hidden">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setSidebarOpen(true)}
+                    className="mr-2"
+                    data-testid="button-mobile-menu"
+                  >
+                    <Menu className="w-5 h-5" />
+                  </Button>
+                </div>
+              )}
+
               {/* Hostel Information - Conditional */}
               {showHostelInfo && hostelInfo && (
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
-                    <Building2 className="w-6 h-6 text-[#ff6b35]" />
+                <div className="flex items-center space-x-2 sm:space-x-4 flex-1">
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
+                    <Building2 className="w-4 h-4 sm:w-6 sm:h-6 text-[#ff6b35]" />
                   </div>
-                  <div>
-                    <div className="flex items-center space-x-3">
-                      <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center space-x-2 sm:space-x-3">
+                      <h1 className="text-base sm:text-xl font-bold text-gray-900 dark:text-white truncate">
                         {hostelInfo.hostel_name}
                       </h1>
                       <Badge 
                         variant="default"
-                        className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                        className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 text-xs"
                       >
                         Active
                       </Badge>
                     </div>
-                    <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <div className="hidden sm:flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mt-1">
                       <span className="flex items-center">
                         <Building2 className="w-3 h-3 mr-1" />
                         {hostelInfo.hostel_type}
@@ -609,31 +671,89 @@ export default function HostelDashboard() {
                   {/* Chart */}
                   <div className="w-full">
                     {/* Fees vs Payments Bar Chart */}
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Monthly Fees vs Payments</CardTitle>
+                    <Card className="shadow-lg border-0 bg-gradient-to-br from-white to-blue-50 dark:from-gray-900 dark:to-gray-800">
+                      <CardHeader className="pb-4">
+                        <CardTitle className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent flex items-center gap-2">
+                          <BarChart3 className="w-6 h-6 text-blue-600" />
+                          Monthly Fees vs Payments
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="p-2 sm:p-4 md:p-6">
                         {chartData ? (
-                          <ResponsiveContainer width="100%" height={400}>
-                            <BarChart data={getCombinedChartData()}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="month" />
-                              <YAxis tickFormatter={(value) => `Rs ${value.toLocaleString()}`} />
-                              <Tooltip 
-                                formatter={(value: number) => [formatCurrency(value), ""]}
-                                labelStyle={{ color: '#374151' }}
-                              />
-                              <Legend />
-                              <Bar dataKey="payable" fill="#ef4444" name="Payable" />
-                              <Bar dataKey="paid" fill="#10b981" name="Paid" />
-                            </BarChart>
-                          </ResponsiveContainer>
+                          <div className="w-full overflow-x-auto">
+                            <ResponsiveContainer width="100%" height={350} minWidth={300}>
+                              <BarChart 
+                                data={getCombinedChartData()}
+                                margin={{ top: 20, right: 20, left: 10, bottom: 20 }}
+                                barCategoryGap="20%"
+                              >
+                                <defs>
+                                  <linearGradient id="payableGradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#ef4444" stopOpacity={0.9} />
+                                    <stop offset="100%" stopColor="#dc2626" stopOpacity={0.7} />
+                                  </linearGradient>
+                                  <linearGradient id="paidGradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#10b981" stopOpacity={0.9} />
+                                    <stop offset="100%" stopColor="#059669" stopOpacity={0.7} />
+                                  </linearGradient>
+                                </defs>
+                                <CartesianGrid 
+                                  strokeDasharray="3 3" 
+                                  stroke="#e5e7eb" 
+                                  strokeOpacity={0.6}
+                                />
+                                <XAxis 
+                                  dataKey="month" 
+                                  tick={{ fontSize: 12, fill: '#6b7280' }}
+                                  axisLine={{ stroke: '#d1d5db', strokeWidth: 1 }}
+                                  tickLine={{ stroke: '#d1d5db' }}
+                                />
+                                <YAxis 
+                                  tickFormatter={(value) => `Rs ${(value/1000)}k`}
+                                  tick={{ fontSize: 12, fill: '#6b7280' }}
+                                  axisLine={{ stroke: '#d1d5db', strokeWidth: 1 }}
+                                  tickLine={{ stroke: '#d1d5db' }}
+                                />
+                                <Tooltip 
+                                  formatter={(value: number) => [formatCurrency(value), ""]}
+                                  labelStyle={{ color: '#374151', fontWeight: 'bold' }}
+                                  contentStyle={{
+                                    backgroundColor: 'white',
+                                    border: 'none',
+                                    borderRadius: '12px',
+                                    boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+                                    fontSize: '14px'
+                                  }}
+                                  cursor={{ fill: 'rgba(59, 130, 246, 0.05)' }}
+                                />
+                                <Legend 
+                                  wrapperStyle={{ paddingTop: '20px', fontSize: '14px' }}
+                                />
+                                <Bar 
+                                  dataKey="payable" 
+                                  fill="url(#payableGradient)" 
+                                  name="💰 Payable"
+                                  radius={[4, 4, 0, 0]}
+                                  maxBarSize={40}
+                                />
+                                <Bar 
+                                  dataKey="paid" 
+                                  fill="url(#paidGradient)" 
+                                  name="✅ Paid"
+                                  radius={[4, 4, 0, 0]}
+                                  maxBarSize={40}
+                                />
+                              </BarChart>
+                            </ResponsiveContainer>
+                          </div>
                         ) : (
-                          <div className="h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-                            <p className="text-gray-500 dark:text-gray-400">
-                              No fee data available yet
-                            </p>
+                          <div className="h-64 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl flex items-center justify-center">
+                            <div className="text-center">
+                              <BarChart3 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                              <p className="text-gray-500 dark:text-gray-400 font-medium">
+                                Loading chart data...
+                              </p>
+                            </div>
                           </div>
                         )}
                       </CardContent>
