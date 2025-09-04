@@ -731,8 +731,8 @@ export default function HostelDashboard() {
                                 />
                                 <Legend 
                                   verticalAlign="top"
-                                  height={36}
-                                  wrapperStyle={{ paddingBottom: '20px', fontSize: '14px' }}
+                                  height={50}
+                                  wrapperStyle={{ paddingBottom: '30px', fontSize: '14px' }}
                                   iconType="circle"
                                 />
                                 <Bar 
