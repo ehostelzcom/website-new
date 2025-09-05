@@ -71,7 +71,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
   
   // Get user data from localStorage for API calls
   const studentUserId = localStorage.getItem('student_user_id');
-  const hostelId = localStorage.getItem('student_hostel_id');
+  const hostelId = localStorage.getItem('hostel_id');
   
   // For standalone mode, use default values if localStorage is empty (for testing)
   const finalStudentUserId = studentUserId || '101';
