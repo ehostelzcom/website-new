@@ -425,12 +425,12 @@ export default function Fees({ standalone = true }: FeesProps) {
 
   // Navigation items
   const sidebarItems = [
-    { id: "home", label: "Home", icon: Home, route: "/hostel-dashboard/101?tab=home" },
-    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: `/hostel-dashboard/${finalStudentUserId}?tab=dashboard` },
+    { id: "home", label: "Home", icon: Home, route: "/home" },
+    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "/dashboard" },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
-    { id: "rating", label: "Rating", icon: Star, route: "/hostel-dashboard/101?tab=rating" },
-    { id: "profile", label: "Profile", icon: User, route: "/hostel-dashboard/101?tab=profile" },
+    { id: "rating", label: "Rating", icon: Star, route: "/home" },
+    { id: "profile", label: "Profile", icon: User, route: "/home" },
   ];
 
   // Return content with or without page wrapper based on standalone prop

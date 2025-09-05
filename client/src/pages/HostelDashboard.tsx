@@ -132,7 +132,7 @@ export default function HostelDashboard() {
   const [match, params] = useRoute("/hostel-dashboard/:hostelId");
   const [hostelInfo, setHostelInfo] = useState<HostelInfo | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("home");
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [ratings, setRatings] = useState<RatingData>({});
   const [isSubmittingRating, setIsSubmittingRating] = useState(false);
   const [error, setError] = useState<string>("");
@@ -413,17 +413,17 @@ export default function HostelDashboard() {
     { id: "overall", question: "Overall, how would you rate your experience?" }
   ];
 
-  // Check if we should show sidebar and hostel info
-  const showSidebar = activeTab !== "home";
-  const showHostelInfo = activeTab !== "home";
+  // Always show sidebar and hostel info in dashboard
+  const showSidebar = true;
+  const showHostelInfo = true;
 
   const sidebarItems = [
-    { id: "home", label: "Home", icon: Home, route: "#" },
-    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "#" },
+    { id: "home", label: "Home", icon: Home, route: "/home" },
+    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "/dashboard" },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
-    { id: "rating", label: "Rating", icon: Star, route: "#" },
-    { id: "profile", label: "Profile", icon: User, route: "#" },
+    { id: "rating", label: "Rating", icon: Star, route: "/home" },
+    { id: "profile", label: "Profile", icon: User, route: "/home" },
   ];
 
   if (!match || !hostelId) {
@@ -465,7 +465,7 @@ export default function HostelDashboard() {
                 <button
                   key={item.id}
                   onClick={() => {
-                    if (item.id === "fees" || item.id === "payments") {
+                    if (item.id === "fees" || item.id === "payments" || item.id === "home") {
                       setLocation(item.route);
                     } else {
                       setActiveTab(item.id);
@@ -511,7 +511,7 @@ export default function HostelDashboard() {
                     <button
                       key={item.id}
                       onClick={() => {
-                        if (item.id === "fees" || item.id === "payments") {
+                        if (item.id === "fees" || item.id === "payments" || item.id === "home") {
                           setLocation(item.route);
                         } else {
                           setActiveTab(item.id);
