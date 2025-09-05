@@ -92,7 +92,7 @@ export default function Header() {
             <div className="hidden md:block">
               <Button 
                 onClick={() => window.open("/student-login", "_blank")}
-                className="bg-[#004e89] hover:bg-[#003a6b] text-white px-4 py-2 rounded"
+                className="bg-[#004e89] hover:bg-[#003a6b] text-gray-200 px-4 py-2 rounded"
                 data-testid="button-student-login-header"
               >
                 Student Login
@@ -168,7 +168,7 @@ export default function Header() {
                   <div className="pt-4 space-y-3">
                     <Button 
                       onClick={() => {window.open("/student-login", "_blank"); setIsOpen(false);}}
-                      className="w-full bg-[#004e89] hover:bg-[#003a6b] text-white py-2 rounded"
+                      className="w-full bg-[#004e89] hover:bg-[#003a6b] text-gray-200 py-2 rounded"
                       data-testid="nav-mobile-student-login"
                     >
                       Student Login
