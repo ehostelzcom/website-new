@@ -7,6 +7,7 @@ import Home from "@/pages/home";
 import SearchResults from "@/pages/SearchResults";
 import StudentLogin from "@/pages/StudentLogin";
 import StudentDashboard from "@/pages/StudentDashboard";
+import StudentHome from "@/pages/StudentHome";
 import HostelDashboard from "@/pages/HostelDashboard";
 import Fees from "@/pages/Fees";
 import Payments from "@/pages/Payments";
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/search-hostels" component={SearchResults} />
       <Route path="/student-login" component={StudentLogin} />
       <Route path="/student-dashboard" component={StudentDashboard} />
+      <Route path="/student-home" component={StudentHome} />
       <Route path="/hostel-dashboard/:hostelId" component={HostelDashboard} />
       <Route path="/fees" component={Fees} />
       <Route path="/payments" component={Payments} />
