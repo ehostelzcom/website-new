@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, User, Calendar } from "lucide-react";
 import RequestDemoModal from "@/components/ui/request-demo-modal";
 import { useLocation } from "wouter";
 import logoSvg from "@assets/logo/Asset 3.svg";
@@ -92,18 +92,20 @@ export default function Header() {
             <div className="hidden md:block">
               <Button 
                 onClick={() => window.open("/student-login", "_blank")}
-                className="bg-[#004e89] hover:bg-[#003a6b] text-gray-200 px-4 py-2 rounded"
+                className="bg-[#004e89] hover:bg-[#003a6b] text-white px-4 py-2 rounded flex items-center gap-2"
                 data-testid="button-student-login-header"
               >
+                <User className="w-4 h-4" />
                 Student Login
               </Button>
             </div>
             <div className="hidden md:block">
               <RequestDemoModal>
                 <Button 
-                  className="bg-gradient-to-r from-[#004e89] to-[#0066b3] hover:from-[#003a6b] hover:to-[#004e89] text-white font-semibold px-6 py-2.5 shadow-lg shadow-[#004e89]/25 hover:shadow-xl hover:shadow-[#004e89]/30 transition-all duration-300 hover:scale-105 border border-white/10 backdrop-blur-sm"
+                  className="bg-[#ff6b35] hover:bg-[#e55a2e] text-white px-4 py-2 rounded flex items-center gap-2"
                   data-testid="button-request-demo-header"
                 >
+                  <Calendar className="w-4 h-4" />
                   Request Demo
                 </Button>
               </RequestDemoModal>
@@ -168,16 +170,18 @@ export default function Header() {
                   <div className="pt-4 space-y-3">
                     <Button 
                       onClick={() => {window.open("/student-login", "_blank"); setIsOpen(false);}}
-                      className="w-full bg-[#004e89] hover:bg-[#003a6b] text-gray-200 py-2 rounded"
+                      className="w-full bg-[#004e89] hover:bg-[#003a6b] text-white py-2 rounded flex items-center justify-center gap-2"
                       data-testid="nav-mobile-student-login"
                     >
+                      <User className="w-4 h-4" />
                       Student Login
                     </Button>
                     <RequestDemoModal>
                       <Button 
-                        className="w-full bg-gradient-to-r from-[#004e89] to-[#0066b3] hover:from-[#003a6b] hover:to-[#004e89] text-white font-semibold py-3 shadow-lg shadow-[#004e89]/25 hover:shadow-xl transition-all duration-300"
+                        className="w-full bg-[#ff6b35] hover:bg-[#e55a2e] text-white py-2 rounded flex items-center justify-center gap-2"
                         data-testid="nav-mobile-request-demo"
                       >
+                        <Calendar className="w-4 h-4" />
                         Request Demo
                       </Button>
                     </RequestDemoModal>
