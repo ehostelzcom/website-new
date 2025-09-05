@@ -91,7 +91,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
   });
 
   // Fetch hostel information
-  const { data: hostelData } = useQuery({
+  const { data: hostelData } = useQuery<any>({
     queryKey: ['/api/student-hostels', finalStudentUserId],
     enabled: !!finalStudentUserId
   });

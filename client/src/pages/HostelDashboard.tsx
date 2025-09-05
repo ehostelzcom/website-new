@@ -554,114 +554,14 @@ export default function HostelDashboard() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-white/10">
-          <div className="px-4 lg:px-6 py-4">
-            <div className="flex items-center justify-between">
-              {/* Mobile Menu Button */}
-              {showSidebar && (
-                <div className="lg:hidden">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setSidebarOpen(true)}
-                    className="mr-2"
-                    data-testid="button-mobile-menu"
-                  >
-                    <Menu className="w-5 h-5" />
-                  </Button>
-                </div>
-              )}
-
-              {/* Hostel Information - Conditional */}
-              {showHostelInfo && hostelInfo && (
-                <div className="flex items-center space-x-2 sm:space-x-4 flex-1">
-                  <div className="w-8 h-8 sm:w-12 sm:h-12 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
-                    <Building2 className="w-4 h-4 sm:w-6 sm:h-6 text-[#ff6b35]" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center space-x-2 sm:space-x-3">
-                      <h1 className="text-base sm:text-xl font-bold text-gray-900 dark:text-white truncate">
-                        {hostelInfo.hostel_name}
-                      </h1>
-                      <Badge 
-                        variant="default"
-                        className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 text-xs"
-                      >
-                        Active
-                      </Badge>
-                    </div>
-                    <div className="hidden sm:flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mt-1">
-                      <span className="flex items-center">
-                        <Building2 className="w-3 h-3 mr-1" />
-                        {hostelInfo.hostel_type}
-                      </span>
-                      <span className="flex items-center">
-                        <MapPin className="w-3 h-3 mr-1" />
-                        {hostelInfo.hostel_city_name}
-                      </span>
-                      <span className="flex items-center">
-                        <Phone className="w-3 h-3 mr-1" />
-                        {hostelInfo.hostel_mobile_no}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              )}
-              
-              {/* Show logo on Home page when sidebar is hidden */}
-              {!showSidebar && (
-                <div className="flex items-center">
-                  <img 
-                    src={logoSvg} 
-                    alt="ehostelz.com" 
-                    className="h-10 w-auto"
-                    data-testid="img-header-logo"
-                  />
-                </div>
-              )}
-              
-              {/* User Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white"
-                    data-testid="button-user-menu"
-                  >
-                    <div className="w-8 h-8 bg-[#004e89] rounded-full flex items-center justify-center">
-                      <User className="w-4 h-4 text-white" />
-                    </div>
-                    <span className="font-medium">{hostelInfo?.presenter_name || "Student"}</span>
-                    <ChevronDown className="w-4 h-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end">
-                  <DropdownMenuGroup>
-                    <div className="px-2 py-1.5">
-                      <p className="text-sm font-medium text-gray-900 dark:text-white">
-                        {hostelInfo?.presenter_name || "Student"}
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
-                        {hostelInfo?.user_role || "Student"} - {hostelInfo?.hostel_name}
-                      </p>
-                    </div>
-                  </DropdownMenuGroup>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem onClick={handleProfile} data-testid="button-dropdown-profile">
-                      <Settings className="w-4 h-4 mr-2" />
-                      Profile
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleLogout} data-testid="button-dropdown-logout">
-                      <User className="w-4 h-4 mr-2" />
-                      Logout
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
-        </header>
+        <StudentHeader 
+          title="Dashboard Overview"
+          sidebarItems={sidebarItems}
+          activeItemId="dashboard"
+          onMenuToggle={() => setSidebarOpen(true)}
+          hostelInfo={hostelInfo || undefined}
+          showHostelInfo={showHostelInfo}
+        />
 
         {/* Page Content */}
         <main className="flex-1 p-6">
