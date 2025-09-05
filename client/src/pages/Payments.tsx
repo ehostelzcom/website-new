@@ -179,9 +179,6 @@ export default function Payments({ standalone = true }: PaymentsProps) {
       {/* Compact Header - only show in standalone mode */}
       {standalone && (
         <div className="mb-4">
-          <div className="flex items-center gap-2">
-            <Receipt className="h-5 w-5 text-blue-600" />
-          </div>
         </div>
       )}
 
