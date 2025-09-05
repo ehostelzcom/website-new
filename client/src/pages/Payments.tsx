@@ -181,7 +181,6 @@ export default function Payments({ standalone = true }: PaymentsProps) {
         <div className="mb-4">
           <div className="flex items-center gap-2">
             <Receipt className="h-5 w-5 text-blue-600" />
-            <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Payment Records</h1>
           </div>
         </div>
       )}

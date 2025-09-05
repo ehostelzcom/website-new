@@ -169,7 +169,6 @@ export default function Fees({ standalone = true }: FeesProps) {
         <div className="mb-4">
           <div className="flex items-center gap-2">
             <CreditCard className="h-5 w-5 text-blue-600" />
-            <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Fee Records</h1>
           </div>
         </div>
       )}
