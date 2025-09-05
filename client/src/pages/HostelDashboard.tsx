@@ -46,6 +46,7 @@ import {
   Legend
 } from "recharts";
 import logoSvg from "@assets/logo/Asset 3.svg";
+import StudentHeader from "@/components/shared/StudentHeader";
 import girlsHostelLogo from "@assets/logo/Asset 7.svg";
 import boysHostelLogo from "@assets/logo/Asset 8.svg";
 

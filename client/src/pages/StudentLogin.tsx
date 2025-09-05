@@ -38,11 +38,13 @@ export default function StudentLogin() {
       const data = await response.json();
 
       if (data.status && data.code === 200) {
-        // Login successful - store user_id in localStorage
-        const userId = data.data.user_id;
-        localStorage.setItem("student_user_id", userId.toString());
+        // Login successful - store user_id, full_name, and cnic in localStorage
+        const { user_id, full_name, cnic } = data.data;
+        localStorage.setItem("student_user_id", user_id.toString());
+        localStorage.setItem("student_full_name", full_name || "");
+        localStorage.setItem("student_cnic", cnic?.toString() || "");
         
-        console.log("Login successful:", { userId, username });
+        console.log("Login successful:", { user_id, full_name, cnic, username });
         
         // Redirect to home page (hostel cards)
         setLocation("/home");

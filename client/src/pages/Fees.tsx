@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CalendarDays, Search, Filter, Receipt, ChevronLeft, ChevronRight, Home, BarChart3, CreditCard, Star, User, Menu } from 'lucide-react';
 import logoSvg from "@assets/logo/Asset 3.svg";
+import StudentHeader from "@/components/shared/StudentHeader";
 import { format } from 'date-fns';
 
 // Types for fee data
@@ -511,26 +512,12 @@ export default function Fees({ standalone = true }: FeesProps) {
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
           {/* Header */}
-          <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-white/10">
-            <div className="px-4 lg:px-6 py-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="lg:hidden"
-                    onClick={() => setSidebarOpen(true)}
-                    data-testid="button-mobile-menu"
-                  >
-                    <Menu className="h-5 w-5" />
-                  </Button>
-                  <div>
-                    <h1 className="text-lg font-semibold text-gray-900 dark:text-white">Fee Records</h1>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </header>
+          <StudentHeader 
+            title="Fee Records"
+            sidebarItems={sidebarItems}
+            activeItemId="fees"
+            onMenuToggle={() => setSidebarOpen(true)}
+          />
 
           {/* Content */}
           <main className="flex-1 p-3 lg:p-4">
