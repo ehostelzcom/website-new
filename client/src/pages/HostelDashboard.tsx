@@ -982,6 +982,7 @@ export default function HostelDashboard() {
           {/* Fees Content */}
           {activeTab === "fees" && (
             <div className="space-y-6">
+              {console.log("🔵 Rendering Fees component, activeTab:", activeTab)}
               <Fees standalone={false} />
             </div>
           )}
@@ -989,6 +990,7 @@ export default function HostelDashboard() {
           {/* Payments Content */}
           {activeTab === "payments" && (
             <div className="space-y-6">
+              {console.log("🟡 Rendering Payments component, activeTab:", activeTab)}
               <Payments standalone={false} />
             </div>
           )}
