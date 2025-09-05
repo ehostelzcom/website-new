@@ -558,7 +558,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
         <div className="flex-1 flex flex-col">
           {/* Student Header */}
           <StudentHeader 
-            title="Payment Records"
+            title=""
             sidebarItems={sidebarItems}
             activeItemId="payments"
             onMenuToggle={() => setSidebarOpen(true)}

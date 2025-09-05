@@ -527,7 +527,7 @@ export default function Fees({ standalone = true }: FeesProps) {
         <div className="flex-1 flex flex-col">
           {/* Student Header */}
           <StudentHeader 
-            title="Fee Records"
+            title=""
             sidebarItems={sidebarItems}
             activeItemId="fees"
             onMenuToggle={() => setSidebarOpen(true)}
