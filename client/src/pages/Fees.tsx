@@ -71,7 +71,7 @@ export default function Fees({ standalone = true }: FeesProps) {
     queryKey: ['/api/student-fees', studentUserId, hostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
     queryFn: async () => {
       let url = `/api/student-fees/${studentUserId}/${hostelId}`;
-      if (allotmentFilter !== 'all') {
+      if (allotmentFilter && allotmentFilter !== 'all') {
         url += `?allotment_id=${allotmentFilter}`;
       }
       const response = await fetch(url);

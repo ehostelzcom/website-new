@@ -84,7 +84,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
     queryKey: ['/api/student-payments', studentUserId, hostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
     queryFn: async () => {
       let url = `/api/student-payments/${studentUserId}/${hostelId}`;
-      if (allotmentFilter !== 'all') {
+      if (allotmentFilter && allotmentFilter !== 'all') {
         url += `?allotment_id=${allotmentFilter}`;
       }
       const response = await fetch(url);
