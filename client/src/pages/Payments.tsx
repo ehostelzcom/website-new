@@ -562,9 +562,27 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                   >
                     <Menu className="h-5 w-5" />
                   </Button>
-                  <div className="flex items-center gap-2">
-                    <Receipt className="h-5 w-5 text-blue-600" />
-                    <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Payment Records</h1>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2">
+                      <Receipt className="h-5 w-5 text-blue-600" />
+                      <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Payment Records</h1>
+                    </div>
+                    {hostelData?.data && (
+                      <div className="flex flex-col md:flex-row gap-2 md:gap-4 text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        <div className="flex items-center gap-2">
+                          <Building2 className="w-4 h-4" />
+                          <span>{hostelData.data.hostel_name} ({hostelData.data.hostel_type})</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4" />
+                          <span>{hostelData.data.hostel_city_name}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Phone className="w-4 h-4" />
+                          <span>{hostelData.data.hostel_mobile_no}</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
