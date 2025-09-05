@@ -69,17 +69,6 @@ export default function Fees({ standalone = true }: FeesProps) {
   // Fetch fees data - include allotment_id if specific allotment is selected
   const { data: feesData, isLoading, error } = useQuery<FeesResponse>({
     queryKey: ['/api/student-fees', studentUserId, hostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
-    queryFn: async () => {
-      let url = `/api/student-fees/${studentUserId}/${hostelId}`;
-      if (allotmentFilter && allotmentFilter !== 'all') {
-        url += `?allotment_id=${allotmentFilter}`;
-      }
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch fees data: ${response.status} ${response.statusText}`);
-      }
-      return response.json();
-    },
     enabled: !!studentUserId && !!hostelId,
   });
 
