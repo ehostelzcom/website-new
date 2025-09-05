@@ -8,6 +8,7 @@ import SearchResults from "@/pages/SearchResults";
 import StudentLogin from "@/pages/StudentLogin";
 import StudentDashboard from "@/pages/StudentDashboard";
 import HostelDashboard from "@/pages/HostelDashboard";
+import Fees from "@/pages/Fees";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/student-login" component={StudentLogin} />
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/hostel-dashboard/:hostelId" component={HostelDashboard} />
+      <Route path="/fees" component={Fees} />
       <Route component={NotFound} />
     </Switch>
   );

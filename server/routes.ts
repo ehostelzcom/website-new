@@ -711,6 +711,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // GET API for Student Fees by user_id and hostel_id
+  app.get("/api/student-fees/:user_id/:hostel_id", async (req, res) => {
+    console.log("Student fees API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
+    try {
+      const { user_id, hostel_id } = req.params;
+      
+      // Validate required parameters
+      if (!user_id || !hostel_id) {
+        return res.status(400).json({ 
+          error: "Missing required parameters",
+          message: "user_id and hostel_id are required"
+        });
+      }
+
+      // Call Oracle APEX student fees API
+      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/student-fees/${user_id}/${hostel_id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log("Oracle APEX student-fees response:", response.data);
+      
+      // Return the response directly from Oracle APEX
+      res.setHeader('Content-Type', 'application/json');
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("Error fetching student fees:", error);
+      
+      // Handle not found case
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return res.status(404).json({ 
+          status: false,
+          code: 404,
+          message: "No fees data found for this student and hostel"
+        });
+      }
+      
+      res.status(500).json({ 
+        status: false,
+        code: 500,
+        message: "Failed to fetch student fees"
+      });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 

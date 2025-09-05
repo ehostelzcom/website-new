@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useRoute } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Fees from "@/pages/Fees";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -981,21 +982,9 @@ export default function HostelDashboard() {
           {activeTab === "fees" && (
             <div className="space-y-6">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Fee Details
+                Fee Records
               </h2>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Fee Structure & Status</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <CreditCard className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Fee table will be populated with real API data
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+              <Fees standalone={false} />
             </div>
           )}
 
