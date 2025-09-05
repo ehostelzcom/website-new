@@ -153,6 +153,15 @@ export default function HostelDashboard() {
 
   const hostelId = params?.hostelId ? parseInt(params.hostelId) : null;
 
+  // Read tab from URL parameters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    if (tabParam) {
+      setActiveTab(tabParam);
+    }
+  }, []);
+
   useEffect(() => {
     const fetchStudentHostel = async () => {
       try {
@@ -409,12 +418,12 @@ export default function HostelDashboard() {
   const showHostelInfo = activeTab !== "home";
 
   const sidebarItems = [
-    { id: "home", label: "Home", icon: Home, route: `/hostel-dashboard/${hostelId}` },
-    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: `/hostel-dashboard/${hostelId}` },
+    { id: "home", label: "Home", icon: Home, route: "#" },
+    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "#" },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
-    { id: "rating", label: "Rating", icon: Star, route: `/hostel-dashboard/${hostelId}` },
-    { id: "profile", label: "Profile", icon: User, route: `/hostel-dashboard/${hostelId}` },
+    { id: "rating", label: "Rating", icon: Star, route: "#" },
+    { id: "profile", label: "Profile", icon: User, route: "#" },
   ];
 
   if (!match || !hostelId) {

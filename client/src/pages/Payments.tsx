@@ -428,12 +428,12 @@ export default function Payments({ standalone = true }: PaymentsProps) {
 
   // Navigation items
   const sidebarItems = [
-    { id: "home", label: "Home", icon: Home, route: "/hostel-dashboard/101" },
-    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: `/hostel-dashboard/${finalStudentUserId}` },
+    { id: "home", label: "Home", icon: Home, route: "/hostel-dashboard/101?tab=home" },
+    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: `/hostel-dashboard/${finalStudentUserId}?tab=dashboard` },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
-    { id: "rating", label: "Rating", icon: Star, route: "/student-dashboard" },
-    { id: "profile", label: "Profile", icon: User, route: "/student-dashboard" },
+    { id: "rating", label: "Rating", icon: Star, route: "/hostel-dashboard/101?tab=rating" },
+    { id: "profile", label: "Profile", icon: User, route: "/hostel-dashboard/101?tab=profile" },
   ];
 
   if (standalone) {
