@@ -428,7 +428,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
 
   // Navigation items
   const sidebarItems = [
-    { id: "home", label: "Home", icon: Home, route: "/" },
+    { id: "home", label: "Home", icon: Home, route: "/student-dashboard" },
     { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "/student-dashboard" },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
