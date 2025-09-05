@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useAuth } from '@/hooks/useAuth';
+// useAuth not needed - authentication handled at parent level
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -39,7 +39,9 @@ interface FeesProps {
 }
 
 export default function Fees({ standalone = true }: FeesProps) {
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  // Get user data from localStorage for API calls
+  const studentUserId = localStorage.getItem('student_user_id');
+  const hostelId = localStorage.getItem('student_hostel_id');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [monthFilter, setMonthFilter] = useState('all');
@@ -49,8 +51,8 @@ export default function Fees({ standalone = true }: FeesProps) {
 
   // Fetch fees data
   const { data: feesData, isLoading, error } = useQuery<FeesResponse>({
-    queryKey: ['/api/student-fees', user?.user_id, user?.hostel_id],
-    enabled: isAuthenticated && !!user?.user_id && !!user?.hostel_id,
+    queryKey: ['/api/student-fees', studentUserId, hostelId],
+    enabled: !!studentUserId && !!hostelId,
   });
 
   // Get unique values for filters
@@ -116,18 +118,8 @@ export default function Fees({ standalone = true }: FeesProps) {
     setCurrentPage(1);
   }, [searchTerm, statusFilter, monthFilter, seatFilter]);
 
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
+  // Only check authentication for standalone mode
+  if (standalone && (!studentUserId || !hostelId)) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
