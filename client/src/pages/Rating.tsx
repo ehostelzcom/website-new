@@ -251,10 +251,10 @@ export default function Rating() {
             </p>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Rating Questions - Two Column Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Left Column - First 4 Questions */}
-              <div className="space-y-6">
+            {/* Rating Questions - 6 Column + 6 Column Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              {/* Left Side - 6 Columns, First 4 Questions */}
+              <div className="lg:col-span-6 space-y-6">
                 {ratingQuestions.slice(0, 4).map((question) => (
                   <div key={question.id} className="space-y-2">
                     <Label className="text-sm font-medium">{question.question}</Label>
@@ -271,8 +271,8 @@ export default function Rating() {
                 ))}
               </div>
               
-              {/* Right Column - Last 4 Questions */}
-              <div className="space-y-6">
+              {/* Right Side - 6 Columns, Last 4 Questions */}
+              <div className="lg:col-span-6 space-y-6">
                 {ratingQuestions.slice(4, 8).map((question) => (
                   <div key={question.id} className="space-y-2">
                     <Label className="text-sm font-medium">{question.question}</Label>
