@@ -980,34 +980,15 @@ export default function HostelDashboard() {
           )}
 
           {/* Fees Content */}
-          {(() => {
-            console.log('🟢 DASHBOARD: activeTab is:', activeTab, 'should render fees?', activeTab === "fees");
-            return null;
-          })()}
           {activeTab === "fees" && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Fee Records
-              </h2>
-              {(() => {
-                console.log('🟢 DASHBOARD: Rendering Fees component now!');
-                return null;
-              })()}
               <Fees standalone={false} />
             </div>
           )}
 
           {/* Payments Content */}
-          {(() => {
-            console.log('🟡 DASHBOARD: activeTab is:', activeTab, 'should render payments?', activeTab === "payments");
-            return null;
-          })()}
           {activeTab === "payments" && (
             <div className="space-y-6">
-              {(() => {
-                console.log('🟡 DASHBOARD: Rendering Payments component now!');
-                return null;
-              })()}
               <Payments standalone={false} />
             </div>
           )}

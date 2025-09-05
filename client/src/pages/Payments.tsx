@@ -62,17 +62,9 @@ interface PaymentsProps {
 }
 
 export default function Payments({ standalone = true }: PaymentsProps) {
-  console.log('🟡 PAYMENTS COMPONENT RENDERING!!! standalone:', standalone);
-  
   // Get user data from localStorage for API calls
   const studentUserId = localStorage.getItem('student_user_id');
   const hostelId = localStorage.getItem('student_hostel_id');
-  
-  // Debug logging
-  console.log('🟡 Payments component mounted - studentUserId:', studentUserId, 'hostelId:', hostelId);
-  console.log('🟡 Payments component - standalone mode:', standalone);
-  console.log('🟡 Allotments query enabled:', !!studentUserId && !!hostelId);
-  console.log('🟡 Payments query enabled:', !!studentUserId && !!hostelId);
   
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -88,7 +80,6 @@ export default function Payments({ standalone = true }: PaymentsProps) {
   });
 
   // Fetch payments data - include allotment_id if specific allotment is selected
-  console.log('🟡 SETTING UP PAYMENTS QUERY!!! enabled:', !!studentUserId && !!hostelId);
   const { data: paymentsData, isLoading, error } = useQuery<PaymentsResponse>({
     queryKey: ['/api/student-payments', studentUserId, hostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
     queryFn: async () => {
@@ -96,20 +87,14 @@ export default function Payments({ standalone = true }: PaymentsProps) {
       if (allotmentFilter !== 'all') {
         url += `?allotment_id=${allotmentFilter}`;
       }
-      console.log('🟡 Fetching payments from URL:', url);
       const response = await fetch(url);
       if (!response.ok) {
-        console.error('🟡 Payments API error:', response.status, response.statusText);
         throw new Error(`Failed to fetch payments data: ${response.status} ${response.statusText}`);
       }
-      const data = await response.json();
-      console.log('🟡 Payments API response:', data);
-      return data;
+      return response.json();
     },
     enabled: !!studentUserId && !!hostelId,
   });
-  
-  console.log('🟡 PAYMENTS QUERY STATUS - isLoading:', isLoading, 'error:', error, 'data:', paymentsData);
 
   // Get unique values for filters
   const uniqueMonths = Array.from(

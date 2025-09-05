@@ -50,17 +50,9 @@ interface FeesProps {
 }
 
 export default function Fees({ standalone = true }: FeesProps) {
-  console.log('🔵 FEES COMPONENT RENDERING!!! standalone:', standalone);
-  
   // Get user data from localStorage for API calls
   const studentUserId = localStorage.getItem('student_user_id');
   const hostelId = localStorage.getItem('student_hostel_id');
-  
-  // Debug logging
-  console.log('🔵 Fees component mounted - studentUserId:', studentUserId, 'hostelId:', hostelId);
-  console.log('🔵 Fees component - standalone mode:', standalone);
-  console.log('🔵 Allotments query enabled:', !!studentUserId && !!hostelId);
-  console.log('🔵 Fees query enabled:', !!studentUserId && !!hostelId);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [monthFilter, setMonthFilter] = useState('all');
@@ -75,7 +67,6 @@ export default function Fees({ standalone = true }: FeesProps) {
   });
 
   // Fetch fees data - include allotment_id if specific allotment is selected
-  console.log('🔴 SETTING UP FEES QUERY!!! enabled:', !!studentUserId && !!hostelId);
   const { data: feesData, isLoading, error } = useQuery<FeesResponse>({
     queryKey: ['/api/student-fees', studentUserId, hostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
     queryFn: async () => {
@@ -83,20 +74,14 @@ export default function Fees({ standalone = true }: FeesProps) {
       if (allotmentFilter !== 'all') {
         url += `?allotment_id=${allotmentFilter}`;
       }
-      console.log('🔴 Fetching fees from URL:', url);
       const response = await fetch(url);
       if (!response.ok) {
-        console.error('🔴 Fees API error:', response.status, response.statusText);
         throw new Error(`Failed to fetch fees data: ${response.status} ${response.statusText}`);
       }
-      const data = await response.json();
-      console.log('🔴 Fees API response:', data);
-      return data;
+      return response.json();
     },
     enabled: !!studentUserId && !!hostelId,
   });
-  
-  console.log('🔴 FEES QUERY STATUS - isLoading:', isLoading, 'error:', error, 'data:', feesData);
 
   // Get unique values for filters
   const uniqueMonths = Array.from(
