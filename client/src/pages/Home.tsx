@@ -172,57 +172,66 @@ export default function Home() {
               </div>
             </div>
           ) : hostelData?.data ? (
-            <div className="max-w-md">
-              <Card
-                className="cursor-pointer hover:shadow-xl transition-all duration-200 hover:scale-105 border-0 shadow-lg"
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Card 
+                className="cursor-pointer transition-all duration-200 hover:shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-xl"
                 onClick={() => handleHostelClick(hostelData.data)}
                 data-testid={`card-hostel-${hostelData.data.hostel_id}`}
               >
-                <CardHeader className="text-center pb-4">
-                  <div className="mx-auto mb-4">
-                    <img 
-                      src={hostelData.data.hostel_type.toLowerCase() === 'boys' ? boysHostelLogo : girlsHostelLogo} 
-                      alt={`${hostelData.data.hostel_name} Logo`}
-                      className="h-16 w-16 mx-auto"
-                      data-testid="img-hostel-logo"
-                    />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-gray-900 dark:text-white">
-                    {hostelData.data.hostel_name}
-                  </CardTitle>
-                  <div className="flex justify-center items-center gap-2 mt-2">
-                    <Badge 
-                      variant="outline" 
-                      className="bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                    >
-                      {hostelData.data.hostel_type}
+                <div className="p-4">
+                  {/* Header Row */}
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-start space-x-3">
+                      {/* Icon */}
+                      <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <img 
+                          src={hostelData.data.hostel_type === "Boys" ? boysHostelLogo : girlsHostelLogo}
+                          alt={`${hostelData.data.hostel_type} Hostel`}
+                          className="w-8 h-8"
+                        />
+                      </div>
+                      
+                      {/* Hostel Name and Type */}
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-2 mb-1">
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                            {hostelData.data.hostel_name}
+                          </h3>
+                          <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
+                            <User className="w-4 h-4" />
+                            <span>{hostelData.data.hostel_type}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Status Badge */}
+                    <Badge className="bg-blue-600 hover:bg-blue-600 text-white text-sm px-3 py-1 flex-shrink-0">
+                      {hostelData.data.student_hostel_status || "Active"}
                     </Badge>
-                    <Badge 
-                      variant={hostelData.data.student_hostel_status === "Active" ? "default" : "secondary"}
-                      data-testid={`badge-status-${hostelData.data.student_hostel_status.toLowerCase()}`}
-                    >
-                      {hostelData.data.student_hostel_status}
-                    </Badge>
                   </div>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                    <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
-                    <span>{hostelData.data.hostel_address}</span>
+
+                  {/* Location Info */}
+                  <div className="flex items-start space-x-2">
+                    <MapPin className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        {hostelData.data.hostel_city_name}
+                      </p>
+                      <p className="text-xs leading-relaxed">
+                        {hostelData.data.hostel_address}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                    <Phone className="w-4 h-4 mr-2 flex-shrink-0" />
-                    <span>{hostelData.data.hostel_mobile_no}</span>
+                  
+                  {/* Contact Info */}
+                  <div className="flex items-center space-x-2 mt-2">
+                    <Phone className="w-4 h-4 text-gray-500" />
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {hostelData.data.hostel_mobile_no}
+                    </span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                    <Building2 className="w-4 h-4 mr-2 flex-shrink-0" />
-                    <span>{hostelData.data.hostel_city_name}</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                    <Users className="w-4 h-4 mr-2 flex-shrink-0" />
-                    <span>Presenter: {hostelData.data.presenter_name}</span>
-                  </div>
-                </CardContent>
+                </div>
               </Card>
             </div>
           ) : (
