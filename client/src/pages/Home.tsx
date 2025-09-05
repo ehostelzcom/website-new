@@ -83,6 +83,12 @@ export default function Home() {
   };
 
   const handleLogout = () => {
+    // Clear all stored user data
+    localStorage.removeItem("student_user_id");
+    localStorage.removeItem("student_full_name");
+    localStorage.removeItem("student_cnic");
+    localStorage.removeItem("hostel_id");
+    
     setLocation("/student-login");
   };
 
@@ -90,6 +96,10 @@ export default function Home() {
     // TODO: Navigate to profile page
     console.log("Profile clicked");
   };
+
+  // Get user data from localStorage
+  const fullName = localStorage.getItem("student_full_name") || "Student";
+  const cnic = localStorage.getItem("student_cnic") || "";
 
   // Navigation items
   const sidebarItems = [
@@ -128,30 +138,44 @@ export default function Home() {
             {/* User Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  className="relative h-10 w-10 rounded-full bg-[#004e89] text-white hover:bg-[#003a6b]"
+                <Button
+                  variant="ghost"
+                  className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white"
                   data-testid="button-user-menu"
                 >
-                  <User className="h-5 w-5" />
+                  <div className="w-8 h-8 bg-[#004e89] rounded-full flex items-center justify-center">
+                    <User className="w-4 h-4 text-white" />
+                  </div>
+                  <div className="hidden sm:block text-left">
+                    <span className="font-medium block">{fullName}</span>
+                  </div>
+                  <ChevronDown className="w-4 h-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end" forceMount>
+              <DropdownMenuContent className="w-56" align="end">
                 <DropdownMenuGroup>
-                  <DropdownMenuItem onClick={handleProfile} data-testid="menu-profile">
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem data-testid="menu-settings">
-                    <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
-                  </DropdownMenuItem>
+                  <div className="px-2 py-1.5">
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">
+                      {fullName}
+                    </p>
+                    {cnic && (
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        {cnic}
+                      </p>
+                    )}
+                  </div>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} data-testid="menu-logout">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Logout</span>
-                </DropdownMenuItem>
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={handleProfile} data-testid="button-dropdown-profile">
+                    <Settings className="w-4 h-4 mr-2" />
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleLogout} data-testid="button-dropdown-logout">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
