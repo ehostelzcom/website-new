@@ -409,12 +409,12 @@ export default function HostelDashboard() {
   const showHostelInfo = activeTab !== "home";
 
   const sidebarItems = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "dashboard", label: "Dashboard", icon: BarChart3 },
-    { id: "fees", label: "Fees", icon: CreditCard },
-    { id: "payments", label: "Payments", icon: Receipt },
-    { id: "rating", label: "Rating", icon: Star },
-    { id: "profile", label: "Profile", icon: User },
+    { id: "home", label: "Home", icon: Home, route: `/hostel-dashboard/${hostelId}` },
+    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: `/hostel-dashboard/${hostelId}` },
+    { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
+    { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
+    { id: "rating", label: "Rating", icon: Star, route: `/hostel-dashboard/${hostelId}` },
+    { id: "profile", label: "Profile", icon: User, route: `/hostel-dashboard/${hostelId}` },
   ];
 
   if (!match || !hostelId) {
@@ -455,7 +455,13 @@ export default function HostelDashboard() {
               return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveTab(item.id)}
+                  onClick={() => {
+                    if (item.id === "fees" || item.id === "payments") {
+                      setLocation(item.route);
+                    } else {
+                      setActiveTab(item.id);
+                    }
+                  }}
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
                     activeTab === item.id
                       ? "bg-gradient-to-r from-[#004e89] to-[#0066b3] text-white shadow-lg"
@@ -496,7 +502,11 @@ export default function HostelDashboard() {
                     <button
                       key={item.id}
                       onClick={() => {
-                        setActiveTab(item.id);
+                        if (item.id === "fees" || item.id === "payments") {
+                          setLocation(item.route);
+                        } else {
+                          setActiveTab(item.id);
+                        }
                         setSidebarOpen(false);
                       }}
                       className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
