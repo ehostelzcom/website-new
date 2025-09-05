@@ -8,9 +8,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { CalendarDays, Search, Filter, CreditCard, ChevronLeft, ChevronRight, Home, BarChart3, Receipt, Star, User, Menu } from 'lucide-react';
+import { CalendarDays, Search, Filter, CreditCard, ChevronLeft, ChevronRight, Home, BarChart3, Receipt, Star, User, Menu, Settings, LogOut, Building2, MapPin, Phone, ChevronDown } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuGroup, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import logoSvg from "@assets/logo/Asset 3.svg";
-import StudentHeader from "@/components/shared/StudentHeader";
 import { format } from 'date-fns';
 
 // Types for payment data
@@ -312,13 +312,16 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">S.No</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Seat</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Month</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100 text-center">Fee Amount</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100 text-center">Payable</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100 text-center">Paid</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Due Date</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Fee Amount</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Discount</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Payable</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Paid</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Balance</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Method</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Type</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Status</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Created at</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Date</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -333,14 +336,28 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                             {payment.seat_title}
                           </TableCell>
                           <TableCell>{payment.month_of}</TableCell>
-                          <TableCell className="text-center font-medium">
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <CalendarDays className="h-4 w-4 text-gray-400" />
+                              {formatDate(payment.created_at)}
+                            </div>
+                          </TableCell>
+                          <TableCell className="text-right font-medium">
                             {formatCurrency(payment.fee_amount)}
                           </TableCell>
-                          <TableCell className="text-center font-medium">
+                          <TableCell className="text-right">
+                            {formatCurrency(payment.discount)}
+                          </TableCell>
+                          <TableCell className="text-right font-medium">
                             {formatCurrency(payment.payable_amount)}
                           </TableCell>
-                          <TableCell className="text-center font-medium text-green-600 dark:text-green-400">
+                          <TableCell className="text-right font-medium text-green-600 dark:text-green-400">
                             {formatCurrency(payment.payment_amount)}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <span className={payment.remaining_balance > 0 ? 'text-red-600 dark:text-red-400 font-medium' : 'text-gray-600 dark:text-gray-400'}>
+                              {formatCurrency(payment.remaining_balance)}
+                            </span>
                           </TableCell>
                           <TableCell>
                             <Badge variant="outline" className="bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300">
@@ -532,14 +549,69 @@ export default function Payments({ standalone = true }: PaymentsProps) {
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
           {/* Header */}
-          <StudentHeader 
-            title="Payment Records"
-            sidebarItems={sidebarItems}
-            activeItemId="payments"
-            onMenuToggle={() => setSidebarOpen(true)}
-            hostelInfo={hostelData?.data}
-            showHostelInfo={true}
-          />
+          <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-white/10">
+            <div className="px-4 lg:px-6 py-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="lg:hidden"
+                    onClick={() => setSidebarOpen(true)}
+                    data-testid="button-mobile-menu"
+                  >
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Receipt className="h-5 w-5 text-blue-600" />
+                    <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Payment Records</h1>
+                  </div>
+                </div>
+
+                {/* User Menu */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white"
+                      data-testid="button-user-menu"
+                    >
+                      <div className="w-8 h-8 bg-[#004e89] rounded-full flex items-center justify-center">
+                        <User className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="hidden sm:block text-left">
+                        <span className="font-medium block">{localStorage.getItem("student_full_name") || "Student"}</span>
+                      </div>
+                      <ChevronDown className="w-4 h-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56" align="end">
+                    <DropdownMenuGroup>
+                      <div className="px-2 py-1.5">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">
+                          {localStorage.getItem("student_full_name") || "Student"}
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          {localStorage.getItem("student_cnic") || ""}
+                        </p>
+                      </div>
+                    </DropdownMenuGroup>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem data-testid="button-dropdown-profile">
+                        <Settings className="w-4 h-4 mr-2" />
+                        Profile
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setLocation("/student-login")} data-testid="button-dropdown-logout">
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Logout
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </div>
+          </header>
 
           {/* Content */}
           <main className="flex-1 p-3 lg:p-4">
