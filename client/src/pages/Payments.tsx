@@ -333,13 +333,13 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                             {payment.seat_title}
                           </TableCell>
                           <TableCell>{payment.month_of}</TableCell>
-                          <TableCell className="text-right font-medium">
+                          <TableCell className="text-center font-medium">
                             {formatCurrency(payment.fee_amount)}
                           </TableCell>
-                          <TableCell className="text-right font-medium">
+                          <TableCell className="text-center font-medium">
                             {formatCurrency(payment.payable_amount)}
                           </TableCell>
-                          <TableCell className="text-right font-medium text-green-600 dark:text-green-400">
+                          <TableCell className="text-center font-medium text-green-600 dark:text-green-400">
                             {formatCurrency(payment.payment_amount)}
                           </TableCell>
                           <TableCell>
