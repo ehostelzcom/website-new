@@ -34,6 +34,17 @@ interface FeesResponse {
   data: FeeRecord[];
 }
 
+interface AllotmentRecord {
+  allotment_id: string;
+  value: string;
+}
+
+interface AllotmentsResponse {
+  status: boolean;
+  code: number;
+  data: AllotmentRecord[];
+}
+
 interface FeesProps {
   standalone?: boolean; // Whether this is a standalone page or embedded in dashboard
 }
@@ -45,13 +56,30 @@ export default function Fees({ standalone = true }: FeesProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [monthFilter, setMonthFilter] = useState('all');
-  const [seatFilter, setSeatFilter] = useState('all');
+  const [seatFilter, setSeatFilter] = useState('all'); // This will store allotment_id
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Fetch fees data
+  // Fetch allotments data for seat filter dropdown
+  const { data: allotmentsData } = useQuery<AllotmentsResponse>({
+    queryKey: ['/api/student-allotments', studentUserId, hostelId],
+    enabled: !!studentUserId && !!hostelId,
+  });
+
+  // Fetch fees data - include allotment_id if specific seat is selected
   const { data: feesData, isLoading, error } = useQuery<FeesResponse>({
-    queryKey: ['/api/student-fees', studentUserId, hostelId],
+    queryKey: ['/api/student-fees', studentUserId, hostelId, seatFilter !== 'all' ? seatFilter : undefined],
+    queryFn: async () => {
+      let url = `/api/student-fees/${studentUserId}/${hostelId}`;
+      if (seatFilter !== 'all') {
+        url += `?allotment_id=${seatFilter}`;
+      }
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Failed to fetch fees data');
+      }
+      return response.json();
+    },
     enabled: !!studentUserId && !!hostelId,
   });
 
@@ -60,15 +88,13 @@ export default function Fees({ standalone = true }: FeesProps) {
     new Set(feesData?.data?.map(fee => fee.month_of) || [])
   ).sort();
   
-  const uniqueSeats = Array.from(
-    new Set(feesData?.data?.map(fee => fee.seat_title) || [])
-  ).sort();
+  // uniqueSeats removed - now using allotments API data
 
   const uniqueStatuses = Array.from(
     new Set(feesData?.data?.map(fee => fee.payment_status) || [])
   ).sort();
 
-  // Filter and search logic
+  // Filter and search logic (seat filtering now done server-side via API)
   const filteredData = feesData?.data?.filter(fee => {
     const matchesSearch = 
       fee.seat_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -77,9 +103,9 @@ export default function Fees({ standalone = true }: FeesProps) {
     
     const matchesStatus = statusFilter === 'all' || fee.payment_status === statusFilter;
     const matchesMonth = monthFilter === 'all' || fee.month_of === monthFilter;
-    const matchesSeat = seatFilter === 'all' || fee.seat_title === seatFilter;
+    // Seat filtering removed - now handled by API with allotment_id parameter
     
-    return matchesSearch && matchesStatus && matchesMonth && matchesSeat;
+    return matchesSearch && matchesStatus && matchesMonth;
   }) || [];
 
   // Pagination logic
@@ -199,16 +225,16 @@ export default function Fees({ standalone = true }: FeesProps) {
                 </SelectContent>
               </Select>
 
-              {/* Seat Filter */}
+              {/* Seat/Allotment Filter */}
               <Select value={seatFilter} onValueChange={setSeatFilter}>
                 <SelectTrigger data-testid="select-seat">
-                  <SelectValue placeholder="Seat" />
+                  <SelectValue placeholder="All Seats" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Seats</SelectItem>
-                  {uniqueSeats.map((seat) => (
-                    <SelectItem key={seat} value={seat}>
-                      {seat}
+                  {allotmentsData?.data?.map((allotment) => (
+                    <SelectItem key={allotment.allotment_id} value={allotment.allotment_id}>
+                      {allotment.value}
                     </SelectItem>
                   ))}
                 </SelectContent>
