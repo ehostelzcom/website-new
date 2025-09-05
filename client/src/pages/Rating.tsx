@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import StudentHeader from "@/components/shared/StudentHeader";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { 
   Star,
   Building2,
@@ -16,9 +17,11 @@ import {
   CreditCard, 
   Receipt, 
   User,
-  Send
+  Send,
+  Menu
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import logoSvg from "@assets/logo/Asset 3.svg";
 
 // Types for student hostel data (matches API response)
 interface StudentHostelData {
@@ -95,6 +98,7 @@ export default function Rating() {
 
   const [additionalComments, setAdditionalComments] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Navigation items
   const sidebarItems = [
@@ -193,19 +197,100 @@ export default function Rating() {
   const showHostelInfo = !!hostelInfo;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Student Header */}
-      <StudentHeader 
-        title="Hostel Rating"
-        sidebarItems={sidebarItems}
-        activeItemId="rating"
-        onMenuToggle={() => {}}
-        hostelInfo={hostelInfo}
-        showHostelInfo={showHostelInfo}
-      />
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 flex">
+      {/* Desktop Sidebar */}
+      <aside className="hidden lg:flex w-64 bg-white dark:bg-gray-900 shadow-xl border-r border-gray-200 dark:border-gray-700 flex-col">
+        {/* Logo Section */}
+        <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+          <img 
+            src={logoSvg} 
+            alt="ehostelz.com" 
+            className="h-12 w-auto"
+            data-testid="img-logo"
+          />
+        </div>
 
-      {/* Page Content */}
-      <div className="p-4 lg:p-6 space-y-6">
+        {/* Navigation Menu */}
+        <nav className="flex-1 p-4">
+          <div className="space-y-2">
+            {sidebarItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setLocation(item.route)}
+                  className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                    item.id === "rating"
+                      ? "bg-gradient-to-r from-[#004e89] to-[#0066b3] text-white shadow-lg"
+                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  }`}
+                  data-testid={`button-nav-${item.id}`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="font-medium">{item.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </nav>
+      </aside>
+
+      {/* Mobile Sidebar */}
+      <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+        <SheetContent side="left" className="w-64 p-0 lg:hidden">
+          {/* Logo Section */}
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+            <img 
+              src={logoSvg} 
+              alt="ehostelz.com" 
+              className="h-12 w-auto"
+              data-testid="img-mobile-logo"
+            />
+          </div>
+
+          {/* Navigation Menu */}
+          <nav className="flex-1 p-4">
+            <div className="space-y-2">
+              {sidebarItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setLocation(item.route);
+                      setSidebarOpen(false);
+                    }}
+                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                      item.id === "rating"
+                        ? "bg-gradient-to-r from-[#004e89] to-[#0066b3] text-white shadow-lg"
+                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    }`}
+                    data-testid={`button-mobile-nav-${item.id}`}
+                  >
+                    <Icon className="w-5 h-5" />
+                    <span className="font-medium">{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </nav>
+        </SheetContent>
+      </Sheet>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Student Header */}
+        <StudentHeader 
+          title="Hostel Rating"
+          sidebarItems={sidebarItems}
+          activeItemId="rating"
+          onMenuToggle={() => setSidebarOpen(true)}
+          hostelInfo={hostelInfo}
+          showHostelInfo={showHostelInfo}
+        />
+
+        {/* Page Content */}
+        <main className="flex-1 p-4 lg:p-6 space-y-6">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
           <HomeIcon className="w-4 h-4" />
@@ -319,6 +404,7 @@ export default function Rating() {
             </div>
           </CardContent>
         </Card>
+        </main>
       </div>
     </div>
   );
