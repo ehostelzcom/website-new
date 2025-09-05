@@ -460,7 +460,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
     { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "/dashboard" },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
-    { id: "rating", label: "Rating", icon: Star, route: "/home" },
+    { id: "rating", label: "Rating", icon: Star, route: "/rating" },
     { id: "profile", label: "Profile", icon: User, route: "/home" },
   ];
 
