@@ -768,6 +768,63 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Student payments API endpoint
+  app.get("/api/student-payments/:user_id/:hostel_id", async (req, res) => {
+    console.log("Student payments API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
+    try {
+      const { user_id, hostel_id } = req.params;
+      const { allotment_id } = req.query;
+      
+      // Validate required parameters
+      if (!user_id || !hostel_id) {
+        return res.status(400).json({ 
+          error: "Missing required parameters",
+          message: "user_id and hostel_id are required"
+        });
+      }
+
+      // Build URL with required parameters
+      let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-payments/${user_id}/${hostel_id}`;
+      
+      if (allotment_id) {
+        apiUrl += `?allotment_id=${allotment_id}`;
+        console.log(`Including allotment_id parameter: ${allotment_id}`);
+      }
+
+      // Call Oracle APEX student payments API
+      const response = await axios.get(apiUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log("Oracle APEX student-payments response:", response.data);
+      
+      // Return the response directly from Oracle APEX
+      res.setHeader('Content-Type', 'application/json');
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("Error fetching student payments:", error);
+      
+      // Handle not found case
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return res.status(404).json({ 
+          status: false,
+          code: 404,
+          message: "No payments data found for this student and hostel"
+        });
+      }
+      
+      res.status(500).json({ 
+        status: false,
+        code: 500,
+        message: "Failed to fetch student payments"
+      });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 

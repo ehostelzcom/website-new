@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useRoute } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Fees from "@/pages/Fees";
+import Payments from "@/pages/Payments";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -1015,6 +1016,24 @@ export default function HostelDashboard() {
                   </div>
                 </CardContent>
               </Card>
+            </div>
+          )}
+
+          {/* Payments Content */}
+          {(() => {
+            console.log('🟡 DASHBOARD: activeTab is:', activeTab, 'should render payments?', activeTab === "payments");
+            return null;
+          })()}
+          {activeTab === "payments" && (
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                Payment Records
+              </h2>
+              {(() => {
+                console.log('🟡 DASHBOARD: Rendering Payments component now!');
+                return null;
+              })()}
+              <Payments standalone={false} />
             </div>
           )}
 
