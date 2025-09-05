@@ -9,9 +9,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { CalendarDays, Search, Filter, Receipt, ChevronLeft, ChevronRight, Home, BarChart3, CreditCard, Star, User, Menu, Settings, LogOut, Building2, MapPin, Phone, ChevronDown } from 'lucide-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuGroup, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { CalendarDays, Search, Filter, Receipt, ChevronLeft, ChevronRight, Home, BarChart3, CreditCard, Star, User, Menu } from 'lucide-react';
 import logoSvg from "@assets/logo/Asset 3.svg";
+import StudentHeader from "@/components/shared/StudentHeader";
 import { format } from 'date-fns';
 
 // Types for fee data
@@ -517,88 +517,15 @@ export default function Fees({ standalone = true }: FeesProps) {
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
-          {/* Header */}
-          <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-white/10">
-            <div className="px-4 lg:px-6 py-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="lg:hidden"
-                    onClick={() => setSidebarOpen(true)}
-                    data-testid="button-mobile-menu"
-                  >
-                    <Menu className="h-5 w-5" />
-                  </Button>
-                  <div className="flex flex-col">
-                    <div className="flex items-center gap-2">
-                      <CreditCard className="h-5 w-5 text-blue-600" />
-                      <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Fee Records</h1>
-                    </div>
-                    {hostelData?.data && (
-                      <div className="flex flex-col md:flex-row gap-2 md:gap-4 text-sm text-gray-600 dark:text-gray-400 mt-1">
-                        <div className="flex items-center gap-2">
-                          <Building2 className="w-4 h-4" />
-                          <span>{hostelData.data.hostel_name} ({hostelData.data.hostel_type})</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4" />
-                          <span>{hostelData.data.hostel_city_name}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Phone className="w-4 h-4" />
-                          <span>{hostelData.data.hostel_mobile_no}</span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* User Menu */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white"
-                      data-testid="button-user-menu"
-                    >
-                      <div className="w-8 h-8 bg-[#004e89] rounded-full flex items-center justify-center">
-                        <User className="w-4 h-4 text-white" />
-                      </div>
-                      <div className="hidden sm:block text-left">
-                        <span className="font-medium block">{localStorage.getItem("student_full_name") || "Student"}</span>
-                      </div>
-                      <ChevronDown className="w-4 h-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56" align="end">
-                    <DropdownMenuGroup>
-                      <div className="px-2 py-1.5">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">
-                          {localStorage.getItem("student_full_name") || "Student"}
-                        </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          {localStorage.getItem("student_cnic") || ""}
-                        </p>
-                      </div>
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
-                      <DropdownMenuItem data-testid="button-dropdown-profile">
-                        <Settings className="w-4 h-4 mr-2" />
-                        Profile
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setLocation("/student-login")} data-testid="button-dropdown-logout">
-                        <LogOut className="w-4 h-4 mr-2" />
-                        Logout
-                      </DropdownMenuItem>
-                    </DropdownMenuGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            </div>
-          </header>
+          {/* Student Header */}
+          <StudentHeader 
+            title="Fee Records"
+            sidebarItems={sidebarItems}
+            activeItemId="fees"
+            onMenuToggle={() => setSidebarOpen(true)}
+            hostelInfo={hostelData?.data || undefined}
+            showHostelInfo={!!hostelData?.data}
+          />
 
           {/* Content */}
           <main className="flex-1 p-3 lg:p-4">
