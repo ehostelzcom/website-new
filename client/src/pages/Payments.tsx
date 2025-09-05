@@ -98,7 +98,18 @@ export default function Payments({ standalone = true }: PaymentsProps) {
 
   // Fetch payments data - include allotment_id if specific allotment is selected
   const { data: paymentsData, isLoading, error } = useQuery<PaymentsResponse>({
-    queryKey: ['/api/student-payments', finalStudentUserId, finalHostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
+    queryKey: ['/api/student-payments', finalStudentUserId, finalHostelId, allotmentFilter],
+    queryFn: async () => {
+      let url = `/api/student-payments/${finalStudentUserId}/${finalHostelId}`;
+      if (allotmentFilter !== 'all') {
+        url += `?allotment_id=${allotmentFilter}`;
+      }
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    },
     enabled: !!finalStudentUserId && !!finalHostelId,
   });
 
