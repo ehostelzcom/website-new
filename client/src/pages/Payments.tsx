@@ -321,7 +321,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Method</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Type</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Status</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Date</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Created at</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>

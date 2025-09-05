@@ -309,7 +309,7 @@ export default function Fees({ standalone = true }: FeesProps) {
                       <TableHead className="text-right">Paid</TableHead>
                       <TableHead className="text-right">Balance</TableHead>
                       <TableHead>Status</TableHead>
-                      <TableHead>Date</TableHead>
+                      <TableHead>Created at</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
