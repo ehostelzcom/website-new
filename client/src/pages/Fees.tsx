@@ -50,6 +50,7 @@ interface FeesProps {
 }
 
 export default function Fees({ standalone = true }: FeesProps) {
+  console.log("🔵 FEES COMPONENT MOUNTED - Starting API calls");
   // Get user data from localStorage for API calls
   const studentUserId = localStorage.getItem('student_user_id');
   const hostelId = localStorage.getItem('student_hostel_id');
