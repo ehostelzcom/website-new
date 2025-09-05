@@ -89,6 +89,7 @@ export default function Rating() {
     { id: 'staff_behavior', question: 'How would you rate the staff behavior?', rating: 0 },
     { id: 'facilities', question: 'How would you rate the hostel facilities?', rating: 0 },
     { id: 'security', question: 'How would you rate the security arrangements?', rating: 0 },
+    { id: 'wifi_internet', question: 'How would you rate the WiFi and internet connectivity?', rating: 0 },
     { id: 'overall', question: 'Overall, how would you rate this hostel?', rating: 0 }
   ]);
 
@@ -250,21 +251,44 @@ export default function Rating() {
             </p>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Rating Questions */}
-            {ratingQuestions.map((question) => (
-              <div key={question.id} className="space-y-2">
-                <Label className="text-sm font-medium">{question.question}</Label>
-                <div className="flex items-center gap-3">
-                  <StarRating 
-                    rating={question.rating}
-                    onRatingChange={(rating) => updateRating(question.id, rating)}
-                  />
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {question.rating > 0 ? `${question.rating}/5` : 'Not rated'}
-                  </span>
-                </div>
+            {/* Rating Questions - Two Column Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Left Column - First 4 Questions */}
+              <div className="space-y-6">
+                {ratingQuestions.slice(0, 4).map((question) => (
+                  <div key={question.id} className="space-y-2">
+                    <Label className="text-sm font-medium">{question.question}</Label>
+                    <div className="flex items-center gap-3">
+                      <StarRating 
+                        rating={question.rating}
+                        onRatingChange={(rating) => updateRating(question.id, rating)}
+                      />
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        {question.rating > 0 ? `${question.rating}/5` : 'Not rated'}
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+              
+              {/* Right Column - Last 4 Questions */}
+              <div className="space-y-6">
+                {ratingQuestions.slice(4, 8).map((question) => (
+                  <div key={question.id} className="space-y-2">
+                    <Label className="text-sm font-medium">{question.question}</Label>
+                    <div className="flex items-center gap-3">
+                      <StarRating 
+                        rating={question.rating}
+                        onRatingChange={(rating) => updateRating(question.id, rating)}
+                      />
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        {question.rating > 0 ? `${question.rating}/5` : 'Not rated'}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             {/* Additional Comments */}
             <div className="space-y-2">
