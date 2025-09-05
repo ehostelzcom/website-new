@@ -66,6 +66,10 @@ export default function Payments({ standalone = true }: PaymentsProps) {
   const studentUserId = localStorage.getItem('student_user_id');
   const hostelId = localStorage.getItem('student_hostel_id');
   
+  // For standalone mode, use default values if localStorage is empty (for testing)
+  const finalStudentUserId = studentUserId || '101';
+  const finalHostelId = hostelId || '2';
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [monthFilter, setMonthFilter] = useState('all');
@@ -75,14 +79,14 @@ export default function Payments({ standalone = true }: PaymentsProps) {
 
   // Fetch allotments data for seat filter dropdown
   const { data: allotmentsData } = useQuery<AllotmentsResponse>({
-    queryKey: ['/api/student-allotments', studentUserId, hostelId],
-    enabled: !!studentUserId && !!hostelId,
+    queryKey: ['/api/student-allotments', finalStudentUserId, finalHostelId],
+    enabled: !!finalStudentUserId && !!finalHostelId,
   });
 
   // Fetch payments data - include allotment_id if specific allotment is selected
   const { data: paymentsData, isLoading, error } = useQuery<PaymentsResponse>({
-    queryKey: ['/api/student-payments', studentUserId, hostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
-    enabled: !!studentUserId && !!hostelId,
+    queryKey: ['/api/student-payments', finalStudentUserId, finalHostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
+    enabled: !!finalStudentUserId && !!finalHostelId,
   });
 
   // Get unique values for filters
@@ -146,7 +150,8 @@ export default function Payments({ standalone = true }: PaymentsProps) {
   }, [searchTerm, statusFilter, monthFilter, allotmentFilter]);
 
   // Only check authentication for standalone mode
-  if (standalone && (!studentUserId || !hostelId)) {
+  // Only check authentication for standalone mode if we have no fallback values
+  if (standalone && (!finalStudentUserId || !finalHostelId)) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
