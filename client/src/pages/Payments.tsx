@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useLocation } from "wouter";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CalendarDays, Search, Filter, CreditCard, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { CalendarDays, Search, Filter, CreditCard, ChevronLeft, ChevronRight, Home, BarChart3, Receipt, Star, User, Menu } from 'lucide-react';
+import logoSvg from "@assets/logo/Asset 3.svg";
 import { format } from 'date-fns';
 
 // Types for payment data
@@ -62,6 +65,9 @@ interface PaymentsProps {
 }
 
 export default function Payments({ standalone = true }: PaymentsProps) {
+  const [, setLocation] = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
   // Get user data from localStorage for API calls
   const studentUserId = localStorage.getItem('student_user_id');
   const hostelId = localStorage.getItem('student_hostel_id');
@@ -420,11 +426,128 @@ export default function Payments({ standalone = true }: PaymentsProps) {
     </>
   );
 
+  // Navigation items
+  const sidebarItems = [
+    { id: "dashboard", label: "Dashboard", icon: Home, route: `/hostel-dashboard/${finalStudentUserId}` },
+    { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
+    { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
+    { id: "rating", label: "Rating", icon: Star, route: `/hostel-dashboard/${finalStudentUserId}` },
+    { id: "profile", label: "Profile", icon: User, route: `/hostel-dashboard/${finalStudentUserId}` },
+  ];
+
   if (standalone) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
-        <div className="max-w-7xl mx-auto">
-          {content}
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 flex">
+        {/* Desktop Sidebar */}
+        <aside className="hidden lg:flex w-64 bg-white dark:bg-gray-900 shadow-xl border-r border-gray-200 dark:border-gray-700 flex-col">
+          {/* Logo Section */}
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+            <img 
+              src={logoSvg} 
+              alt="ehostelz.com" 
+              className="h-12 w-auto"
+              data-testid="img-logo"
+            />
+          </div>
+
+          {/* Navigation Menu */}
+          <nav className="flex-1 p-4">
+            <div className="space-y-2">
+              {sidebarItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setLocation(item.route)}
+                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                      item.id === "payments"
+                        ? "bg-gradient-to-r from-[#004e89] to-[#0066b3] text-white shadow-lg"
+                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    }`}
+                    data-testid={`button-nav-${item.id}`}
+                  >
+                    <Icon className="w-5 h-5" />
+                    <span className="font-medium">{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </nav>
+        </aside>
+
+        {/* Mobile Sidebar */}
+        <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+          <SheetContent side="left" className="w-64 p-0 lg:hidden">
+            {/* Logo Section */}
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+              <img 
+                src={logoSvg} 
+                alt="ehostelz.com" 
+                className="h-12 w-auto"
+                data-testid="img-mobile-logo"
+              />
+            </div>
+
+            {/* Navigation Menu */}
+            <nav className="flex-1 p-4">
+              <div className="space-y-2">
+                {sidebarItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        setLocation(item.route);
+                        setSidebarOpen(false);
+                      }}
+                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                        item.id === "payments"
+                          ? "bg-gradient-to-r from-[#004e89] to-[#0066b3] text-white shadow-lg"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      }`}
+                      data-testid={`button-mobile-nav-${item.id}`}
+                    >
+                      <Icon className="w-5 h-5" />
+                      <span className="font-medium">{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </nav>
+          </SheetContent>
+        </Sheet>
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col">
+          {/* Header */}
+          <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-white/10">
+            <div className="px-4 lg:px-6 py-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="lg:hidden"
+                    onClick={() => setSidebarOpen(true)}
+                    data-testid="button-mobile-menu"
+                  >
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                  <div>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Payment Records</h1>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      View and track your hostel payment history
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          {/* Content */}
+          <main className="flex-1 p-4 lg:p-6">
+            {content}
+          </main>
         </div>
       </div>
     );
