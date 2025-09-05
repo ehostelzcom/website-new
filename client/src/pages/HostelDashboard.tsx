@@ -129,7 +129,7 @@ const StarRating = ({ rating, onRatingChange, questionId }: { rating: number; on
 
 export default function HostelDashboard() {
   const [, setLocation] = useLocation();
-  const [match, params] = useRoute("/dashboard/:userId/:hostelId");
+  const [match, params] = useRoute("/dashboard");
   const [hostelInfo, setHostelInfo] = useState<HostelInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -151,8 +151,9 @@ export default function HostelDashboard() {
   const [allotmentsLoading, setAllotmentsLoading] = useState(false);
   const [allotmentChanging, setAllotmentChanging] = useState(false);
 
-  const userId = params?.userId ? parseInt(params.userId) : null;
-  const hostelId = params?.hostelId ? parseInt(params.hostelId) : null;
+  // Get IDs from localStorage
+  const userId = localStorage.getItem("student_user_id") ? parseInt(localStorage.getItem("student_user_id")!) : null;
+  const hostelId = localStorage.getItem("hostel_id") ? parseInt(localStorage.getItem("hostel_id")!) : null;
 
   // Read tab from URL parameters
   useEffect(() => {
@@ -420,15 +421,27 @@ export default function HostelDashboard() {
 
   const sidebarItems = [
     { id: "home", label: "Home", icon: Home, route: "/home" },
-    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: `/dashboard/${userId}/${hostelId}` },
+    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "/dashboard" },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
     { id: "rating", label: "Rating", icon: Star, route: "/home" },
     { id: "profile", label: "Profile", icon: User, route: "/home" },
   ];
 
-  if (!match || !hostelId || !userId) {
-    return <div>Invalid user ID or hostel ID</div>;
+  if (!userId || !hostelId) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 dark:text-red-400 mb-4">Missing user or hostel information</p>
+          <button 
+            onClick={() => setLocation("/home")} 
+            className="text-blue-600 hover:text-blue-800"
+          >
+            Go to Home
+          </button>
+        </div>
+      </div>
+    );
   }
 
   if (loading) {

@@ -76,8 +76,10 @@ export default function Home() {
   });
 
   const handleHostelClick = (hostelData: StudentHostelData) => {
-    // Navigate to individual hostel dashboard with user_id and hostel_id
-    setLocation(`/dashboard/${hostelData.user_id}/${hostelData.hostel_id}`);
+    // Store hostel_id in localStorage for dashboard use
+    localStorage.setItem("hostel_id", hostelData.hostel_id.toString());
+    // Navigate to dashboard (user_id already in localStorage from login)
+    setLocation(`/dashboard`);
   };
 
   const handleLogout = () => {

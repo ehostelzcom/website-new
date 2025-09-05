@@ -426,7 +426,7 @@ export default function Fees({ standalone = true }: FeesProps) {
   // Navigation items
   const sidebarItems = [
     { id: "home", label: "Home", icon: Home, route: "/home" },
-    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: `/dashboard/${finalStudentUserId}/2` },
+    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "/dashboard" },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
     { id: "rating", label: "Rating", icon: Star, route: "/home" },
