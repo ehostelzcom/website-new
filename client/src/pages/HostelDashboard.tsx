@@ -129,7 +129,7 @@ const StarRating = ({ rating, onRatingChange, questionId }: { rating: number; on
 
 export default function HostelDashboard() {
   const [, setLocation] = useLocation();
-  const [match, params] = useRoute("/hostel-dashboard/:hostelId");
+  const [match, params] = useRoute("/dashboard/:userId/:hostelId");
   const [hostelInfo, setHostelInfo] = useState<HostelInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -151,6 +151,7 @@ export default function HostelDashboard() {
   const [allotmentsLoading, setAllotmentsLoading] = useState(false);
   const [allotmentChanging, setAllotmentChanging] = useState(false);
 
+  const userId = params?.userId ? parseInt(params.userId) : null;
   const hostelId = params?.hostelId ? parseInt(params.hostelId) : null;
 
   // Read tab from URL parameters
@@ -419,15 +420,15 @@ export default function HostelDashboard() {
 
   const sidebarItems = [
     { id: "home", label: "Home", icon: Home, route: "/home" },
-    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "/dashboard" },
+    { id: "dashboard", label: "Dashboard", icon: BarChart3, route: `/dashboard/${userId}/${hostelId}` },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
     { id: "rating", label: "Rating", icon: Star, route: "/home" },
     { id: "profile", label: "Profile", icon: User, route: "/home" },
   ];
 
-  if (!match || !hostelId) {
-    return <div>Invalid hostel ID</div>;
+  if (!match || !hostelId || !userId) {
+    return <div>Invalid user ID or hostel ID</div>;
   }
 
   if (loading) {
