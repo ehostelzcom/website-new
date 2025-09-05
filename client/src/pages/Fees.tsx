@@ -293,7 +293,7 @@ export default function Fees({ standalone = true }: FeesProps) {
               <div className="text-center py-12">
                 <Receipt className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                 <p className="text-gray-600 dark:text-gray-400">
-                  {filteredData.length === 0 && (searchTerm || statusFilter !== 'all' || monthFilter !== 'all' || seatFilter !== 'all')
+                  {filteredData.length === 0 && (searchTerm || statusFilter !== 'all' || monthFilter !== 'all' || allotmentFilter !== 'all')
                     ? 'No records match your filters'
                     : 'No fee records found'
                   }
