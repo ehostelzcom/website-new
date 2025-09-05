@@ -315,12 +315,9 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">S.No</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Seat</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Month</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Due Date</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Fee Amount</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Discount</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Payable</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Paid</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Balance</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Method</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Type</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Status</TableHead>
@@ -339,28 +336,14 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                             {payment.seat_title}
                           </TableCell>
                           <TableCell>{payment.month_of}</TableCell>
-                          <TableCell>
-                            <div className="flex items-center gap-2">
-                              <CalendarDays className="h-4 w-4 text-gray-400" />
-                              {formatDate(payment.created_at)}
-                            </div>
-                          </TableCell>
                           <TableCell className="text-right font-medium">
                             {formatCurrency(payment.fee_amount)}
-                          </TableCell>
-                          <TableCell className="text-right">
-                            {formatCurrency(payment.discount)}
                           </TableCell>
                           <TableCell className="text-right font-medium">
                             {formatCurrency(payment.payable_amount)}
                           </TableCell>
                           <TableCell className="text-right font-medium text-green-600 dark:text-green-400">
                             {formatCurrency(payment.payment_amount)}
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <span className={payment.remaining_balance > 0 ? 'text-red-600 dark:text-red-400 font-medium' : 'text-gray-600 dark:text-gray-400'}>
-                              {formatCurrency(payment.remaining_balance)}
-                            </span>
                           </TableCell>
                           <TableCell>
                             <Badge variant="outline" className="bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300">
