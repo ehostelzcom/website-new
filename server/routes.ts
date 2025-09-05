@@ -716,6 +716,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     console.log("Student fees API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
     try {
       const { user_id, hostel_id } = req.params;
+      const { allotment_id } = req.query;
       
       // Validate required parameters
       if (!user_id || !hostel_id) {
@@ -725,8 +726,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
+      // Build URL with required parameters
+      let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-fees/${user_id}/${hostel_id}`;
+      
+      if (allotment_id) {
+        apiUrl += `?allotment_id=${allotment_id}`;
+        console.log(`Including allotment_id parameter: ${allotment_id}`);
+      }
+
       // Call Oracle APEX student fees API
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/student-fees/${user_id}/${hostel_id}`, {
+      const response = await axios.get(apiUrl, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
