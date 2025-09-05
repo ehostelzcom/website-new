@@ -100,162 +100,64 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 flex">
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex w-64 bg-white dark:bg-gray-900 shadow-xl border-r border-gray-200 dark:border-gray-700 flex-col">
-        {/* Logo Section */}
-        <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-          <img 
-            src={logoSvg} 
-            alt="ehostelz.com" 
-            className="h-12 w-auto"
-            data-testid="img-logo"
-          />
-        </div>
-
-        {/* Navigation Menu */}
-        <nav className="flex-1 p-4">
-          <div className="space-y-2">
-            {sidebarItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = item.id === "home";
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setLocation(item.route)}
-                  className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
-                    isActive
-                      ? "bg-gradient-to-r from-[#004e89] to-[#0066b3] text-white shadow-lg"
-                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                  }`}
-                  data-testid={`button-nav-${item.id}`}
-                >
-                  <Icon className="w-5 h-5" />
-                  <span className="font-medium">{item.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </nav>
-      </aside>
-
-      {/* Mobile Sidebar */}
-      <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-        <SheetContent side="left" className="w-64 p-0 lg:hidden">
-          {/* Logo Section */}
-          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-            <img 
-              src={logoSvg} 
-              alt="ehostelz.com" 
-              className="h-12 w-auto"
-              data-testid="img-mobile-logo"
-            />
-          </div>
-
-          {/* Navigation Menu */}
-          <nav className="flex-1 p-4">
-            <div className="space-y-2">
-              {sidebarItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = item.id === "home";
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      setLocation(item.route);
-                      setSidebarOpen(false);
-                    }}
-                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
-                      isActive
-                        ? "bg-gradient-to-r from-[#004e89] to-[#0066b3] text-white shadow-lg"
-                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                    }`}
-                    data-testid={`button-mobile-nav-${item.id}`}
-                  >
-                    <Icon className="w-5 h-5" />
-                    <span className="font-medium">{item.label}</span>
-                  </button>
-                );
-              })}
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900">
+      {/* Header */}
+      <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-white/10">
+        <div className="px-4 lg:px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo and Title */}
+            <div className="flex items-center space-x-4">
+              <img 
+                src={logoSvg} 
+                alt="ehostelz.com" 
+                className="h-10 w-auto"
+                data-testid="img-header-logo"
+              />
+              <div>
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                  My Hostels
+                </h1>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  All your registered hostels
+                </p>
+              </div>
             </div>
-          </nav>
-        </SheetContent>
-      </Sheet>
+
+            {/* User Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  className="relative h-10 w-10 rounded-full bg-[#004e89] text-white hover:bg-[#003a6b]"
+                  data-testid="button-user-menu"
+                >
+                  <User className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={handleProfile} data-testid="menu-profile">
+                    <User className="mr-2 h-4 w-4" />
+                    <span>Profile</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem data-testid="menu-settings">
+                    <Settings className="mr-2 h-4 w-4" />
+                    <span>Settings</span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} data-testid="menu-logout">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Logout</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+      </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-white/10">
-          <div className="px-4 lg:px-6 py-4">
-            <div className="flex items-center justify-between">
-              {/* Mobile Menu Button */}
-              <div className="lg:hidden">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setSidebarOpen(true)}
-                  className="mr-2"
-                  data-testid="button-mobile-menu"
-                >
-                  <Menu className="w-5 h-5" />
-                </Button>
-              </div>
-
-              {/* Logo and Title */}
-              <div className="flex items-center space-x-2 sm:space-x-4 flex-1">
-                <div className="lg:hidden">
-                  <img 
-                    src={logoSvg} 
-                    alt="ehostelz.com" 
-                    className="h-8 w-auto"
-                    data-testid="img-mobile-header-logo"
-                  />
-                </div>
-                <div>
-                  <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
-                    My Hostels
-                  </h1>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    All your registered hostels
-                  </p>
-                </div>
-              </div>
-
-              {/* User Menu */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    className="relative h-10 w-10 rounded-full bg-[#004e89] text-white hover:bg-[#003a6b]"
-                    data-testid="button-user-menu"
-                  >
-                    <User className="h-5 w-5" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem onClick={handleProfile} data-testid="menu-profile">
-                      <User className="mr-2 h-4 w-4" />
-                      <span>Profile</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem data-testid="menu-settings">
-                      <Settings className="mr-2 h-4 w-4" />
-                      <span>Settings</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout} data-testid="menu-logout">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Logout</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
-        </header>
-
-        {/* Main Content */}
-        <main className="flex-1 p-4 lg:p-6">
+      <main className="container mx-auto px-4 lg:px-8 py-8">
           {isLoading ? (
             <div className="flex items-center justify-center h-64">
               <div className="text-center">
@@ -336,8 +238,7 @@ export default function Home() {
               </div>
             </div>
           )}
-        </main>
-      </div>
+      </main>
     </div>
   );
 }
