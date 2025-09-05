@@ -136,12 +136,9 @@ export default function StudentHeader({ title, sidebarItems, activeItemId, onMen
                   </p>
                   {cnic && (
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      CNIC: {cnic}
+                      {cnic}
                     </p>
                   )}
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Student
-                  </p>
                 </div>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
