@@ -2,9 +2,21 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuGroup, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Menu, User, ChevronDown, Settings, LogOut } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Menu, User, ChevronDown, Settings, LogOut, Building2, MapPin, Phone } from "lucide-react";
 import { useLocation } from "wouter";
 import logoSvg from "@assets/logo/Asset 3.svg";
+
+interface HostelInfo {
+  hostel_id: number;
+  hostel_name: string;
+  hostel_type: string;
+  hostel_address: string;
+  hostel_city_name: string;
+  hostel_mobile_no: string;
+  presenter_name: string;
+  user_role: string;
+}
 
 interface StudentHeaderProps {
   title: string;
@@ -16,9 +28,11 @@ interface StudentHeaderProps {
   }>;
   activeItemId: string;
   onMenuToggle: () => void;
+  hostelInfo?: HostelInfo;
+  showHostelInfo?: boolean;
 }
 
-export default function StudentHeader({ title, sidebarItems, activeItemId, onMenuToggle }: StudentHeaderProps) {
+export default function StudentHeader({ title, sidebarItems, activeItemId, onMenuToggle, hostelInfo, showHostelInfo = false }: StudentHeaderProps) {
   const [, setLocation] = useLocation();
   
   // Get user data from localStorage
@@ -55,9 +69,46 @@ export default function StudentHeader({ title, sidebarItems, activeItemId, onMen
             >
               <Menu className="h-5 w-5" />
             </Button>
-            <div>
-              <h1 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h1>
-            </div>
+
+            {/* Hostel Information - Conditional */}
+            {showHostelInfo && hostelInfo ? (
+              <div className="flex items-center space-x-2 sm:space-x-4 flex-1">
+                <div className="w-8 h-8 sm:w-12 sm:h-12 bg-[#ff6b35]/10 rounded-full flex items-center justify-center">
+                  <Building2 className="w-4 h-4 sm:w-6 sm:h-6 text-[#ff6b35]" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <h1 className="text-base sm:text-xl font-bold text-gray-900 dark:text-white truncate">
+                      {hostelInfo.hostel_name}
+                    </h1>
+                    <Badge 
+                      variant="default"
+                      className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 text-xs"
+                    >
+                      Active
+                    </Badge>
+                  </div>
+                  <div className="hidden sm:flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <span className="flex items-center">
+                      <Building2 className="w-3 h-3 mr-1" />
+                      {hostelInfo.hostel_type}
+                    </span>
+                    <span className="flex items-center">
+                      <MapPin className="w-3 h-3 mr-1" />
+                      {hostelInfo.hostel_city_name}
+                    </span>
+                    <span className="flex items-center">
+                      <Phone className="w-3 h-3 mr-1" />
+                      {hostelInfo.hostel_mobile_no}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <h1 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h1>
+              </div>
+            )}
           </div>
 
           {/* User Dropdown */}
@@ -73,9 +124,6 @@ export default function StudentHeader({ title, sidebarItems, activeItemId, onMen
                 </div>
                 <div className="hidden sm:block text-left">
                   <span className="font-medium block">{fullName}</span>
-                  {cnic && (
-                    <span className="text-xs text-gray-500 dark:text-gray-400 block">CNIC: {cnic}</span>
-                  )}
                 </div>
                 <ChevronDown className="w-4 h-4" />
               </Button>

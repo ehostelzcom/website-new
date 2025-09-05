@@ -90,6 +90,12 @@ export default function Payments({ standalone = true }: PaymentsProps) {
     enabled: !!finalStudentUserId && !!finalHostelId,
   });
 
+  // Fetch hostel information
+  const { data: hostelData } = useQuery({
+    queryKey: ['/api/student-hostels', finalStudentUserId],
+    enabled: !!finalStudentUserId
+  });
+
   // Fetch payments data - include allotment_id if specific allotment is selected
   const { data: paymentsData, isLoading, error } = useQuery<PaymentsResponse>({
     queryKey: ['/api/student-payments', finalStudentUserId, finalHostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
@@ -548,6 +554,8 @@ export default function Payments({ standalone = true }: PaymentsProps) {
             sidebarItems={sidebarItems}
             activeItemId="payments"
             onMenuToggle={() => setSidebarOpen(true)}
+            hostelInfo={hostelData?.data}
+            showHostelInfo={true}
           />
 
           {/* Content */}

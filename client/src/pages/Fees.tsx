@@ -78,6 +78,12 @@ export default function Fees({ standalone = true }: FeesProps) {
     enabled: !!finalStudentUserId && !!finalHostelId,
   });
 
+  // Fetch hostel information
+  const { data: hostelData } = useQuery({
+    queryKey: ['/api/student-hostels', finalStudentUserId],
+    enabled: !!finalStudentUserId
+  });
+
   // Fetch fees data - include allotment_id if specific allotment is selected
   const { data: feesData, isLoading, error } = useQuery<FeesResponse>({
     queryKey: ['/api/student-fees', finalStudentUserId, finalHostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
@@ -517,6 +523,8 @@ export default function Fees({ standalone = true }: FeesProps) {
             sidebarItems={sidebarItems}
             activeItemId="fees"
             onMenuToggle={() => setSidebarOpen(true)}
+            hostelInfo={hostelData?.data}
+            showHostelInfo={true}
           />
 
           {/* Content */}
