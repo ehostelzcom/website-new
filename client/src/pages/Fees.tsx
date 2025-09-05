@@ -53,6 +53,9 @@ export default function Fees({ standalone = true }: FeesProps) {
   // Get user data from localStorage for API calls
   const studentUserId = localStorage.getItem('student_user_id');
   const hostelId = localStorage.getItem('student_hostel_id');
+  
+  // Debug logging
+  console.log('Fees component - studentUserId:', studentUserId, 'hostelId:', hostelId);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [monthFilter, setMonthFilter] = useState('all');
@@ -74,11 +77,15 @@ export default function Fees({ standalone = true }: FeesProps) {
       if (seatFilter !== 'all') {
         url += `?allotment_id=${seatFilter}`;
       }
+      console.log('Fetching fees from URL:', url);
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Failed to fetch fees data');
+        console.error('Fees API error:', response.status, response.statusText);
+        throw new Error(`Failed to fetch fees data: ${response.status} ${response.statusText}`);
       }
-      return response.json();
+      const data = await response.json();
+      console.log('Fees API response:', data);
+      return data;
     },
     enabled: !!studentUserId && !!hostelId,
   });
