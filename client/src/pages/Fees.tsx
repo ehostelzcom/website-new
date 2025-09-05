@@ -55,7 +55,10 @@ export default function Fees({ standalone = true }: FeesProps) {
   const hostelId = localStorage.getItem('student_hostel_id');
   
   // Debug logging
-  console.log('Fees component - studentUserId:', studentUserId, 'hostelId:', hostelId);
+  console.log('Fees component mounted - studentUserId:', studentUserId, 'hostelId:', hostelId);
+  console.log('Fees component - standalone mode:', standalone);
+  console.log('Allotments query enabled:', !!studentUserId && !!hostelId);
+  console.log('Fees query enabled:', !!studentUserId && !!hostelId);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [monthFilter, setMonthFilter] = useState('all');
