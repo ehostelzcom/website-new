@@ -157,114 +157,106 @@ export default function Fees({ standalone = true }: FeesProps) {
 
   const content = (
     <>
-      {/* Header - only show in standalone mode */}
+      {/* Compact Header - only show in standalone mode */}
       {standalone && (
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Receipt className="h-8 w-8 text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Fee Records</h1>
+        <div className="mb-4">
+          <div className="flex items-center gap-2">
+            <Receipt className="h-5 w-5 text-blue-600" />
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Fee Records</h1>
           </div>
-          <p className="text-gray-600 dark:text-gray-400">
-            View and manage your hostel fee payments and transactions
-          </p>
         </div>
       )}
 
-        {/* Filters Card */}
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Filter className="h-5 w-5" />
-              Filters & Search
-            </CardTitle>
-            <CardDescription>
-              Filter and search through your fee records
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-              {/* Search Input */}
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                <Input
-                  placeholder="Search by seat, month, status..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                  data-testid="input-search-fees"
-                />
-              </div>
-
-              {/* Status Filter */}
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger data-testid="select-payment-status">
-                  <SelectValue placeholder="Payment Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Statuses</SelectItem>
-                  {uniqueStatuses.map((status) => (
-                    <SelectItem key={status} value={status}>
-                      {status}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* Month Filter */}
-              <Select value={monthFilter} onValueChange={setMonthFilter}>
-                <SelectTrigger data-testid="select-month">
-                  <SelectValue placeholder="Month" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Months</SelectItem>
-                  {uniqueMonths.map((month) => (
-                    <SelectItem key={month} value={month}>
-                      {month}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* All Allotments Filter */}
-              <Select value={allotmentFilter} onValueChange={setAllotmentFilter}>
-                <SelectTrigger data-testid="select-allotment">
-                  <SelectValue placeholder="All Allotments" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Allotments</SelectItem>
-                  {allotmentsData?.data?.map((allotment) => (
-                    <SelectItem key={allotment.allotment_id} value={allotment.allotment_id}>
-                      {allotment.value}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* Clear Filters */}
-              <Button 
-                variant="outline" 
-                onClick={() => {
-                  setSearchTerm('');
-                  setStatusFilter('all');
-                  setMonthFilter('all');
-                  setAllotmentFilter('all');
-                }}
-                data-testid="button-clear-filters"
-              >
-                Clear Filters
-              </Button>
+        {/* Compact Filters */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg border p-3 mb-4">
+          <div className="flex items-center gap-2 mb-3">
+            <Filter className="h-4 w-4 text-gray-500" />
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Filters</span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+            {/* Search Input */}
+            <div className="relative col-span-2">
+              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 h-3 w-3" />
+              <Input
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-7 h-8 text-sm"
+                data-testid="input-search-fees"
+              />
             </div>
-          </CardContent>
-        </Card>
 
-        {/* Results Summary */}
-        <div className="mb-4 flex items-center justify-between">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Showing {startIndex + 1}-{Math.min(endIndex, filteredData.length)} of {filteredData.length} records
+            {/* Status Filter */}
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="h-8 text-sm" data-testid="select-payment-status">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Statuses</SelectItem>
+                {uniqueStatuses.map((status) => (
+                  <SelectItem key={status} value={status}>
+                    {status}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Month Filter */}
+            <Select value={monthFilter} onValueChange={setMonthFilter}>
+              <SelectTrigger className="h-8 text-sm" data-testid="select-month">
+                <SelectValue placeholder="Month" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Months</SelectItem>
+                {uniqueMonths.map((month) => (
+                  <SelectItem key={month} value={month}>
+                    {month}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Allotments Filter */}
+            <Select value={allotmentFilter} onValueChange={setAllotmentFilter}>
+              <SelectTrigger className="h-8 text-sm" data-testid="select-allotment">
+                <SelectValue placeholder="Allotment" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Allotments</SelectItem>
+                {allotmentsData?.data?.map((allotment) => (
+                  <SelectItem key={allotment.allotment_id} value={allotment.allotment_id}>
+                    {allotment.value}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Clear Filters */}
+            <Button 
+              variant="outline"
+              size="sm"
+              className="h-8 text-xs"
+              onClick={() => {
+                setSearchTerm('');
+                setStatusFilter('all');
+                setMonthFilter('all');
+                setAllotmentFilter('all');
+              }}
+              data-testid="button-clear-filters"
+            >
+              Clear
+            </Button>
+          </div>
+        </div>
+
+        {/* Compact Results Summary */}
+        <div className="mb-2 flex items-center justify-between">
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            {startIndex + 1}-{Math.min(endIndex, filteredData.length)} of {filteredData.length} records
           </p>
           {searchTerm && (
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Search results for "{searchTerm}"
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              "{searchTerm}"
             </p>
           )}
         </div>
@@ -533,10 +525,7 @@ export default function Fees({ standalone = true }: FeesProps) {
                     <Menu className="h-5 w-5" />
                   </Button>
                   <div>
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Fee Records</h1>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      View and manage your hostel fee payments
-                    </p>
+                    <h1 className="text-lg font-semibold text-gray-900 dark:text-white">Fee Records</h1>
                   </div>
                 </div>
               </div>
@@ -544,7 +533,7 @@ export default function Fees({ standalone = true }: FeesProps) {
           </header>
 
           {/* Content */}
-          <main className="flex-1 p-4 lg:p-6">
+          <main className="flex-1 p-3 lg:p-4">
             {content}
           </main>
         </div>
