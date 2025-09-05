@@ -62,7 +62,6 @@ interface PaymentsProps {
 }
 
 export default function Payments({ standalone = true }: PaymentsProps) {
-  console.log("🟡 PAYMENTS COMPONENT MOUNTED - Starting API calls");
   // Get user data from localStorage for API calls
   const studentUserId = localStorage.getItem('student_user_id');
   const hostelId = localStorage.getItem('student_hostel_id');
