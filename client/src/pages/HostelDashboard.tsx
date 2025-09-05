@@ -998,37 +998,12 @@ export default function HostelDashboard() {
           )}
 
           {/* Payments Content */}
-          {activeTab === "payments" && (
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Payment History
-              </h2>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Recent Payments</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <Receipt className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Payment history will be populated with real API data
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          )}
-
-          {/* Payments Content */}
           {(() => {
             console.log('🟡 DASHBOARD: activeTab is:', activeTab, 'should render payments?', activeTab === "payments");
             return null;
           })()}
           {activeTab === "payments" && (
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Payment Records
-              </h2>
               {(() => {
                 console.log('🟡 DASHBOARD: Rendering Payments component now!');
                 return null;
