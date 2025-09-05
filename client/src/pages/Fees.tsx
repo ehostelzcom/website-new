@@ -59,7 +59,7 @@ export default function Fees({ standalone = true }: FeesProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [monthFilter, setMonthFilter] = useState('all');
-  const [seatFilter, setSeatFilter] = useState('all'); // This will store allotment_id
+  const [allotmentFilter, setAllotmentFilter] = useState('all'); // This will store allotment_id
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -69,13 +69,13 @@ export default function Fees({ standalone = true }: FeesProps) {
     enabled: !!studentUserId && !!hostelId,
   });
 
-  // Fetch fees data - include allotment_id if specific seat is selected
+  // Fetch fees data - include allotment_id if specific allotment is selected
   const { data: feesData, isLoading, error } = useQuery<FeesResponse>({
-    queryKey: ['/api/student-fees', studentUserId, hostelId, seatFilter !== 'all' ? seatFilter : undefined],
+    queryKey: ['/api/student-fees', studentUserId, hostelId, allotmentFilter !== 'all' ? allotmentFilter : undefined],
     queryFn: async () => {
       let url = `/api/student-fees/${studentUserId}/${hostelId}`;
-      if (seatFilter !== 'all') {
-        url += `?allotment_id=${seatFilter}`;
+      if (allotmentFilter !== 'all') {
+        url += `?allotment_id=${allotmentFilter}`;
       }
       console.log('Fetching fees from URL:', url);
       const response = await fetch(url);
@@ -149,7 +149,7 @@ export default function Fees({ standalone = true }: FeesProps) {
   // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, statusFilter, monthFilter, seatFilter]);
+  }, [searchTerm, statusFilter, monthFilter, allotmentFilter]);
 
   // Only check authentication for standalone mode
   if (standalone && (!studentUserId || !hostelId)) {
@@ -232,13 +232,13 @@ export default function Fees({ standalone = true }: FeesProps) {
                 </SelectContent>
               </Select>
 
-              {/* Seat/Allotment Filter */}
-              <Select value={seatFilter} onValueChange={setSeatFilter}>
-                <SelectTrigger data-testid="select-seat">
-                  <SelectValue placeholder="All Seats" />
+              {/* All Allotments Filter */}
+              <Select value={allotmentFilter} onValueChange={setAllotmentFilter}>
+                <SelectTrigger data-testid="select-allotment">
+                  <SelectValue placeholder="All Allotments" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Seats</SelectItem>
+                  <SelectItem value="all">All Allotments</SelectItem>
                   {allotmentsData?.data?.map((allotment) => (
                     <SelectItem key={allotment.allotment_id} value={allotment.allotment_id}>
                       {allotment.value}
@@ -254,7 +254,7 @@ export default function Fees({ standalone = true }: FeesProps) {
                   setSearchTerm('');
                   setStatusFilter('all');
                   setMonthFilter('all');
-                  setSeatFilter('all');
+                  setAllotmentFilter('all');
                 }}
                 data-testid="button-clear-filters"
               >
