@@ -92,7 +92,7 @@ export default function Header() {
             <div className="hidden md:block">
               <Button 
                 onClick={() => window.open("/student-login", "_blank")}
-                className="bg-white dark:bg-gray-800 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white font-semibold px-6 py-2.5 shadow-lg shadow-[#ff6b35]/25 hover:shadow-xl hover:shadow-[#ff6b35]/30 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+                className="bg-[#004e89] hover:bg-[#003a6b] text-white px-4 py-2 rounded"
                 data-testid="button-student-login-header"
               >
                 Student Login
@@ -168,7 +168,7 @@ export default function Header() {
                   <div className="pt-4 space-y-3">
                     <Button 
                       onClick={() => {window.open("/student-login", "_blank"); setIsOpen(false);}}
-                      className="w-full bg-white dark:bg-gray-800 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white font-semibold py-3 shadow-lg shadow-[#ff6b35]/25 hover:shadow-xl transition-all duration-300"
+                      className="w-full bg-[#004e89] hover:bg-[#003a6b] text-white py-2 rounded"
                       data-testid="nav-mobile-student-login"
                     >
                       Student Login
