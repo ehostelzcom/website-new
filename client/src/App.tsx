@@ -26,8 +26,8 @@ function Router() {
       <Route path="/home" component={StudentHomeNew} />
       <Route path="/dashboard" component={HostelDashboard} />
       <Route path="/hostel-dashboard/:hostelId" component={HostelDashboard} />
-      <Route path="/fees" component={() => <Fees standalone={false} />} />
-      <Route path="/payments" component={() => <Payments standalone={false} />} />
+      <Route path="/fees" component={Fees} />
+      <Route path="/payments" component={Payments} />
       <Route path="/rating" component={Rating} />
       <Route component={NotFound} />
     </Switch>
