@@ -186,6 +186,14 @@ export default function Payments({ standalone = true }: PaymentsProps) {
         </div>
       )}
 
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
+          <Home className="w-4 h-4" />
+          <span>/</span>
+          <Receipt className="w-4 h-4" />
+          <span>Payments</span>
+        </div>
+
         {/* Compact Filters */}
         <div className="bg-white dark:bg-gray-800 rounded-lg border p-3 mb-4">
           <div className="flex items-center gap-2 mb-3">

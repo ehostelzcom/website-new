@@ -174,6 +174,14 @@ export default function Fees({ standalone = true }: FeesProps) {
         </div>
       )}
 
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
+          <Home className="w-4 h-4" />
+          <span>/</span>
+          <CreditCard className="w-4 h-4" />
+          <span>Fees</span>
+        </div>
+
         {/* Compact Filters */}
         <div className="bg-white dark:bg-gray-800 rounded-lg border p-3 mb-4">
           <div className="flex items-center gap-2 mb-3">
