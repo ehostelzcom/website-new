@@ -329,12 +329,6 @@ export default function Rating() {
 
         {/* Rating Form */}
         <Card>
-          <CardHeader>
-            <CardTitle>Please rate your experience</CardTitle>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Your feedback helps us improve our services. Please rate each category from 1 to 5 stars.
-            </p>
-          </CardHeader>
           <CardContent className="space-y-6">
             {/* Rating Questions - 6 Column + 6 Column Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
