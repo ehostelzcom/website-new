@@ -44,8 +44,8 @@ export default function StudentLogin() {
         
         console.log("Login successful:", { userId, username });
         
-        // Redirect to student dashboard with hostel cards
-        setLocation("/student-dashboard");
+        // Redirect to hostel dashboard (existing design)
+        setLocation("/hostel-dashboard/101");
       } else {
         // Login failed
         setError(data.message || "Invalid username or password");
