@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useLocation } from "wouter";
+import { useQuery } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -51,6 +52,20 @@ export default function ChangePassword({ standalone = true }: ChangePasswordProp
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  
+  // Get user data from localStorage for API calls - same as other pages
+  const studentUserId = localStorage.getItem('student_user_id');
+  const hostelId = localStorage.getItem('hostel_id');
+  
+  // For standalone mode, use default values if localStorage is empty (for testing)
+  const finalStudentUserId = studentUserId || '101';
+  const finalHostelId = hostelId || '2';
+
+  // Fetch hostel information - same as other pages
+  const { data: hostelData } = useQuery<any>({
+    queryKey: ['/api/student-hostels', finalStudentUserId],
+    enabled: !!finalStudentUserId
+  });
 
   const form = useForm<ChangePasswordFormData>({
     resolver: zodResolver(changePasswordSchema),
@@ -344,7 +359,8 @@ export default function ChangePassword({ standalone = true }: ChangePasswordProp
             sidebarItems={sidebarItems}
             activeItemId="change-password"
             onMenuToggle={() => setSidebarOpen(true)}
-            showHostelInfo={false}
+            hostelInfo={hostelData?.data || undefined}
+            showHostelInfo={!!hostelData?.data}
           />
 
           {/* Content */}
