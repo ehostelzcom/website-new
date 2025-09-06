@@ -151,10 +151,13 @@ export default function Rating() {
       // Handle additional comments (question ID 100)
       const commentsQuestion = ratingsQuestionsData.data.find(q => q.id === 100);
       if (commentsQuestion) {
-        // Find existing comment from ratings data (if any)
+        // Find existing comment from ratings data, or use default from API
         const existingComment = existingRatingsData?.ratings?.find(r => r.rating_id === 100);
         if (existingComment && typeof existingComment.score === 'string') {
           setAdditionalComments(existingComment.score);
+        } else {
+          // Use the description from API as default value ("No suggestions")
+          setAdditionalComments(commentsQuestion.description);
         }
       }
     }
@@ -219,6 +222,16 @@ export default function Rating() {
       return;
     }
 
+    // Check if additional comments field is filled (mandatory)
+    if (!additionalComments.trim()) {
+      toast({
+        title: "Additional Comments Required",
+        description: "Please provide additional comments or suggestions.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
@@ -228,13 +241,11 @@ export default function Rating() {
         score: q.rating
       }));
 
-      // Add additional comments as rating ID 100 if provided
-      if (additionalComments.trim()) {
-        ratingsData.push({
-          rating_id: 100,
-          score: additionalComments.trim() as any // Allow string for comments
-        });
-      }
+      // Add additional comments as rating ID 100 (always required now)
+      ratingsData.push({
+        rating_id: 100,
+        score: additionalComments.trim() as any // Allow string for comments
+      });
 
       const payload = {
         user_id: parseInt(finalStudentUserId),
@@ -291,8 +302,7 @@ export default function Rating() {
         queryKey: ['existing-ratings', finalStudentUserId, finalHostelId]
       });
       
-      // Clear comments only (ratings will be updated from API)
-      setAdditionalComments('');
+      // Don't clear comments - they will be updated from API data
       
     } catch (error) {
       console.error('Error submitting rating:', error);
@@ -514,10 +524,10 @@ export default function Rating() {
               </div>
             )}
 
-            {/* Additional Comments - Dynamic label from API */}
+            {/* Additional Comments - Fixed title, pre-filled with API value */}
             <div className="space-y-2">
               <Label htmlFor="comments" className="text-sm font-medium">
-                {ratingsQuestionsData?.data?.find(q => q.id === 100)?.description || "Additional Comments"} (Optional)
+                Additional Comments or Suggestions <span className="text-red-500">*</span>
               </Label>
               <Textarea
                 id="comments"
@@ -525,6 +535,7 @@ export default function Rating() {
                 value={additionalComments}
                 onChange={(e) => setAdditionalComments(e.target.value)}
                 rows={4}
+                required
                 data-testid="textarea-comments"
               />
             </div>
