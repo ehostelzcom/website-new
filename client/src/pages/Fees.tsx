@@ -337,13 +337,13 @@ export default function Fees({ standalone = true }: FeesProps) {
                       <TableHead>Seat</TableHead>
                       <TableHead>Month</TableHead>
                       <TableHead>Due Date</TableHead>
-                      <TableHead className="text-right">Fee Amount</TableHead>
+                      <TableHead>Fee Amount</TableHead>
                       <TableHead className="text-right">Discount</TableHead>
-                      <TableHead className="text-right">Payable</TableHead>
-                      <TableHead className="text-right">Paid</TableHead>
+                      <TableHead>Payable</TableHead>
+                      <TableHead>Paid</TableHead>
                       <TableHead className="text-right">Balance</TableHead>
                       <TableHead>Status</TableHead>
-                      <TableHead>Created at</TableHead>
+                      <TableHead className="text-right">Created at</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -358,16 +358,16 @@ export default function Fees({ standalone = true }: FeesProps) {
                         </TableCell>
                         <TableCell>{fee.month_of}</TableCell>
                         <TableCell>{formatDate(fee.due_date)}</TableCell>
-                        <TableCell className="text-right font-medium">
+                        <TableCell className="font-medium">
                           {formatCurrency(fee.fee_amount)}
                         </TableCell>
                         <TableCell className="text-right text-green-600">
                           {fee.discount > 0 ? `-${formatCurrency(fee.discount)}` : '-'}
                         </TableCell>
-                        <TableCell className="text-right font-medium">
+                        <TableCell className="font-medium">
                           {formatCurrency(fee.payable_amount)}
                         </TableCell>
-                        <TableCell className="text-right font-medium text-blue-600">
+                        <TableCell className="font-medium text-blue-600">
                           {formatCurrency(fee.total_payment)}
                         </TableCell>
                         <TableCell className="text-right">
@@ -384,7 +384,7 @@ export default function Fees({ standalone = true }: FeesProps) {
                             {fee.payment_status}
                           </Badge>
                         </TableCell>
-                        <TableCell className="text-sm text-gray-500">
+                        <TableCell className="text-sm text-gray-500 text-right">
                           {format(new Date(fee.created_at), 'dd MMM yyyy')}
                         </TableCell>
                       </TableRow>
