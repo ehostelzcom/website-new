@@ -56,8 +56,8 @@ export default function StudentHeader({ title, sidebarItems, activeItemId, onMen
   };
 
   const handleChangePassword = () => {
-    // TODO: Open change password modal or navigate to change password page
-    console.log("Change password clicked");
+    // Navigate to change password page
+    setLocation("/change-password");
   };
 
   return (

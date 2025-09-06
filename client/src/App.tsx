@@ -13,7 +13,7 @@ import Fees from "@/pages/Fees";
 import Payments from "@/pages/Payments";
 import Rating from "@/pages/Rating";
 import Profile from "@/pages/Profile";
-import StudentHomeNew from "@/pages/Home";
+import ChangePassword from "@/pages/ChangePassword";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -24,13 +24,13 @@ function Router() {
       <Route path="/student-login" component={StudentLogin} />
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/student-home" component={StudentHome} />
-      <Route path="/home" component={StudentHomeNew} />
       <Route path="/dashboard" component={HostelDashboard} />
       <Route path="/hostel-dashboard/:hostelId" component={HostelDashboard} />
       <Route path="/fees" component={() => <Fees standalone={true} />} />
       <Route path="/payments" component={() => <Payments standalone={true} />} />
       <Route path="/rating" component={Rating} />
       <Route path="/profile" component={Profile} />
+      <Route path="/change-password" component={ChangePassword} />
       <Route component={NotFound} />
     </Switch>
   );
