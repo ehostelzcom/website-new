@@ -159,14 +159,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
+      // Log the exact payload being sent
+      const payload = {
+        user_id,
+        hostel_id,
+        ratings
+      };
+      console.log("Sending to Oracle APEX - Full payload:", JSON.stringify(payload, null, 2));
+      console.log("Payload details:");
+      console.log("- user_id:", user_id, "(type:", typeof user_id, ")");
+      console.log("- hostel_id:", hostel_id, "(type:", typeof hostel_id, ")");
+      console.log("- ratings array length:", ratings.length);
+      ratings.forEach((rating, index) => {
+        console.log(`- ratings[${index}]:`, JSON.stringify(rating), 
+                   `rating_id type: ${typeof rating.rating_id}, score type: ${typeof rating.score}`);
+      });
+
       // Call Oracle APEX API
       const response = await axios.post(
         "http://ehostelz.com:8890/ords/jee_management_system/web/api/hostel-rating/save",
-        {
-          user_id,
-          hostel_id,
-          ratings
-        },
+        payload,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -176,9 +188,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       );
       
-      console.log("Oracle APEX hostel-rating response:", response.data);
+      console.log("Oracle APEX hostel-rating response:", JSON.stringify(response.data, null, 2));
       console.log("Oracle APEX response status:", response.status);
-      console.log("Oracle APEX response headers:", response.headers);
+      console.log("Oracle APEX response headers content-type:", response.headers['content-type']);
       
       // Return success response
       res.setHeader('Content-Type', 'application/json');
