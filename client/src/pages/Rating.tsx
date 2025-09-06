@@ -551,7 +551,7 @@ export default function Rating() {
                 placeholder="Share any additional feedback or suggestions..."
                 value={additionalComments}
                 onChange={(e) => setAdditionalComments(e.target.value)}
-                rows={4}
+                rows={2}
                 maxLength={1000}
                 required
                 data-testid="textarea-comments"
