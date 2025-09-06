@@ -111,6 +111,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Proxy route for rating questions API to avoid CORS issues
+  app.get("/api/rating-questions", async (req, res) => {
+    console.log("Rating questions API call received");
+    try {
+      const response = await axios.get("http://ehostelz.com:8890/ords/jee_management_system/web/api/rating-questions", {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log("Oracle APEX rating-questions response:", response.data);
+      
+      // Return the response directly from Oracle APEX
+      res.setHeader('Content-Type', 'application/json');
+      res.json(response.data);
+    } catch (error) {
+      console.error("Error fetching rating questions:", error);
+      res.status(500).json({ 
+        error: "Failed to fetch rating questions",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   // POST API for Contact Us form
   app.post("/api/contact-us", async (req, res) => {
     console.log("Contact Us form submission received:", req.body);

@@ -97,7 +97,7 @@ export default function Rating() {
   const { data: ratingsQuestionsData, isLoading: questionsLoading } = useQuery<RatingQuestionsResponse>({
     queryKey: ['rating-questions'],
     queryFn: async () => {
-      const response = await fetch('http://ehostelz.com:8890/ords/jee_management_system/web/api/rating-questions');
+      const response = await fetch('/api/rating-questions');
       if (!response.ok) {
         throw new Error('Failed to fetch rating questions');
       }
