@@ -51,8 +51,8 @@ export default function StudentHeader({ title, sidebarItems, activeItemId, onMen
   };
 
   const handleProfile = () => {
-    // Navigate to profile page (placeholder)
-    console.log("Profile clicked");
+    // Navigate to profile page
+    setLocation("/profile");
   };
 
   return (
