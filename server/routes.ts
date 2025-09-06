@@ -162,6 +162,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
+      // Validate comments length if provided (rating_id 100)
+      const commentsRating = ratings.find(r => r.rating_id === 100);
+      if (commentsRating && typeof commentsRating.score === 'string' && commentsRating.score.length > 1000) {
+        return res.status(400).json({ 
+          error: "Comments too long",
+          message: "Additional comments must be 1000 characters or less"
+        });
+      }
+
       // Log the exact payload being sent
       const payload = {
         user_id,

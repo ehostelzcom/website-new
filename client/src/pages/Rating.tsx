@@ -232,6 +232,16 @@ export default function Rating() {
       return;
     }
 
+    // Validate comments length (max 1000 characters)
+    if (additionalComments.trim().length > 1000) {
+      toast({
+        title: "Comments Too Long",
+        description: "Additional comments must be 1000 characters or less.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
@@ -535,9 +545,13 @@ export default function Rating() {
                 value={additionalComments}
                 onChange={(e) => setAdditionalComments(e.target.value)}
                 rows={4}
+                maxLength={1000}
                 required
                 data-testid="textarea-comments"
               />
+              <div className="text-xs text-gray-500 dark:text-gray-400 text-right">
+                {additionalComments.length}/1000 characters
+              </div>
             </div>
 
             {/* Submit Button */}
