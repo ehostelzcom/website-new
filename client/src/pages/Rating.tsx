@@ -450,6 +450,15 @@ export default function Rating() {
           <span>Rating</span>
         </div>
 
+        {/* Page Title */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Building2 className="w-5 h-5 text-blue-600" />
+              Rate Your Hostel Experience
+            </CardTitle>
+          </CardHeader>
+        </Card>
 
         {/* Rating Form */}
         <Card>
