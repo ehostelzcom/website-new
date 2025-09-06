@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -89,6 +89,7 @@ interface HostelInfo {
 export default function Rating() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
   
   // Get user data from localStorage for API calls
   const studentUserId = localStorage.getItem('student_user_id');
@@ -132,22 +133,16 @@ export default function Rating() {
   
   // Update questions when API data is loaded and populate existing ratings
   useEffect(() => {
-    console.log("useEffect triggered with:");
-    console.log("- ratingsQuestionsData:", ratingsQuestionsData);
-    console.log("- existingRatingsData:", existingRatingsData);
-    
     if (ratingsQuestionsData?.data) {
       const questionsWithRatings = ratingsQuestionsData.data.map(q => {
         // Find existing rating for this question
         const existingRating = existingRatingsData?.ratings?.find(r => r.rating_id === q.id);
-        console.log(`Question ${q.id}: Found existing rating:`, existingRating);
         return {
           id: q.id,
           description: q.description,
           rating: existingRating ? existingRating.score : 0
         };
       });
-      console.log("Final questionsWithRatings:", questionsWithRatings);
       setRatingQuestions(questionsWithRatings);
     }
   }, [ratingsQuestionsData, existingRatingsData]);
@@ -270,8 +265,12 @@ export default function Rating() {
         description: `Thank you for your feedback! You rated ${completedRatings.length} categories.`,
       });
 
-      // Reset form
-      setRatingQuestions(prev => prev.map(q => ({ ...q, rating: 0 })));
+      // Invalidate and refetch existing ratings to show updated data
+      await queryClient.invalidateQueries({
+        queryKey: ['existing-ratings', finalStudentUserId, finalHostelId]
+      });
+      
+      // Clear comments only (ratings will be updated from API)
       setAdditionalComments('');
       
     } catch (error) {
