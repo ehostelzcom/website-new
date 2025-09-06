@@ -355,7 +355,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Method</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Type</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Status</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Created at</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100 text-right">Created at</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -370,13 +370,13 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                             {payment.seat_title}
                           </TableCell>
                           <TableCell>{payment.month_of}</TableCell>
-                          <TableCell className="text-right font-medium">
+                          <TableCell className="font-medium">
                             {formatCurrency(payment.fee_amount)}
                           </TableCell>
-                          <TableCell className="text-right font-medium">
+                          <TableCell className="font-medium">
                             {formatCurrency(payment.payable_amount)}
                           </TableCell>
-                          <TableCell className="text-right font-medium text-green-600 dark:text-green-400">
+                          <TableCell className="font-medium text-green-600 dark:text-green-400">
                             {formatCurrency(payment.payment_amount)}
                           </TableCell>
                           <TableCell>
@@ -397,7 +397,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                               {payment.fee_payment_status}
                             </Badge>
                           </TableCell>
-                          <TableCell className="text-gray-600 dark:text-gray-400">
+                          <TableCell className="text-gray-600 dark:text-gray-400 text-right">
                             {formatDate(payment.created_at)}
                           </TableCell>
                         </TableRow>
