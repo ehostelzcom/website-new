@@ -57,6 +57,12 @@ interface RatingQuestion {
   rating: number;
 }
 
+interface RatingPayload {
+  rating_id: number;
+  score: number;
+  comment_suggestions?: string; // Optional for rating_id 100
+}
+
 interface RatingQuestionsResponse {
   status: boolean;
   code: number;
@@ -72,7 +78,7 @@ interface ExistingRatingsResponse {
   ratings: Array<{
     rating_id: number;
     score: number;
-    comment_suggestions?: string; // Comments within rating object for ID 100
+    comment_suggestions: string; // Comments field now returned for all ratings
   }>;
 }
 
@@ -154,7 +160,7 @@ export default function Rating() {
       if (commentsQuestion) {
         // Check if comments are returned from API within rating_id 100
         const existingComment = existingRatingsData?.ratings?.find(r => r.rating_id === 100);
-        if (existingComment?.comment_suggestions) {
+        if (existingComment?.comment_suggestions && existingComment.comment_suggestions !== "No Suggestions") {
           setAdditionalComments(existingComment.comment_suggestions);
         } else {
           // Use the description from API as default value ("No suggestions")
@@ -247,7 +253,7 @@ export default function Rating() {
     
     try {
       // Prepare ratings data for API submission
-      const ratingsData = completedRatings.map(q => ({
+      const ratingsData: RatingPayload[] = completedRatings.map(q => ({
         rating_id: q.id,
         score: q.rating
       }));
