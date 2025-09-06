@@ -24,6 +24,7 @@ function Router() {
       <Route path="/student-login" component={StudentLogin} />
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/student-home" component={StudentHome} />
+      <Route path="/home" component={StudentHome} />
       <Route path="/dashboard" component={HostelDashboard} />
       <Route path="/hostel-dashboard/:hostelId" component={HostelDashboard} />
       <Route path="/fees" component={() => <Fees standalone={true} />} />
