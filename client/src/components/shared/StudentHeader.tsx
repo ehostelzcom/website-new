@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuGroup, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { Menu, User, ChevronDown, Settings, LogOut, Building2, MapPin, Phone } from "lucide-react";
+import { Menu, User, ChevronDown, Settings, LogOut, Building2, MapPin, Phone, Key } from "lucide-react";
 import { useLocation } from "wouter";
 import logoSvg from "@assets/logo/Asset 3.svg";
 
@@ -53,6 +53,11 @@ export default function StudentHeader({ title, sidebarItems, activeItemId, onMen
   const handleProfile = () => {
     // Navigate to profile page
     setLocation("/profile");
+  };
+
+  const handleChangePassword = () => {
+    // TODO: Open change password modal or navigate to change password page
+    console.log("Change password clicked");
   };
 
   return (
@@ -146,6 +151,10 @@ export default function StudentHeader({ title, sidebarItems, activeItemId, onMen
                 <DropdownMenuItem onClick={handleProfile} data-testid="button-dropdown-profile">
                   <Settings className="w-4 h-4 mr-2" />
                   Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleChangePassword} data-testid="button-dropdown-change-password">
+                  <Key className="w-4 h-4 mr-2" />
+                  Change Password
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleLogout} data-testid="button-dropdown-logout">
                   <LogOut className="w-4 h-4 mr-2" />
