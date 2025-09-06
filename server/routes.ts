@@ -274,6 +274,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // GET API for student profile
+  app.get("/api/student-profile/:user_id/:hostel_id", async (req, res) => {
+    const { user_id, hostel_id } = req.params;
+    console.log(`Student profile API call received for user_id: ${user_id} hostel_id: ${hostel_id}`);
+    
+    try {
+      const response = await axios.get(
+        `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-profile/${user_id}/${hostel_id}`,
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      
+      console.log("Oracle APEX student-profile response:", response.data);
+      res.json(response.data);
+      
+    } catch (error) {
+      console.error("Error fetching student profile:", error);
+      res.status(500).json({ 
+        status: false,
+        error: "Failed to fetch student profile data" 
+      });
+    }
+  });
+
   // POST API for Contact Us form
   app.post("/api/contact-us", async (req, res) => {
     console.log("Contact Us form submission received:", req.body);

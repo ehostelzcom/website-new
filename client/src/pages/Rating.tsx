@@ -181,7 +181,7 @@ export default function Rating() {
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
     { id: "rating", label: "Rating", icon: Star, route: "/rating" },
-    { id: "profile", label: "Profile", icon: User, route: "/home" },
+    { id: "profile", label: "Profile", icon: User, route: "/profile" },
   ];
 
   // Update rating for a specific question

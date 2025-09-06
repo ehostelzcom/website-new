@@ -453,12 +453,12 @@ export default function Payments({ standalone = true }: PaymentsProps) {
 
   // Navigation items
   const sidebarItems = [
-    { id: "home", label: "Home", icon: Home, route: "/home" },
+    { id: "home", label: "Home", icon: Home, route: "/profile" },
     { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "/dashboard" },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
     { id: "rating", label: "Rating", icon: Star, route: "/rating" },
-    { id: "profile", label: "Profile", icon: User, route: "/home" },
+    { id: "profile", label: "Profile", icon: User, route: "/profile" },
   ];
 
   if (standalone) {
