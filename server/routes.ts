@@ -141,7 +141,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/hostel-rating/save", async (req, res) => {
     console.log("Hostel rating submission received:", req.body);
     try {
-      const { user_id, hostel_id, ratings } = req.body;
+      const { user_id, hostel_id, ratings, COMMENT_SUGGESTIONS } = req.body;
       
       // Validate required fields
       if (!user_id || !hostel_id || !ratings || !Array.isArray(ratings)) {
@@ -162,9 +162,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Validate comments length if provided (rating_id 100)
-      const commentsRating = ratings.find(r => r.rating_id === 100);
-      if (commentsRating && typeof commentsRating.score === 'string' && commentsRating.score.length > 1000) {
+      // Validate comments length if provided
+      if (COMMENT_SUGGESTIONS && typeof COMMENT_SUGGESTIONS === 'string' && COMMENT_SUGGESTIONS.length > 1000) {
         return res.status(400).json({ 
           error: "Comments too long",
           message: "Additional comments must be 1000 characters or less"
@@ -175,7 +174,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const payload = {
         user_id,
         hostel_id,
-        ratings
+        ratings,
+        ...(COMMENT_SUGGESTIONS && { COMMENT_SUGGESTIONS })
       };
       console.log("Sending to Oracle APEX - Full payload:", JSON.stringify(payload, null, 2));
       console.log("Payload details:");
