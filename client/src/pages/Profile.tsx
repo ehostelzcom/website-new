@@ -35,6 +35,7 @@ interface ProfileData {
   city_name: string;
   location: string;
   created_at: string;
+  join_date: string;
   hostel_name: string;
   guardian_name: string;
   guardian_address: string;
@@ -274,7 +275,7 @@ export default function Profile() {
                   </div>
                   <div className="text-right text-sm">
                     <p className="text-blue-200">Joined</p>
-                    <p className="text-white font-medium">{formatDate(profile.created_at).split(',')[0]}</p>
+                    <p className="text-white font-medium">{profile.join_date}</p>
                   </div>
                 </div>
               </div>
