@@ -259,207 +259,145 @@ export default function Profile() {
             </div>
           ) : profile ? (
             /* Profile Content */
-            <div className="space-y-4">
-              {/* Profile Header Section */}
-              <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg p-6 text-white">
-                <div className="flex items-center gap-4">
-                  <Avatar className="w-20 h-20 border-4 border-white/20">
-                    <AvatarFallback className="bg-white/20 text-white text-2xl font-bold">
+            <div className="space-y-3">
+              {/* Compact Profile Header */}
+              <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg p-4 text-white">
+                <div className="flex items-center gap-3">
+                  <Avatar className="w-14 h-14 border-2 border-white/30">
+                    <AvatarFallback className="bg-white/20 text-white text-lg font-bold">
                       {profile.full_name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                     </AvatarFallback>
                   </Avatar>
-                  <div className="flex-1">
-                    <h1 className="text-2xl font-bold">{profile.full_name}</h1>
-                    <p className="text-blue-100 text-lg">Student ID: {profile.user_id}</p>
-                    <p className="text-blue-200 mt-1">{profile.institute_name}</p>
+                  <div className="flex-1 min-w-0">
+                    <h1 className="text-xl font-bold truncate">{profile.full_name}</h1>
+                    <p className="text-blue-100 text-sm">ID: {profile.user_id} • {profile.department_name}</p>
+                  </div>
+                  <div className="text-right text-sm">
+                    <p className="text-blue-200">Joined</p>
+                    <p className="text-white font-medium">{formatDate(profile.created_at).split(',')[0]}</p>
                   </div>
                 </div>
               </div>
 
-              {/* Main Content Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                {/* Personal Details - Takes 2 columns */}
-                <Card className="lg:col-span-2">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <User className="w-5 h-5 text-blue-600" />
-                      Personal Information
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <User className="w-4 h-4 text-gray-500" />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-xs text-gray-500 dark:text-gray-400">Father's Name</p>
-                          <p className="font-medium text-gray-900 dark:text-white truncate">{profile.father_name}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <CreditCard className="w-4 h-4 text-gray-500" />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-xs text-gray-500 dark:text-gray-400">CNIC</p>
-                          <p className="font-medium text-gray-900 dark:text-white">{profile.cnic}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <Phone className="w-4 h-4 text-gray-500" />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-xs text-gray-500 dark:text-gray-400">Mobile</p>
-                          <p className="font-medium text-gray-900 dark:text-white">{profile.mobile_no}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <Phone className="w-4 h-4 text-gray-500" />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-xs text-gray-500 dark:text-gray-400">WhatsApp</p>
-                          <p className="font-medium text-gray-900 dark:text-white">{profile.whatsapp_no}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <UserCheck className="w-4 h-4 text-gray-500" />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-xs text-gray-500 dark:text-gray-400">Gender</p>
-                          <p className="font-medium text-gray-900 dark:text-white">{profile.gender}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <Heart className="w-4 h-4 text-gray-500" />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-xs text-gray-500 dark:text-gray-400">Religion</p>
-                          <p className="font-medium text-gray-900 dark:text-white">{profile.religion}</p>
-                        </div>
-                      </div>
+              {/* Compact Info Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+                <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border">
+                  <div className="flex items-center gap-2">
+                    <User className="w-3 h-3 text-blue-500" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-gray-500">Father</p>
+                      <p className="text-sm font-medium truncate">{profile.father_name}</p>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
 
-                {/* Quick Stats */}
-                <div className="space-y-4">
-                  <Card className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border-green-200 dark:border-green-700">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3">
-                        <Calendar className="w-8 h-8 text-green-600" />
-                        <div>
-                          <p className="text-sm text-green-700 dark:text-green-300">Joined</p>
-                          <p className="font-semibold text-green-800 dark:text-green-200">{formatDate(profile.created_at)}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border">
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-3 h-3 text-green-500" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-gray-500">Mobile</p>
+                      <p className="text-sm font-medium">{profile.mobile_no}</p>
+                    </div>
+                  </div>
+                </div>
 
-                  <Card className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 border-purple-200 dark:border-purple-700">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3">
-                        <Building2 className="w-8 h-8 text-purple-600" />
-                        <div>
-                          <p className="text-sm text-purple-700 dark:text-purple-300">Current Hostel</p>
-                          <p className="font-semibold text-purple-800 dark:text-purple-200">{profile.hostel_name}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border">
+                  <div className="flex items-center gap-2">
+                    <CreditCard className="w-3 h-3 text-purple-500" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-gray-500">CNIC</p>
+                      <p className="text-sm font-medium">{profile.cnic}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border">
+                  <div className="flex items-center gap-2">
+                    <UserCheck className="w-3 h-3 text-orange-500" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-gray-500">Gender</p>
+                      <p className="text-sm font-medium">{profile.gender}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border">
+                  <div className="flex items-center gap-2">
+                    <Heart className="w-3 h-3 text-red-500" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-gray-500">Religion</p>
+                      <p className="text-sm font-medium">{profile.religion}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border">
+                  <div className="flex items-center gap-2">
+                    <Building2 className="w-3 h-3 text-indigo-500" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-gray-500">Hostel</p>
+                      <p className="text-sm font-medium truncate">{profile.hostel_name}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Address & Guardian Info */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <MapPin className="w-5 h-5 text-green-600" />
-                      Address Information
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0 space-y-3">
-                    <div className="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <MapPin className="w-4 h-4 text-gray-500 mt-1" />
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Home Address</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.address}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">{profile.city_name}</p>
-                      </div>
+              {/* Compact Section Cards */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+                {/* Address */}
+                <Card className="p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <MapPin className="w-4 h-4 text-green-600" />
+                    <h3 className="font-semibold text-sm">Address</h3>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    <div>
+                      <p className="text-xs text-gray-500">Home</p>
+                      <p className="font-medium">{profile.address}, {profile.city_name}</p>
                     </div>
-
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <Globe className="w-4 h-4 text-gray-500" />
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Current Location</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.location}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <Users className="w-5 h-5 text-purple-600" />
-                      Guardian Information
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0 space-y-3">
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <User className="w-4 h-4 text-gray-500" />
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Guardian Name</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.guardian_name}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">{profile.guardian_relation}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <Phone className="w-4 h-4 text-gray-500" />
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Contact</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.guardian_mobile_no}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Academic Information */}
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <GraduationCap className="w-5 h-5 text-orange-600" />
-                    Academic Information
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <Building2 className="w-4 h-4 text-gray-500" />
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Institute</p>
-                        <p className="font-medium text-gray-900 dark:text-white text-sm">{profile.institute_name}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <GraduationCap className="w-4 h-4 text-gray-500" />
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Department</p>
-                        <p className="font-medium text-gray-900 dark:text-white text-sm">{profile.department_name}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <CreditCard className="w-4 h-4 text-gray-500" />
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Registration</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.registration_number}</p>
-                      </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Current</p>
+                      <p className="font-medium">{profile.location}</p>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </Card>
+
+                {/* Guardian */}
+                <Card className="p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Users className="w-4 h-4 text-purple-600" />
+                    <h3 className="font-semibold text-sm">Guardian</h3>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    <div>
+                      <p className="text-xs text-gray-500">{profile.guardian_relation}</p>
+                      <p className="font-medium">{profile.guardian_name}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Contact</p>
+                      <p className="font-medium">{profile.guardian_mobile_no}</p>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Academic */}
+                <Card className="p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <GraduationCap className="w-4 h-4 text-orange-600" />
+                    <h3 className="font-semibold text-sm">Academic</h3>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    <div>
+                      <p className="text-xs text-gray-500">Institute</p>
+                      <p className="font-medium">{profile.institute_name}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Registration</p>
+                      <p className="font-medium">{profile.registration_number}</p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
             </div>
           ) : (
             /* No Data State */
