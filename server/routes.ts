@@ -215,6 +215,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // GET API for existing hostel ratings
+  app.get("/api/hostel-ratings/:user_id/:hostel_id", async (req, res) => {
+    console.log("Hostel ratings GET API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
+    try {
+      const { user_id, hostel_id } = req.params;
+      
+      // Validate required parameters
+      if (!user_id || !hostel_id) {
+        return res.status(400).json({ 
+          error: "Missing required parameters",
+          message: "user_id and hostel_id are required"
+        });
+      }
+
+      // Call Oracle APEX API to get existing ratings
+      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/hostel-ratings/${user_id}/${hostel_id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log("Oracle APEX hostel-ratings GET response:", response.data);
+      
+      // Return the response directly from Oracle APEX
+      res.setHeader('Content-Type', 'application/json');
+      res.json(response.data);
+    } catch (error) {
+      console.error("Error fetching existing ratings:", error);
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        // No ratings found - return empty ratings array
+        res.setHeader('Content-Type', 'application/json');
+        res.json({ 
+          status: true,
+          code: 200,
+          ratings: []
+        });
+      } else {
+        res.status(500).json({ 
+          error: "Failed to fetch existing ratings",
+          message: error instanceof Error ? error.message : "Unknown error"
+        });
+      }
+    }
+  });
+
   // POST API for Contact Us form
   app.post("/api/contact-us", async (req, res) => {
     console.log("Contact Us form submission received:", req.body);

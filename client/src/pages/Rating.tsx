@@ -66,6 +66,15 @@ interface RatingQuestionsResponse {
   }>;
 }
 
+interface ExistingRatingsResponse {
+  status: boolean;
+  code: number;
+  ratings: Array<{
+    rating_id: number;
+    score: number;
+  }>;
+}
+
 interface HostelInfo {
   hostel_id: number;
   hostel_name: string;
@@ -105,20 +114,37 @@ export default function Rating() {
     }
   });
 
+  // Fetch existing ratings for this user/hostel
+  const { data: existingRatingsData, isLoading: ratingsLoading } = useQuery<ExistingRatingsResponse>({
+    queryKey: ['existing-ratings', finalStudentUserId, finalHostelId],
+    queryFn: async () => {
+      const response = await fetch(`/api/hostel-ratings/${finalStudentUserId}/${finalHostelId}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch existing ratings');
+      }
+      return response.json();
+    },
+    enabled: !!finalStudentUserId && !!finalHostelId,
+  });
+
   // Initialize rating questions with fetched data
   const [ratingQuestions, setRatingQuestions] = useState<RatingQuestion[]>([]);
   
-  // Update questions when API data is loaded
+  // Update questions when API data is loaded and populate existing ratings
   useEffect(() => {
     if (ratingsQuestionsData?.data) {
-      const questionsWithRatings = ratingsQuestionsData.data.map(q => ({
-        id: q.id,
-        description: q.description,
-        rating: 0
-      }));
+      const questionsWithRatings = ratingsQuestionsData.data.map(q => {
+        // Find existing rating for this question
+        const existingRating = existingRatingsData?.ratings?.find(r => r.rating_id === q.id);
+        return {
+          id: q.id,
+          description: q.description,
+          rating: existingRating ? existingRating.score : 0
+        };
+      });
       setRatingQuestions(questionsWithRatings);
     }
-  }, [ratingsQuestionsData]);
+  }, [ratingsQuestionsData, existingRatingsData]);
 
   const [additionalComments, setAdditionalComments] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -403,7 +429,7 @@ export default function Rating() {
         <Card>
           <CardContent className="space-y-6">
             {/* Rating Questions - 6 Column + 6 Column Layout */}
-            {questionsLoading ? (
+            {questionsLoading || ratingsLoading ? (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Loading Skeleton */}
                 {[...Array(8)].map((_, index) => (
