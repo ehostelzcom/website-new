@@ -21,6 +21,7 @@ import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import StudentHeader from '@/components/shared/StudentHeader';
+import logoSvg from "@assets/logo/Asset 3.svg";
 
 interface ProfileData {
   user_id: number;
@@ -145,9 +146,12 @@ export default function Profile() {
       <aside className="hidden lg:flex lg:w-64 lg:flex-col">
         <nav className="flex-1 bg-white dark:bg-gray-800 shadow-lg">
           <div className="p-4 border-b dark:border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
-              Student Portal
-            </h2>
+            <div className="flex items-center space-x-3">
+              <img src={logoSvg} alt="ehostelz.com" className="w-8 h-8" />
+              <span className="text-lg font-semibold text-gray-800 dark:text-white">
+                ehostelz.com
+              </span>
+            </div>
           </div>
           <div className="p-4 space-y-2">
             {sidebarItems.map((item) => {
@@ -177,9 +181,12 @@ export default function Profile() {
         <SheetContent side="left" className="p-0 w-64">
           <nav className="h-full bg-white dark:bg-gray-800">
             <div className="p-4 border-b dark:border-gray-700">
-              <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
-                Student Portal
-              </h2>
+              <div className="flex items-center space-x-3">
+                <img src={logoSvg} alt="ehostelz.com" className="w-8 h-8" />
+                <span className="text-lg font-semibold text-gray-800 dark:text-white">
+                  ehostelz.com
+                </span>
+              </div>
             </div>
             <div className="p-4 space-y-2">
               {sidebarItems.map((item) => {
