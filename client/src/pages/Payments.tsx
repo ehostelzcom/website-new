@@ -413,7 +413,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-6 flex items-center justify-center gap-4">
+          <div className="mt-6 flex items-center justify-end gap-4">
             <div className="text-sm text-gray-600 dark:text-gray-400">
               Page {currentPage} of {totalPages}
             </div>
