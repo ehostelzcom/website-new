@@ -137,6 +137,70 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // POST API for hostel rating submission
+  app.post("/api/hostel-rating/save", async (req, res) => {
+    console.log("Hostel rating submission received:", req.body);
+    try {
+      const { user_id, hostel_id, ratings } = req.body;
+      
+      // Validate required fields
+      if (!user_id || !hostel_id || !ratings || !Array.isArray(ratings)) {
+        return res.status(400).json({ 
+          error: "Missing required fields",
+          message: "user_id, hostel_id, and ratings array are required"
+        });
+      }
+
+      // Validate minimum 3 ratings
+      if (ratings.length < 3) {
+        return res.status(400).json({ 
+          error: "Insufficient ratings",
+          message: "At least 3 ratings are required"
+        });
+      }
+
+      // Call Oracle APEX API
+      const response = await axios.post(
+        "http://ehostelz.com:8890/ords/jee_management_system/web/api/hostel-rating/save",
+        {
+          user_id,
+          hostel_id,
+          ratings
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          timeout: 10000,
+        }
+      );
+      
+      console.log("Oracle APEX hostel-rating response:", response.data);
+      
+      // Return success response
+      res.setHeader('Content-Type', 'application/json');
+      res.json({ 
+        success: true, 
+        message: "Rating submitted successfully",
+        data: response.data 
+      });
+    } catch (error) {
+      console.error("Error submitting rating:", error);
+      if (axios.isAxiosError(error) && error.response) {
+        res.status(error.response.status).json({
+          error: "Failed to submit rating",
+          message: error.response.data?.message || error.message
+        });
+      } else {
+        res.status(500).json({ 
+          error: "Failed to submit rating",
+          message: error instanceof Error ? error.message : "Unknown error"
+        });
+      }
+    }
+  });
+
   // POST API for Contact Us form
   app.post("/api/contact-us", async (req, res) => {
     console.log("Contact Us form submission received:", req.body);

@@ -168,12 +168,12 @@ export default function Rating() {
 
   // Handle form submission
   const handleSubmit = async () => {
-    // Check if all ratings are filled
-    const unratedQuestions = ratingQuestions.filter(q => q.rating === 0);
-    if (unratedQuestions.length > 0) {
+    // Check if at least 3 ratings are filled (minimum requirement)
+    const completedRatings = ratingQuestions.filter(q => q.rating > 0);
+    if (completedRatings.length < 3) {
       toast({
-        title: "Incomplete Rating",
-        description: "Please rate all categories before submitting.",
+        title: "Minimum Ratings Required",
+        description: "Please provide at least 3 ratings before submitting.",
         variant: "destructive",
       });
       return;
@@ -182,13 +182,40 @@ export default function Rating() {
     setIsSubmitting(true);
     
     try {
-      // Here you would typically send the rating data to your API
-      // For now, we'll simulate the submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Prepare ratings data for API submission
+      const ratingsData = completedRatings.map(q => ({
+        rating_id: q.id,
+        score: q.rating
+      }));
+
+      const payload = {
+        user_id: parseInt(finalStudentUserId),
+        hostel_id: parseInt(finalHostelId),
+        ratings: ratingsData
+      };
+
+      console.log('Submitting rating payload:', payload);
+
+      // Submit rating to API
+      const response = await fetch('/api/hostel-rating/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to submit rating');
+      }
+
+      const result = await response.json();
+      console.log('Rating submission successful:', result);
       
       toast({
-        title: "Rating Submitted",
-        description: "Thank you for your feedback! Your rating has been submitted successfully.",
+        title: "Rating Submitted Successfully",
+        description: `Thank you for your feedback! You rated ${completedRatings.length} categories.`,
       });
 
       // Reset form
@@ -196,9 +223,10 @@ export default function Rating() {
       setAdditionalComments('');
       
     } catch (error) {
+      console.error('Error submitting rating:', error);
       toast({
         title: "Submission Failed",
-        description: "Failed to submit your rating. Please try again.",
+        description: error instanceof Error ? error.message : "Failed to submit your rating. Please try again.",
         variant: "destructive",
       });
     } finally {
