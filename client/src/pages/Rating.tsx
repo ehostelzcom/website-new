@@ -463,12 +463,12 @@ export default function Rating() {
         {/* Rating Form */}
         <Card>
           <CardContent className="space-y-6">
-            {/* Rating Questions - 6 Column + 6 Column Layout */}
+            {/* Rating Questions - 4 Column + 4 Column + 4 Column Layout */}
             {questionsLoading || ratingsLoading ? (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Loading Skeleton */}
-                {[...Array(8)].map((_, index) => (
-                  <div key={index} className={`${index < 4 ? 'lg:col-span-6' : 'lg:col-span-6'} space-y-6`}>
+                {[...Array(9)].map((_, index) => (
+                  <div key={index} className={`${index < 3 ? 'lg:col-span-4' : index < 6 ? 'lg:col-span-4' : 'lg:col-span-4'} space-y-6`}>
                     <div className="space-y-2 animate-pulse">
                       <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
                       <div className="flex items-center gap-3">
@@ -485,9 +485,9 @@ export default function Rating() {
               </div>
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                {/* Left Side - 6 Columns, First half of Questions */}
-                <div className="lg:col-span-6 space-y-6">
-                  {ratingQuestions.slice(0, Math.ceil(ratingQuestions.length / 2)).map((question) => (
+                {/* First Column - 4 Columns, First third of Questions */}
+                <div className="lg:col-span-4 space-y-6">
+                  {ratingQuestions.slice(0, Math.ceil(ratingQuestions.length / 3)).map((question) => (
                     <div key={question.id} className="space-y-2">
                       <Label className="text-sm font-medium">{question.description}</Label>
                       <div className="flex items-center gap-3">
@@ -503,9 +503,27 @@ export default function Rating() {
                   ))}
                 </div>
                 
-                {/* Right Side - 6 Columns, Second half of Questions */}
-                <div className="lg:col-span-6 space-y-6">
-                  {ratingQuestions.slice(Math.ceil(ratingQuestions.length / 2)).map((question) => (
+                {/* Second Column - 4 Columns, Second third of Questions */}
+                <div className="lg:col-span-4 space-y-6">
+                  {ratingQuestions.slice(Math.ceil(ratingQuestions.length / 3), Math.ceil(ratingQuestions.length * 2 / 3)).map((question) => (
+                    <div key={question.id} className="space-y-2">
+                      <Label className="text-sm font-medium">{question.description}</Label>
+                      <div className="flex items-center gap-3">
+                        <StarRating 
+                          rating={question.rating}
+                          onRatingChange={(rating) => updateRating(question.id, rating)}
+                        />
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          {question.rating > 0 ? `${question.rating}/5` : 'Not rated'}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Third Column - 4 Columns, Last third of Questions */}
+                <div className="lg:col-span-4 space-y-6">
+                  {ratingQuestions.slice(Math.ceil(ratingQuestions.length * 2 / 3)).map((question) => (
                     <div key={question.id} className="space-y-2">
                       <Label className="text-sm font-medium">{question.description}</Label>
                       <div className="flex items-center gap-3">
