@@ -9,7 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { CalendarDays, Search, Filter, Receipt, ChevronLeft, ChevronRight, Home, BarChart3, CreditCard, Star, User, Menu } from 'lucide-react';
+import { Search, Filter, Receipt, ChevronLeft, ChevronRight, Home, BarChart3, CreditCard, Star, User, Menu } from 'lucide-react';
 import logoSvg from "@assets/logo/Asset 3.svg";
 import StudentHeader from "@/components/shared/StudentHeader";
 import { format } from 'date-fns';
@@ -350,11 +350,8 @@ export default function Fees({ standalone = true }: FeesProps) {
                     {currentData.map((fee) => (
                       <TableRow key={fee.serial_no} data-testid={`row-fee-${fee.serial_no}`}>
                         <TableCell className="font-medium">{fee.serial_no}</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <CalendarDays className="h-4 w-4 text-gray-400" />
-                            {fee.seat_title}
-                          </div>
+                        <TableCell className="font-medium">
+                          {fee.seat_title}
                         </TableCell>
                         <TableCell>{fee.month_of}</TableCell>
                         <TableCell>{formatDate(fee.due_date)}</TableCell>
@@ -367,7 +364,7 @@ export default function Fees({ standalone = true }: FeesProps) {
                         <TableCell className="font-medium">
                           {formatCurrency(fee.payable_amount)}
                         </TableCell>
-                        <TableCell className="font-medium text-blue-600">
+                        <TableCell className="font-medium text-green-600 dark:text-green-400">
                           {formatCurrency(fee.total_payment)}
                         </TableCell>
                         <TableCell className="text-right">

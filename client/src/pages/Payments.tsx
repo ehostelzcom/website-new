@@ -345,28 +345,27 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
-                      <TableRow className="bg-gray-50 dark:bg-gray-800">
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">S.No</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Seat</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Month</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Fee Amount</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Payable</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Paid</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Method</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Type</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Status</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Created at</TableHead>
+                      <TableRow>
+                        <TableHead>S.No</TableHead>
+                        <TableHead>Seat</TableHead>
+                        <TableHead>Month</TableHead>
+                        <TableHead>Fee Amount</TableHead>
+                        <TableHead>Payable</TableHead>
+                        <TableHead>Paid</TableHead>
+                        <TableHead>Method</TableHead>
+                        <TableHead>Type</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Created at</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {currentData.map((payment) => (
                         <TableRow 
                           key={payment.payment_id} 
-                          className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                           data-testid={`row-payment-${payment.payment_id}`}
                         >
                           <TableCell className="font-medium">{payment.serial_no}</TableCell>
-                          <TableCell className="font-medium text-blue-600 dark:text-blue-400">
+                          <TableCell className="font-medium">
                             {payment.seat_title}
                           </TableCell>
                           <TableCell>{payment.month_of}</TableCell>
