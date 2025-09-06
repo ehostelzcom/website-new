@@ -104,7 +104,23 @@ export default function Fees({ standalone = true }: FeesProps) {
   // Get unique values for filters
   const uniqueMonths = Array.from(
     new Set(feesData?.data?.map(fee => fee.month_of) || [])
-  ).sort().reverse();
+  ).sort((a, b) => {
+    // Parse month-year format like "Nov-2024"
+    const [monthA, yearA] = a.split('-');
+    const [monthB, yearB] = b.split('-');
+    
+    // Convert month names to numbers for proper sorting
+    const monthMap: { [key: string]: number } = {
+      'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+      'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+    };
+    
+    const dateA = new Date(parseInt(yearA), monthMap[monthA] - 1);
+    const dateB = new Date(parseInt(yearB), monthMap[monthB] - 1);
+    
+    // Sort in descending order (newest first)
+    return dateB.getTime() - dateA.getTime();
+  });
   
   // uniqueSeats removed - now using allotments API data
 
