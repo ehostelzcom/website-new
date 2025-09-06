@@ -104,7 +104,7 @@ export default function Fees({ standalone = true }: FeesProps) {
   // Get unique values for filters
   const uniqueMonths = Array.from(
     new Set(feesData?.data?.map(fee => fee.month_of) || [])
-  ).sort();
+  ).sort().reverse();
   
   // uniqueSeats removed - now using allotments API data
 

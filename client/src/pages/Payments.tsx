@@ -116,7 +116,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
   // Get unique values for filters
   const uniqueMonths = Array.from(
     new Set(paymentsData?.data?.map(payment => payment.month_of) || [])
-  ).sort();
+  ).sort().reverse();
 
   const uniqueStatuses = Array.from(
     new Set(paymentsData?.data?.map(payment => payment.fee_payment_status) || [])
