@@ -421,7 +421,7 @@ export default function HostelDashboard() {
   const showHostelInfo = true;
 
   const sidebarItems = [
-    { id: "home", label: "Home", icon: Home, route: "/profile" },
+    { id: "home", label: "Home", icon: Home, route: "/home" },
     { id: "dashboard", label: "Dashboard", icon: BarChart3, route: "/dashboard" },
     { id: "fees", label: "Fees", icon: CreditCard, route: "/fees" },
     { id: "payments", label: "Payments", icon: Receipt, route: "/payments" },
@@ -480,7 +480,7 @@ export default function HostelDashboard() {
                 <button
                   key={item.id}
                   onClick={() => {
-                    if (item.id === "fees" || item.id === "payments" || item.id === "home") {
+                    if (item.id === "fees" || item.id === "payments" || item.id === "home" || item.id === "profile") {
                       setLocation(item.route);
                     } else {
                       setActiveTab(item.id);
@@ -526,7 +526,7 @@ export default function HostelDashboard() {
                     <button
                       key={item.id}
                       onClick={() => {
-                        if (item.id === "fees" || item.id === "payments" || item.id === "home") {
+                        if (item.id === "fees" || item.id === "payments" || item.id === "home" || item.id === "profile") {
                           setLocation(item.route);
                         } else {
                           setActiveTab(item.id);
