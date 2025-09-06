@@ -72,8 +72,8 @@ interface ExistingRatingsResponse {
   ratings: Array<{
     rating_id: number;
     score: number;
+    comment_suggestions?: string; // Comments within rating object for ID 100
   }>;
-  COMMENT_SUGGESTIONS?: string; // Comments returned as separate field
 }
 
 interface HostelInfo {
@@ -152,9 +152,10 @@ export default function Rating() {
       // Handle additional comments (question ID 100)
       const commentsQuestion = ratingsQuestionsData.data.find(q => q.id === 100);
       if (commentsQuestion) {
-        // Check if comments are returned from API, otherwise use default
-        if (existingRatingsData?.COMMENT_SUGGESTIONS) {
-          setAdditionalComments(existingRatingsData.COMMENT_SUGGESTIONS);
+        // Check if comments are returned from API within rating_id 100
+        const existingComment = existingRatingsData?.ratings?.find(r => r.rating_id === 100);
+        if (existingComment?.comment_suggestions) {
+          setAdditionalComments(existingComment.comment_suggestions);
         } else {
           // Use the description from API as default value ("No suggestions")
           setAdditionalComments(commentsQuestion.description);
@@ -251,17 +252,17 @@ export default function Rating() {
         score: q.rating
       }));
 
-      // Add rating ID 100 with fixed score of 5 (always required now)
+      // Add rating ID 100 with fixed score of 5 and comment_suggestions
       ratingsData.push({
         rating_id: 100,
-        score: 5 // Fixed score for comments rating
+        score: 5, // Fixed score for comments rating
+        comment_suggestions: additionalComments.trim() // Comment text within the rating object
       });
 
       const payload = {
         user_id: parseInt(finalStudentUserId),
         hostel_id: parseInt(finalHostelId),
-        ratings: ratingsData,
-        COMMENT_SUGGESTIONS: additionalComments.trim() // Separate field for comment text
+        ratings: ratingsData
       };
 
       console.log('Submitting rating payload:', payload);
