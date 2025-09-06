@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -52,9 +52,18 @@ interface StudentHostelResponse {
 }
 
 interface RatingQuestion {
-  id: string;
-  question: string;
+  id: number;
+  description: string;
   rating: number;
+}
+
+interface RatingQuestionsResponse {
+  status: boolean;
+  code: number;
+  data: Array<{
+    id: number;
+    description: string;
+  }>;
 }
 
 interface HostelInfo {
@@ -84,17 +93,32 @@ export default function Rating() {
     enabled: !!finalStudentUserId
   });
 
-  // Rating questions
-  const [ratingQuestions, setRatingQuestions] = useState<RatingQuestion[]>([
-    { id: 'cleanliness', question: 'How would you rate the cleanliness of the hostel?', rating: 0 },
-    { id: 'food_quality', question: 'How would you rate the food quality?', rating: 0 },
-    { id: 'room_comfort', question: 'How comfortable are the rooms?', rating: 0 },
-    { id: 'staff_behavior', question: 'How would you rate the staff behavior?', rating: 0 },
-    { id: 'facilities', question: 'How would you rate the hostel facilities?', rating: 0 },
-    { id: 'security', question: 'How would you rate the security arrangements?', rating: 0 },
-    { id: 'wifi_internet', question: 'How would you rate the WiFi and internet connectivity?', rating: 0 },
-    { id: 'overall', question: 'Overall, how would you rate this hostel?', rating: 0 }
-  ]);
+  // Fetch rating questions from API
+  const { data: ratingsQuestionsData, isLoading: questionsLoading } = useQuery<RatingQuestionsResponse>({
+    queryKey: ['rating-questions'],
+    queryFn: async () => {
+      const response = await fetch('http://ehostelz.com:8890/ords/jee_management_system/web/api/rating-questions');
+      if (!response.ok) {
+        throw new Error('Failed to fetch rating questions');
+      }
+      return response.json();
+    }
+  });
+
+  // Initialize rating questions with fetched data
+  const [ratingQuestions, setRatingQuestions] = useState<RatingQuestion[]>([]);
+  
+  // Update questions when API data is loaded
+  useEffect(() => {
+    if (ratingsQuestionsData?.data) {
+      const questionsWithRatings = ratingsQuestionsData.data.map(q => ({
+        id: q.id,
+        description: q.description,
+        rating: 0
+      }));
+      setRatingQuestions(questionsWithRatings);
+    }
+  }, [ratingsQuestionsData]);
 
   const [additionalComments, setAdditionalComments] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -111,7 +135,7 @@ export default function Rating() {
   ];
 
   // Update rating for a specific question
-  const updateRating = (questionId: string, rating: number) => {
+  const updateRating = (questionId: number, rating: number) => {
     setRatingQuestions(prev => 
       prev.map(q => q.id === questionId ? { ...q, rating } : q)
     );
@@ -331,43 +355,64 @@ export default function Rating() {
         <Card>
           <CardContent className="space-y-6">
             {/* Rating Questions - 6 Column + 6 Column Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              {/* Left Side - 6 Columns, First 4 Questions */}
-              <div className="lg:col-span-6 space-y-6">
-                {ratingQuestions.slice(0, 4).map((question) => (
-                  <div key={question.id} className="space-y-2">
-                    <Label className="text-sm font-medium">{question.question}</Label>
-                    <div className="flex items-center gap-3">
-                      <StarRating 
-                        rating={question.rating}
-                        onRatingChange={(rating) => updateRating(question.id, rating)}
-                      />
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {question.rating > 0 ? `${question.rating}/5` : 'Not rated'}
-                      </span>
+            {questionsLoading ? (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                {/* Loading Skeleton */}
+                {[...Array(8)].map((_, index) => (
+                  <div key={index} className={`${index < 4 ? 'lg:col-span-6' : 'lg:col-span-6'} space-y-6`}>
+                    <div className="space-y-2 animate-pulse">
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                      <div className="flex items-center gap-3">
+                        <div className="flex gap-1">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <div key={star} className="w-6 h-6 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                          ))}
+                        </div>
+                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
-              
-              {/* Right Side - 6 Columns, Last 4 Questions */}
-              <div className="lg:col-span-6 space-y-6">
-                {ratingQuestions.slice(4, 8).map((question) => (
-                  <div key={question.id} className="space-y-2">
-                    <Label className="text-sm font-medium">{question.question}</Label>
-                    <div className="flex items-center gap-3">
-                      <StarRating 
-                        rating={question.rating}
-                        onRatingChange={(rating) => updateRating(question.id, rating)}
-                      />
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {question.rating > 0 ? `${question.rating}/5` : 'Not rated'}
-                      </span>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                {/* Left Side - 6 Columns, First half of Questions */}
+                <div className="lg:col-span-6 space-y-6">
+                  {ratingQuestions.slice(0, Math.ceil(ratingQuestions.length / 2)).map((question) => (
+                    <div key={question.id} className="space-y-2">
+                      <Label className="text-sm font-medium">{question.description}</Label>
+                      <div className="flex items-center gap-3">
+                        <StarRating 
+                          rating={question.rating}
+                          onRatingChange={(rating) => updateRating(question.id, rating)}
+                        />
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          {question.rating > 0 ? `${question.rating}/5` : 'Not rated'}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+                
+                {/* Right Side - 6 Columns, Second half of Questions */}
+                <div className="lg:col-span-6 space-y-6">
+                  {ratingQuestions.slice(Math.ceil(ratingQuestions.length / 2)).map((question) => (
+                    <div key={question.id} className="space-y-2">
+                      <Label className="text-sm font-medium">{question.description}</Label>
+                      <div className="flex items-center gap-3">
+                        <StarRating 
+                          rating={question.rating}
+                          onRatingChange={(rating) => updateRating(question.id, rating)}
+                        />
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          {question.rating > 0 ? `${question.rating}/5` : 'Not rated'}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Additional Comments */}
             <div className="space-y-2">
