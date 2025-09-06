@@ -259,208 +259,203 @@ export default function Profile() {
             </div>
           ) : profile ? (
             /* Profile Content */
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Personal Information */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <User className="w-5 h-5 text-blue-600" />
-                    Personal Information
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-4 mb-6">
-                    <Avatar className="w-16 h-16">
-                      <AvatarFallback className="bg-blue-100 text-blue-600 text-xl font-semibold">
-                        {profile.full_name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                        {profile.full_name}
-                      </h3>
-                      <p className="text-gray-500 dark:text-gray-400">
-                        Student ID: {profile.user_id}
-                      </p>
-                    </div>
+            <div className="space-y-4">
+              {/* Profile Header Section */}
+              <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg p-6 text-white">
+                <div className="flex items-center gap-4">
+                  <Avatar className="w-20 h-20 border-4 border-white/20">
+                    <AvatarFallback className="bg-white/20 text-white text-2xl font-bold">
+                      {profile.full_name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <h1 className="text-2xl font-bold">{profile.full_name}</h1>
+                    <p className="text-blue-100 text-lg">Student ID: {profile.user_id}</p>
+                    <p className="text-blue-200 mt-1">{profile.institute_name}</p>
                   </div>
+                </div>
+              </div>
 
-                  <div className="grid grid-cols-1 gap-4">
-                    <div className="flex items-center gap-3">
-                      <User className="w-5 h-5 text-gray-500" />
-                      <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Father's Name</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.father_name}</p>
+              {/* Main Content Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                {/* Personal Details - Takes 2 columns */}
+                <Card className="lg:col-span-2">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <User className="w-5 h-5 text-blue-600" />
+                      Personal Information
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <User className="w-4 h-4 text-gray-500" />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs text-gray-500 dark:text-gray-400">Father's Name</p>
+                          <p className="font-medium text-gray-900 dark:text-white truncate">{profile.father_name}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <CreditCard className="w-4 h-4 text-gray-500" />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs text-gray-500 dark:text-gray-400">CNIC</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{profile.cnic}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <Phone className="w-4 h-4 text-gray-500" />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs text-gray-500 dark:text-gray-400">Mobile</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{profile.mobile_no}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <Phone className="w-4 h-4 text-gray-500" />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs text-gray-500 dark:text-gray-400">WhatsApp</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{profile.whatsapp_no}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <UserCheck className="w-4 h-4 text-gray-500" />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs text-gray-500 dark:text-gray-400">Gender</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{profile.gender}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <Heart className="w-4 h-4 text-gray-500" />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs text-gray-500 dark:text-gray-400">Religion</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{profile.religion}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Quick Stats */}
+                <div className="space-y-4">
+                  <Card className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border-green-200 dark:border-green-700">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3">
+                        <Calendar className="w-8 h-8 text-green-600" />
+                        <div>
+                          <p className="text-sm text-green-700 dark:text-green-300">Joined</p>
+                          <p className="font-semibold text-green-800 dark:text-green-200">{formatDate(profile.created_at)}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 border-purple-200 dark:border-purple-700">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3">
+                        <Building2 className="w-8 h-8 text-purple-600" />
+                        <div>
+                          <p className="text-sm text-purple-700 dark:text-purple-300">Current Hostel</p>
+                          <p className="font-semibold text-purple-800 dark:text-purple-200">{profile.hostel_name}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+
+              {/* Address & Guardian Info */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <MapPin className="w-5 h-5 text-green-600" />
+                      Address Information
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0 space-y-3">
+                    <div className="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <MapPin className="w-4 h-4 text-gray-500 mt-1" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Home Address</p>
+                        <p className="font-medium text-gray-900 dark:text-white">{profile.address}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">{profile.city_name}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      <CreditCard className="w-5 h-5 text-gray-500" />
-                      <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">CNIC</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.cnic}</p>
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <Globe className="w-4 h-4 text-gray-500" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Current Location</p>
+                        <p className="font-medium text-gray-900 dark:text-white">{profile.location}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Users className="w-5 h-5 text-purple-600" />
+                      Guardian Information
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0 space-y-3">
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <User className="w-4 h-4 text-gray-500" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Guardian Name</p>
+                        <p className="font-medium text-gray-900 dark:text-white">{profile.guardian_name}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">{profile.guardian_relation}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-gray-500" />
-                      <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Mobile Number</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.mobile_no}</p>
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <Phone className="w-4 h-4 text-gray-500" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Contact</p>
+                        <p className="font-medium text-gray-900 dark:text-white">{profile.guardian_mobile_no}</p>
                       </div>
                     </div>
-
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-gray-500" />
-                      <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">WhatsApp Number</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.whatsapp_no}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <UserCheck className="w-5 h-5 text-gray-500" />
-                      <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Gender</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.gender}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <Heart className="w-5 h-5 text-gray-500" />
-                      <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Religion</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{profile.religion}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <Calendar className="w-5 h-5 text-gray-500" />
-                      <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Joined Date</p>
-                        <p className="font-medium text-gray-900 dark:text-white">{formatDate(profile.created_at)}</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Address Information */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-green-600" />
-                    Address Information
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Address</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.address}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <Globe className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">City</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.city_name}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Location</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.location}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <Building2 className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Current Hostel</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.hostel_name}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Guardian Information */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Users className="w-5 h-5 text-purple-600" />
-                    Guardian Information
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <User className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Guardian Name</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.guardian_name}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <Heart className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Relation</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.guardian_relation}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Mobile Number</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.guardian_mobile_no}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Address</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.guardian_address}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
 
               {/* Academic Information */}
               <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+                <CardHeader className="pb-3">
+                  <CardTitle className="flex items-center gap-2 text-lg">
                     <GraduationCap className="w-5 h-5 text-orange-600" />
                     Academic Information
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <Building2 className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Institute</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.institute_name}</p>
+                <CardContent className="pt-0">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <Building2 className="w-4 h-4 text-gray-500" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Institute</p>
+                        <p className="font-medium text-gray-900 dark:text-white text-sm">{profile.institute_name}</p>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex items-center gap-3">
-                    <GraduationCap className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Department</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.department_name}</p>
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <GraduationCap className="w-4 h-4 text-gray-500" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Department</p>
+                        <p className="font-medium text-gray-900 dark:text-white text-sm">{profile.department_name}</p>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex items-center gap-3">
-                    <CreditCard className="w-5 h-5 text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Registration Number</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{profile.registration_number}</p>
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <CreditCard className="w-4 h-4 text-gray-500" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Registration</p>
+                        <p className="font-medium text-gray-900 dark:text-white">{profile.registration_number}</p>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
