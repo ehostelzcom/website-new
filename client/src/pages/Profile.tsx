@@ -140,6 +140,37 @@ export default function Profile() {
 
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Desktop Sidebar */}
+      <aside className="hidden lg:flex lg:w-64 lg:flex-col">
+        <nav className="flex-1 bg-white dark:bg-gray-800 shadow-lg">
+          <div className="p-4 border-b dark:border-gray-700">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+              Student Portal
+            </h2>
+          </div>
+          <div className="p-4 space-y-2">
+            {sidebarItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => window.location.href = item.route}
+                  className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                    item.id === "profile"
+                      ? "bg-gradient-to-r from-[#004e89] to-[#0066b3] text-white shadow-lg"
+                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  }`}
+                  data-testid={`button-desktop-nav-${item.id}`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="font-medium">{item.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </nav>
+      </aside>
+
       {/* Mobile Sidebar */}
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
         <SheetContent side="left" className="p-0 w-64">
