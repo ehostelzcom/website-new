@@ -145,13 +145,13 @@ export default function Profile() {
       {/* Desktop Sidebar */}
       <aside className="hidden lg:flex lg:w-64 lg:flex-col">
         <nav className="flex-1 bg-white dark:bg-gray-800 shadow-lg">
-          <div className="p-4 border-b dark:border-gray-700">
-            <div className="flex items-center space-x-3">
-              <img src={logoSvg} alt="ehostelz.com" className="w-8 h-8" />
-              <span className="text-lg font-semibold text-gray-800 dark:text-white">
-                ehostelz.com
-              </span>
-            </div>
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+            <img 
+              src={logoSvg} 
+              alt="ehostelz.com" 
+              className="h-12 w-auto"
+              data-testid="img-logo"
+            />
           </div>
           <div className="p-4 space-y-2">
             {sidebarItems.map((item) => {
@@ -180,13 +180,13 @@ export default function Profile() {
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
         <SheetContent side="left" className="p-0 w-64">
           <nav className="h-full bg-white dark:bg-gray-800">
-            <div className="p-4 border-b dark:border-gray-700">
-              <div className="flex items-center space-x-3">
-                <img src={logoSvg} alt="ehostelz.com" className="w-8 h-8" />
-                <span className="text-lg font-semibold text-gray-800 dark:text-white">
-                  ehostelz.com
-                </span>
-              </div>
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+              <img 
+                src={logoSvg} 
+                alt="ehostelz.com" 
+                className="h-12 w-auto"
+                data-testid="img-logo"
+              />
             </div>
             <div className="p-4 space-y-2">
               {sidebarItems.map((item) => {
