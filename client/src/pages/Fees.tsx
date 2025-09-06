@@ -267,37 +267,32 @@ export default function Fees({ standalone = true }: FeesProps) {
             >
               Clear
             </Button>
-            
-            {/* Rows per page selector */}
-            <div className="flex items-center gap-1 col-span-1">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Rows:</span>
-              <Select 
-                value={itemsPerPage.toString()} 
-                onValueChange={(value) => {
-                  setItemsPerPage(Number(value));
-                  setCurrentPage(1); // Reset to first page when changing rows per page
-                }}
-              >
-                <SelectTrigger className="w-16 h-8 text-sm">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="5">5</SelectItem>
-                  <SelectItem value="10">10</SelectItem>
-                  <SelectItem value="20">20</SelectItem>
-                  <SelectItem value="50">50</SelectItem>
-                  <SelectItem value="100">100</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
           </div>
         </div>
 
-        {/* Compact Results Summary */}
+        {/* Rows per page selector */}
         <div className="mb-2 flex items-center justify-between">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            {startIndex + 1}-{Math.min(endIndex, filteredData.length)} of {filteredData.length} records
-          </p>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600 dark:text-gray-400">Rows per page:</span>
+            <Select 
+              value={itemsPerPage.toString()} 
+              onValueChange={(value) => {
+                setItemsPerPage(Number(value));
+                setCurrentPage(1); // Reset to first page when changing rows per page
+              }}
+            >
+              <SelectTrigger className="w-20 h-8">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="5">5</SelectItem>
+                <SelectItem value="10">10</SelectItem>
+                <SelectItem value="20">20</SelectItem>
+                <SelectItem value="50">50</SelectItem>
+                <SelectItem value="100">100</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           {searchTerm && (
             <p className="text-xs text-gray-500 dark:text-gray-400">
               "{searchTerm}"
@@ -330,6 +325,12 @@ export default function Fees({ standalone = true }: FeesProps) {
               </div>
             ) : (
               <div className="overflow-x-auto">
+                {/* Records summary at top right of table */}
+                <div className="flex justify-end p-3 border-b">
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {startIndex + 1}-{Math.min(endIndex, filteredData.length)} of {filteredData.length} records
+                  </p>
+                </div>
                 <Table>
                   <TableHeader>
                     <TableRow>
