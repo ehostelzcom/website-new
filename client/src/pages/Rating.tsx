@@ -75,7 +75,7 @@ interface RatingQuestionsResponse {
 interface ExistingRatingsResponse {
   status: boolean;
   code: number;
-  ratings: Array<{
+  data: Array<{
     rating_id: number;
     score: number;
     comment_suggestions: string; // Comments field now returned for all ratings
@@ -146,7 +146,7 @@ export default function Rating() {
       
       const questionsWithRatings = starRatingQuestions.map(q => {
         // Find existing rating for this question (only numeric ratings)
-        const existingRating = existingRatingsData?.ratings?.find(r => r.rating_id === q.id);
+        const existingRating = existingRatingsData?.data?.find(r => r.rating_id === q.id);
         return {
           id: q.id,
           description: q.description,
@@ -159,7 +159,7 @@ export default function Rating() {
       const commentsQuestion = ratingsQuestionsData.data.find(q => q.id === 100);
       if (commentsQuestion) {
         // Check if comments are returned from API within rating_id 100
-        const existingComment = existingRatingsData?.ratings?.find(r => r.rating_id === 100);
+        const existingComment = existingRatingsData?.data?.find(r => r.rating_id === 100);
         if (existingComment?.comment_suggestions && existingComment.comment_suggestions !== "No Suggestions") {
           setAdditionalComments(existingComment.comment_suggestions);
         } else {
