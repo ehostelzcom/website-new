@@ -343,7 +343,7 @@ export default function Fees({ standalone = true }: FeesProps) {
                       <TableHead>Paid</TableHead>
                       <TableHead className="text-right">Balance</TableHead>
                       <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Created at</TableHead>
+                      <TableHead>Created at</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -384,7 +384,7 @@ export default function Fees({ standalone = true }: FeesProps) {
                             {fee.payment_status}
                           </Badge>
                         </TableCell>
-                        <TableCell className="text-sm text-gray-500 text-right">
+                        <TableCell className="text-sm text-gray-500">
                           {format(new Date(fee.created_at), 'dd MMM yyyy')}
                         </TableCell>
                       </TableRow>

@@ -355,7 +355,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Method</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Type</TableHead>
                         <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Status</TableHead>
-                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100 text-right">Created at</TableHead>
+                        <TableHead className="font-semibold text-gray-900 dark:text-gray-100">Created at</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -397,7 +397,7 @@ export default function Payments({ standalone = true }: PaymentsProps) {
                               {payment.fee_payment_status}
                             </Badge>
                           </TableCell>
-                          <TableCell className="text-gray-600 dark:text-gray-400 text-right">
+                          <TableCell className="text-gray-600 dark:text-gray-400">
                             {formatDate(payment.created_at)}
                           </TableCell>
                         </TableRow>
