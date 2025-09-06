@@ -71,7 +71,7 @@ interface ExistingRatingsResponse {
   code: number;
   ratings: Array<{
     rating_id: number;
-    score: number;
+    score: number | string; // Allow both number (star ratings) and string (comments)
   }>;
 }
 
@@ -134,16 +134,29 @@ export default function Rating() {
   // Update questions when API data is loaded and populate existing ratings
   useEffect(() => {
     if (ratingsQuestionsData?.data) {
-      const questionsWithRatings = ratingsQuestionsData.data.map(q => {
-        // Find existing rating for this question
+      // Filter out question ID 100 (Additional Comments) from star rating questions
+      const starRatingQuestions = ratingsQuestionsData.data.filter(q => q.id !== 100);
+      
+      const questionsWithRatings = starRatingQuestions.map(q => {
+        // Find existing rating for this question (only numeric ratings)
         const existingRating = existingRatingsData?.ratings?.find(r => r.rating_id === q.id);
         return {
           id: q.id,
           description: q.description,
-          rating: existingRating ? existingRating.score : 0
+          rating: existingRating && typeof existingRating.score === 'number' ? existingRating.score : 0
         };
       });
       setRatingQuestions(questionsWithRatings);
+      
+      // Handle additional comments (question ID 100)
+      const commentsQuestion = ratingsQuestionsData.data.find(q => q.id === 100);
+      if (commentsQuestion) {
+        // Find existing comment from ratings data (if any)
+        const existingComment = existingRatingsData?.ratings?.find(r => r.rating_id === 100);
+        if (existingComment && typeof existingComment.score === 'string') {
+          setAdditionalComments(existingComment.score);
+        }
+      }
     }
   }, [ratingsQuestionsData, existingRatingsData]);
 
@@ -214,6 +227,14 @@ export default function Rating() {
         rating_id: q.id,
         score: q.rating
       }));
+
+      // Add additional comments as rating ID 100 if provided
+      if (additionalComments.trim()) {
+        ratingsData.push({
+          rating_id: 100,
+          score: additionalComments.trim() as any // Allow string for comments
+        });
+      }
 
       const payload = {
         user_id: parseInt(finalStudentUserId),
@@ -493,10 +514,10 @@ export default function Rating() {
               </div>
             )}
 
-            {/* Additional Comments */}
+            {/* Additional Comments - Dynamic label from API */}
             <div className="space-y-2">
               <Label htmlFor="comments" className="text-sm font-medium">
-                Additional Comments (Optional)
+                {ratingsQuestionsData?.data?.find(q => q.id === 100)?.description || "Additional Comments"} (Optional)
               </Label>
               <Textarea
                 id="comments"

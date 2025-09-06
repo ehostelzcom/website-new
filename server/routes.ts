@@ -151,11 +151,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Validate minimum 3 ratings
-      if (ratings.length < 3) {
+      // Count only numeric star ratings (exclude ID 100 which is comments)
+      const starRatings = ratings.filter(r => r.rating_id !== 100);
+      
+      // Validate minimum 3 star ratings
+      if (starRatings.length < 3) {
         return res.status(400).json({ 
           error: "Insufficient ratings",
-          message: "At least 3 ratings are required"
+          message: "At least 3 star ratings are required"
         });
       }
 
