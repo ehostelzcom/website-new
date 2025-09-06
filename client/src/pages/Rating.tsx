@@ -450,33 +450,6 @@ export default function Rating() {
           <span>Rating</span>
         </div>
 
-        {/* Hostel Information Card */}
-        {showHostelInfo && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-blue-600" />
-                Rate Your Hostel Experience
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col md:flex-row gap-4 text-sm text-gray-600 dark:text-gray-400">
-                <div className="flex items-center gap-2">
-                  <Building2 className="w-4 h-4" />
-                  <span>{hostelInfo.hostel_name} ({hostelInfo.hostel_type})</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  <span>{hostelInfo.hostel_city_name}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4" />
-                  <span>{hostelInfo.hostel_mobile_no}</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
 
         {/* Rating Form */}
         <Card>
