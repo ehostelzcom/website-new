@@ -205,12 +205,32 @@ export default function Rating() {
         body: JSON.stringify(payload),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
       if (!response.ok) {
-        const errorData = await response.json();
+        let errorData;
+        try {
+          const responseText = await response.text();
+          console.log('Error response text:', responseText);
+          errorData = responseText ? JSON.parse(responseText) : {};
+        } catch (parseError) {
+          console.error('Error parsing error response:', parseError);
+          errorData = { message: 'Failed to submit rating' };
+        }
         throw new Error(errorData.message || 'Failed to submit rating');
       }
 
-      const result = await response.json();
+      let result;
+      try {
+        const responseText = await response.text();
+        console.log('Success response text:', responseText);
+        result = responseText ? JSON.parse(responseText) : {};
+      } catch (parseError) {
+        console.error('Error parsing success response:', parseError);
+        result = { success: true, message: 'Rating submitted successfully' };
+      }
+      
       console.log('Rating submission successful:', result);
       
       toast({

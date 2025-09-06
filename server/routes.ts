@@ -177,6 +177,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       );
       
       console.log("Oracle APEX hostel-rating response:", response.data);
+      console.log("Oracle APEX response status:", response.status);
+      console.log("Oracle APEX response headers:", response.headers);
       
       // Return success response
       res.setHeader('Content-Type', 'application/json');
