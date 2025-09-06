@@ -92,10 +92,6 @@ export default function Home() {
     setLocation("/student-login");
   };
 
-  const handleProfile = () => {
-    // TODO: Navigate to profile page
-    console.log("Profile clicked");
-  };
 
   // Get user data from localStorage
   const fullName = localStorage.getItem("student_full_name") || "Student";
@@ -167,10 +163,6 @@ export default function Home() {
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem onClick={handleProfile} data-testid="button-dropdown-profile">
-                    <Settings className="w-4 h-4 mr-2" />
-                    Profile
-                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleLogout} data-testid="button-dropdown-logout">
                     <LogOut className="w-4 h-4 mr-2" />
                     Logout
