@@ -238,7 +238,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX hostel-ratings GET response:", response.data);
+      console.log("Oracle APEX hostel-ratings GET response:", JSON.stringify(response.data, null, 2));
       
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');

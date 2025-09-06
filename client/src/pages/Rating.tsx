@@ -132,16 +132,22 @@ export default function Rating() {
   
   // Update questions when API data is loaded and populate existing ratings
   useEffect(() => {
+    console.log("useEffect triggered with:");
+    console.log("- ratingsQuestionsData:", ratingsQuestionsData);
+    console.log("- existingRatingsData:", existingRatingsData);
+    
     if (ratingsQuestionsData?.data) {
       const questionsWithRatings = ratingsQuestionsData.data.map(q => {
         // Find existing rating for this question
         const existingRating = existingRatingsData?.ratings?.find(r => r.rating_id === q.id);
+        console.log(`Question ${q.id}: Found existing rating:`, existingRating);
         return {
           id: q.id,
           description: q.description,
           rating: existingRating ? existingRating.score : 0
         };
       });
+      console.log("Final questionsWithRatings:", questionsWithRatings);
       setRatingQuestions(questionsWithRatings);
     }
   }, [ratingsQuestionsData, existingRatingsData]);
