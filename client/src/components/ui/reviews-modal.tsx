@@ -183,7 +183,11 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
                   {review.ratings.length > 1 && (
                     <div className="ml-4">
                       <button
-                        onClick={() => toggleExpanded(review.user_id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          toggleExpanded(review.user_id);
+                        }}
                         className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm font-medium hover:underline transition-colors"
                       >
                         {expandedReviews.has(review.user_id) 
