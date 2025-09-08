@@ -37,10 +37,24 @@ interface ReviewsModalProps {
 }
 
 export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: ReviewsModalProps) {
+  const [expandedReviews, setExpandedReviews] = useState<Set<number>>(new Set());
+  
   const { data: reviewsData, isLoading, error } = useQuery<ReviewsResponse>({
     queryKey: [`/api/hostel-reviews/${hostelId}`],
     enabled: isOpen && !!hostelId,
   });
+
+  const toggleExpanded = (userId: number) => {
+    setExpandedReviews(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(userId)) {
+        newSet.delete(userId);
+      } else {
+        newSet.add(userId);
+      }
+      return newSet;
+    });
+  };
 
   const getAverageRating = (ratings: Rating[]) => {
     if (!ratings.length) return 0;
@@ -109,7 +123,47 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
 
                 {/* Individual Ratings */}
                 <div className="ml-13 space-y-3">
-                  {review.ratings.map((rating) => (
+                  {/* Show first rating by default */}
+                  {review.ratings.length > 0 && (
+                    <div className="border-l-2 border-gray-200 dark:border-gray-700 pl-4">
+                      <div className="mb-2">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
+                          {review.ratings[0].description}
+                        </p>
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1">
+                            {renderStars(review.ratings[0].score)}
+                          </div>
+                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                            {review.ratings[0].score}/5
+                          </span>
+                        </div>
+                      </div>
+                      {review.ratings[0].comment_suggestions && review.ratings[0].comment_suggestions !== "No Suggestions" && (
+                        <p className="text-xs text-gray-600 dark:text-gray-400 italic">
+                          "{review.ratings[0].comment_suggestions}"
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Show more/less toggle if there are more than 1 rating */}
+                  {review.ratings.length > 1 && (
+                    <div className="ml-4">
+                      <button
+                        onClick={() => toggleExpanded(review.user_id)}
+                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm font-medium hover:underline transition-colors"
+                      >
+                        {expandedReviews.has(review.user_id) 
+                          ? `Show less` 
+                          : `Show ${review.ratings.length - 1} more ratings`
+                        }
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Show remaining ratings when expanded */}
+                  {expandedReviews.has(review.user_id) && review.ratings.slice(1).map((rating) => (
                     <div key={rating.rating_id} className="border-l-2 border-gray-200 dark:border-gray-700 pl-4">
                       <div className="mb-2">
                         <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
