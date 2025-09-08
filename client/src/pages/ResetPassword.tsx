@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ArrowLeft, Shield, Users } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import logoSvg from '@assets/logo/Asset 3.svg';
 
 export default function ResetPassword() {
   const [, setLocation] = useLocation();
@@ -109,9 +110,14 @@ export default function ResetPassword() {
 
         <Card className="shadow-xl border-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg">
           <CardHeader className="text-center pb-8">
-            {/* Icon */}
-            <div className="mx-auto w-16 h-16 bg-gradient-to-r from-[#004e89] to-[#0066cc] rounded-full flex items-center justify-center mb-4">
-              <Shield className="w-8 h-8 text-white" />
+            {/* Logo */}
+            <div className="flex justify-center mb-6">
+              <img 
+                src={logoSvg} 
+                alt="ehostelz.com" 
+                className="h-16 w-auto transition-all duration-300 hover:scale-105 drop-shadow-sm"
+                data-testid="img-logo"
+              />
             </div>
             
             <div className="space-y-3">
