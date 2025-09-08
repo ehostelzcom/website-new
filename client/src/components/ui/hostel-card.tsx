@@ -42,6 +42,49 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
   const [rentsModalOpen, setRentsModalOpen] = useState(false);
   const [reviewsModalOpen, setReviewsModalOpen] = useState(false);
 
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    
+    return Array.from({ length: 5 }, (_, index) => {
+      if (index < fullStars) {
+        // Full star
+        return (
+          <Star
+            key={index}
+            className="w-4 h-4 fill-yellow-400 text-yellow-400"
+          />
+        );
+      } else if (index === fullStars && hasHalfStar) {
+        // Half star using linear gradient
+        return (
+          <div key={index} className="relative w-4 h-4">
+            <Star 
+              className="w-4 h-4 text-gray-300 dark:text-gray-600" 
+              style={{ fill: 'currentColor' }}
+            />
+            <Star 
+              className="absolute top-0 left-0 w-4 h-4 text-yellow-400"
+              style={{ 
+                fill: 'currentColor',
+                clipPath: 'polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%)'
+              }}
+            />
+          </div>
+        );
+      } else {
+        // Empty star
+        return (
+          <Star
+            key={index}
+            className="w-4 h-4 text-gray-300 dark:text-gray-600"
+            style={{ fill: 'currentColor' }}
+          />
+        );
+      }
+    });
+  };
+
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 hover:border-primary/30 bg-white dark:bg-gray-800 rounded-lg overflow-hidden hover:-translate-y-1" onClick={(e) => {
       // Only trigger onClick if clicking on the card itself, not on modal buttons
@@ -85,7 +128,9 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                 </div>
                 {/* Rating after hostel type */}
                 <div className="flex items-center gap-1 mb-2">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <div className="flex items-center gap-0.5">
+                    {renderStars(hostel.hostel_avg_rating || parseFloat(hostel.rating?.toString() || "4.2"))}
+                  </div>
                   <span className="text-sm font-semibold text-yellow-600 dark:text-yellow-400">
                     {hostel.hostel_avg_rating ? hostel.hostel_avg_rating.toFixed(1) : (hostel.rating || "4.2")}
                   </span>

@@ -68,6 +68,49 @@ export default function Home() {
   const [, setLocation] = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [reviewsModalOpen, setReviewsModalOpen] = useState(false);
+
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    
+    return Array.from({ length: 5 }, (_, index) => {
+      if (index < fullStars) {
+        // Full star
+        return (
+          <Star
+            key={index}
+            className="w-4 h-4 fill-yellow-400 text-yellow-400"
+          />
+        );
+      } else if (index === fullStars && hasHalfStar) {
+        // Half star using linear gradient
+        return (
+          <div key={index} className="relative w-4 h-4">
+            <Star 
+              className="w-4 h-4 text-gray-300 dark:text-gray-600" 
+              style={{ fill: 'currentColor' }}
+            />
+            <Star 
+              className="absolute top-0 left-0 w-4 h-4 text-yellow-400"
+              style={{ 
+                fill: 'currentColor',
+                clipPath: 'polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%)'
+              }}
+            />
+          </div>
+        );
+      } else {
+        // Empty star
+        return (
+          <Star
+            key={index}
+            className="w-4 h-4 text-gray-300 dark:text-gray-600"
+            style={{ fill: 'currentColor' }}
+          />
+        );
+      }
+    });
+  };
   
   // Get user data from localStorage for API calls
   const studentUserId = localStorage.getItem('student_user_id');
@@ -226,7 +269,9 @@ export default function Home() {
                           </div>
                           {/* Rating after hostel type */}
                           <div className="flex items-center space-x-1">
-                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                            <div className="flex items-center space-x-0.5">
+                              {renderStars(hostelData.data.hostel_avg_rating)}
+                            </div>
                             <span className="text-sm font-medium text-gray-900 dark:text-white">
                               {hostelData.data.hostel_avg_rating.toFixed(1)}
                             </span>
