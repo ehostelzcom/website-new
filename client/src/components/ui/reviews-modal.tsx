@@ -65,19 +65,9 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <div className="flex items-center justify-between">
-            <DialogTitle className="text-xl font-semibold text-gray-900 dark:text-white">
-              Reviews for {hostelName}
-            </DialogTitle>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              className="h-8 w-8"
-            >
-              <X className="w-4 h-4" />
-            </Button>
-          </div>
+          <DialogTitle className="text-xl font-semibold text-gray-900 dark:text-white">
+            Reviews for {hostelName}
+          </DialogTitle>
         </DialogHeader>
 
         {isLoading ? (
