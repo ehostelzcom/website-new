@@ -2,6 +2,7 @@ import { SiFacebook, SiInstagram, SiLinkedin } from "react-icons/si";
 import logoUrl from "@assets/logo/Asset 3.svg";
 import RequestDemoModal from "@/components/ui/request-demo-modal";
 import YouTubeModal from "@/components/ui/youtube-modal";
+import FAQModal from "@/components/ui/faq-modal";
 import { Button } from "@/components/ui/button";
 
 export default function Footer() {
@@ -139,10 +140,12 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-600 hover:text-primary hover:translate-x-2 transition-all duration-300 flex items-center group" data-testid="footer-privacy">
-                    <span className="w-2 h-2 bg-accent rounded-full mr-3 group-hover:bg-primary transition-colors"></span>
-                    Privacy Policy
-                  </a>
+                  <FAQModal>
+                    <button className="text-gray-600 hover:text-primary hover:translate-x-2 transition-all duration-300 flex items-center group text-left" data-testid="footer-faqs">
+                      <span className="w-2 h-2 bg-accent rounded-full mr-3 group-hover:bg-primary transition-colors"></span>
+                      FAQs
+                    </button>
+                  </FAQModal>
                 </li>
               </ul>
             </div>
