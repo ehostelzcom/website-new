@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, User, Calendar } from "lucide-react";
+import { Menu, User, Calendar, HelpCircle } from "lucide-react";
 import RequestDemoModal from "@/components/ui/request-demo-modal";
+import FAQModal from "@/components/ui/faq-modal";
 import { useLocation } from "wouter";
 import logoSvg from "@assets/logo/Asset 3.svg";
 
@@ -86,6 +87,15 @@ export default function Header() {
               Contact
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] via-[#0066cc] to-[#ff6b35] transition-all duration-400 group-hover:w-full shadow-sm"></span>
             </button>
+            <FAQModal>
+              <button 
+                className="relative text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-base tracking-wide group px-1 py-2"
+                data-testid="nav-faq"
+              >
+                FAQs
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] via-[#0066cc] to-[#ff6b35] transition-all duration-400 group-hover:w-full shadow-sm"></span>
+              </button>
+            </FAQModal>
           </nav>
           
           <div className="flex items-center space-x-4">
@@ -162,11 +172,20 @@ export default function Header() {
                   </button>
                   <button 
                     onClick={() => scrollToSection('contact')}
-                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30 rounded-b-lg"
+                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30"
                     data-testid="nav-mobile-contact"
                   >
                     Contact
                   </button>
+                  <FAQModal>
+                    <button 
+                      className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30 rounded-b-lg"
+                      data-testid="nav-mobile-faq"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      FAQs
+                    </button>
+                  </FAQModal>
                   <div className="pt-6 space-y-4">
                     <Button 
                       onClick={() => {window.open("/student-login", "_blank"); setIsOpen(false);}}
@@ -180,6 +199,7 @@ export default function Header() {
                       <Button 
                         className="w-full bg-[#ff6b35] hover:bg-[#e55a2e] text-white py-3 px-6 rounded-xl flex items-center justify-center gap-3 font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
                         data-testid="nav-mobile-request-demo"
+                        onClick={() => setIsOpen(false)}
                       >
                         <Calendar className="w-5 h-5" />
                         Request Demo
