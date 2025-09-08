@@ -53,6 +53,8 @@ interface StudentHostelData {
   file_name: string;
   presenter_image_url: string;
   student_hostel_status: string;
+  hostel_review_counts: number;
+  hostel_avg_rating: number;
 }
 
 interface StudentHostelResponse {
@@ -242,12 +244,26 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  {/* Contact Info */}
-                  <div className="flex items-center space-x-2 mt-2">
-                    <Phone className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
-                      {hostelData.data.hostel_mobile_no}
-                    </span>
+                  {/* Rating and Contact Info */}
+                  <div className="flex items-center justify-between mt-3">
+                    {/* Rating */}
+                    <div className="flex items-center space-x-1">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="text-sm font-medium text-gray-900 dark:text-white">
+                        {hostelData.data.hostel_avg_rating.toFixed(1)}
+                      </span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        ({hostelData.data.hostel_review_counts} reviews)
+                      </span>
+                    </div>
+                    
+                    {/* Contact Info */}
+                    <div className="flex items-center space-x-2">
+                      <Phone className="w-4 h-4 text-gray-500" />
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        {hostelData.data.hostel_mobile_no}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </Card>

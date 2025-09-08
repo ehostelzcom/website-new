@@ -75,8 +75,12 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                 <div className="flex items-center gap-4 mb-2">
                   <div className="flex items-center gap-1">
                     <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <span className="text-base font-semibold text-yellow-600 dark:text-yellow-400">{hostel.rating || "4.2"}</span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">(24 reviews)</span>
+                    <span className="text-base font-semibold text-yellow-600 dark:text-yellow-400">
+                      {hostel.hostel_avg_rating ? hostel.hostel_avg_rating.toFixed(1) : (hostel.rating || "4.2")}
+                    </span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      ({hostel.hostel_review_counts || "0"} reviews)
+                    </span>
                   </div>
                   <Badge variant="outline" className="bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700">
                     Available
