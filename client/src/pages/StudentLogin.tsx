@@ -81,7 +81,7 @@ export default function StudentLogin() {
               <CardTitle className="text-3xl font-bold bg-gradient-to-r from-[#004e89] via-[#0066cc] to-[#ff6b35] bg-clip-text text-transparent tracking-wide">
                 Student Login
               </CardTitle>
-              <CardDescription className="text-gray-600 dark:text-gray-400 text-base font-medium">
+              <CardDescription className="text-gray-600 dark:text-gray-400 text-sm font-medium">
                 Access your hostel management dashboard
               </CardDescription>
             </div>
