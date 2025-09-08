@@ -11,6 +11,16 @@ import logoSvg from "@assets/logo/Asset 3.svg";
 export default function StudentLogin() {
   const [, setLocation] = useLocation();
   const [username, setUsername] = useState("");
+
+  const handleUsernameChange = (value: string) => {
+    // Only allow digits for CNIC
+    const cleanValue = value.replace(/\D/g, '');
+    
+    // Limit to 13 digits
+    if (cleanValue.length <= 13) {
+      setUsername(cleanValue);
+    }
+  };
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -21,6 +31,13 @@ export default function StudentLogin() {
     e.preventDefault();
     setIsLoading(true);
     setError("");
+    
+    // Validate username (CNIC) length
+    if (username.length !== 13) {
+      setError("CNIC must be exactly 13 digits");
+      setIsLoading(false);
+      return;
+    }
     
     try {
       // Call the student login API
@@ -92,21 +109,25 @@ export default function StudentLogin() {
               {/* Username Field */}
               <div className="space-y-2">
                 <Label htmlFor="username" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Username
+                  CNIC Number
                 </Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 w-5 h-5 z-10 pointer-events-none" />
                   <Input
                     id="username"
                     type="text"
-                    placeholder="Enter your username"
+                    placeholder="Enter your CNIC (13 digits)"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => handleUsernameChange(e.target.value)}
+                    maxLength={13}
                     className="pl-12 h-12 border-gray-200 dark:border-gray-600 focus:border-[#004e89] dark:focus:border-[#004e89] focus:ring-[#004e89] bg-white dark:bg-gray-800 relative z-0"
                     required
                     data-testid="input-username"
                   />
                 </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  {username.length}/13 digits
+                </p>
               </div>
 
               {/* Password Field */}

@@ -17,19 +17,46 @@ export default function ResetPassword() {
   });
 
   const handleInputChange = (field: string, value: string) => {
+    // Only allow digits for CNIC and mobile
+    const cleanValue = value.replace(/\D/g, '');
+    
+    // Apply length limits
+    let finalValue = cleanValue;
+    if (field === 'cnic' && cleanValue.length > 13) {
+      finalValue = cleanValue.substring(0, 13);
+    } else if (field === 'mobile' && cleanValue.length > 11) {
+      finalValue = cleanValue.substring(0, 11);
+    }
+    
     setFormData(prev => ({
       ...prev,
-      [field]: value
+      [field]: finalValue
     }));
+  };
+
+  const validateForm = () => {
+    const errors: string[] = [];
+    
+    if (formData.cnic.length !== 13) {
+      errors.push('CNIC must be exactly 13 digits');
+    }
+    
+    if (formData.mobile.length !== 11) {
+      errors.push('Mobile number must be exactly 11 digits');
+    }
+    
+    return errors;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.cnic || !formData.mobile) {
+    // Validate form
+    const validationErrors = validateForm();
+    if (validationErrors.length > 0) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in both CNIC and mobile number",
+        title: "Invalid Input",
+        description: validationErrors.join(', '),
         variant: "destructive",
       });
       return;
@@ -107,13 +134,17 @@ export default function ResetPassword() {
                 <Input
                   id="cnic"
                   type="text"
-                  placeholder="12345-6789012-3"
+                  placeholder="1234567890123 (13 digits)"
                   value={formData.cnic}
                   onChange={(e) => handleInputChange('cnic', e.target.value)}
                   className="h-11 border-gray-200 dark:border-gray-700 focus:border-[#0066cc] dark:focus:border-[#0066cc]"
                   data-testid="input-cnic"
+                  maxLength={13}
                   required
                 />
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  {formData.cnic.length}/13 digits
+                </p>
               </div>
 
               {/* Mobile Number Input */}
@@ -124,13 +155,17 @@ export default function ResetPassword() {
                 <Input
                   id="mobile"
                   type="tel"
-                  placeholder="03XX-XXXXXXX"
+                  placeholder="03001234567 (11 digits)"
                   value={formData.mobile}
                   onChange={(e) => handleInputChange('mobile', e.target.value)}
                   className="h-11 border-gray-200 dark:border-gray-700 focus:border-[#0066cc] dark:focus:border-[#0066cc]"
                   data-testid="input-mobile"
+                  maxLength={11}
                   required
                 />
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  {formData.mobile.length}/11 digits
+                </p>
               </div>
 
               {/* Verify Button */}
