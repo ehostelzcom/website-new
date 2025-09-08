@@ -83,28 +83,33 @@ export default function ResetPasswordNew() {
     setIsLoading(true);
     
     try {
-      // TODO: API call to update password
-      // const response = await fetch('/api/reset-password/update', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({
-      //     cnic: cnic,
-      //     newPassword: formData.password
-      //   })
-      // });
-      
-      // Temporary simulation - replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Password Reset Successful!",
-        description: "Your password has been updated. Please login with your new password.",
+      // API call to update password
+      const response = await fetch('/api/reset-password/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cnic: cnic,
+          newPassword: formData.password
+        })
       });
       
-      // Redirect to login page
-      setTimeout(() => {
-        setLocation('/student-login');
-      }, 2000);
+      const result = await response.json();
+      
+      if (result.status && result.code === 200) {
+        // Password update successful
+        toast({
+          title: "Password Reset Successful!",
+          description: "Your password has been updated. Please login with your new password.",
+        });
+        
+        // Redirect to login page
+        setTimeout(() => {
+          setLocation('/student-login');
+        }, 2000);
+      } else {
+        // Password update failed
+        throw new Error(result.message || 'Password update failed');
+      }
       
     } catch (error) {
       toast({

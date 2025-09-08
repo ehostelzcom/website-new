@@ -38,18 +38,22 @@ export default function ResetPassword() {
     setIsLoading(true);
     
     try {
-      // TODO: API call to verify CNIC and mobile number
-      // const response = await fetch('/api/reset-password/verify', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
+      // API call to verify CNIC and mobile number
+      const response = await fetch('/api/reset-password/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
       
-      // Temporary simulation - replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const result = await response.json();
       
-      // If verification successful, navigate to new password page
-      setLocation('/reset-password/new?cnic=' + encodeURIComponent(formData.cnic));
+      if (result.status && result.code === 200) {
+        // Verification successful, navigate to new password page
+        setLocation('/reset-password/new?cnic=' + encodeURIComponent(formData.cnic));
+      } else {
+        // Verification failed
+        throw new Error(result.message || 'Verification failed');
+      }
       
     } catch (error) {
       toast({
