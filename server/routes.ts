@@ -450,8 +450,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log("Oracle APEX find-hostels response:", response.data);
       
-      // Transform response and add static rating + amenity data
-      const hostels = await Promise.all((response.data.items || []).map(async (item: any) => {
+      // Transform response and add amenity data + calculate ratings
+      const hostels = await Promise.all((response.data.data || []).map(async (item: any) => {
         // Fetch facilities data for this hostel to get amenity flags
         let amenityData = { wifi: 0, security: 0, food: 0, solar_system: 0 };
         
@@ -478,10 +478,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
           // Use default values (0) if facilities fetch fails
         }
         
+        // Calculate average rating and review count from ratings data
+        let hostel_avg_rating = 4.2; // Default
+        let hostel_review_counts = 0;
+        
+        if (item.ratings && item.ratings.length > 0) {
+          // Calculate total reviews and average rating from all user ratings
+          let totalScore = 0;
+          let totalRatings = 0;
+          
+          item.ratings.forEach((userRating: any) => {
+            if (userRating.ratings && userRating.ratings.length > 0) {
+              userRating.ratings.forEach((rating: any) => {
+                totalScore += rating.score;
+                totalRatings++;
+              });
+            }
+          });
+          
+          if (totalRatings > 0) {
+            hostel_avg_rating = totalScore / totalRatings;
+            hostel_review_counts = item.ratings.length; // Number of users who reviewed
+          }
+        }
+        
         return {
           ...item,
-          rating: 4.2, // Static rating as requested
+          rating: hostel_avg_rating.toFixed(1), // Keep for backward compatibility
           hostel_id: item.hostel_id, // Use real hostel_id from API
+          hostel_avg_rating: parseFloat(hostel_avg_rating.toFixed(1)),
+          hostel_review_counts,
           ...amenityData // Include amenity flags
         };
       }));

@@ -15,6 +15,20 @@ import { useLocations } from "@/hooks/useLocations";
 import HostelCard from "../components/ui/hostel-card";
 import VacantSeatsModal from "../components/ui/vacant-seats-modal";
 
+// Rating structure from API
+interface Rating {
+  rating_id: number;
+  score: number;
+  description: string;
+  comment_suggestions: string;
+}
+
+interface UserRating {
+  user_id: number;
+  full_name: string;
+  ratings: Rating[];
+}
+
 // Hostel type definition based on API response
 export interface Hostel {
   hostel_id?: number;
@@ -27,9 +41,10 @@ export interface Hostel {
   city_name: string;
   location: string;
   address: string;
-  rating: number; // Static for now, will be dynamic later
+  rating: number | string; // Backward compatibility
   hostel_review_counts?: number;
   hostel_avg_rating?: number;
+  ratings?: UserRating[]; // New ratings data from API
   wifi?: number; // 1 = available, 0 = not available
   security?: number; // 1 = available, 0 = not available
   food?: number; // 1 = available, 0 = not available
