@@ -37,62 +37,62 @@ export default function Header() {
             </div>
           </div>
           
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-10">
             <button 
               onClick={() => scrollToSection('home')}
-              className="relative text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-[15px] group"
+              className="relative text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-base tracking-wide group px-1 py-2"
               data-testid="nav-home"
             >
               Home
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] to-[#ff6b35] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] via-[#0066cc] to-[#ff6b35] transition-all duration-400 group-hover:w-full shadow-sm"></span>
             </button>
             <button 
               onClick={() => scrollToSection('features-section')}
-              className="relative text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-[15px] group"
+              className="relative text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-base tracking-wide group px-1 py-2"
               data-testid="nav-features"
             >
               Features
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] to-[#ff6b35] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] via-[#0066cc] to-[#ff6b35] transition-all duration-400 group-hover:w-full shadow-sm"></span>
             </button>
             <button 
               onClick={() => scrollToSection('pricing')}
-              className="relative text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-[15px] group"
+              className="relative text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-base tracking-wide group px-1 py-2"
               data-testid="nav-pricing"
             >
               Pricing
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] to-[#ff6b35] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] via-[#0066cc] to-[#ff6b35] transition-all duration-400 group-hover:w-full shadow-sm"></span>
             </button>
             <button 
               onClick={() => scrollToSection('find-hostel')}
-              className="relative text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-[15px] group"
+              className="relative text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-base tracking-wide group px-1 py-2"
               data-testid="nav-find-hostel"
             >
               Find Hostel
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] to-[#ff6b35] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] via-[#0066cc] to-[#ff6b35] transition-all duration-400 group-hover:w-full shadow-sm"></span>
             </button>
             <button 
               onClick={() => scrollToSection('about')}
-              className="relative text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-[15px] group"
+              className="relative text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-base tracking-wide group px-1 py-2"
               data-testid="nav-about"
             >
               Why ehostelz
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] to-[#ff6b35] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] via-[#0066cc] to-[#ff6b35] transition-all duration-400 group-hover:w-full shadow-sm"></span>
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
-              className="relative text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-[15px] group"
+              className="relative text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-base tracking-wide group px-1 py-2"
               data-testid="nav-contact"
             >
               Contact
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] to-[#ff6b35] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#004e89] via-[#0066cc] to-[#ff6b35] transition-all duration-400 group-hover:w-full shadow-sm"></span>
             </button>
           </nav>
           
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-4">
             <div className="hidden md:block">
               <Button 
                 onClick={() => window.open("/student-login", "_blank")}
-                className="bg-[#004e89] hover:bg-[#003a6b] text-white px-4 py-2 rounded flex items-center gap-2"
+                className="bg-[#004e89] hover:bg-[#003a6b] text-white px-5 py-2.5 rounded-lg flex items-center gap-2 font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
                 data-testid="button-student-login-header"
               >
                 <User className="w-4 h-4" />
@@ -102,7 +102,7 @@ export default function Header() {
             <div className="hidden md:block">
               <RequestDemoModal>
                 <Button 
-                  className="bg-[#ff6b35] hover:bg-[#e55a2e] text-white px-4 py-2 rounded flex items-center gap-2"
+                  className="bg-[#ff6b35] hover:bg-[#e55a2e] text-white px-5 py-2.5 rounded-lg flex items-center gap-2 font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
                   data-testid="button-request-demo-header"
                 >
                   <Calendar className="w-4 h-4" />
@@ -123,65 +123,65 @@ export default function Header() {
                   <Menu className="h-5 w-5 text-[#004e89]" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-l border-gray-200/50 dark:border-gray-700/50">
-                <div className="flex flex-col space-y-6 mt-8">
+              <SheetContent className="bg-white/96 dark:bg-gray-900/96 backdrop-blur-xl border-l border-gray-200/60 dark:border-gray-700/60">
+                <div className="flex flex-col space-y-4 mt-10">
                   <button 
                     onClick={() => scrollToSection('home')}
-                    className="text-left text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-lg py-3 border-b border-gray-200/30 dark:border-gray-700/30 hover:border-[#004e89]/30"
+                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30 rounded-t-lg"
                     data-testid="nav-mobile-home"
                   >
                     Home
                   </button>
                   <button 
                     onClick={() => scrollToSection('features-section')}
-                    className="text-left text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-lg py-3 border-b border-gray-200/30 dark:border-gray-700/30 hover:border-[#004e89]/30"
+                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30"
                     data-testid="nav-mobile-features"
                   >
                     Features
                   </button>
                   <button 
                     onClick={() => scrollToSection('pricing')}
-                    className="text-left text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-lg py-3 border-b border-gray-200/30 dark:border-gray-700/30 hover:border-[#004e89]/30"
+                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30"
                     data-testid="nav-mobile-pricing"
                   >
                     Pricing
                   </button>
                   <button 
                     onClick={() => scrollToSection('find-hostel')}
-                    className="text-left text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-lg py-3 border-b border-gray-200/30 dark:border-gray-700/30 hover:border-[#004e89]/30"
+                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30"
                     data-testid="nav-mobile-find-hostel"
                   >
                     Find Hostel
                   </button>
                   <button 
                     onClick={() => scrollToSection('about')}
-                    className="text-left text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-lg py-3 border-b border-gray-200/30 dark:border-gray-700/30 hover:border-[#004e89]/30"
+                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30"
                     data-testid="nav-mobile-about"
                   >
                     Why ehostelz
                   </button>
                   <button 
                     onClick={() => scrollToSection('contact')}
-                    className="text-left text-gray-600 dark:text-gray-300 hover:text-[#004e89] dark:hover:text-[#004e89] transition-all duration-300 font-medium text-lg py-3 border-b border-gray-200/30 dark:border-gray-700/30 hover:border-[#004e89]/30"
+                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30 rounded-b-lg"
                     data-testid="nav-mobile-contact"
                   >
                     Contact
                   </button>
-                  <div className="pt-4 space-y-3">
+                  <div className="pt-6 space-y-4">
                     <Button 
                       onClick={() => {window.open("/student-login", "_blank"); setIsOpen(false);}}
-                      className="w-full bg-[#004e89] hover:bg-[#003a6b] text-white py-2 rounded flex items-center justify-center gap-2"
+                      className="w-full bg-[#004e89] hover:bg-[#003a6b] text-white py-3 px-6 rounded-xl flex items-center justify-center gap-3 font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
                       data-testid="nav-mobile-student-login"
                     >
-                      <User className="w-4 h-4" />
+                      <User className="w-5 h-5" />
                       Student Login
                     </Button>
                     <RequestDemoModal>
                       <Button 
-                        className="w-full bg-[#ff6b35] hover:bg-[#e55a2e] text-white py-2 rounded flex items-center justify-center gap-2"
+                        className="w-full bg-[#ff6b35] hover:bg-[#e55a2e] text-white py-3 px-6 rounded-xl flex items-center justify-center gap-3 font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
                         data-testid="nav-mobile-request-demo"
                       >
-                        <Calendar className="w-4 h-4" />
+                        <Calendar className="w-5 h-5" />
                         Request Demo
                       </Button>
                     </RequestDemoModal>
