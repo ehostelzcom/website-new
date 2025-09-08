@@ -1081,6 +1081,147 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // POST API for Password Reset Verification (CNIC + Mobile)
+  app.post("/api/reset-password/verify", async (req, res) => {
+    console.log("Password reset verification API call received:", req.body);
+    try {
+      const { cnic, mobile } = req.body;
+      
+      // Validate required fields
+      if (!cnic || !mobile) {
+        return res.status(400).json({ 
+          status: false,
+          code: 400,
+          message: "CNIC and mobile number are required"
+        });
+      }
+
+      // TODO: Call Oracle APEX API for password reset verification
+      // const response = await axios.post(
+      //   "http://ehostelz.com:8890/ords/jee_management_system/web/api/reset-password/verify",
+      //   {
+      //     cnic,
+      //     mobile
+      //   },
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       'Accept': 'application/json',
+      //     },
+      //     timeout: 10000,
+      //   }
+      // );
+      
+      // Temporary simulation - replace with actual Oracle APEX API call
+      console.log("Simulating verification for CNIC:", cnic, "Mobile:", mobile);
+      
+      // Simulate API response for now
+      const simulatedResponse = {
+        status: true,
+        code: 200,
+        message: "Account verified successfully",
+        data: {
+          cnic: cnic,
+          mobile: mobile,
+          verified: true
+        }
+      };
+      
+      console.log("Password reset verification response:", simulatedResponse);
+      
+      // Return the verification response
+      res.setHeader('Content-Type', 'application/json');
+      res.json(simulatedResponse);
+    } catch (error) {
+      console.error("Error during password reset verification:", error);
+      
+      // Handle verification failure
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return res.status(404).json({ 
+          status: false,
+          code: 404,
+          message: "CNIC or mobile number not found in our system"
+        });
+      }
+      
+      res.status(500).json({ 
+        status: false,
+        code: 500,
+        message: "Verification failed due to server error"
+      });
+    }
+  });
+
+  // POST API for Password Reset Update
+  app.post("/api/reset-password/update", async (req, res) => {
+    console.log("Password reset update API call received:", req.body);
+    try {
+      const { cnic, newPassword } = req.body;
+      
+      // Validate required fields
+      if (!cnic || !newPassword) {
+        return res.status(400).json({ 
+          status: false,
+          code: 400,
+          message: "CNIC and new password are required"
+        });
+      }
+
+      // TODO: Call Oracle APEX API for password reset update
+      // const response = await axios.post(
+      //   "http://ehostelz.com:8890/ords/jee_management_system/web/api/reset-password/update",
+      //   {
+      //     cnic,
+      //     newPassword
+      //   },
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       'Accept': 'application/json',
+      //     },
+      //     timeout: 10000,
+      //   }
+      // );
+      
+      // Temporary simulation - replace with actual Oracle APEX API call
+      console.log("Simulating password update for CNIC:", cnic);
+      
+      // Simulate API response for now
+      const simulatedResponse = {
+        status: true,
+        code: 200,
+        message: "Password updated successfully",
+        data: {
+          cnic: cnic,
+          updated: true
+        }
+      };
+      
+      console.log("Password reset update response:", simulatedResponse);
+      
+      // Return the update response
+      res.setHeader('Content-Type', 'application/json');
+      res.json(simulatedResponse);
+    } catch (error) {
+      console.error("Error during password reset update:", error);
+      
+      // Handle update failure
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return res.status(404).json({ 
+          status: false,
+          code: 404,
+          message: "User not found"
+        });
+      }
+      
+      res.status(500).json({ 
+        status: false,
+        code: 500,
+        message: "Password update failed due to server error"
+      });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 
