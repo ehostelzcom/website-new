@@ -77,11 +77,11 @@ export default function StudentLogin() {
               />
             </div>
             
-            <div className="space-y-2">
-              <CardTitle className="text-2xl font-bold text-gray-700 dark:text-gray-300">
+            <div className="space-y-3">
+              <CardTitle className="text-4xl font-bold bg-gradient-to-r from-[#004e89] via-[#0066cc] to-[#ff6b35] bg-clip-text text-transparent tracking-wide">
                 Student Login
               </CardTitle>
-              <CardDescription className="text-gray-600 dark:text-gray-400">
+              <CardDescription className="text-gray-600 dark:text-gray-400 text-base font-medium">
                 Access your hostel management dashboard
               </CardDescription>
             </div>
