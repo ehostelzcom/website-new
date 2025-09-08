@@ -170,8 +170,8 @@ export default function FAQModal({ children }: FAQModalProps) {
       </div>
       
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-4xl w-full max-h-[80vh] p-0 overflow-hidden" data-testid="faq-modal">
-          <DialogHeader className="p-6 pb-0 border-b border-gray-200/50 dark:border-gray-700/50">
+        <DialogContent className="max-w-5xl w-full max-h-[85vh] p-0 overflow-hidden flex flex-col" data-testid="faq-modal">
+          <DialogHeader className="flex-shrink-0 p-6 pb-4 border-b border-gray-200/50 dark:border-gray-700/50">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-[#004e89] to-[#0066cc] rounded-full flex items-center justify-center">
                 <HelpCircle className="w-5 h-5 text-white" />
@@ -187,9 +187,9 @@ export default function FAQModal({ children }: FAQModalProps) {
             </div>
           </DialogHeader>
 
-          <div className="flex flex-col md:flex-row h-full">
+          <div className="flex flex-col md:flex-row flex-1 min-h-0">
             {/* Category Filter Sidebar */}
-            <div className="w-full md:w-64 p-4 border-r border-gray-200/50 dark:border-gray-700/50 bg-gray-50/30 dark:bg-gray-800/30">
+            <div className="w-full md:w-64 flex-shrink-0 p-4 border-r border-gray-200/50 dark:border-gray-700/50 bg-gray-50/30 dark:bg-gray-800/30">
               <div className="space-y-2">
                 <Button
                   variant={activeCategory === "all" ? "default" : "ghost"}
@@ -219,8 +219,8 @@ export default function FAQModal({ children }: FAQModalProps) {
             </div>
 
             {/* FAQ Content */}
-            <div className="flex-1">
-              <ScrollArea className="h-[60vh] p-6">
+            <div className="flex-1 flex flex-col min-h-0">
+              <ScrollArea className="flex-1 p-6">
                 <div className="space-y-6">
                   {filteredFAQs.map((category) => (
                     <div key={category.category} className="space-y-4">
@@ -255,17 +255,18 @@ export default function FAQModal({ children }: FAQModalProps) {
                 </div>
               </ScrollArea>
 
-              <div className="p-6 border-t border-gray-200/50 dark:border-gray-700/50 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800/50 dark:to-gray-900/50">
+              {/* Fixed Footer */}
+              <div className="flex-shrink-0 p-6 border-t border-gray-200/50 dark:border-gray-700/50 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800/50 dark:to-gray-900/50">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#004e89] to-[#0066cc] rounded-full flex items-center justify-center flex-shrink-0">
-                      <HelpCircle className="w-5 h-5 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#004e89] to-[#0066cc] rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <HelpCircle className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white">
+                      <h4 className="font-bold text-lg text-gray-900 dark:text-white">
                         Still have questions?
                       </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">
                         We're here to help you get started
                       </p>
                     </div>
@@ -273,10 +274,9 @@ export default function FAQModal({ children }: FAQModalProps) {
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Button
                       variant="default"
-                      size="sm"
+                      size="default"
                       onClick={() => {
                         setIsOpen(false);
-                        // Scroll to contact section
                         setTimeout(() => {
                           const element = document.getElementById('contact');
                           if (element) {
@@ -284,7 +284,7 @@ export default function FAQModal({ children }: FAQModalProps) {
                           }
                         }, 100);
                       }}
-                      className="bg-[#004e89] hover:bg-[#003a6b] text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                      className="bg-[#004e89] hover:bg-[#003a6b] text-white px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold"
                       data-testid="faq-contact-us"
                     >
                       <MapPin className="w-4 h-4 mr-2" />
@@ -292,13 +292,12 @@ export default function FAQModal({ children }: FAQModalProps) {
                     </Button>
                     <Button
                       variant="outline"
-                      size="sm"
+                      size="default"
                       onClick={() => {
                         setIsOpen(false);
-                        // Open WhatsApp (you can replace this with actual WhatsApp link)
-                        window.open('https://wa.me/message', '_blank');
+                        window.open('https://wa.me/923129409211?text=Hi%2C%20I%20need%20help%20with%20ehostelz.com', '_blank');
                       }}
-                      className="border-[#25d366] text-[#25d366] hover:bg-[#25d366] hover:text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                      className="border-2 border-[#25d366] text-[#25d366] hover:bg-[#25d366] hover:text-white px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold"
                       data-testid="faq-whatsapp-us"
                     >
                       💬 WhatsApp
