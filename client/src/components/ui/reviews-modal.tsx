@@ -13,6 +13,7 @@ import { Star, User, X } from "lucide-react";
 interface Rating {
   rating_id: number;
   score: number;
+  description: string;
   comment_suggestions: string;
 }
 
@@ -54,7 +55,7 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
         className={`w-4 h-4 ${
           index < rating 
             ? 'fill-yellow-400 text-yellow-400' 
-            : 'text-gray-300 dark:text-gray-600'
+            : 'fill-none text-gray-300 dark:text-gray-600'
         }`}
       />
     ));
@@ -117,24 +118,27 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
                 </div>
 
                 {/* Individual Ratings */}
-                <div className="ml-13 space-y-2">
+                <div className="ml-13 space-y-3">
                   {review.ratings.map((rating) => (
-                    <div key={rating.rating_id} className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
+                    <div key={rating.rating_id} className="border-l-2 border-gray-200 dark:border-gray-700 pl-4">
+                      <div className="mb-2">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
+                          {rating.description}
+                        </p>
+                        <div className="flex items-center gap-2">
                           <div className="flex items-center gap-1">
                             {renderStars(rating.score)}
                           </div>
-                          <Badge variant="outline" className="text-xs">
-                            Rating ID: {rating.rating_id}
-                          </Badge>
+                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                            {rating.score}/5
+                          </span>
                         </div>
-                        {rating.comment_suggestions && rating.comment_suggestions !== "No Suggestions" && (
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {rating.comment_suggestions}
-                          </p>
-                        )}
                       </div>
+                      {rating.comment_suggestions && rating.comment_suggestions !== "No Suggestions" && (
+                        <p className="text-xs text-gray-600 dark:text-gray-400 italic">
+                          "{rating.comment_suggestions}"
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
