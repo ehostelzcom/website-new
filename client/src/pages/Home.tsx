@@ -213,10 +213,20 @@ export default function Home() {
                       
                       {/* Hostel Name and Type */}
                       <div className="flex-1">
-                        <div className="flex items-center space-x-2 mb-1">
-                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                        <div className="mb-2">
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                             {hostelData.data.hostel_name}
                           </h3>
+                          {/* Rating under hostel name */}
+                          <div className="flex items-center space-x-1 mb-1">
+                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                            <span className="text-sm font-medium text-gray-900 dark:text-white">
+                              {hostelData.data.hostel_avg_rating.toFixed(1)}
+                            </span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">
+                              ({hostelData.data.hostel_review_counts} reviews)
+                            </span>
+                          </div>
                           <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
                             <User className="w-4 h-4" />
                             <span>{hostelData.data.hostel_type}</span>
@@ -244,26 +254,12 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  {/* Rating and Contact Info */}
-                  <div className="flex items-center justify-between mt-3">
-                    {/* Rating */}
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-sm font-medium text-gray-900 dark:text-white">
-                        {hostelData.data.hostel_avg_rating.toFixed(1)}
-                      </span>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        ({hostelData.data.hostel_review_counts} reviews)
-                      </span>
-                    </div>
-                    
-                    {/* Contact Info */}
-                    <div className="flex items-center space-x-2">
-                      <Phone className="w-4 h-4 text-gray-500" />
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
-                        {hostelData.data.hostel_mobile_no}
-                      </span>
-                    </div>
+                  {/* Contact Info */}
+                  <div className="flex items-center space-x-2 mt-2">
+                    <Phone className="w-4 h-4 text-gray-500" />
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {hostelData.data.hostel_mobile_no}
+                    </span>
                   </div>
                 </div>
               </Card>

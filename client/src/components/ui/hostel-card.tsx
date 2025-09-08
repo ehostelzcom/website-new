@@ -69,19 +69,20 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
             
             <div className="flex-1">
               <div className="mb-3">
-                <h3 className="font-bold text-2xl text-gray-900 dark:text-white group-hover:text-primary transition-colors mb-2">
+                <h3 className="font-bold text-2xl text-gray-900 dark:text-white group-hover:text-primary transition-colors mb-1">
                   {hostel.hostel_name}
                 </h3>
+                {/* Rating directly under hostel name */}
+                <div className="flex items-center gap-1 mb-2">
+                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <span className="text-sm font-semibold text-yellow-600 dark:text-yellow-400">
+                    {hostel.hostel_avg_rating ? hostel.hostel_avg_rating.toFixed(1) : (hostel.rating || "4.2")}
+                  </span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    ({hostel.hostel_review_counts || "0"} reviews)
+                  </span>
+                </div>
                 <div className="flex items-center gap-4 mb-2">
-                  <div className="flex items-center gap-1">
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    <span className="text-base font-semibold text-yellow-600 dark:text-yellow-400">
-                      {hostel.hostel_avg_rating ? hostel.hostel_avg_rating.toFixed(1) : (hostel.rating || "4.2")}
-                    </span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      ({hostel.hostel_review_counts || "0"} reviews)
-                    </span>
-                  </div>
                   <Badge variant="outline" className="bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700">
                     Available
                   </Badge>
