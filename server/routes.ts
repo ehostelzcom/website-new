@@ -1016,6 +1016,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get hostel reviews
+  app.get('/api/hostel-reviews/:hostelId', async (req, res) => {
+    try {
+      const { hostelId } = req.params;
+      
+      console.log(`Hostel reviews API call received for hostel_id: ${hostelId}`);
+      
+      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/hostel-reviews/${hostelId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        timeout: 10000,
+      });
+      
+      console.log('Oracle APEX hostel reviews response:', response.data);
+      
+      res.setHeader('Content-Type', 'application/json');
+      res.json(response.data);
+    } catch (error) {
+      console.error('Error fetching hostel reviews:', error);
+      
+      // Handle not found case
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return res.status(404).json({ 
+          status: false,
+          code: 404,
+          message: "No reviews found for this hostel"
+        });
+      }
+      
+      res.status(500).json({ 
+        status: false,
+        code: 500,
+        message: 'Failed to fetch hostel reviews' 
+      });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 

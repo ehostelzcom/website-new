@@ -54,6 +54,13 @@ Preferred communication style: Simple, everyday language.
 - **Regional Focus**: Pre-configured for Pakistani administrative divisions
 - **Component Integration**: Reusable location search component for hostel discovery
 
+### Review System Integration
+- **Clickable Review Counts**: Review counts on hostel cards are clickable with hover effects
+- **Reviews Modal**: Comprehensive modal displaying user reviews with ratings and comments
+- **API Integration**: Server-side hostel-reviews API endpoint with Oracle APEX backend
+- **Dynamic Rating Display**: Real-time rating averages and review counts from API data
+- **Multi-Page Support**: Available on both Home page and search results hostel cards
+
 ## External Dependencies
 
 ### Core Framework Dependencies

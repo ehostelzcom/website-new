@@ -32,6 +32,7 @@ import {
 import logoSvg from "@assets/logo/Asset 3.svg";
 import girlsHostelLogo from "@assets/logo/Asset 7.svg";
 import boysHostelLogo from "@assets/logo/Asset 8.svg";
+import ReviewsModal from "@/components/ui/reviews-modal";
 
 // Types for student hostel data (matches API response)
 interface StudentHostelData {
@@ -66,6 +67,7 @@ interface StudentHostelResponse {
 export default function Home() {
   const [, setLocation] = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [reviewsModalOpen, setReviewsModalOpen] = useState(false);
   
   // Get user data from localStorage for API calls
   const studentUserId = localStorage.getItem('student_user_id');
@@ -228,9 +230,15 @@ export default function Home() {
                             <span className="text-sm font-medium text-gray-900 dark:text-white">
                               {hostelData.data.hostel_avg_rating.toFixed(1)}
                             </span>
-                            <span className="text-sm text-gray-500 dark:text-gray-400">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setReviewsModalOpen(true);
+                              }}
+                              className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline cursor-pointer transition-colors"
+                            >
                               ({hostelData.data.hostel_review_counts} reviews)
-                            </span>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -279,6 +287,16 @@ export default function Home() {
             </div>
           )}
       </main>
+      
+      {/* Reviews Modal */}
+      {hostelData?.data && (
+        <ReviewsModal
+          isOpen={reviewsModalOpen}
+          onClose={() => setReviewsModalOpen(false)}
+          hostelId={hostelData.data.hostel_id}
+          hostelName={hostelData.data.hostel_name}
+        />
+      )}
     </div>
   );
 }

@@ -8,6 +8,7 @@ import asset7 from "@assets/logo/Asset 7.svg";
 import asset8 from "@assets/logo/Asset 8.svg";
 import FacilitiesModal from "./facilities-modal";
 import RentsModal from "./rents-modal";
+import ReviewsModal from "./reviews-modal";
 
 interface Province {
   id: number;
@@ -39,6 +40,7 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
   // Modal states
   const [facilitiesModalOpen, setFacilitiesModalOpen] = useState(false);
   const [rentsModalOpen, setRentsModalOpen] = useState(false);
+  const [reviewsModalOpen, setReviewsModalOpen] = useState(false);
 
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 dark:border-gray-700 hover:border-primary/30 bg-white dark:bg-gray-800 rounded-lg overflow-hidden hover:-translate-y-1" onClick={(e) => {
@@ -87,9 +89,15 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                   <span className="text-sm font-semibold text-yellow-600 dark:text-yellow-400">
                     {hostel.hostel_avg_rating ? hostel.hostel_avg_rating.toFixed(1) : (hostel.rating || "4.2")}
                   </span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setReviewsModalOpen(true);
+                    }}
+                    className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline cursor-pointer transition-colors"
+                  >
                     ({hostel.hostel_review_counts || "0"} reviews)
-                  </span>
+                  </button>
                 </div>
                 <div className="flex items-center gap-4 mb-2">
                   <Badge variant="outline" className="bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700">
@@ -291,6 +299,16 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
           }
         }}
       />
+      
+      {/* Reviews Modal */}
+      {hostel.hostel_id && (
+        <ReviewsModal
+          isOpen={reviewsModalOpen}
+          onClose={() => setReviewsModalOpen(false)}
+          hostelId={hostel.hostel_id}
+          hostelName={hostel.hostel_name}
+        />
+      )}
     </Card>
   );
 }
