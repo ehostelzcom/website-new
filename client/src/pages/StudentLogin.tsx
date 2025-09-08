@@ -193,15 +193,6 @@ export default function StudentLogin() {
                   Reset here
                 </button>
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Need help?{" "}
-                <button 
-                  onClick={() => setLocation("/#contact")}
-                  className="text-[#ff6b35] hover:text-[#e55a2b] font-medium transition-colors"
-                >
-                  Contact Support
-                </button>
-              </p>
             </div>
           </CardContent>
         </Card>
