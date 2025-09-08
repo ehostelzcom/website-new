@@ -59,14 +59,17 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
   const getAverageRating = (ratings: Rating[]) => {
     if (!ratings.length) return 0;
     const total = ratings.reduce((sum, rating) => sum + rating.score, 0);
-    return (total / ratings.length).toFixed(1);
+    return total / ratings.length;
   };
+  
+  const formatRating = (rating: number) => rating.toFixed(1);
 
   const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    
     return Array.from({ length: 5 }, (_, index) => {
-      const difference = rating - index;
-      
-      if (difference >= 1) {
+      if (index < fullStars) {
         // Full star
         return (
           <Star
@@ -74,16 +77,21 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
             className="w-4 h-4 fill-yellow-400 text-yellow-400"
           />
         );
-      } else if (difference >= 0.5) {
-        // Half star
+      } else if (index === fullStars && hasHalfStar) {
+        // Half star using linear gradient
         return (
           <div key={index} className="relative w-4 h-4">
-            {/* Empty star background */}
-            <Star className="absolute w-4 h-4 fill-none text-gray-300 dark:text-gray-600" />
-            {/* Half star overlay */}
-            <div className="absolute w-4 h-4 overflow-hidden" style={{ width: '50%' }}>
-              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-            </div>
+            <Star 
+              className="w-4 h-4 text-gray-300 dark:text-gray-600" 
+              style={{ fill: 'currentColor' }}
+            />
+            <Star 
+              className="absolute top-0 left-0 w-4 h-4 text-yellow-400"
+              style={{ 
+                fill: 'currentColor',
+                clipPath: 'polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%)'
+              }}
+            />
           </div>
         );
       } else {
@@ -91,7 +99,8 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
         return (
           <Star
             key={index}
-            className="w-4 h-4 fill-none text-gray-300 dark:text-gray-600"
+            className="w-4 h-4 text-gray-300 dark:text-gray-600"
+            style={{ fill: 'currentColor' }}
           />
         );
       }
@@ -135,9 +144,9 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
                         {review.full_name}
                       </h4>
                       <div className="flex items-center gap-1">
-                        {renderStars(Math.round(parseFloat(getAverageRating(review.ratings))))}
+                        {renderStars(getAverageRating(review.ratings))}
                         <span className="text-sm font-medium text-gray-700 dark:text-gray-300 ml-1">
-                          {getAverageRating(review.ratings)}
+                          {formatRating(getAverageRating(review.ratings))}
                         </span>
                       </div>
                     </div>
