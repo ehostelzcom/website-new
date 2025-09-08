@@ -124,7 +124,16 @@ export default function ResetPasswordNew() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4 relative">
+      {/* Top-left Logo */}
+      <div className="fixed top-4 left-4 z-10">
+        <img 
+          src={logoSvg} 
+          alt="ehostelz.com" 
+          className="h-8 w-auto opacity-70 hover:opacity-100 transition-opacity duration-300"
+          data-testid="img-logo-corner"
+        />
+      </div>
       <div className="w-full max-w-md">
         {/* Back Button */}
         <Button 
@@ -139,14 +148,9 @@ export default function ResetPasswordNew() {
 
         <Card className="shadow-xl border-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg">
           <CardHeader className="text-center pb-8">
-            {/* Logo */}
-            <div className="flex justify-center mb-6">
-              <img 
-                src={logoSvg} 
-                alt="ehostelz.com" 
-                className="h-16 w-auto transition-all duration-300 hover:scale-105 drop-shadow-sm"
-                data-testid="img-logo"
-              />
+            {/* Icon */}
+            <div className="mx-auto w-16 h-16 bg-gradient-to-r from-[#004e89] to-[#0066cc] rounded-full flex items-center justify-center mb-4">
+              <Lock className="w-8 h-8 text-white" />
             </div>
             
             <div className="space-y-3">
