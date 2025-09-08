@@ -189,7 +189,11 @@ export default function StudentLogin() {
             <div className="text-center space-y-4 pt-4 border-t border-gray-200/50 dark:border-gray-600/50">
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Forgot your password?{" "}
-                <button className="text-[#004e89] hover:text-[#003a6b] font-medium transition-colors">
+                <button 
+                  onClick={() => setLocation('/reset-password')}
+                  className="text-[#004e89] hover:text-[#003a6b] font-medium transition-colors"
+                  data-testid="button-reset-password"
+                >
                   Reset here
                 </button>
               </p>
