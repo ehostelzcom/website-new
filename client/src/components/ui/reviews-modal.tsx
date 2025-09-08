@@ -63,16 +63,39 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
   };
 
   const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <Star
-        key={index}
-        className={`w-4 h-4 ${
-          index < rating 
-            ? 'fill-yellow-400 text-yellow-400' 
-            : 'fill-none text-gray-300 dark:text-gray-600'
-        }`}
-      />
-    ));
+    return Array.from({ length: 5 }, (_, index) => {
+      const difference = rating - index;
+      
+      if (difference >= 1) {
+        // Full star
+        return (
+          <Star
+            key={index}
+            className="w-4 h-4 fill-yellow-400 text-yellow-400"
+          />
+        );
+      } else if (difference >= 0.5) {
+        // Half star
+        return (
+          <div key={index} className="relative w-4 h-4">
+            {/* Empty star background */}
+            <Star className="absolute w-4 h-4 fill-none text-gray-300 dark:text-gray-600" />
+            {/* Half star overlay */}
+            <div className="absolute w-4 h-4 overflow-hidden" style={{ width: '50%' }}>
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            </div>
+          </div>
+        );
+      } else {
+        // Empty star
+        return (
+          <Star
+            key={index}
+            className="w-4 h-4 fill-none text-gray-300 dark:text-gray-600"
+          />
+        );
+      }
+    });
   };
 
   return (
