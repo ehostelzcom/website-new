@@ -161,7 +161,16 @@ export default function SearchResults() {
             <div className="flex items-center gap-4">
               <Button
                 variant="outline"
-                onClick={() => setLocation("/")}
+                onClick={() => {
+                  setLocation("/#find-hostels");
+                  // Small delay to ensure navigation completes, then scroll to find hostels section
+                  setTimeout(() => {
+                    const findHostelsSection = document.getElementById('find-hostels');
+                    if (findHostelsSection) {
+                      findHostelsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 100);
+                }}
                 className="flex items-center gap-2 border-primary/20 text-primary hover:bg-primary hover:text-white transition-all duration-200 px-6 py-2 font-medium"
                 data-testid="button-back-home"
               >
