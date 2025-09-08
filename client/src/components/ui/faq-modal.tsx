@@ -271,7 +271,7 @@ export default function FAQModal({ children }: FAQModalProps) {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-3">
+                  <div>
                     <Button
                       variant="default"
                       size="default"
@@ -284,23 +284,11 @@ export default function FAQModal({ children }: FAQModalProps) {
                           }
                         }, 100);
                       }}
-                      className="bg-[#004e89] hover:bg-[#003a6b] text-white px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold"
+                      className="bg-[#004e89] hover:bg-[#003a6b] text-white px-8 py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold"
                       data-testid="faq-contact-us"
                     >
                       <MapPin className="w-4 h-4 mr-2" />
                       Contact Us
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="default"
-                      onClick={() => {
-                        setIsOpen(false);
-                        window.open('https://wa.me/923129409211?text=Hi%2C%20I%20need%20help%20with%20ehostelz.com', '_blank');
-                      }}
-                      className="border-2 border-[#25d366] text-[#25d366] hover:bg-[#25d366] hover:text-white px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold"
-                      data-testid="faq-whatsapp-us"
-                    >
-                      💬 WhatsApp
                     </Button>
                   </div>
                 </div>
