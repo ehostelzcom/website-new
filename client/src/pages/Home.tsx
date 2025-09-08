@@ -217,8 +217,13 @@ export default function Home() {
                           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                             {hostelData.data.hostel_name}
                           </h3>
-                          {/* Rating under hostel name */}
-                          <div className="flex items-center space-x-1 mb-1">
+                          {/* Hostel type under hostel name */}
+                          <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400 mb-1">
+                            <User className="w-4 h-4" />
+                            <span>{hostelData.data.hostel_type}</span>
+                          </div>
+                          {/* Rating after hostel type */}
+                          <div className="flex items-center space-x-1">
                             <Star className="w-4 h-4 text-yellow-400 fill-current" />
                             <span className="text-sm font-medium text-gray-900 dark:text-white">
                               {hostelData.data.hostel_avg_rating.toFixed(1)}
@@ -226,10 +231,6 @@ export default function Home() {
                             <span className="text-sm text-gray-500 dark:text-gray-400">
                               ({hostelData.data.hostel_review_counts} reviews)
                             </span>
-                          </div>
-                          <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
-                            <User className="w-4 h-4" />
-                            <span>{hostelData.data.hostel_type}</span>
                           </div>
                         </div>
                       </div>

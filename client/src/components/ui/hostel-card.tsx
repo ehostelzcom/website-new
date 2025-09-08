@@ -72,7 +72,16 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                 <h3 className="font-bold text-2xl text-gray-900 dark:text-white group-hover:text-primary transition-colors mb-1">
                   {hostel.hostel_name}
                 </h3>
-                {/* Rating directly under hostel name */}
+                {/* Hostel type badge under name */}
+                <div className="flex items-center gap-2 mb-1">
+                  <Badge 
+                    variant={hostel.hostel_type.toUpperCase() === "BOYS" ? "default" : "secondary"}
+                    className="text-xs font-semibold"
+                  >
+                    {hostel.hostel_type}
+                  </Badge>
+                </div>
+                {/* Rating after hostel type */}
                 <div className="flex items-center gap-1 mb-2">
                   <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   <span className="text-sm font-semibold text-yellow-600 dark:text-yellow-400">
