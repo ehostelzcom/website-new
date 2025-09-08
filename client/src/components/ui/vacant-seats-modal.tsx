@@ -164,10 +164,6 @@ Please let me know about availability and booking process. Thank you!`;
                   <Badge variant="outline" className="text-xs">
                     {hostel?.hostel_type} Hostel
                   </Badge>
-                  <div className="flex items-center gap-1">
-                    <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                    <span className="text-xs text-yellow-600 dark:text-yellow-400">4.5</span>
-                  </div>
                 </div>
               </div>
             </DialogTitle>
