@@ -255,28 +255,55 @@ export default function FAQModal({ children }: FAQModalProps) {
                 </div>
               </ScrollArea>
 
-              <div className="p-4 border-t border-gray-200/50 dark:border-gray-700/50 bg-gray-50/30 dark:bg-gray-800/30">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Still have questions?
-                  </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      setIsOpen(false);
-                      // Scroll to contact section
-                      setTimeout(() => {
-                        const element = document.getElementById('contact');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }, 100);
-                    }}
-                    data-testid="faq-contact-us"
-                  >
-                    Contact Us
-                  </Button>
+              <div className="p-6 border-t border-gray-200/50 dark:border-gray-700/50 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800/50 dark:to-gray-900/50">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#004e89] to-[#0066cc] rounded-full flex items-center justify-center flex-shrink-0">
+                      <HelpCircle className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 dark:text-white">
+                        Still have questions?
+                      </h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        We're here to help you get started
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button
+                      variant="default"
+                      size="sm"
+                      onClick={() => {
+                        setIsOpen(false);
+                        // Scroll to contact section
+                        setTimeout(() => {
+                          const element = document.getElementById('contact');
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }, 100);
+                      }}
+                      className="bg-[#004e89] hover:bg-[#003a6b] text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                      data-testid="faq-contact-us"
+                    >
+                      <MapPin className="w-4 h-4 mr-2" />
+                      Contact Us
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setIsOpen(false);
+                        // Open WhatsApp (you can replace this with actual WhatsApp link)
+                        window.open('https://wa.me/message', '_blank');
+                      }}
+                      className="border-[#25d366] text-[#25d366] hover:bg-[#25d366] hover:text-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                      data-testid="faq-whatsapp-us"
+                    >
+                      💬 WhatsApp
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
