@@ -1096,52 +1096,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // TODO: Call Oracle APEX API for password reset verification
-      // const response = await axios.post(
-      //   "http://ehostelz.com:8890/ords/jee_management_system/web/api/reset-password/verify",
-      //   {
-      //     cnic,
-      //     mobile
-      //   },
-      //   {
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //       'Accept': 'application/json',
-      //     },
-      //     timeout: 10000,
-      //   }
-      // );
-      
-      // Temporary simulation - replace with actual Oracle APEX API call
-      console.log("Simulating verification for CNIC:", cnic, "Mobile:", mobile);
-      
-      // Simulate API response for now
-      const simulatedResponse = {
-        status: true,
-        code: 200,
-        message: "Account verified successfully",
-        data: {
+      // Call Oracle APEX API for account verification
+      const response = await axios.post(
+        "http://ehostelz.com:8890/ords/jee_management_system/web/api/student-verified-account",
+        {
           cnic: cnic,
-          mobile: mobile,
-          verified: true
+          mobile_no: mobile  // Note: API expects 'mobile_no', not 'mobile'
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          timeout: 10000,
         }
-      };
+      );
       
-      console.log("Password reset verification response:", simulatedResponse);
+      console.log("Oracle APEX student-verified-account response:", response.data);
       
-      // Return the verification response
+      // Return the verification response from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
-      res.json(simulatedResponse);
+      res.json(response.data);
     } catch (error) {
       console.error("Error during password reset verification:", error);
       
-      // Handle verification failure
+      // Handle verification failure from Oracle APEX
       if (axios.isAxiosError(error) && error.response?.status === 404) {
-        return res.status(404).json({ 
-          status: false,
-          code: 404,
-          message: "CNIC or mobile number not found in our system"
-        });
+        // Return the exact Oracle APEX error response
+        return res.status(404).json(error.response.data);
+      }
+      
+      // Handle other Oracle APEX error responses
+      if (axios.isAxiosError(error) && error.response?.data) {
+        return res.status(error.response.status || 400).json(error.response.data);
       }
       
       res.status(500).json({ 
