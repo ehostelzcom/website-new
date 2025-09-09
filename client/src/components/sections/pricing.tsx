@@ -23,8 +23,7 @@ const plans = [
       "🌐 Vacant Seats Display on Website",
       "⭐ Experience Rating System",
       "💰 Hostel Pricing Display",
-      "🏨 Facilities & Amenities Showcase",
-      "📊 Real-Time Occupancy Updates"
+      "🏨 Facilities & Amenities Showcase"
     ],
     popular: false
   },
@@ -46,9 +45,7 @@ const plans = [
       "🌐 Vacant Seats Display on Website",
       "⭐ Experience Rating System",
       "💰 Hostel Pricing Display",
-      "🏨 Facilities & Amenities Showcase",
-      "📊 Real-Time Occupancy Updates",
-      "📈 Advanced Analytics Dashboard"
+      "🏨 Facilities & Amenities Showcase"
     ],
     popular: true
   },
@@ -70,10 +67,7 @@ const plans = [
       "🌐 Vacant Seats Display on Website",
       "⭐ Experience Rating System",
       "💰 Hostel Pricing Display",
-      "🏨 Facilities & Amenities Showcase",
-      "📊 Real-Time Occupancy Updates",
-      "📈 Advanced Analytics Dashboard",
-      "💳 Online Payment Integration"
+      "🏨 Facilities & Amenities Showcase"
     ],
     popular: false
   },
@@ -95,11 +89,7 @@ const plans = [
       "🌐 Vacant Seats Display on Website",
       "⭐ Experience Rating System",
       "💰 Hostel Pricing Display",
-      "🏨 Facilities & Amenities Showcase",
-      "📊 Real-Time Occupancy Updates",
-      "📈 Multi-Hostel Analytics Dashboard",
-      "💳 Online Payment Integration",
-      "🔄 Cross-Hostel Seat Management"
+      "🏨 Facilities & Amenities Showcase"
     ],
     popular: false
   },
@@ -121,12 +111,7 @@ const plans = [
       "🌐 Vacant Seats Display on Website",
       "⭐ Experience Rating System",
       "💰 Hostel Pricing Display",
-      "🏨 Facilities & Amenities Showcase",
-      "📊 Real-Time Occupancy Updates",
-      "📈 Enterprise Analytics Dashboard",
-      "💳 Online Payment Integration",
-      "🔄 Cross-Hostel Seat Management",
-      "🎯 Priority Customer Support"
+      "🏨 Facilities & Amenities Showcase"
     ],
     popular: false
   },
@@ -149,12 +134,7 @@ const plans = [
       "⭐ Experience Rating System",
       "💰 Hostel Pricing Display",
       "🏨 Facilities & Amenities Showcase",
-      "📊 Real-Time Occupancy Updates",
-      "📈 Custom Analytics Dashboard",
-      "💳 Online Payment Integration",
-      "🔄 Advanced Seat Management",
-      "🎯 Dedicated Account Manager",
-      "⚙️ Custom Feature Development"
+      "📊 Real-Time Occupancy Updates"
     ],
     popular: false,
     isCustom: true
