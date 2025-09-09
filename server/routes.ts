@@ -1143,62 +1143,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/reset-password/update", async (req, res) => {
     console.log("Password reset update API call received:", req.body);
     try {
-      const { cnic, newPassword } = req.body;
+      const { user_id, new_password } = req.body;
       
       // Validate required fields
-      if (!cnic || !newPassword) {
+      if (!user_id || !new_password) {
         return res.status(400).json({ 
           status: false,
           code: 400,
-          message: "CNIC and new password are required"
+          message: "User ID and new password are required"
         });
       }
 
-      // TODO: Call Oracle APEX API for password reset update
-      // const response = await axios.post(
-      //   "http://ehostelz.com:8890/ords/jee_management_system/web/api/reset-password/update",
-      //   {
-      //     cnic,
-      //     newPassword
-      //   },
-      //   {
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //       'Accept': 'application/json',
-      //     },
-      //     timeout: 10000,
-      //   }
-      // );
-      
-      // Temporary simulation - replace with actual Oracle APEX API call
-      console.log("Simulating password update for CNIC:", cnic);
-      
-      // Simulate API response for now
-      const simulatedResponse = {
-        status: true,
-        code: 200,
-        message: "Password updated successfully",
-        data: {
-          cnic: cnic,
-          updated: true
+      // Call Oracle APEX API for password reset update
+      const response = await axios.post(
+        "http://ehostelz.com:8890/ords/jee_management_system/web/api/reset-password",
+        {
+          user_id: user_id,
+          new_password: new_password
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          timeout: 10000,
         }
-      };
+      );
       
-      console.log("Password reset update response:", simulatedResponse);
+      console.log("Oracle APEX reset-password response:", response.data);
       
-      // Return the update response
+      // Return the update response from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
-      res.json(simulatedResponse);
+      res.json(response.data);
     } catch (error) {
       console.error("Error during password reset update:", error);
       
-      // Handle update failure
+      // Handle update failure from Oracle APEX
       if (axios.isAxiosError(error) && error.response?.status === 404) {
-        return res.status(404).json({ 
-          status: false,
-          code: 404,
-          message: "User not found"
-        });
+        // Return the exact Oracle APEX error response
+        return res.status(404).json(error.response.data);
+      }
+      
+      // Handle other Oracle APEX error responses
+      if (axios.isAxiosError(error) && error.response?.data) {
+        return res.status(error.response.status || 400).json(error.response.data);
       }
       
       res.status(500).json({ 

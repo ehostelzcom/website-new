@@ -15,19 +15,23 @@ export default function ResetPasswordNew() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [cnic, setCnic] = useState('');
+  const [userId, setUserId] = useState('');
   const [formData, setFormData] = useState({
     password: '',
     confirmPassword: ''
   });
 
-  // Get CNIC from URL params
+  // Get user_id and CNIC from URL params
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+    const userIdParam = urlParams.get('user_id');
     const cnicParam = urlParams.get('cnic');
-    if (cnicParam) {
+    
+    if (userIdParam && cnicParam) {
+      setUserId(userIdParam);
       setCnic(cnicParam);
     } else {
-      // If no CNIC param, redirect back to verification
+      // If no required params, redirect back to verification
       setLocation('/reset-password');
     }
   }, [setLocation]);
@@ -89,8 +93,8 @@ export default function ResetPasswordNew() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          cnic: cnic,
-          newPassword: formData.password
+          user_id: userId,
+          new_password: formData.password
         })
       });
       
@@ -108,8 +112,12 @@ export default function ResetPasswordNew() {
           setLocation('/student-login');
         }, 2000);
       } else {
-        // Password update failed
-        throw new Error(result.message || 'Password update failed');
+        // Password update failed - show the exact Oracle APEX error message
+        toast({
+          title: "Password Reset Failed",
+          description: result.message || 'Password update failed',
+          variant: "destructive",
+        });
       }
       
     } catch (error) {

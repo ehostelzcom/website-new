@@ -76,8 +76,13 @@ export default function ResetPassword() {
       const result = await response.json();
       
       if (result.status && result.code === 200) {
-        // Verification successful, navigate to new password page
-        setLocation('/reset-password/new?cnic=' + encodeURIComponent(formData.cnic));
+        // Verification successful, navigate to new password page with user_id
+        const userId = result.data?.user_id;
+        if (userId) {
+          setLocation(`/reset-password/new?user_id=${userId}&cnic=${encodeURIComponent(formData.cnic)}`);
+        } else {
+          throw new Error('User ID not found in verification response');
+        }
       } else {
         // Verification failed
         throw new Error(result.message || 'Verification failed');
