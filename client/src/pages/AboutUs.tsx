@@ -395,10 +395,10 @@ export default function AboutUs() {
                 size="lg" 
                 variant="outline" 
                 className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-10 py-4 text-lg rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-                data-testid="owner-cta"
+                data-testid="demo-cta"
               >
-                <Building2 className="w-5 h-5 mr-2" />
-                For Hostel Owners
+                <Rocket className="w-5 h-5 mr-2" />
+                Request Demo
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </div>
@@ -413,7 +413,8 @@ export default function AboutUs() {
         </section>
       </div>
 
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes blob {
           0% { transform: translate(0px, 0px) scale(1); }
           33% { transform: translate(30px, -50px) scale(1.1); }
@@ -429,7 +430,8 @@ export default function AboutUs() {
         .animation-delay-4000 {
           animation-delay: 4s;
         }
-      `}</style>
+        `
+      }} />
     </div>
   );
 }
