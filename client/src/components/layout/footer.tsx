@@ -108,14 +108,14 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <button 
-                    onClick={() => scrollToSection('about')}
+                  <a 
+                    href="/about-us"
                     className="text-gray-600 hover:text-primary hover:translate-x-2 transition-all duration-300 flex items-center group"
                     data-testid="footer-about"
                   >
                     <span className="w-2 h-2 bg-accent rounded-full mr-3 group-hover:bg-primary transition-colors"></span>
-                    About
-                  </button>
+                    About Us
+                  </a>
                 </li>
                 <li>
                   <button 

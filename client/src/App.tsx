@@ -17,6 +17,7 @@ import Profile from "@/pages/Profile";
 import ChangePassword from "@/pages/ChangePassword";
 import ResetPassword from "@/pages/ResetPassword";
 import ResetPasswordNew from "@/pages/ResetPasswordNew";
+import AboutUs from "@/pages/AboutUs";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -37,6 +38,7 @@ function Router() {
       <Route path="/change-password" component={() => <ChangePassword standalone={true} />} />
       <Route path="/reset-password" component={ResetPassword} />
       <Route path="/reset-password/new" component={ResetPasswordNew} />
+      <Route path="/about-us" component={AboutUs} />
       <Route component={NotFound} />
     </Switch>
   );
