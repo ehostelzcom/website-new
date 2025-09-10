@@ -71,14 +71,27 @@ export default function AboutUs() {
       </div>
 
       {/* Header Section with Logo */}
-      <div className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <img 
-            src={logoUrl} 
-            alt="ehostelz.com Logo" 
-            className="w-40 h-auto transform hover:scale-105 transition-transform duration-300" 
-            data-testid="about-logo" 
-          />
+      <div className="sticky top-0 z-50 w-full border-b border-white/10 bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5 supports-[backdrop-filter]:bg-white/70">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="flex h-20 items-center justify-between">
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-3 group" data-testid="about-logo">
+                <img 
+                  src={logoUrl} 
+                  alt="ehostelz.com" 
+                  className="h-12 w-auto transition-all duration-300 group-hover:scale-105 drop-shadow-sm"
+                />
+              </div>
+            </div>
+            <div className="flex items-center">
+              <a 
+                href="/"
+                className="text-gray-700 hover:text-[#004e89] transition-all duration-300 font-semibold text-base"
+              >
+                ← Back to Home
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
