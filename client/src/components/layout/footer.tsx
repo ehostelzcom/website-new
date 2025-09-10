@@ -110,6 +110,8 @@ export default function Footer() {
                 <li>
                   <a 
                     href="/about-us"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-gray-600 hover:text-primary hover:translate-x-2 transition-all duration-300 flex items-center group"
                     data-testid="footer-about"
                   >
