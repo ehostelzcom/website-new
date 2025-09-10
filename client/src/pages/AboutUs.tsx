@@ -209,7 +209,7 @@ export default function AboutUs() {
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
                   <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-md">
                     <Code className="w-4 h-4 mr-2 text-blue-600" />
-                    <span className="text-slate-600 font-medium">Senior Developer</span>
+                    <span className="text-slate-600 font-medium">Software Engineer</span>
                   </div>
                   <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-md">
                     <Calendar className="w-4 h-4 mr-2 text-purple-600" />
