@@ -29,9 +29,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logoSvg from "@assets/logo/Asset 3.svg";
-import girlsHostelLogo from "@assets/logo/Asset 7.svg";
-import boysHostelLogo from "@assets/logo/Asset 8.svg";
+const logoSvg = "/logo/asset-3.svg";
+const girlsHostelLogo = "/logo/asset-7.svg";
+const boysHostelLogo = "/logo/asset-8.svg";
 import ReviewsModal from "@/components/ui/reviews-modal";
 
 // Types for student hostel data (matches API response)

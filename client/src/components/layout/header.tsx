@@ -4,7 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, User, Calendar } from "lucide-react";
 import RequestDemoModal from "@/components/ui/request-demo-modal";
 import { useLocation } from "wouter";
-import logoSvg from "@assets/logo/Asset 3.svg";
+const logoSvg = "/logo/asset-3.svg";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

@@ -21,7 +21,7 @@ import {
   Menu
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import logoSvg from "@assets/logo/Asset 3.svg";
+const logoSvg = "/logo/asset-3.svg";
 
 // Types for student hostel data (matches API response)
 interface StudentHostelData {

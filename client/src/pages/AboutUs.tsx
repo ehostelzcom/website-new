@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import logoUrl from "@assets/logo/Asset 3.svg";
+const logoUrl = "/logo/asset-3.svg";
 import { 
   Building2, 
   Users, 

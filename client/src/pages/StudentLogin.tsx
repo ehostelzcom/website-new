@@ -6,7 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Eye, EyeOff, User, Lock } from "lucide-react";
 import { useLocation } from "wouter";
-import logoSvg from "@assets/logo/Asset 3.svg";
+const logoSvg = "/logo/asset-3.svg";
 
 export default function StudentLogin() {
   const [, setLocation] = useLocation();

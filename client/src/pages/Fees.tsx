@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Search, Filter, Receipt, ChevronLeft, ChevronRight, Home, BarChart3, CreditCard, Star, User, Menu } from 'lucide-react';
-import logoSvg from "@assets/logo/Asset 3.svg";
+const logoSvg = "/logo/asset-3.svg";
 import StudentHeader from "@/components/shared/StudentHeader";
 import { format } from 'date-fns';
 
