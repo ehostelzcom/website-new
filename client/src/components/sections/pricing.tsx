@@ -272,15 +272,20 @@ export default function Pricing() {
                     </div>
                   </div>
 
-                  {/* Key Stats */}
-                  <div className="grid grid-cols-2 gap-3 mb-6 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  {/* Active Seats Highlight */}
+                  <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-pink-900/20 rounded-xl border-2 border-dashed border-primary/20">
                     <div className="text-center">
-                      <div className="text-lg font-bold text-primary">{plan.hostels}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Hostels</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-accent">{plan.seats}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Active Seats</div>
+                      <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+                        {plan.seats}
+                      </div>
+                      <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mt-1">
+                        Active Seats Included
+                      </div>
+                      <div className="flex items-center justify-center mt-2">
+                        <span className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-medium">
+                          🎆 Full Access
+                        </span>
+                      </div>
                     </div>
                   </div>
 
