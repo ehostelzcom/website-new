@@ -46,7 +46,7 @@ export default function AboutUs() {
   const testimonials = [
     {
       quote: "ehostelz.com revolutionized our daily operations. From room assignments to fee collection, everything is automated and transparent. Our administrative workload decreased by 70%!",
-      author: "Smart Boys Hostel Warden",
+      author: "Fawad Smart Hostel Warden",
       role: "Mardan"
     },
     {
