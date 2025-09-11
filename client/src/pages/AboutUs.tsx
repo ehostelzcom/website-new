@@ -31,7 +31,7 @@ export default function AboutUs() {
   useEffect(() => {
     setIsVisible(true);
     const interval = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % 3);
+      setCurrentSlide(prev => (prev + 1) % testimonials.length);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
@@ -45,19 +45,19 @@ export default function AboutUs() {
 
   const testimonials = [
     {
-      quote: "ehostelz.com transformed how we manage our hostel operations. It's incredibly efficient!",
-      author: "Ahmed Hassan",
-      role: "Hostel Owner, Lahore"
+      quote: "ehostelz.com revolutionized our daily operations. From room assignments to fee collection, everything is automated and transparent. Our administrative workload decreased by 70%!",
+      author: "Smart Boys Hostel Warden",
+      role: "Mardan"
     },
     {
-      quote: "Finding the perfect hostel has never been easier. The platform is user-friendly and comprehensive.",
-      author: "Fatima Khan", 
-      role: "Student, University of Punjab"
+      quote: "The student portal and automated notifications transformed our hostel management. Parents get real-time updates, and our fee collection improved dramatically. It's a game-changer!",
+      author: "Shehzad Islamabad Boys Hostel Warden", 
+      role: "Islamabad"
     },
     {
-      quote: "The payment management system has streamlined our entire financial process.",
-      author: "Ali Raza",
-      role: "Hostel Manager, Karachi"
+      quote: "Managing 200+ students was overwhelming until we adopted ehostelz.com. The comprehensive dashboard and reporting features made our operations smooth and efficient.",
+      author: "Zaka Ullah, Khyber Hostel",
+      role: "Peshawar"
     }
   ];
 
