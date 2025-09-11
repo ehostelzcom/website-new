@@ -9,15 +9,15 @@ const plans = [
     name: "Starter",
     category: "Single Hostel",
     description: "Perfect for small single hostels just starting",
-    monthlyPrice: 2000,
-    seats: 50,
+    monthlyPrice: 2500,
+    seats: "1-100",
     hostels: 1,
     features: [
       "✅ 100% Cloud-Based Access",
       "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "🏠 1 Hostel",
-      "🪑 50 Active Seats / month",
+      "🪑 1-100 Seats Included",
       "👥 Unlimited Registered Users",
       "🎓 Student Portal",
       "🌐 Vacant Seats Display on Website",
@@ -31,15 +31,15 @@ const plans = [
     name: "Growth",
     category: "Single Hostel",
     description: "For growing hostels with more students",
-    monthlyPrice: 3500,
-    seats: 100,
+    monthlyPrice: 4000,
+    seats: "101-250",
     hostels: 1,
     features: [
       "✅ 100% Cloud-Based Access",
       "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "🏠 1 Hostel",
-      "🪑 100 Active Seats / month",
+      "🪑 101-250 Seats Included",
       "👥 Unlimited Registered Users",
       "🎓 Student Portal",
       "🌐 Vacant Seats Display on Website",
@@ -53,15 +53,15 @@ const plans = [
     name: "Scale",
     category: "Single Hostel",
     description: "For large hostels with high turnover",
-    monthlyPrice: 8000,
-    seats: 500,
+    monthlyPrice: 10000,
+    seats: "251-500",
     hostels: 1,
     features: [
       "✅ 100% Cloud-Based Access",
       "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "🏠 1 Hostel",
-      "🪑 500 Active Seats / month",
+      "🪑 251-500 Seats Included",
       "👥 Unlimited Registered Users",
       "🎓 Student Portal",
       "🌐 Vacant Seats Display on Website",
@@ -70,74 +70,6 @@ const plans = [
       "🏨 Facilities & Amenities Showcase"
     ],
     popular: false
-  },
-  {
-    name: "Business",
-    category: "Group of Hostels",
-    description: "Designed for small hostel groups",
-    monthlyPrice: 12000,
-    seats: 300,
-    hostels: 3,
-    features: [
-      "✅ 100% Cloud-Based Access",
-      "🔒 Enterprise-Level Data Security",
-      "📱 Mobile Responsive Design",
-      "🏢 Up to 3 Hostels",
-      "🪑 100 Active Seats per hostel",
-      "👥 Unlimited Registered Users",
-      "🎓 Student Portal",
-      "🌐 Vacant Seats Display on Website",
-      "⭐ Experience Rating System",
-      "💰 Hostel Pricing Display",
-      "🏨 Facilities & Amenities Showcase"
-    ],
-    popular: false
-  },
-  {
-    name: "Enterprise",
-    category: "Group of Hostels",
-    description: "For bigger hostel chains with multiple branches",
-    monthlyPrice: 20000,
-    seats: 1000,
-    hostels: 5,
-    features: [
-      "✅ 100% Cloud-Based Access",
-      "🔒 Enterprise-Level Data Security",
-      "📱 Mobile Responsive Design",
-      "🏢 Up to 5 Hostels",
-      "🪑 200 Active Seats per hostel",
-      "👥 Unlimited Registered Users",
-      "🎓 Student Portal",
-      "🌐 Vacant Seats Display on Website",
-      "⭐ Experience Rating System",
-      "💰 Hostel Pricing Display",
-      "🏨 Facilities & Amenities Showcase"
-    ],
-    popular: false
-  },
-  {
-    name: "Custom",
-    category: "Both Single Hostel & Group of Hostels",
-    description: "Unlimited hostels for large organizations",
-    monthlyPrice: null,
-    seats: "Unlimited",
-    hostels: "Unlimited",
-    features: [
-      "✅ 100% Cloud-Based Access",
-      "🔒 Enterprise-Level Data Security",
-      "📱 Mobile Responsive Design",
-      "🏢 Unlimited Hostels",
-      "🪑 Unlimited Seats / month",
-      "👥 Unlimited Registered Users",
-      "🎓 Student Portal",
-      "🌐 Vacant Seats Display on Website",
-      "⭐ Experience Rating System",
-      "💰 Hostel Pricing Display",
-      "🏨 Facilities & Amenities Showcase",
-      "📊 Real-Time Occupancy Updates"
-    ],
-    popular: false,
-    isCustom: true
   }
 ];
 
@@ -330,21 +262,17 @@ export default function Pricing() {
                     </div>
                     
                     {/* Price */}
-                    {plan.isCustom ? (
-                      <div className="text-2xl font-bold text-gray-900 dark:text-white">Contact Us</div>
-                    ) : (
-                      <div>
-                        <div className="text-3xl font-bold text-gray-900 dark:text-white" data-testid={`plan-price-${index}`}>
-                          Rs {price?.toLocaleString()}
-                          <span className="text-sm text-gray-500 dark:text-gray-400">{getPeriodLabel(billingPeriod)}</span>
-                        </div>
-                        {billingPeriod !== 'monthly' && (
-                          <div className="text-xs text-green-600 dark:text-green-400 mt-1">
-                            Save Rs {((plan.monthlyPrice! * (billingPeriod === '6months' ? 6 : 12)) - price!).toLocaleString()}
-                          </div>
-                        )}
+                    <div>
+                      <div className="text-3xl font-bold text-gray-900 dark:text-white" data-testid={`plan-price-${index}`}>
+                        Rs {price?.toLocaleString()}
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{getPeriodLabel(billingPeriod)}</span>
                       </div>
-                    )}
+                      {billingPeriod !== 'monthly' && (
+                        <div className="text-xs text-green-600 dark:text-green-400 mt-1">
+                          Save Rs {((plan.monthlyPrice! * (billingPeriod === '6months' ? 6 : 12)) - price!).toLocaleString()}
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* Key Stats */}
@@ -373,11 +301,11 @@ export default function Pricing() {
                   <Button 
                     className="w-full flex items-center justify-center gap-2"
                     variant={plan.popular ? 'default' : 'outline'}
-                    onClick={() => plan.isCustom ? handleContactSales() : handleGetStarted(plan.name, price, billingPeriod)}
+                    onClick={() => handleGetStarted(plan.name, price, billingPeriod)}
                     data-testid={`plan-button-${index}`}
                   >
                     <FaWhatsapp className="h-4 w-4" />
-                    {plan.isCustom ? 'Contact Sales' : 'Get Started'}
+                    Get Started
                   </Button>
                 </CardContent>
               </Card>
