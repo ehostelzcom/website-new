@@ -17,7 +17,7 @@ const plans = [
       "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "🏠 1 Hostel",
-      "🪑 1-100 Seats Included",
+      "🪑 1-100 Active Seats Included",
       "👥 Unlimited Registered Users",
       "🎓 Student Portal",
       "🌐 Vacant Seats Display on Website",
@@ -39,7 +39,7 @@ const plans = [
       "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "🏠 1 Hostel",
-      "🪑 101-250 Seats Included",
+      "🪑 101-250 Active Seats Included",
       "👥 Unlimited Registered Users",
       "🎓 Student Portal",
       "🌐 Vacant Seats Display on Website",
@@ -61,7 +61,7 @@ const plans = [
       "🔒 Enterprise-Level Data Security",
       "📱 Mobile Responsive Design",
       "🏠 1 Hostel",
-      "🪑 251-500 Seats Included",
+      "🪑 251-500 Active Seats Included",
       "👥 Unlimited Registered Users",
       "🎓 Student Portal",
       "🌐 Vacant Seats Display on Website",
@@ -283,7 +283,7 @@ export default function Pricing() {
                     </div>
                     <div className="text-center">
                       <div className="text-lg font-bold text-accent">{plan.seats}</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Seats</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">Active Seats</div>
                     </div>
                   </div>
 
