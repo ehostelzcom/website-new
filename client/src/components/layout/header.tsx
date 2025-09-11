@@ -32,12 +32,12 @@ export default function Header() {
               <img 
                 src={logoSvg} 
                 alt="ehostelz.com" 
-                className="h-12 w-auto transition-all duration-300 group-hover:scale-105 drop-shadow-sm"
+                className="h-10 md:h-12 w-auto transition-all duration-300 group-hover:scale-105 drop-shadow-sm"
               />
             </div>
           </div>
           
-          <nav className="hidden md:flex items-center space-x-10">
+          <nav className="hidden lg:flex items-center space-x-10">
             <button 
               onClick={() => scrollToSection('home')}
               className="relative text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-base tracking-wide group px-1 py-2"
@@ -89,7 +89,7 @@ export default function Header() {
           </nav>
           
           <div className="flex items-center space-x-4">
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <Button 
                 onClick={() => window.open("/student-login", "_blank")}
                 className="bg-[#004e89] hover:bg-[#003a6b] text-white px-5 py-2.5 rounded-lg flex items-center gap-2 font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
@@ -99,7 +99,7 @@ export default function Header() {
                 Student Login
               </Button>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <RequestDemoModal>
                 <Button 
                   className="bg-[#ff6b35] hover:bg-[#e55a2e] text-white px-5 py-2.5 rounded-lg flex items-center gap-2 font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
@@ -117,7 +117,7 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  className="md:hidden w-10 h-10 bg-gray-100/80 dark:bg-gray-800/80 hover:bg-gray-200/80 dark:hover:bg-gray-700/80 border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm transition-all duration-300 hover:scale-105 shadow-sm" 
+                  className="lg:hidden w-10 h-10 bg-gray-100/80 dark:bg-gray-800/80 hover:bg-gray-200/80 dark:hover:bg-gray-700/80 border border-gray-200/50 dark:border-gray-600/50 backdrop-blur-sm transition-all duration-300 hover:scale-105 shadow-sm" 
                   data-testid="button-menu"
                 >
                   <Menu className="h-5 w-5 text-[#004e89]" />
