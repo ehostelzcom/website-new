@@ -123,46 +123,46 @@ export default function Header() {
                   <Menu className="h-5 w-5 text-[#004e89]" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="bg-white/96 dark:bg-gray-900/96 backdrop-blur-xl border-l border-gray-200/60 dark:border-gray-700/60">
+              <SheetContent className="bg-gray-900/96 dark:bg-gray-900/96 backdrop-blur-xl border-l border-gray-700/60 dark:border-gray-700/60">
                 <div className="flex flex-col space-y-4 mt-10">
                   <button 
                     onClick={() => scrollToSection('home')}
-                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30 rounded-t-lg"
+                    className="text-left text-white dark:text-gray-100 hover:text-[#4a8bc2] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-white/20 dark:border-gray-700/40 hover:border-[#4a8bc2]/50 hover:bg-white/10 dark:hover:bg-gray-800/30 rounded-t-lg"
                     data-testid="nav-mobile-home"
                   >
                     Home
                   </button>
                   <button 
                     onClick={() => scrollToSection('features-section')}
-                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30"
+                    className="text-left text-white dark:text-gray-100 hover:text-[#4a8bc2] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-white/20 dark:border-gray-700/40 hover:border-[#4a8bc2]/50 hover:bg-white/10 dark:hover:bg-gray-800/30"
                     data-testid="nav-mobile-features"
                   >
                     Features
                   </button>
                   <button 
                     onClick={() => scrollToSection('pricing')}
-                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30"
+                    className="text-left text-white dark:text-gray-100 hover:text-[#4a8bc2] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-white/20 dark:border-gray-700/40 hover:border-[#4a8bc2]/50 hover:bg-white/10 dark:hover:bg-gray-800/30"
                     data-testid="nav-mobile-pricing"
                   >
                     Pricing
                   </button>
                   <button 
                     onClick={() => scrollToSection('find-hostel')}
-                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30"
+                    className="text-left text-white dark:text-gray-100 hover:text-[#4a8bc2] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-white/20 dark:border-gray-700/40 hover:border-[#4a8bc2]/50 hover:bg-white/10 dark:hover:bg-gray-800/30"
                     data-testid="nav-mobile-find-hostel"
                   >
                     Find Hostel
                   </button>
                   <button 
                     onClick={() => scrollToSection('about')}
-                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30"
+                    className="text-left text-white dark:text-gray-100 hover:text-[#4a8bc2] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-white/20 dark:border-gray-700/40 hover:border-[#4a8bc2]/50 hover:bg-white/10 dark:hover:bg-gray-800/30"
                     data-testid="nav-mobile-about"
                   >
                     Why ehostelz
                   </button>
                   <button 
                     onClick={() => scrollToSection('contact')}
-                    className="text-left text-gray-700 dark:text-gray-200 hover:text-[#004e89] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-gray-200/40 dark:border-gray-700/40 hover:border-[#004e89]/50 hover:bg-gray-50/50 dark:hover:bg-gray-800/30 rounded-b-lg"
+                    className="text-left text-white dark:text-gray-100 hover:text-[#4a8bc2] dark:hover:text-[#4a8bc2] transition-all duration-400 font-semibold text-xl py-4 px-2 border-b border-white/20 dark:border-gray-700/40 hover:border-[#4a8bc2]/50 hover:bg-white/10 dark:hover:bg-gray-800/30 rounded-b-lg"
                     data-testid="nav-mobile-contact"
                   >
                     Contact
