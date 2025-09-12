@@ -8,9 +8,28 @@ const logoSvg = "/logo/asset-3.svg";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
 
   const scrollToSection = (sectionId: string) => {
+    // If not on landing page, navigate to it first
+    if (location !== '/') {
+      setLocation('/');
+      // Wait for navigation then scroll
+      setTimeout(() => {
+        if (sectionId === 'home') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 100);
+      setIsOpen(false);
+      return;
+    }
+    
+    // Already on landing page, just scroll
     if (sectionId === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setIsOpen(false);

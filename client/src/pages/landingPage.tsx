@@ -9,7 +9,7 @@ import About from "@/components/sections/about";
 import Contact from "@/components/sections/contact";
 import WhatsAppChat from "@/components/ui/whatsapp-chat";
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
