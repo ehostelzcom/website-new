@@ -116,7 +116,7 @@ export default function FindHostel() {
                             Error loading provinces
                           </SelectItem>
                         ) : (
-                          provinces?.map((prov) => (
+                          (provinces || []).map((prov) => (
                             <SelectItem key={prov.id} value={prov.id.toString()}>
                               {prov.title}
                             </SelectItem>

@@ -205,7 +205,7 @@ export default function SearchResults() {
                       <SelectValue placeholder="Select province" />
                     </SelectTrigger>
                     <SelectContent>
-                      {provinces?.map((province) => (
+                      {(provinces || []).map((province) => (
                         <SelectItem key={province.id} value={province.id.toString()}>
                           {province.title}
                         </SelectItem>

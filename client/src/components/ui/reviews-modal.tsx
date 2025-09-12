@@ -131,7 +131,7 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
           </div>
         ) : (
           <div className="space-y-6">
-            {reviewsData.data.map((review) => (
+            {(reviewsData.data || []).map((review) => (
               <div key={review.user_id} className="border-b border-gray-200 dark:border-gray-700 pb-4 last:border-b-0">
                 {/* Reviewer Info */}
                 <div className="flex items-start gap-3 mb-3">
@@ -199,7 +199,7 @@ export default function ReviewsModal({ isOpen, onClose, hostelId, hostelName }: 
                   )}
 
                   {/* Show remaining ratings when expanded */}
-                  {expandedReviews.has(review.user_id) && review.ratings.slice(1).map((rating) => (
+                  {expandedReviews.has(review.user_id) && (review.ratings || []).slice(1).map((rating) => (
                     <div key={rating.rating_id} className="border-l-2 border-gray-200 dark:border-gray-700 pl-4">
                       <div className="mb-2">
                         <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
