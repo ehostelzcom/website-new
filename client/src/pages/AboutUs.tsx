@@ -142,7 +142,11 @@ export default function AboutUs() {
         <section className="py-20 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-5xl font-bold text-slate-800 mb-6">Our Vision & Mission</h2>
+              <h2 className="text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-primary via-primary/80 to-accent bg-clip-text text-transparent animate-gradient-x bg-300% filter drop-shadow-lg">
+                  Our Vision & Mission
+                </span>
+              </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-8"></div>
             </div>
             
@@ -152,7 +156,11 @@ export default function AboutUs() {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-700/20"></div>
                   <div className="relative z-10">
                     <Target className="w-16 h-16 mb-6 group-hover:rotate-12 transition-transform duration-500" />
-                    <h3 className="text-4xl font-bold mb-6">Find Faster, Manage Smarter</h3>
+                    <h3 className="text-4xl font-bold mb-6">
+                      <span className="bg-gradient-to-r from-white via-white/90 to-accent bg-clip-text text-transparent animate-gradient-x bg-300% filter drop-shadow-lg">
+                        Find Faster, Manage Smarter
+                      </span>
+                    </h3>
                     <p className="text-xl leading-relaxed opacity-95 mb-6">
                       Our revolutionary slogan encapsulates our core mission: empowering students to discover their ideal accommodation with unprecedented speed, while enabling hostel owners to manage their properties with intelligent, cutting-edge technology.
                     </p>
@@ -201,7 +209,11 @@ export default function AboutUs() {
         <section className="py-20 px-4 bg-gradient-to-br from-slate-100 to-blue-100">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-5xl font-bold text-slate-800 mb-6" data-testid="founder-title">The Visionary Behind the Revolution</h2>
+              <h2 className="text-5xl font-bold mb-6" data-testid="founder-title">
+                <span className="bg-gradient-to-r from-primary via-primary/80 to-accent bg-clip-text text-transparent animate-gradient-x bg-300% filter drop-shadow-lg">
+                  The Visionary Behind the Revolution
+                </span>
+              </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-8"></div>
             </div>
 
