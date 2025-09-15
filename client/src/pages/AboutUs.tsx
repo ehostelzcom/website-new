@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import RequestDemoModal from "@/components/ui/request-demo-modal";
+import { useLocation } from "wouter";
 const logoUrl = "/logo/asset-3.svg";
 import { 
   Building2, 
@@ -27,6 +29,7 @@ import {
 export default function AboutUs() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     setIsVisible(true);
@@ -422,21 +425,24 @@ export default function AboutUs() {
                 size="lg" 
                 className="bg-white text-primary hover:bg-gray-100 px-10 py-4 text-lg rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                 data-testid="student-cta"
+                onClick={() => setLocation('/student-login')}
               >
                 <Users className="w-5 h-5 mr-2" />
                 Student Portal
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               
-              <Button 
-                size="lg" 
-                className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary px-10 py-4 text-lg rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-                data-testid="demo-cta"
-              >
-                <Rocket className="w-5 h-5 mr-2" />
-                Request Demo
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
+              <RequestDemoModal>
+                <Button 
+                  size="lg" 
+                  className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary px-10 py-4 text-lg rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                  data-testid="demo-cta"
+                >
+                  <Rocket className="w-5 h-5 mr-2" />
+                  Request Demo
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </RequestDemoModal>
             </div>
 
             <div className="mt-12 flex items-center justify-center">
