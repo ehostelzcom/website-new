@@ -100,21 +100,21 @@ export default function AboutUs() {
         <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
           <div className={`text-center max-w-6xl mx-auto transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h1 className="text-6xl md:text-8xl font-black mb-8 leading-tight">
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-pulse">
+              <span className="bg-gradient-to-r from-primary via-primary/80 to-accent bg-clip-text text-transparent animate-gradient-x bg-300% filter drop-shadow-lg">
                 Revolutionizing
               </span>
               <br />
-              <span className="text-slate-800">Hostel Management</span>
+              <span className="bg-gradient-to-r from-primary via-primary/80 to-accent bg-clip-text text-transparent animate-gradient-x bg-300% filter drop-shadow-lg">Hostel Management</span>
             </h1>
             
-            <div className="w-32 h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto mb-8 rounded-full"></div>
+            <div className="w-32 h-2 bg-gradient-to-r from-primary to-accent mx-auto mb-8 rounded-full"></div>
             
             <p className="text-2xl md:text-3xl text-slate-700 font-light max-w-4xl mx-auto leading-relaxed mb-12" data-testid="main-description">
               Pakistan's most innovative hostel management ecosystem, where technology meets hospitality to create seamless experiences for owners and students alike.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 text-lg rounded-full hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+              <Button className="bg-gradient-to-r from-primary to-accent text-white px-8 py-4 text-lg rounded-full hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
                 <Rocket className="w-5 h-5 mr-2" />
                 Start Your Journey
               </Button>
@@ -128,7 +128,7 @@ export default function AboutUs() {
               {stats.map((stat, index) => (
                 <div key={index} className={`text-center transform transition-all duration-700 delay-${index * 200} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                   <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
-                    <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
+                    <stat.icon className="w-8 h-8 mx-auto mb-3 text-primary group-hover:scale-110 transition-transform duration-300" />
                     <div className="text-3xl font-bold text-slate-800 mb-1">{stat.number}</div>
                     <div className="text-slate-600 font-medium">{stat.label}</div>
                   </div>
@@ -147,13 +147,13 @@ export default function AboutUs() {
                   Our Vision & Mission
                 </span>
               </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-8"></div>
+              <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-8"></div>
             </div>
             
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <Card className="border-none shadow-2xl bg-gradient-to-br from-blue-600 to-purple-700 text-white overflow-hidden group">
+              <Card className="border-none shadow-2xl bg-gradient-to-br from-primary to-accent text-white overflow-hidden group">
                 <CardContent className="p-12 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-700/20"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20"></div>
                   <div className="relative z-10">
                     <Target className="w-16 h-16 mb-6 group-hover:rotate-12 transition-transform duration-500" />
                     <h3 className="text-4xl font-bold mb-6">
@@ -176,7 +176,7 @@ export default function AboutUs() {
                 <Card className="border-none shadow-xl hover:shadow-2xl transition-all duration-500 group">
                   <CardContent className="p-8">
                     <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                         <Users className="w-6 h-6 text-white" />
                       </div>
                       <h4 className="text-2xl font-bold text-slate-800">For Students</h4>
@@ -190,7 +190,7 @@ export default function AboutUs() {
                 <Card className="border-none shadow-xl hover:shadow-2xl transition-all duration-500 group">
                   <CardContent className="p-8">
                     <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-12 h-12 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                         <Building2 className="w-6 h-6 text-white" />
                       </div>
                       <h4 className="text-2xl font-bold text-slate-800">For Owners</h4>
@@ -206,7 +206,7 @@ export default function AboutUs() {
         </section>
 
         {/* Founder's Story */}
-        <section className="py-20 px-4 bg-gradient-to-br from-slate-100 to-blue-100">
+        <section className="py-20 px-4 bg-gradient-to-br from-background to-primary/10">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-5xl font-bold mb-6" data-testid="founder-title">
@@ -214,16 +214,16 @@ export default function AboutUs() {
                   The Visionary Behind the Revolution
                 </span>
               </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-8"></div>
+              <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-8"></div>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="text-center lg:text-left">
                 <div className="relative inline-block mb-8">
-                  <div className="w-48 h-48 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-full flex items-center justify-center shadow-2xl transform hover:scale-105 transition-all duration-500">
+                  <div className="w-48 h-48 bg-gradient-to-br from-primary via-accent to-primary/80 rounded-full flex items-center justify-center shadow-2xl transform hover:scale-105 transition-all duration-500">
                     <span className="text-6xl font-black text-white">KK</span>
                   </div>
-                  <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                  <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-gradient-to-r from-accent to-accent/80 rounded-full flex items-center justify-center shadow-lg">
                     <Star className="w-8 h-8 text-white" />
                   </div>
                 </div>
@@ -233,15 +233,15 @@ export default function AboutUs() {
                 
                 <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
                   <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-md">
-                    <Code className="w-4 h-4 mr-2 text-blue-600" />
+                    <Code className="w-4 h-4 mr-2 text-primary" />
                     <span className="text-slate-600 font-medium">Software Engineer</span>
                   </div>
                   <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-md">
-                    <Calendar className="w-4 h-4 mr-2 text-purple-600" />
+                    <Calendar className="w-4 h-4 mr-2 text-accent" />
                     <span className="text-slate-600 font-medium">Since 2014</span>
                   </div>
                   <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-md">
-                    <Home className="w-4 h-4 mr-2 text-green-600" />
+                    <Home className="w-4 h-4 mr-2 text-primary" />
                     <span className="text-slate-600 font-medium">Smart Hostel Owner</span>
                   </div>
                 </div>
@@ -275,7 +275,7 @@ export default function AboutUs() {
                 <Card className="border-none shadow-xl bg-white/70 backdrop-blur-sm">
                   <CardContent className="p-8">
                     <div className="flex items-center mb-4">
-                      <Globe className="w-8 h-8 text-purple-500 mr-3" />
+                      <Globe className="w-8 h-8 text-accent mr-3" />
                       <h4 className="text-2xl font-bold text-slate-800">Vision for Tomorrow</h4>
                     </div>
                     <p className="text-slate-700 leading-relaxed text-lg">
@@ -292,8 +292,12 @@ export default function AboutUs() {
         <section className="py-20 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-5xl font-bold text-slate-800 mb-6" data-testid="future-title">Pioneering the Future</h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-8"></div>
+              <h2 className="text-5xl font-bold mb-6" data-testid="future-title">
+                <span className="bg-gradient-to-r from-primary via-primary/80 to-accent bg-clip-text text-transparent animate-gradient-x bg-300% filter drop-shadow-lg">
+                  Pioneering the Future
+                </span>
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-8"></div>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto">
                 Our commitment to innovation drives us to continuously evolve and expand our platform with cutting-edge features that anticipate tomorrow's needs.
               </p>
@@ -302,25 +306,25 @@ export default function AboutUs() {
             <div className="grid lg:grid-cols-2 gap-12">
               <Card className="border-none shadow-2xl overflow-hidden group hover:shadow-3xl transition-all duration-500">
                 <CardContent className="p-0">
-                  <div className="bg-gradient-to-br from-green-500 to-emerald-600 p-8 text-white">
+                  <div className="bg-gradient-to-br from-primary to-primary/80 p-8 text-white">
                     <Smartphone className="w-16 h-16 mb-4 group-hover:rotate-12 transition-transform duration-500" />
                     <h3 className="text-3xl font-bold mb-4">Mobile Revolution</h3>
-                    <p className="text-green-100 text-lg">
+                    <p className="text-primary-foreground/80 text-lg">
                       Experience the future in your pocket with our upcoming mobile applications for both Android and iOS platforms.
                     </p>
                   </div>
                   <div className="p-8 bg-white">
                     <div className="space-y-4">
                       <div className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                        <CheckCircle className="w-5 h-5 text-primary mr-3" />
                         <span className="text-slate-700">Phase 1: Student-focused features with advanced hostel discovery</span>
                       </div>
                       <div className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                        <CheckCircle className="w-5 h-5 text-primary mr-3" />
                         <span className="text-slate-700">Phase 2: Complete owner management suite integration</span>
                       </div>
                       <div className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                        <CheckCircle className="w-5 h-5 text-primary mr-3" />
                         <span className="text-slate-700">Real-time notifications and seamless user experience</span>
                       </div>
                     </div>
@@ -330,25 +334,25 @@ export default function AboutUs() {
 
               <Card className="border-none shadow-2xl overflow-hidden group hover:shadow-3xl transition-all duration-500">
                 <CardContent className="p-0">
-                  <div className="bg-gradient-to-br from-orange-500 to-red-600 p-8 text-white">
+                  <div className="bg-gradient-to-br from-accent to-accent/80 p-8 text-white">
                     <CreditCard className="w-16 h-16 mb-4 group-hover:rotate-12 transition-transform duration-500" />
                     <h3 className="text-3xl font-bold mb-4">Financial Innovation</h3>
-                    <p className="text-orange-100 text-lg">
+                    <p className="text-accent-foreground/80 text-lg">
                       Revolutionizing payment processes with secure, instant, and convenient online payment solutions.
                     </p>
                   </div>
                   <div className="p-8 bg-white">
                     <div className="space-y-4">
                       <div className="flex items-center">
-                        <Zap className="w-5 h-5 text-orange-500 mr-3" />
+                        <Zap className="w-5 h-5 text-accent mr-3" />
                         <span className="text-slate-700">Instant fee payments through web and mobile platforms</span>
                       </div>
                       <div className="flex items-center">
-                        <Shield className="w-5 h-5 text-orange-500 mr-3" />
+                        <Shield className="w-5 h-5 text-accent mr-3" />
                         <span className="text-slate-700">Bank-grade security with multiple payment options</span>
                       </div>
                       <div className="flex items-center">
-                        <TrendingUp className="w-5 h-5 text-orange-500 mr-3" />
+                        <TrendingUp className="w-5 h-5 text-accent mr-3" />
                         <span className="text-slate-700">Automated billing and financial reporting systems</span>
                       </div>
                     </div>
@@ -360,9 +364,13 @@ export default function AboutUs() {
         </section>
 
         {/* Testimonials Carousel */}
-        <section className="py-20 px-4 bg-gradient-to-br from-blue-900 to-purple-900">
+        <section className="py-20 px-4 bg-gradient-to-br from-primary to-accent">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-5xl font-bold text-white mb-16">What Our Community Says</h2>
+            <h2 className="text-5xl font-bold text-white mb-16">
+              <span className="bg-gradient-to-r from-white via-white/90 to-accent-foreground bg-clip-text text-transparent animate-gradient-x bg-300% filter drop-shadow-lg">
+                What Our Community Says
+              </span>
+            </h2>
             
             <div className="relative">
               <Card className="border-none shadow-2xl bg-white/10 backdrop-blur-md text-white overflow-hidden">
@@ -377,7 +385,7 @@ export default function AboutUs() {
                   </blockquote>
                   <div>
                     <div className="text-xl font-semibold">{testimonials[currentSlide].author}</div>
-                    <div className="text-blue-200">{testimonials[currentSlide].role}</div>
+                    <div className="text-primary-foreground/70">{testimonials[currentSlide].role}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -398,9 +406,13 @@ export default function AboutUs() {
         </section>
 
         {/* Call to Action */}
-        <section className="py-20 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+        <section className="py-20 px-4 bg-gradient-to-r from-primary via-accent to-primary">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h2 className="text-5xl md:text-6xl font-bold mb-8">Ready to Transform Your Experience?</h2>
+            <h2 className="text-5xl md:text-6xl font-bold mb-8">
+              <span className="bg-gradient-to-r from-white via-white/90 to-accent-foreground bg-clip-text text-transparent animate-gradient-x bg-300% filter drop-shadow-lg">
+                Ready to Transform Your Experience?
+              </span>
+            </h2>
             <p className="text-xl md:text-2xl opacity-90 mb-12 leading-relaxed">
               Join thousands of students and hostel owners who have already discovered the power of ehostelz.com. Your journey towards smarter hostel management starts here.
             </p>
@@ -408,7 +420,7 @@ export default function AboutUs() {
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
               <Button 
                 size="lg" 
-                className="bg-white text-blue-600 hover:bg-gray-100 px-10 py-4 text-lg rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                className="bg-white text-primary hover:bg-gray-100 px-10 py-4 text-lg rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                 data-testid="student-cta"
               >
                 <Users className="w-5 h-5 mr-2" />
@@ -418,7 +430,7 @@ export default function AboutUs() {
               
               <Button 
                 size="lg" 
-                className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-blue-600 px-10 py-4 text-lg rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary px-10 py-4 text-lg rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                 data-testid="demo-cta"
               >
                 <Rocket className="w-5 h-5 mr-2" />
