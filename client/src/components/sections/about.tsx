@@ -119,7 +119,7 @@ export default function About() {
               Our Mission
             </h3>
             <p className="text-xl text-white/90 leading-relaxed" data-testid="mission-description">
-              To become the world's leading hostel management platform by empowering hostel owners with innovative management tools and helping students find their ideal accommodation with ease and confidence.
+              To become Pakistan's leading hostel management platform by empowering hostel owners with innovative management tools and helping students find their ideal accommodation with ease and confidence.
             </p>
           </div>
         </div>
