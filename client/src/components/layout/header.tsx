@@ -4,7 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, User, Calendar } from "lucide-react";
 import RequestDemoModal from "@/components/ui/request-demo-modal";
 import { useLocation } from "wouter";
-const logoSvg = "/logo/asset-3.svg";
+import logoSvg from "/logo/asset-3.svg";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +51,11 @@ export default function Header() {
               <img 
                 src={logoSvg} 
                 alt="ehostelz.com" 
-                className="h-10 md:h-12 w-auto transition-all duration-300 group-hover:scale-105 drop-shadow-sm"
+                className="h-12 w-auto transition-all duration-300 group-hover:scale-105 drop-shadow-sm"
+                loading="eager"
+                onError={(e) => {
+                  e.currentTarget.src = '/logo/asset-3.svg';
+                }}
               />
             </div>
           </div>
