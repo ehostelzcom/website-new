@@ -7,7 +7,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Proxy route for provinces API to avoid CORS issues
   app.get("/api/provinces", async (req, res) => {
-    console.log("API call received for provinces");
     try {
       const response = await axios.get("http://ehostelz.com:8890/ords/jee_management_system/web/api/provinces", {
         headers: {
@@ -17,7 +16,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      // console.log("Oracle APEX response:", response.data);
       
       // Return the sorted provinces directly as array
       const sortedProvinces = response.data.items.sort((a: any, b: any) => a.title.localeCompare(b.title));
@@ -36,7 +34,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Proxy route for cities API with province_id as path parameter
   app.get("/api/cities/:province_id", async (req, res) => {
-    console.log("API call received for cities with province_id:", req.params.province_id);
     try {
       const provinceId = req.params.province_id;
       
@@ -49,7 +46,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX cities response count:", response.data.items?.length);
       
       const cities = response.data.items || [];
       
@@ -70,7 +66,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Proxy route for locations API with city_id as path parameter
   app.get("/api/locations/:city_id", async (req, res) => {
-    console.log("API call received for locations with city_id:", req.params.city_id);
     try {
       const cityId = req.params.city_id;
       
@@ -83,7 +78,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX locations response count:", response.data.items?.length || 0);
       
       const locations = response.data.items || [];
       
@@ -99,7 +93,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // If locations API fails (404 or other error), return empty array
       // This makes location optional - search can work with just province/city
       if (axios.isAxiosError(error) && error.response?.status === 404) {
-        console.log("No locations found for city_id:", req.params.city_id);
         res.setHeader('Content-Type', 'application/json');
         res.json([]); // Return empty array instead of error
       } else {
@@ -113,7 +106,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Proxy route for rating questions API to avoid CORS issues
   app.get("/api/rating-questions", async (req, res) => {
-    console.log("Rating questions API call received");
     try {
       const response = await axios.get("http://ehostelz.com:8890/ords/jee_management_system/web/api/rating-questions", {
         headers: {
@@ -123,7 +115,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX rating-questions response:", response.data);
       
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
@@ -139,7 +130,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // POST API for hostel rating submission
   app.post("/api/hostel-rating/save", async (req, res) => {
-    console.log("Hostel rating submission received:", req.body);
     try {
       const { user_id, hostel_id, ratings } = req.body;
       
@@ -171,21 +161,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Log the exact payload being sent
+      // Prepare payload for Oracle APEX
       const payload = {
         user_id,
         hostel_id,
         ratings
       };
-      console.log("Sending to Oracle APEX - Full payload:", JSON.stringify(payload, null, 2));
-      console.log("Payload details:");
-      console.log("- user_id:", user_id, "(type:", typeof user_id, ")");
-      console.log("- hostel_id:", hostel_id, "(type:", typeof hostel_id, ")");
-      console.log("- ratings array length:", ratings.length);
-      ratings.forEach((rating, index) => {
-        console.log(`- ratings[${index}]:`, JSON.stringify(rating), 
-                   `rating_id type: ${typeof rating.rating_id}, score type: ${typeof rating.score}${rating.comment_suggestions ? `, comment_suggestions type: ${typeof rating.comment_suggestions}` : ''}`);
-      });
 
       // Call Oracle APEX API
       const response = await axios.post(
@@ -200,9 +181,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       );
       
-      console.log("Oracle APEX hostel-rating response:", JSON.stringify(response.data, null, 2));
-      console.log("Oracle APEX response status:", response.status);
-      console.log("Oracle APEX response headers content-type:", response.headers['content-type']);
       
       // Return success response
       res.setHeader('Content-Type', 'application/json');
@@ -229,7 +207,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // GET API for existing hostel ratings
   app.get("/api/hostel-ratings/:user_id/:hostel_id", async (req, res) => {
-    console.log("Hostel ratings GET API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
     try {
       const { user_id, hostel_id } = req.params;
       
@@ -250,7 +227,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX hostel-ratings GET response:", JSON.stringify(response.data, null, 2));
       
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
@@ -277,7 +253,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // GET API for student profile
   app.get("/api/student-profile/:user_id/:hostel_id", async (req, res) => {
     const { user_id, hostel_id } = req.params;
-    console.log(`Student profile API call received for user_id: ${user_id} hostel_id: ${hostel_id}`);
     
     try {
       const response = await axios.get(
@@ -290,7 +265,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       );
       
-      console.log("Oracle APEX student-profile response:", response.data);
       res.json(response.data);
       
     } catch (error) {
@@ -304,7 +278,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // POST API for Contact Us form
   app.post("/api/contact-us", async (req, res) => {
-    console.log("Contact Us form submission received:", req.body);
     try {
       const { name, email, phone, message } = req.body;
       
@@ -334,7 +307,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       );
       
-      console.log("Oracle APEX contact-us response:", response.data);
       
       // Return success response
       res.setHeader('Content-Type', 'application/json');
@@ -354,7 +326,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // POST API for Request Demo form
   app.post("/api/request-demo", async (req, res) => {
-    console.log("Request Demo form submission received:", req.body);
     try {
       const { 
         homeName, 
@@ -400,7 +371,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       );
       
-      console.log("Oracle APEX request-demo response:", response.data);
       
       // Return success response
       res.setHeader('Content-Type', 'application/json');
@@ -420,7 +390,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // GET API for finding hostels by search (province_id, city_id, optional location_id)
   app.get("/api/find-hostels/:province_id/:city_id", async (req, res) => {
-    console.log("Find hostels API call received with params:", req.params, "query:", req.query);
     try {
       const { province_id, city_id } = req.params;
       const { location_id } = req.query;
@@ -448,7 +417,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX find-hostels response:", response.data);
       
       // Transform response and add amenity data + calculate ratings
       const hostels = await Promise.all((response.data.data || []).map(async (item: any) => {
@@ -474,7 +442,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
             };
           }
         } catch (error) {
-          console.log(`Warning: Could not fetch amenities for hostel ${item.hostel_id}`);
           // Use default values (0) if facilities fetch fails
         }
         
@@ -534,7 +501,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // GET API for finding vacant seats by hostel_id
   app.get("/api/vacant-seats/:hostel_id", async (req, res) => {
-    console.log("Vacant seats API call received for hostel_id:", req.params.hostel_id);
     try {
       const { hostel_id } = req.params;
       
@@ -555,7 +521,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX vacant-seats response:", response.data);
       
       // Transform the API response to flatten the structure for frontend use
       const vacantSeats: any[] = [];
@@ -597,7 +562,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // GET API for fetching facilities by hostel_id
   app.get("/api/facilities/:hostel_id", async (req, res) => {
-    console.log("Facilities API call received for hostel_id:", req.params.hostel_id);
     try {
       const { hostel_id } = req.params;
       
@@ -618,7 +582,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX facilities response:", response.data);
       
       // Return the facilities data directly
       res.setHeader('Content-Type', 'application/json');
@@ -634,7 +597,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // GET API for fetching rents by hostel_id
   app.get("/api/rents/:hostel_id", async (req, res) => {
-    console.log("Rents API call received for hostel_id:", req.params.hostel_id);
     try {
       const { hostel_id } = req.params;
       
@@ -655,7 +617,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX rents response:", response.data);
       
       // Return the rents data directly
       res.setHeader('Content-Type', 'application/json');
@@ -671,7 +632,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // POST API for Student Login
   app.post("/api/student-login", async (req, res) => {
-    console.log("Student login API call received:", req.body);
     try {
       const { username, password } = req.body;
       
@@ -699,7 +659,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       );
       
-      console.log("Oracle APEX student-login response:", response.data);
       
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
@@ -726,7 +685,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // GET API for Student Hostels by user_id
   app.get("/api/student-hostels/:user_id", async (req, res) => {
-    console.log("Student hostels API call received for user_id:", req.params.user_id);
     try {
       const { user_id } = req.params;
       
@@ -747,7 +705,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX student-hostels response:", response.data);
       
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
@@ -774,7 +731,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Student Allotments API endpoint
   app.get("/api/student-allotments/:user_id/:hostel_id", async (req, res) => {
-    console.log("Student allotments API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
     try {
       const { user_id, hostel_id } = req.params;
       const { year } = req.query;
@@ -792,7 +748,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       if (year) {
         apiUrl += `?year=${year}`;
-        console.log(`Including year parameter: ${year}`);
       }
 
       const response = await axios.get(apiUrl, {
@@ -803,7 +758,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       });
 
-      console.log("Oracle APEX student-allotments response:", response.data);
       res.json(response.data);
     } catch (error: any) {
       console.error("Error fetching student allotments:", error);
@@ -824,7 +778,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // GET API for Years
   app.get("/api/years", async (req, res) => {
-    console.log("Years API call received");
     try {
       // Call Oracle APEX years API
       const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/years`, {
@@ -835,7 +788,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX years response:", response.data);
       
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
@@ -859,7 +811,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // GET API for Student Dashboard Fees and Payments by user_id and hostel_id
   app.get("/api/student-dashboard-fees-payments/:user_id/:hostel_id", async (req, res) => {
-    console.log("Student dashboard fees/payments API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
     try {
       const { user_id, hostel_id } = req.params;
       const { year, allotment_id } = req.query;
@@ -878,16 +829,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       if (year && year !== 'overall') {
         params.push(`year=${year}`);
-        console.log("Including year parameter:", year);
       } else if (year === 'overall') {
-        console.log("Year is 'overall', not including in query params");
       }
       
       if (allotment_id && allotment_id !== 'overall') {
         params.push(`allotment_id=${allotment_id}`);
-        console.log("Including allotment_id parameter:", allotment_id);
       } else if (allotment_id === 'overall') {
-        console.log("Allotment_id is 'overall', not including in query params");
       }
       
       if (params.length > 0) {
@@ -903,7 +850,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX student-dashboard-fees-payments response:", response.data);
       
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
@@ -930,7 +876,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // GET API for Student Fees by user_id and hostel_id
   app.get("/api/student-fees/:user_id/:hostel_id", async (req, res) => {
-    console.log("Student fees API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
     try {
       const { user_id, hostel_id } = req.params;
       const { allotment_id } = req.query;
@@ -948,7 +893,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       if (allotment_id) {
         apiUrl += `?allotment_id=${allotment_id}`;
-        console.log(`Including allotment_id parameter: ${allotment_id}`);
+
       }
 
       // Call Oracle APEX student fees API
@@ -960,7 +905,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX student-fees response:", response.data);
       
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
@@ -987,7 +931,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Student payments API endpoint
   app.get("/api/student-payments/:user_id/:hostel_id", async (req, res) => {
-    console.log("Student payments API call received for user_id:", req.params.user_id, "hostel_id:", req.params.hostel_id);
     try {
       const { user_id, hostel_id } = req.params;
       const { allotment_id } = req.query;
@@ -1005,7 +948,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       if (allotment_id) {
         apiUrl += `?allotment_id=${allotment_id}`;
-        console.log(`Including allotment_id parameter: ${allotment_id}`);
+
       }
 
       // Call Oracle APEX student payments API
@@ -1017,7 +960,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX student-payments response:", response.data);
       
       // Return the response directly from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
@@ -1047,7 +989,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { hostelId } = req.params;
       
-      console.log(`Hostel reviews API call received for hostel_id: ${hostelId}`);
       
       const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/hostel-reviews/${hostelId}`, {
         headers: {
@@ -1057,7 +998,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log('Oracle APEX hostel reviews response:', response.data);
       
       res.setHeader('Content-Type', 'application/json');
       res.json(response.data);
@@ -1083,7 +1023,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // POST API for Password Reset Verification (CNIC + Mobile)
   app.post("/api/reset-password/verify", async (req, res) => {
-    console.log("Password reset verification API call received:", req.body);
     try {
       const { cnic, mobile } = req.body;
       
@@ -1112,7 +1051,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       );
       
-      console.log("Oracle APEX student-verified-account response:", response.data);
       
       // Return the verification response from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
@@ -1141,7 +1079,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // POST API for Password Reset Update
   app.post("/api/reset-password/update", async (req, res) => {
-    console.log("Password reset update API call received:", req.body);
     try {
       const { user_id, new_password } = req.body;
       
@@ -1170,7 +1107,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       );
       
-      console.log("Oracle APEX reset-password response:", response.data);
       
       // Return the update response from Oracle APEX
       res.setHeader('Content-Type', 'application/json');
