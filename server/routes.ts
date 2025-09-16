@@ -17,7 +17,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         timeout: 10000,
       });
       
-      console.log("Oracle APEX response:", response.data);
+      // console.log("Oracle APEX response:", response.data);
       
       // Return the sorted provinces directly as array
       const sortedProvinces = response.data.items.sort((a: any, b: any) => a.title.localeCompare(b.title));
