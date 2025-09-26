@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SearchableSelect } from "@/components/ui/searchable-select";
-import { ArrowLeft, Search, MapPin, Phone, Users, Star, Bed } from "lucide-react";
+import { ArrowLeft, Search, MapPin, Phone, Users, Star, Bed, X } from "lucide-react";
 const asset9 = "/logo/asset-9.svg";
 const asset3 = "/logo/asset-3.svg";
 import { useProvinces } from "@/hooks/useProvinces";
@@ -155,6 +155,17 @@ export default function SearchResults() {
     setSearchParams(newParams);
   };
 
+  const handleClearFilters = () => {
+    setSearchParams({
+      province: "",
+      city: "",
+      location: "",
+      low_rent: "",
+      high_rent: ""
+    });
+    setHostels([]);
+  };
+
   const handleHostelClick = (hostel: Hostel) => {
     setSelectedHostel(hostel);
     setVacantSeatsModalOpen(true);
@@ -295,6 +306,17 @@ export default function SearchResults() {
                     </div>
                   </div>
                 </div>
+
+                {/* Clear Filters Button */}
+                <Button
+                  variant="outline"
+                  onClick={handleClearFilters}
+                  className="w-full"
+                  data-testid="button-clear-filters"
+                >
+                  <X className="w-4 h-4 mr-2" />
+                  Clear All Filters
+                </Button>
 
                 <Button 
                   onClick={() => handleSearch(searchParams)}
