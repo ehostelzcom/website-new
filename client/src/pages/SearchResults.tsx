@@ -303,26 +303,25 @@ export default function SearchResults() {
                   </div>
                 </div>
 
-                <Button 
-                  onClick={() => handleSearch(searchParams)}
-                  className="w-full"
-                  disabled={!searchParams.province || !searchParams.city || loading}
-                  data-testid="button-search-hostels"
-                >
-                  <Search className="w-4 h-4 mr-2" />
-                  {loading ? "Searching..." : "Search Hostels"}
-                </Button>
-
-                {/* Clear Filters Button */}
-                <Button
-                  variant="outline"
-                  onClick={handleClearFilters}
-                  className="w-full"
-                  data-testid="button-clear-filters"
-                >
-                  <X className="w-4 h-4 mr-2" />
-                  Clear All Filters
-                </Button>
+                {/* Inline Buttons */}
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    variant="outline"
+                    onClick={handleClearFilters}
+                    className="w-full"
+                    data-testid="button-clear-filters"
+                  >
+                    Clear
+                  </Button>
+                  <Button 
+                    onClick={() => handleSearch(searchParams)}
+                    className="w-full"
+                    disabled={!searchParams.province || !searchParams.city || loading}
+                    data-testid="button-search-hostels"
+                  >
+                    {loading ? "Searching..." : "Search"}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
