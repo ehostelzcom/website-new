@@ -144,23 +144,6 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                     ({hostel.hostel_review_counts || "0"} reviews)
                   </button>
                 </div>
-                
-                {/* Pricing Information */}
-                {hostel.low_rent && hostel.high_rent && hostel.rate_type && (
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-lg">
-                      <div className="text-center">
-                        <p className="text-lg font-bold text-primary dark:text-primary-foreground">
-                          Rs {hostel.low_rent?.toLocaleString()} - {hostel.high_rent?.toLocaleString()}
-                        </p>
-                        <p className="text-xs text-primary/80 dark:text-primary-foreground/80 font-medium">
-                          {hostel.rate_type}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
                 <div className="flex items-center gap-4 mb-2">
                   <Badge variant="outline" className="bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700">
                     Available
@@ -264,8 +247,22 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
             </div>
           </div>
           
-          {/* Bottom/Right Section - Action Buttons */}
+          {/* Bottom/Right Section - Pricing & Action Buttons */}
           <div className="flex flex-col gap-3 w-full lg:w-auto lg:min-w-[200px] lg:max-w-[250px]">
+            {/* Pricing Information */}
+            {hostel.low_rent && hostel.high_rent && hostel.rate_type && (
+              <div className="bg-primary/10 border border-primary/20 px-3 py-2 rounded-lg">
+                <div className="text-center">
+                  <p className="text-lg font-bold text-primary dark:text-primary-foreground">
+                    Rs {hostel.low_rent?.toLocaleString()} - {hostel.high_rent?.toLocaleString()}
+                  </p>
+                  <p className="text-xs text-primary/80 dark:text-primary-foreground/80 font-medium">
+                    {hostel.rate_type}
+                  </p>
+                </div>
+              </div>
+            )}
+            
             {/* Primary Action Button */}
             <Button 
               size="lg"
