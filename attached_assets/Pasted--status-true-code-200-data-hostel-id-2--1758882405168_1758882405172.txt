@@ -1,0 +1,83 @@
+{
+    "status": "true",
+    "code": 200,
+    "data": [
+        {
+            "hostel_id": 2,
+            "group_name": "Ungrouped Hostels",
+            "hostel_name": "SMART HOSTEL",
+            "hostel_type": "BOYS",
+            "mobile": "03335638649",
+            "whatsapp": "03335638649",
+            "province": "Khyber Pakhtunkhwa",
+            "city_name": "Mardan",
+            "location": "Nawan Killi, Mardan",
+            "address": "Near Abdul Wali Khan University, Garden Campus Toru Road Mardan.",
+            "low_rent": 3000,
+            "high_rent": 5000,
+            "rate_type": "per month",
+            "ratings": [
+                {
+                    "user_id": 101,
+                    "full_name": " M Fawad Hussain",
+                    "ratings": [
+                        {
+                            "rating_id": 5,
+                            "score": 4,
+                            "description": "How would you rate the cleanliness of the hostel?",
+                            "comment_suggestions": "No Suggestions"
+                        },
+                        {
+                            "rating_id": 8,
+                            "score": 5,
+                            "description": "How would you rate the staff behavior?",
+                            "comment_suggestions": "No Suggestions"
+                        },
+                        {
+                            "rating_id": 9,
+                            "score": 5,
+                            "description": "How would you rate the hostel facilities?",
+                            "comment_suggestions": "No Suggestions"
+                        },
+                        {
+                            "rating_id": 10,
+                            "score": 3,
+                            "description": "How would you rate the security arrangements?",
+                            "comment_suggestions": "No Suggestions"
+                        },
+                        {
+                            "rating_id": 12,
+                            "score": 5,
+                            "description": "Overall, how would you rate this hostel?",
+                            "comment_suggestions": "No Suggestions"
+                        },
+                        {
+                            "rating_id": 4,
+                            "score": 4,
+                            "description": "Is the hostel rent suitable compared to the facilities provided?",
+                            "comment_suggestions": "No Suggestions"
+                        },
+                        {
+                            "rating_id": 6,
+                            "score": 5,
+                            "description": "How would you rate the food quality?",
+                            "comment_suggestions": "No Suggestions"
+                        },
+                        {
+                            "rating_id": 7,
+                            "score": 5,
+                            "description": "How comfortable are the rooms?",
+                            "comment_suggestions": "No Suggestions"
+                        },
+                        {
+                            "rating_id": 11,
+                            "score": 2,
+                            "description": "How would you rate the WiFi and internet connectivity?",
+                            "comment_suggestions": "No Suggestions"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -49,6 +49,9 @@ export interface Hostel {
   security?: number; // 1 = available, 0 = not available
   food?: number; // 1 = available, 0 = not available
   solar_system?: number; // 1 = available, 0 = not available
+  low_rent?: number; // Minimum rent amount
+  high_rent?: number; // Maximum rent amount
+  rate_type?: string; // e.g., "per month", "per day"
 }
 
 interface SearchParams {
