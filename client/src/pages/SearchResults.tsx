@@ -58,6 +58,8 @@ interface SearchParams {
   province: string;
   city: string;
   location?: string;
+  low_rent?: string;
+  high_rent?: string;
 }
 
 export default function SearchResults() {
@@ -65,7 +67,9 @@ export default function SearchResults() {
   const [searchParams, setSearchParams] = useState<SearchParams>({
     province: "",
     city: "",
-    location: ""
+    location: "",
+    low_rent: "",
+    high_rent: ""
   });
   const [hostels, setHostels] = useState<Hostel[]>([]);
   const [loading, setLoading] = useState(false);
@@ -78,12 +82,14 @@ export default function SearchResults() {
     const province = urlParams.get("province") || "";
     const city = urlParams.get("city") || "";
     const location = urlParams.get("location") || "";
+    const low_rent = urlParams.get("low_rent") || "";
+    const high_rent = urlParams.get("high_rent") || "";
     
-    setSearchParams({ province, city, location });
+    setSearchParams({ province, city, location, low_rent, high_rent });
     
     // Auto-search if we have province and city
     if (province && city) {
-      handleSearch({ province, city, location });
+      handleSearch({ province, city, location, low_rent, high_rent });
     }
   }, []);
 
@@ -101,8 +107,21 @@ export default function SearchResults() {
     try {
       // Call the real API for finding hostels
       let apiUrl = `/api/find-hostels/${params.province}/${params.city}`;
+      
+      // Build query parameters
+      const queryParams = [];
       if (params.location) {
-        apiUrl += `?location_id=${params.location}`;
+        queryParams.push(`location_id=${params.location}`);
+      }
+      if (params.low_rent && !isNaN(parseInt(params.low_rent))) {
+        queryParams.push(`low_rent=${params.low_rent}`);
+      }
+      if (params.high_rent && !isNaN(parseInt(params.high_rent))) {
+        queryParams.push(`high_rent=${params.high_rent}`);
+      }
+      
+      if (queryParams.length > 0) {
+        apiUrl += `?${queryParams.join('&')}`;
       }
       
       const response = await fetch(apiUrl);
@@ -241,6 +260,40 @@ export default function SearchResults() {
                     disabled={!selectedCityId}
                     testId="select-filter-location"
                   />
+                </div>
+
+                {/* Price Range Filter */}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Price Range (Rs)</label>
+                  <div className="space-y-2">
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <Input
+                          type="number"
+                          placeholder="Min rent"
+                          value={searchParams.low_rent || ""}
+                          onChange={(e) => handleFilterChange("low_rent", e.target.value)}
+                          min="0"
+                          data-testid="input-min-rent"
+                          className="text-sm"
+                        />
+                      </div>
+                      <div>
+                        <Input
+                          type="number"
+                          placeholder="Max rent"
+                          value={searchParams.high_rent || ""}
+                          onChange={(e) => handleFilterChange("high_rent", e.target.value)}
+                          min="0"
+                          data-testid="input-max-rent"
+                          className="text-sm"
+                        />
+                      </div>
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      Enter amount in Pakistani Rupees
+                    </div>
+                  </div>
                 </div>
 
                 <Button 

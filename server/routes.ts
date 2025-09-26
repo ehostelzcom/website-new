@@ -392,7 +392,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/find-hostels/:province_id/:city_id", async (req, res) => {
     try {
       const { province_id, city_id } = req.params;
-      const { location_id } = req.query;
+      const { location_id, low_rent, high_rent } = req.query;
       
       // Validate required parameters
       if (!province_id || !city_id) {
@@ -402,10 +402,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Build API URL with optional location_id
+      // Build API URL with optional query parameters
       let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/find-hostels/${province_id}/${city_id}`;
+      
+      // Build query parameters array
+      const queryParams = [];
       if (location_id) {
-        apiUrl += `?location_id=${location_id}`;
+        queryParams.push(`location_id=${location_id}`);
+      }
+      if (low_rent && !isNaN(parseInt(low_rent as string))) {
+        queryParams.push(`low_rent=${low_rent}`);
+      }
+      if (high_rent && !isNaN(parseInt(high_rent as string))) {
+        queryParams.push(`high_rent=${high_rent}`);
+      }
+      
+      // Add query parameters if any exist
+      if (queryParams.length > 0) {
+        apiUrl += `?${queryParams.join('&')}`;
       }
 
       // Call Oracle APEX API
