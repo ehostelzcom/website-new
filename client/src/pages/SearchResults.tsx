@@ -277,35 +277,41 @@ export default function SearchResults() {
                 <div>
                   <label className="text-sm font-medium mb-2 block">Price Range (Rs)</label>
                   <div className="space-y-2">
-                    <div className="grid grid-cols-2 gap-2">
-                      <div>
-                        <Input
-                          type="number"
-                          placeholder="Min rent"
-                          value={searchParams.low_rent || ""}
-                          onChange={(e) => handleFilterChange("low_rent", e.target.value)}
-                          min="0"
-                          data-testid="input-min-rent"
-                          className="text-sm"
-                        />
-                      </div>
-                      <div>
-                        <Input
-                          type="number"
-                          placeholder="Max rent"
-                          value={searchParams.high_rent || ""}
-                          onChange={(e) => handleFilterChange("high_rent", e.target.value)}
-                          min="0"
-                          data-testid="input-max-rent"
-                          className="text-sm"
-                        />
-                      </div>
+                    <div className="space-y-2">
+                      <Input
+                        type="number"
+                        placeholder="Min rent"
+                        value={searchParams.low_rent || ""}
+                        onChange={(e) => handleFilterChange("low_rent", e.target.value)}
+                        min="0"
+                        data-testid="input-min-rent"
+                        className="text-sm"
+                      />
+                      <Input
+                        type="number"
+                        placeholder="Max rent"
+                        value={searchParams.high_rent || ""}
+                        onChange={(e) => handleFilterChange("high_rent", e.target.value)}
+                        min="0"
+                        data-testid="input-max-rent"
+                        className="text-sm"
+                      />
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
                       Enter amount in Pakistani Rupees
                     </div>
                   </div>
                 </div>
+
+                <Button 
+                  onClick={() => handleSearch(searchParams)}
+                  className="w-full"
+                  disabled={!searchParams.province || !searchParams.city || loading}
+                  data-testid="button-search-hostels"
+                >
+                  <Search className="w-4 h-4 mr-2" />
+                  {loading ? "Searching..." : "Search Hostels"}
+                </Button>
 
                 {/* Clear Filters Button */}
                 <Button
@@ -316,16 +322,6 @@ export default function SearchResults() {
                 >
                   <X className="w-4 h-4 mr-2" />
                   Clear All Filters
-                </Button>
-
-                <Button 
-                  onClick={() => handleSearch(searchParams)}
-                  className="w-full"
-                  disabled={!searchParams.province || !searchParams.city || loading}
-                  data-testid="button-search-hostels"
-                >
-                  <Search className="w-4 h-4 mr-2" />
-                  {loading ? "Searching..." : "Search Hostels"}
                 </Button>
               </CardContent>
             </Card>
