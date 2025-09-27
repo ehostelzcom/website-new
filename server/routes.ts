@@ -2,19 +2,14 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import axios from "axios";
 import { storage } from "./storage";
+import { buildApiUrl, getApiConfig } from "./config/api";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
   // Proxy route for provinces API to avoid CORS issues
   app.get("/api/provinces", async (req, res) => {
     try {
-      const response = await axios.get("http://ehostelz.com:8890/ords/jee_management_system/web/api/provinces", {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        timeout: 10000,
-      });
+      const response = await axios.get(buildApiUrl('provinces'), getApiConfig());
       
       
       // Return the sorted provinces directly as array
@@ -38,13 +33,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const provinceId = req.params.province_id;
       
       // Call Oracle APEX API with province_id in URL path
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/cities/${provinceId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        timeout: 10000,
-      });
+      const response = await axios.get(buildApiUrl(`cities/${provinceId}`), getApiConfig());
       
       
       const cities = response.data.items || [];
@@ -70,13 +59,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const cityId = req.params.city_id;
       
       // Call Oracle APEX API with city_id in URL path
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/locations/${cityId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        timeout: 10000,
-      });
+      const response = await axios.get(buildApiUrl(`locations/${cityId}`), getApiConfig());
       
       
       const locations = response.data.items || [];
@@ -107,13 +90,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Proxy route for rating questions API to avoid CORS issues
   app.get("/api/rating-questions", async (req, res) => {
     try {
-      const response = await axios.get("http://ehostelz.com:8890/ords/jee_management_system/web/api/rating-questions", {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        timeout: 10000,
-      });
+      const response = await axios.get(buildApiUrl('rating-questions'), getApiConfig());
       
       
       // Return the response directly from Oracle APEX
@@ -170,15 +147,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Call Oracle APEX API
       const response = await axios.post(
-        "http://ehostelz.com:8890/ords/jee_management_system/web/api/hostel-rating/save",
+        buildApiUrl('hostel-rating/save'),
         payload,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          timeout: 10000,
-        }
+        getApiConfig()
       );
       
       
@@ -219,13 +190,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Call Oracle APEX API to get existing ratings
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/hostel-ratings/${user_id}/${hostel_id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        timeout: 10000,
-      });
+      const response = await axios.get(buildApiUrl(`hostel-ratings/${user_id}/${hostel_id}`), getApiConfig());
       
       
       // Return the response directly from Oracle APEX
@@ -256,13 +221,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     
     try {
       const response = await axios.get(
-        `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-profile/${user_id}/${hostel_id}`,
-        {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        }
+        buildApiUrl(`student-profile/${user_id}/${hostel_id}`),
+        getApiConfig()
       );
       
       res.json(response.data);
@@ -291,20 +251,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Call Oracle APEX API
       const response = await axios.post(
-        "http://ehostelz.com:8890/ords/jee_management_system/web/api/contact-us",
+        buildApiUrl('contact-us'),
         {
           name,
           email,
           phone,
           message
         },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          timeout: 10000,
-        }
+        getApiConfig()
       );
       
       
@@ -360,7 +314,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Call Oracle APEX API
       const response = await axios.post(
-        "http://ehostelz.com:8890/ords/jee_management_system/web/api/request-demo",
+        buildApiUrl('request-demo'),
         requestData,
         {
           headers: {
@@ -403,7 +357,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Build API URL with optional query parameters
-      let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/find-hostels/${province_id}/${city_id}`;
+      let apiUrl = buildApiUrl(`find-hostels/${province_id}/${city_id}`);
       
       // Build query parameters array
       const queryParams = [];
@@ -507,7 +461,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Call Oracle APEX API for vacant seats
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/find-vacant-seats/${hostel_id}`, {
+      const response = await axios.get(buildApiUrl(`find-vacant-seats/${hostel_id}`), {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -568,7 +522,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Call Oracle APEX API for facilities
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/facilities/${hostel_id}`, {
+      const response = await axios.get(buildApiUrl(`facilities/${hostel_id}`), {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -603,7 +557,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Call Oracle APEX API for rents
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/rents/${hostel_id}`, {
+      const response = await axios.get(buildApiUrl(`rents/${hostel_id}`), {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -639,7 +593,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Call Oracle APEX student login API
       const response = await axios.post(
-        "http://ehostelz.com:8890/ords/jee_management_system/web/api/student-login",
+        buildApiUrl('student-login'),
         {
           username,
           password
@@ -691,7 +645,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Call Oracle APEX student hostels API
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/student-hostels/${user_id}`, {
+      const response = await axios.get(buildApiUrl(`student-hostels/${user_id}`), {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -738,7 +692,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       // Build URL with required parameters
-      let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-allotments/${user_id}/${hostel_id}`;
+      let apiUrl = buildApiUrl(`student-allotments/${user_id}/${hostel_id}`);
       
       if (year) {
         apiUrl += `?year=${year}`;
@@ -774,7 +728,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/years", async (req, res) => {
     try {
       // Call Oracle APEX years API
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/years`, {
+      const response = await axios.get(buildApiUrl('years'), {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -818,7 +772,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Build URL with optional parameters
-      let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-dashboard-fees-payments/${user_id}/${hostel_id}`;
+      let apiUrl = buildApiUrl(`student-dashboard-fees-payments/${user_id}/${hostel_id}`);
       const params = [];
       
       if (year && year !== 'overall') {
@@ -883,7 +837,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Build URL with required parameters
-      let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-fees/${user_id}/${hostel_id}`;
+      let apiUrl = buildApiUrl(`student-fees/${user_id}/${hostel_id}`);
       
       if (allotment_id) {
         apiUrl += `?allotment_id=${allotment_id}`;
@@ -938,7 +892,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Build URL with required parameters
-      let apiUrl = `http://ehostelz.com:8890/ords/jee_management_system/web/api/student-payments/${user_id}/${hostel_id}`;
+      let apiUrl = buildApiUrl(`student-payments/${user_id}/${hostel_id}`);
       
       if (allotment_id) {
         apiUrl += `?allotment_id=${allotment_id}`;
@@ -984,7 +938,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { hostelId } = req.params;
       
       
-      const response = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/hostel-reviews/${hostelId}`, {
+      const response = await axios.get(buildApiUrl(`hostel-reviews/${hostelId}`), {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -1031,7 +985,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Call Oracle APEX API for account verification
       const response = await axios.post(
-        "http://ehostelz.com:8890/ords/jee_management_system/web/api/student-verified-account",
+        buildApiUrl('student-verified-account'),
         {
           cnic: cnic,
           mobile_no: mobile  // Note: API expects 'mobile_no', not 'mobile'
@@ -1087,7 +1041,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Call Oracle APEX API for password reset update
       const response = await axios.post(
-        "http://ehostelz.com:8890/ords/jee_management_system/web/api/reset-password",
+        buildApiUrl('reset-password'),
         {
           user_id: user_id,
           new_password: new_password
