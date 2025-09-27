@@ -386,8 +386,48 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
       
       
-      // Transform response and calculate ratings (amenity data now comes directly from find-hostels API)
-      const hostels = (response.data.data || []).map((item: any) => {
+      // Get hostel data from find-hostels API
+      const hostelData = response.data.data || [];
+      
+      // Fetch amenity data for all hostels in parallel (since find-hostels API has incorrect amenity values)
+      const amenityPromises = hostelData.map(async (item: any) => {
+        try {
+          const facilitiesResponse = await axios.get(buildApiUrl(`facilities/${item.hostel_id}`), getApiConfig());
+          return {
+            hostel_id: item.hostel_id,
+            amenities: {
+              wifi: facilitiesResponse.data.wifi || 0,
+              security: facilitiesResponse.data.security || 0,
+              food: facilitiesResponse.data.food || 0,
+              solar: facilitiesResponse.data.solar || 0
+            }
+          };
+        } catch (error) {
+          console.warn(`Failed to fetch amenities for hostel ${item.hostel_id}:`, error);
+          // Return default values if facilities API fails
+          return {
+            hostel_id: item.hostel_id,
+            amenities: {
+              wifi: 0,
+              security: 0,
+              food: 0,
+              solar: 0
+            }
+          };
+        }
+      });
+      
+      // Wait for all amenity data to be fetched
+      const amenityResults = await Promise.all(amenityPromises);
+      
+      // Create a map for quick lookup of amenities by hostel_id
+      const amenityMap = new Map();
+      amenityResults.forEach(result => {
+        amenityMap.set(result.hostel_id, result.amenities);
+      });
+      
+      // Transform response and calculate ratings, merge with correct amenity data
+      const hostels = hostelData.map((item: any) => {
         
         // Calculate average rating and review count from ratings data
         let hostel_avg_rating = 4.2; // Default
@@ -413,17 +453,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
           }
         }
         
+        // Get amenity data from our fetched results
+        const amenities = amenityMap.get(item.hostel_id) || {
+          wifi: 0,
+          security: 0,
+          food: 0,
+          solar: 0
+        };
+        
         return {
           ...item,
           rating: hostel_avg_rating.toFixed(1), // Keep for backward compatibility
           hostel_id: item.hostel_id, // Use real hostel_id from API
           hostel_avg_rating: parseFloat(hostel_avg_rating.toFixed(1)),
           hostel_review_counts,
-          // Amenity fields now come directly from the find-hostels API
-          wifi: item.wifi || 0,
-          security: item.security || 0,
-          food: item.food || 0,
-          solar_system: item.solar || 0 // Map 'solar' from API to 'solar_system' for consistency
+          // Use correct amenity data from facilities API
+          wifi: amenities.wifi,
+          security: amenities.security,
+          food: amenities.food,
+          solar: amenities.solar
         };
       });
       

@@ -225,19 +225,19 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                   }`}>Food</span>
                 </div>
 
-                {/* Solar System */}
+                {/* Solar */}
                 <div className={`flex items-center gap-1 px-2 py-1 rounded-md border ${
-                  hostel.solar_system === 1 
+                  hostel.solar === 1 
                     ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800' 
                     : 'bg-gray-50 dark:bg-gray-900/20 border-gray-200 dark:border-gray-800 opacity-50'
                 }`}>
                   <Sun className={`w-3 h-3 sm:w-4 sm:h-4 ${
-                    hostel.solar_system === 1 
+                    hostel.solar === 1 
                       ? 'text-yellow-600 dark:text-yellow-400' 
                       : 'text-gray-400 dark:text-gray-600'
                   }`} />
                   <span className={`text-xs font-medium ${
-                    hostel.solar_system === 1 
+                    hostel.solar === 1 
                       ? 'text-yellow-700 dark:text-yellow-300' 
                       : 'text-gray-500 dark:text-gray-500'
                   }`}>Solar</span>
