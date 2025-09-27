@@ -432,32 +432,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
       
       
-      // Transform response and add amenity data + calculate ratings
-      const hostels = await Promise.all((response.data.data || []).map(async (item: any) => {
-        // Fetch facilities data for this hostel to get amenity flags
-        let amenityData = { wifi: 0, security: 0, food: 0, solar_system: 0 };
-        
-        try {
-          const facilityResponse = await axios.get(`http://ehostelz.com:8890/ords/jee_management_system/web/api/facilities/${item.hostel_id}`, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            },
-            timeout: 5000,
-          });
-          
-          // Extract amenity flags from facilities response
-          if (facilityResponse.data) {
-            amenityData = {
-              wifi: facilityResponse.data.wifi || 0,
-              security: facilityResponse.data.security || 0,
-              food: facilityResponse.data.food || 0,
-              solar_system: facilityResponse.data.solar_system || 0
-            };
-          }
-        } catch (error) {
-          // Use default values (0) if facilities fetch fails
-        }
+      // Transform response and calculate ratings (amenity data now comes directly from find-hostels API)
+      const hostels = (response.data.data || []).map((item: any) => {
         
         // Calculate average rating and review count from ratings data
         let hostel_avg_rating = 4.2; // Default
@@ -489,9 +465,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           hostel_id: item.hostel_id, // Use real hostel_id from API
           hostel_avg_rating: parseFloat(hostel_avg_rating.toFixed(1)),
           hostel_review_counts,
-          ...amenityData // Include amenity flags
+          // Amenity fields now come directly from the find-hostels API
+          wifi: item.wifi || 0,
+          security: item.security || 0,
+          food: item.food || 0,
+          solar_system: item.solar || 0 // Map 'solar' from API to 'solar_system' for consistency
         };
-      }));
+      });
       
       // Set proper JSON headers and return the hostels
       res.setHeader('Content-Type', 'application/json');

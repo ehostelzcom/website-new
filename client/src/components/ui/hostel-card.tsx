@@ -174,17 +174,17 @@ export default function HostelCard({ hostel, index, provinces, cities, onClick }
                 {/* Wi-Fi */}
                 <div className={`flex items-center gap-1 px-2 py-1 rounded-md border ${
                   hostel.wifi === 1 
-                    ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800' 
+                    ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' 
                     : 'bg-gray-50 dark:bg-gray-900/20 border-gray-200 dark:border-gray-800 opacity-50'
                 }`}>
                   <Wifi className={`w-3 h-3 sm:w-4 sm:h-4 ${
                     hostel.wifi === 1 
-                      ? 'text-blue-600 dark:text-blue-400' 
+                      ? 'text-green-600 dark:text-green-400' 
                       : 'text-gray-400 dark:text-gray-600'
                   }`} />
                   <span className={`text-xs font-medium ${
                     hostel.wifi === 1 
-                      ? 'text-blue-700 dark:text-blue-300' 
+                      ? 'text-green-700 dark:text-green-300' 
                       : 'text-gray-500 dark:text-gray-500'
                   }`}>Wi-Fi</span>
                 </div>
