@@ -113,9 +113,9 @@ export default function TopSlider() {
               <div className="container mx-auto px-8 lg:px-24">
                 <div className="max-w-4xl text-white">
                   {/* Enhanced Title with Modern Typography */}
-                  <h1 className="text-4xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-[0.9] tracking-tight bg-gradient-to-r from-white via-white to-white/90 bg-clip-text text-transparent drop-shadow-lg" data-testid={`slide-title-${index}`}>
+                  <h2 className="text-4xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-[0.9] tracking-tight bg-gradient-to-r from-white via-white to-white/90 bg-clip-text text-transparent drop-shadow-lg" data-testid={`slide-title-${index}`}>
                     {slide.title}
-                  </h1>
+                  </h2>
                   {/* Enhanced Subtitle with Better Spacing */}
                   <p className="text-xl lg:text-2xl text-gray-100/90 mb-10 leading-relaxed font-light max-w-3xl backdrop-blur-sm" data-testid={`slide-subtitle-${index}`}>
                     {slide.subtitle}
