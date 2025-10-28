@@ -6,6 +6,70 @@ import { buildApiUrl, getApiConfig } from "./config/api";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
+  // Get visitor IP and location data
+  app.get("/api/visitor-location", async (req, res) => {
+    try {
+      // Get IP from request (use x-forwarded-for in production)
+      const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'Unknown';
+      
+      // Call ipapi.co to get location data
+      const response = await axios.get('https://ipapi.co/json/');
+      const data = response.data;
+      
+      res.json({
+        ip_address: data.ip || clientIp,
+        country_name: data.country_name || 'Unknown',
+        country_code: data.country_code || 'Unknown',
+        region_name: data.region || 'Unknown',
+        city_name: data.city || 'Unknown',
+        city_id: 0,
+        latitude: data.latitude || 0,
+        longitude: data.longitude || 0,
+        isp_name: data.org || 'Unknown',
+      });
+    } catch (error) {
+      console.error("Error fetching IP location:", error);
+      res.json({
+        ip_address: 'Unknown',
+        country_name: 'Unknown',
+        country_code: 'Unknown',
+        region_name: 'Unknown',
+        city_name: 'Unknown',
+        city_id: 0,
+        latitude: 0,
+        longitude: 0,
+        isp_name: 'Unknown',
+      });
+    }
+  });
+
+  // Proxy visitor tracking to Oracle APEX API
+  app.post("/api/track-visitor", async (req, res) => {
+    try {
+      const visitorData = req.body;
+      
+      // Send to Oracle APEX API
+      const response = await axios.post(
+        'https://apex.ehostelz.com/ords/jee_management_system/web/api/website-visitor-save',
+        visitorData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      
+      res.json({ success: true, data: response.data });
+    } catch (error) {
+      console.error("Error tracking visitor:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: "Failed to track visitor",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+  
   // Proxy route for provinces API to avoid CORS issues
   app.get("/api/provinces", async (req, res) => {
     try {

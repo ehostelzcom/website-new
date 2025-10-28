@@ -19,6 +19,8 @@ import ResetPassword from "@/pages/ResetPassword";
 import ResetPasswordNew from "@/pages/ResetPasswordNew";
 import AboutUs from "@/pages/AboutUs";
 import NotFound from "@/pages/not-found";
+import { useEffect } from "react";
+import { trackVisitor } from "./utils/visitorTracking";
 
 function Router() {
   return (
@@ -45,6 +47,11 @@ function Router() {
 }
 
 function App() {
+  useEffect(() => {
+    // Track visitor on app load
+    trackVisitor();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
