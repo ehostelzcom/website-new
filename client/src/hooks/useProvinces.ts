@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Province } from "@shared/schema";
+import { buildApiUrl } from "../../../server/config/api";
 
 export function useProvinces() {
   return useQuery<Province[], Error>({
-    queryKey: ['provinces'],
+    queryKey: ["provinces"],
     queryFn: async () => {
       try {
-        const response = await axios.get<Province[]>("/api/provinces", {
+        const response = await axios.get<Province[]>(buildApiUrl("provinces"), {
           timeout: 10000, // 10 second timeout
         });
         return response.data;
@@ -15,7 +16,7 @@ export function useProvinces() {
         if (axios.isAxiosError(error)) {
           throw new Error(`API Error: ${error.message}`);
         }
-        throw new Error('Failed to fetch provinces');
+        throw new Error("Failed to fetch provinces");
       }
     },
     staleTime: 1000 * 60 * 60, // Cache for 1 hour since provinces don't change often

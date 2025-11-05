@@ -25,32 +25,38 @@ import { trackVisitor } from "./utils/visitorTracking";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={LandingPage} />
-      <Route path="/search-hostels" component={SearchResults} />
-      <Route path="/student-login" component={StudentLogin} />
-      <Route path="/student-dashboard" component={StudentDashboard} />
-      <Route path="/student-home" component={StudentHome} />
-      <Route path="/home" component={StudentHomePage} />
-      <Route path="/dashboard" component={HostelDashboard} />
-      <Route path="/hostel-dashboard/:hostelId" component={HostelDashboard} />
-      <Route path="/fees" component={() => <Fees standalone={true} />} />
-      <Route path="/payments" component={() => <Payments standalone={true} />} />
-      <Route path="/rating" component={Rating} />
-      <Route path="/profile" component={Profile} />
-      <Route path="/change-password" component={() => <ChangePassword standalone={true} />} />
-      <Route path="/reset-password" component={ResetPassword} />
-      <Route path="/reset-password/new" component={ResetPasswordNew} />
-      <Route path="/about-us" component={AboutUs} />
+      <Route path='/' component={LandingPage} />
+      <Route path='/search-hostels' component={SearchResults} />
+      <Route path='/student-login' component={StudentLogin} />
+      <Route path='/student-dashboard' component={StudentDashboard} />
+      <Route path='/student-home' component={StudentHome} />
+      <Route path='/home' component={StudentHomePage} />
+      <Route path='/dashboard' component={HostelDashboard} />
+      <Route path='/hostel-dashboard/:hostelId' component={HostelDashboard} />
+      <Route path='/fees' component={() => <Fees standalone={true} />} />
+      <Route
+        path='/payments'
+        component={() => <Payments standalone={true} />}
+      />
+      <Route path='/rating' component={Rating} />
+      <Route path='/profile' component={Profile} />
+      <Route
+        path='/change-password'
+        component={() => <ChangePassword standalone={true} />}
+      />
+      <Route path='/reset-password' component={ResetPassword} />
+      <Route path='/reset-password/new' component={ResetPasswordNew} />
+      <Route path='/about-us' component={AboutUs} />
       <Route component={NotFound} />
     </Switch>
   );
 }
 
 function App() {
-  useEffect(() => {
-    // Track visitor on app load
-    trackVisitor();
-  }, []);
+  // useEffect(() => {
+  //   // Track visitor on app load
+  //   // trackVisitor();
+  // }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
